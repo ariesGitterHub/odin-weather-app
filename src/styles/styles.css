@@ -4,7 +4,26 @@
 
 
 
-.root {
+:root {
   --font-hand: "Caveat", cursive;
   --font-sans: "Josefin Sans", sans-serif;
+  
+}
+
+#title-content {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+#title-text {
+  color: #000000;
+  font-family: var(--font-hand);
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+#title-img {
+  height: 3rem;
+  width: auto;
 }
