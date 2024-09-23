@@ -1,14 +1,29 @@
-import svgWeathervane from "../assets/weathervane.svg"
+import svgTitleWindAndLeaves from "../assets/titleWindAndLeaves.svg";
+import svgTitleWeathervane from "../assets/titleWeathervane.svg"
+
+function createImageElement(id, src, alt = "") {
+  const img = document.createElement("img");
+  img.id = id;
+  img.src = src;
+  img.alt = alt;
+  return img;
+};
+
+function createTextElement(tag, id, textContent) {
+  const element = document.createElement(tag);
+  element.id = id;
+  element.textContent = textContent;
+  return element;
+};
 
 export function createTitle() {
-    const titleContent = document.querySelector("#title-content");
-    const titleText = document.createElement("h1");
-    titleText.id = "title-text";
-    titleText.textContent = "Weathervane";
+  const titleContent = document.querySelector("#title-content");
 
-    const titleImg = document.createElement("img");
-    titleImg.id = "title-img";
-    titleImg.src = svgWeathervane;
+  const titleImg1 = createImageElement("title-img1", svgTitleWindAndLeaves, "Wind And Leaves Icon");
 
-    titleContent.append(titleText, titleImg);
+  const titleText = createTextElement("h1", "title-text", "Weathervane");
+
+  const titleImg2 = createImageElement("title-img2", svgTitleWeathervane,  "Weathervane Icon");
+
+  titleContent.append(titleImg1, titleText, titleImg2);
 }

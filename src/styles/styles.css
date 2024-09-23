@@ -5,15 +5,29 @@
 
 
 :root {
+
+
   --font-hand: "Caveat", cursive;
   --font-sans: "Josefin Sans", sans-serif;
-  
+  }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+
 }
 
 #title-content {
+  /* width: 100vw; */
+  background-color: rgb(189, 183, 146);
   display: flex;
-  justify-content: center;
-  align-items: baseline;
+    justify-content: center;
+    align-items: baseline;
+  padding: 1rem 1rem 0 1rem;
 }
 
 #title-text {
@@ -23,7 +37,88 @@
   font-weight: 800;
 }
 
-#title-img {
+#title-img1 {
+  height: 2rem;
+  width: auto;
+}
+
+#title-img2 {
   height: 3rem;
   width: auto;
+}
+
+
+/* #title-content img {
+  height: 3rem;
+  width: auto;
+} */
+
+#search-content {
+  /* width: 100vw; */
+  background-color: rgb(189, 183, 146);
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: .25rem; */
+  padding: 0 1rem 1rem 1rem;
+}
+
+#search-bar, #search-btn {
+height: 2rem;
+/* display: flex;
+  justify-content: center;
+  align-items: center; */
+font-family: var(--font-sans);
+font-size: 1rem;
+padding: .375rem;
+}
+
+/* #search-bar {
+width: 25ch;
+border-top-left-radius: 1rem;
+border-bottom-left-radius: 1rem;
+}
+
+#search-btn {
+width: 10ch;
+border-top-right-radius: 1rem;
+border-bottom-right-radius: 1rem;
+} */
+
+#search-bar {
+    width: 25ch;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #4a90e2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#search-bar:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#search-btn {
+    width: 10ch;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 0.5rem;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#search-btn:hover {
+    background-color: #007bff;
+    transform: translateX(2.5px);
+}
+
+#search-btn:active {
+    transform: translateX(0);
 }
