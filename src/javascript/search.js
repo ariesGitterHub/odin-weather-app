@@ -31,9 +31,9 @@ function createButton(id, text) {
 export function createSearch() {
   const searchContent = document.querySelector("#search-content");
   const placeHolderText = "Enter location name..."; 
-  const searchBar = createFormElement("input", "text", "search-bar", placeHolderText);
+  const searchInput = createFormElement("input", "text", "search-input", placeHolderText);
   
   const searchBtn = createButton("search-btn", "Search");
 
-  searchContent.append(searchBar, searchBtn);
+  searchContent.append(searchInput, searchBtn);
 };
