@@ -15,3 +15,10 @@ Add any styling you like!
 Optional: add a ‘loading’ component that displays from the time the form is submitted until the information comes back from the API. Use DevTools to test for low-end devices.
 
 Push that baby to github and share your solution below!
+
+## Defining the icon set parameter in the Weather API
+https://www.visualcrossing.com/resources/documentation/weather-api/defining-icon-set-in-the-weather-api/?gad_source=1&gclid=EAIaIQobChMIgMHTpKHciAMVMlFHAR3IxSMMEAAYASAAEgKa2_D_BwE
+
+## visualcrossing/WeatherIcons
+Public
+https://github.com/visualcrossing/WeatherIcons

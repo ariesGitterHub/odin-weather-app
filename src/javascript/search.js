@@ -20,7 +20,7 @@ function createFormElement(tag, type, id, placeHolder) {
   return element;
 };
 
-function createButton(id, text) {
+function createBtnElement(id, text) {
   const button = document.createElement("button");
   button.id = id;
   button.classList.add("nav-btn");
@@ -30,10 +30,10 @@ function createButton(id, text) {
 
 export function createSearch() {
   const searchContent = document.querySelector("#search-content");
-  const placeHolderText = "Enter location name..."; 
+  const placeHolderText = "Location, state/country..."; 
   const searchInput = createFormElement("input", "text", "search-input", placeHolderText);
   
-  const searchBtn = createButton("search-btn", "Search");
+  const searchBtn = createBtnElement("search-btn", "Search");
 
   searchContent.append(searchInput, searchBtn);
 };

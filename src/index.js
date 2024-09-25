@@ -2,16 +2,24 @@ import "./styles/styles.css";
 
 import { createTitle } from "./javascript/title.js";
 import { createSearch } from "./javascript/search.js"
+import { createBtns } from "./javascript/btns.js";
 import { fetchWithHandling } from "./javascript/fetch.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   createTitle();
-  createSearch()
+  createSearch();
+  createBtns();
   const searchInput = document.querySelector("#search-input"); // Get searchInput from search function
   let query = "";
 
   const searchButton = document.querySelector("button");
+  const titleImg1 = document.querySelector("#title-img1");
+  const titleImg2 = document.querySelector("#title-img2");
   searchButton.addEventListener("click", () => {
+    titleImg1.classList.add("shake");
+    setTimeout(() => titleImg1.classList.remove("shake"), 500);
+    titleImg2.classList.add("spin");
+    setTimeout(() => titleImg2.classList.remove("spin"), 500);
     query = searchInput.value;
     console.log(`Searching for: ${query}`);
 

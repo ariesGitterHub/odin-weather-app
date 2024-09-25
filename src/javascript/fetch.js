@@ -19,7 +19,7 @@ export async function fetchWithHandling(url) {
       const data = await response.json();
       console.log(data);
       
-        showRawData.textContent = data;
+        showRawData.innerText = data.currentConditions.icon;
     } else {
       // Handle empty responses or unsupported content types
       return null; // Return null for no data
