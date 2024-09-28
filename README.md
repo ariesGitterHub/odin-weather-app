@@ -22,3 +22,9 @@ https://www.visualcrossing.com/resources/documentation/weather-api/defining-icon
 ## visualcrossing/WeatherIcons
 Public
 https://github.com/visualcrossing/WeatherIcons
+
+## Alternate weather icons for use
+https://github.com/erikflowers/weather-icons
+
+## Useful astronomical data and how to use it
+https://www.visualcrossing.com/resources/documentation/weather-api/how-to-include-sunrise-sunset-and-moon-phase-data-into-your-api-requests/
