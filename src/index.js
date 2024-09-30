@@ -14,7 +14,8 @@ import {
 populateWeatherData
  } from "./javascript/weatherView.js";
 
- import { worldCapitals } from "./javascript/worldCapitals.js";
+ import { worldCapitals } from "./data/worldCapitals.js";
+ import { stateCapitals } from "./data/stateCapitals.js";
 
  function clickEffects() {
     const titleImg1 = document.querySelector("#title-img1");
@@ -82,8 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 const worldBtn = document.querySelector("#world-btn");
-// const locationContent = document.querySelector("#location-content");
-// const weatherContent = document.querySelector("#weather-content");
 
 worldBtn.addEventListener("click", () => {
   let queryWorld;
@@ -106,7 +105,7 @@ worldBtn.addEventListener("click", () => {
 
   async function initWorld() {
     clearDivText("location-content", "weather-content");
-    clearQuery(queryWorld);
+    // clearQuery(queryWorld);
     console.log(`TEST2 for: ${queryWorld}`);
     const weatherDataWorld = await fetchWithHandling(urlWorld);
     const locationQueryWorld = randomCapital.city;
@@ -147,7 +146,40 @@ worldBtn.addEventListener("click", () => {
 
 
 // createWeatherView(weatherData);
+const usaBtn = document.querySelector("#usa-btn");
 
+usaBtn.addEventListener("click", () => {
+  let queryUSA;
+  clickEffects();
+  clearQuery(queryUSA);
+  console.log(`TEST1 for: ${queryUSA}`);
+
+  function getRandomCapital() {
+    const randomIndex = Math.floor(Math.random() * stateCapitals.length);
+    return stateCapitals[randomIndex];
+  }
+
+  const randomCapital = getRandomCapital();
+  console.log(`${randomCapital.capital}, ${randomCapital.abbr}`);
+
+  queryUSA = `${randomCapital.capital}, ${randomCapital.abbr}`;
+  console.log(`Searching for: ${queryUSA}`);
+
+  const urlUSA = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${queryUSA}?unitGroup=us&key=${k}&contentType=json`;
+
+  async function initUSA() {
+    clearDivText("location-content", "weather-content");
+    // clearQuery(queryWorld);
+    console.log(`TEST2 for: ${queryUSA}`);
+    const weatherDataUSA = await fetchWithHandling(urlUSA);
+    const locationQueryUSA = randomCapital.capital;
+    console.log(weatherDataUSA);
+    console.log(`Resolved address: ${weatherDataUSA.resolvedAddress}`);
+    populateWeatherData(locationQueryUSA, weatherDataUSA);
+    console.log(`TEST3 for: ${queryUSA}`);
+  }
+  initUSA();
+});
 
 });
 
@@ -162,3 +194,4 @@ worldBtn.addEventListener("click", () => {
 // }
 
 // init();
+
