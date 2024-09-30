@@ -28,3 +28,8 @@ https://github.com/erikflowers/weather-icons
 
 ## Useful astronomical data and how to use it
 https://www.visualcrossing.com/resources/documentation/weather-api/how-to-include-sunrise-sunset-and-moon-phase-data-into-your-api-requests/
+
+## Trying to see foreign language writing systems
+installed: sudo apt install fonts-noto fonts-noto-cjk fonts-arabeyes fonts-wqy-microhei fonts-indic
+sudo apt-get install fonts-noto
+sudo apt-get install fonts-noto-cjk

@@ -3,42 +3,11 @@ import svgEarth1 from "../assets/earth1.svg";
 import svgUSA from "../assets/usa.svg";
 import svgC from "../assets/c.svg";
 import svgF from "../assets/f.svg";
-
-function createBtnElement(id, text) {
-  const button = document.createElement("button");
-  button.id = id;
-  button.textContent = text;
-  return button;
-}
-
-function createImgElement(id, src, alt = "") {
-  const img = document.createElement("img");
-  img.id = id;
-  img.src = src;
-  img.alt = alt;
-  return img;
-};
-
-function createToggleSwitch(id, isChecked) {
-  const label = document.createElement("label");
-  label.htmlFor = id;
-
-  const input = document.createElement("input");
-  input.type = "checkbox";
-  input.id = id;
-  input.checked = isChecked;
-
-  const span = document.createElement("span");
-  span.id = "toggle-slider"; // You can style this class with CSS to look like a toggle switch.
-
-  label.appendChild(input);
-  label.appendChild(span);
- 
-  return label;
-}
-
-
-
+import {
+  createBtnElement,
+  createImgElement,
+  // createToggleSwitch,
+} from "./basicFunctions.js";
 
 // export function toggleEarthImg() {
 //   const worldImg = document.querySelector("#world-img");
@@ -78,10 +47,7 @@ export function displayCF() {
       tempScaleImg.src = svgF;
     }
   });
-
-
 }
-
 
 export function createBtns() {
   const btnContent = document.querySelector("#btn-content");

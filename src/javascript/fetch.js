@@ -1,27 +1,22 @@
+let data = null;
 export async function fetchWithHandling(url) {
-//   const weatherContent = document.querySelector("#weather-content");
-
-  const showRawData = document.querySelector("#show-raw-data");
-
 
   try {
     const response = await fetch(url);
-
     // Check for HTTP errors
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
     // Handle different types of responses
     const contentType = response.headers.get("Content-Type");
 
     if (contentType && contentType.includes("application/json")) {
-      const data = await response.json();
-      console.log(data);
+      data = await response.json();
+      // console.log(data);
+      // console.log(data.resolvedAddress);
       
-        showRawData.innerText = data.currentConditions.icon;
+        return data;
     } else {
-      // Handle empty responses or unsupported content types
       return null; // Return null for no data
     }
   } catch (error) {
@@ -29,3 +24,10 @@ export async function fetchWithHandling(url) {
     return null; // Optionally return null or throw further up
   }
 }
+
+// export function getWeatherData() {
+//   return weatherData; // Can be null if fetch hasn't been called yet
+// }
+
+
+  

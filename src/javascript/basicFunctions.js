@@ -5,7 +5,7 @@ export function createBtnElement(id, text) {
   return button;
 }
 
-export function createImageElement(id, src, alt = "") {
+export function createImgElement(id, src, alt = "") {
   const img = document.createElement("img");
   img.id = id;
   img.src = src;
@@ -27,6 +27,13 @@ export function createTextElement(tag, id, textContent) {
   return element;
 };
 
+// export function handleTextElement(id, textContent) {
+//   const element = document.getElementById(id);
+//   element.textContent = textContent;
+//   return element;
+// };
+
+
 export function createToggleSwitch(id, isChecked) {
   const label = document.createElement("label");
   label.htmlFor = id;
@@ -43,4 +50,29 @@ export function createToggleSwitch(id, isChecked) {
   label.appendChild(span);
 
   return label;
+}
+
+// export function clearTextNodes(divId) {
+//   const div = document.getElementById(divId);
+//   if (div) {
+//     Array.from(div.childNodes).forEach((node) => {
+//       if (node.nodeType === Node.TEXT_NODE) {
+//         node.textContent = ""; // Clear text nodes
+//       }
+//     });
+//   }
+// }
+
+// export function clearDivText(divId) {
+//   const div = document.getElementById(divId);
+//   if (div) {
+//     div.innerHTML = ""; // Clears all text and child elements
+//   }
+// }
+
+export function clearDivText(divId) {
+  const div = document.getElementById(divId);
+  if (div) {
+    div.remove;
+  }
 }
