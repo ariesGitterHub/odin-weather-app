@@ -1,22 +1,8 @@
-// import {
-//   // createImageElement,
-//    createTextElement } from "./basicFunctions";
-
-// export function createWeatherView(data) {
-
-//   const dataName = data.resolvedAddress;
-
-//   // if (!data) {
-//   //   console.error("No weather data available.");
-//   //   return;
-//   // }
-
-//   const locationContent = document.querySelector("#location-content");
-
-//   const locationName = createTextElement("h1", "location-name", dataName);
-//   locationContent.append(locationName);
-// }
-
+import {
+  createDivElement,
+  createImgElement,
+  createTextElement,
+} from "./basicFunctions";
 import clearDay from "../assets/clear-day.svg";
 import clearNight from "../assets/clear-night.svg";
 import cloudy from "../assets/cloudy.svg";
@@ -39,38 +25,67 @@ import thunderShowersDay from "../assets/thunder-showers-day.svg";
 import thunderShowersNight from "../assets/thunder-showers-night.svg";
 import thunder from "../assets/thunder.svg";
 import wind from "../assets/wind.svg";
+// import { format, getDay } from "date-fns";
+
+// function reformatDate(date) {
+//   const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+//   const formattedDate = format(date, "yyyy MMM dd");
+//   // Gets the day of the week index (0 = Sunday, 1 = Monday, etc.)
+//   const dayOfWeekIndex = getDay(date);
+//   // Gets the day of the week name from the array
+//   const dayOfWeek = weekdayNames[dayOfWeekIndex];
+//   // Combines everything together...
+//   return `${formattedDate} (${dayOfWeek})`;
+// }
 
 export function populateWeatherData(query, data) {
+  const noWeatherDataAvailable = "No weather data available.";
+  const dataContent = document.querySelector("#data-content");
   if (!data) {
-    console.error("No weather data available.");
+    console.error(noWeatherDataAvailable);
     return;
   }
 
-  const locationContent = document.querySelector("#location-content");
-  locationContent.style.backgroundColor = "var(--light)";
+  const locationContent = createDivElement("location-content");
 
-  const locationName = document.querySelector("#location-name");
-  // locationName.textContent = data.resolvedAddress;
-  locationName.textContent = query.toUpperCase();
+  const locationName = createTextElement(
+    "h1",
+    "location-name",
+    query.toUpperCase()
+  );
 
-  const resolvedAddress = document.querySelector("#resolved-address");
-  resolvedAddress.textContent = data.resolvedAddress;
+  const resolvedAddress = createTextElement(
+    "p",
+    "resolved-address",
+    data.resolvedAddress
+  );
 
-  const locationLatLon = document.querySelector("#latitude-longitude");
-  locationLatLon.textContent = `(Latitude: ${data.latitude}, Longitude: ${data.longitude})`;
+  const locationLatLon = createTextElement(
+    "p",
+    "latitude-longitude",
+    `(Latitude: ${data.latitude}, Longitude: ${data.longitude})`
+  );
 
-  const sunriseSunset = document.querySelector("#sunrise-sunset");
-  sunriseSunset.textContent = `Sunrise: ${data.currentConditions.sunrise}, Sunset ${data.currentConditions.sunset}`;
+  const sunriseSunset = createTextElement(
+    "p",
+    "sunrise-sunset",
+    `Sunrise: ${data.currentConditions.sunrise}, Sunset ${data.currentConditions.sunset}`
+  );
 
-  const weatherContent = document.querySelector("#weather-content");
-  weatherContent.style.border = ".25rem solid var(--light)";
+  const weatherContent = createDivElement("weather-content");
 
-  const conditions = document.querySelector("#conditions");
-  conditions.textContent = data.currentConditions.conditions;
+  // const today = new Date();
 
-  const icon = document.querySelector("#icon");
+  // const todayDate = document.querySelector("#today-date");
+  // todayDate.textContent = reformatDate(today);
 
-  icon.src = (() => {
+  const currentConditions = createTextElement(
+    "h2",
+    "current-conditions",
+    data.currentConditions.conditions.toUpperCase()
+  );
+
+  const weatherIconSRC = (() => {
     switch (data.currentConditions.icon) {
       case "clear-day":
         return clearDay;
@@ -121,9 +136,36 @@ export function populateWeatherData(query, data) {
     }
   })();
 
-  const temperatures = document.querySelector("#temperatures");
-  temperatures.textContent = `Currently: ${data.currentConditions.temp}° (Feels Like: ${data.currentConditions.feelslike}°)`;
+  const weatherIcon = createImgElement(
+    "weather-icon",
+    weatherIconSRC,
+    "Weather icon based on current conditions."
+  );
 
-  const moisture = document.querySelector("#moisture");
-  moisture.textContent = `Humidity: ${data.currentConditions.humidity}% (Dew Point: ${data.currentConditions.dew}°)`;
+  const temperatures = createTextElement(
+    "p",
+    "temperatures",
+    `Currently: ${data.currentConditions.temp}° (Feels Like: ${data.currentConditions.feelslike}°)`
+  );
+
+  const moisture = createTextElement(
+    "p",
+    "moisture",
+    `Humidity: ${data.currentConditions.humidity}% (Dew Point: ${data.currentConditions.dew}°)`
+  );
+
+  dataContent.append(locationContent, weatherContent);
+
+  locationContent.append(
+    locationName,
+    resolvedAddress,
+    locationLatLon,
+    sunriseSunset
+  );
+
+  weatherContent.append(
+    currentConditions, 
+    temperatures, 
+    moisture, 
+    weatherIcon);
 }

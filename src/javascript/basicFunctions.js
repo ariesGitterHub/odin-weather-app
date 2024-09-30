@@ -1,3 +1,9 @@
+export function createDivElement(id) {
+  const element = document.createElement("div");
+  element.id = id;
+  return element;
+}
+
 export function createBtnElement(id, text) {
   const button = document.createElement("button");
   button.id = id;
@@ -11,7 +17,7 @@ export function createImgElement(id, src, alt = "") {
   img.src = src;
   img.alt = alt;
   return img;
-};
+}
 
 export function createFormElement(tag, type, id, placeHolder) {
   const element = document.createElement(tag);
@@ -25,14 +31,13 @@ export function createTextElement(tag, id, textContent) {
   element.id = id;
   element.textContent = textContent;
   return element;
-};
+}
 
 // export function handleTextElement(id, textContent) {
 //   const element = document.getElementById(id);
 //   element.textContent = textContent;
 //   return element;
 // };
-
 
 export function createToggleSwitch(id, isChecked) {
   const label = document.createElement("label");
@@ -44,7 +49,7 @@ export function createToggleSwitch(id, isChecked) {
   input.checked = isChecked;
 
   const span = document.createElement("span");
-  span.id = "toggle-slider"; 
+  span.id = "toggle-slider";
 
   label.appendChild(input);
   label.appendChild(span);
@@ -70,9 +75,21 @@ export function createToggleSwitch(id, isChecked) {
 //   }
 // }
 
-export function clearDivText(divId) {
-  const div = document.getElementById(divId);
-  if (div) {
-    div.remove;
+export function clearDivText(divId1, divId2) {
+  const div1 = document.getElementById(divId1);
+  if (div1) {
+    div1.remove();
   }
+
+  const div2 = document.getElementById(divId2);
+  if (div2) {
+    div2.remove();
+  }
+}
+
+export function clearQuery(query) {
+  if (query !== "") {
+    query = "";
+  }
+
 }

@@ -1,7 +1,20 @@
+
 let data = null;
+
+// function clearData() {
+//   const locationContent = document.querySelector("#location-content");
+//   locationContent.innerHtml = "";
+//   const weatherContent = document.querySelector("#weather-content");
+//   weatherContent.innerHtml = "";
+
+
+// }
+
 export async function fetchWithHandling(url) {
 
   try {
+    // clearData();
+
     const response = await fetch(url);
     // Check for HTTP errors
     if (!response.ok) {

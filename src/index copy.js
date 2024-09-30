@@ -1,9 +1,8 @@
 import "./styles/styles.css";
 
-import {
-  // clearTextNodes,
-  clearDivText,
-  clearQuery,
+import { 
+  // clearTextNodes, 
+  clearDivText 
 } from "./javascript/basicFunctions.js";
 import { createTitle } from "./javascript/title.js";
 import { createSearch } from "./javascript/search.js"
@@ -48,8 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${query}?unitGroup=us&key=${k}&contentType=json`;
 
     async function init() {
-      clearDivText("location-content", "weather-content");
-      
       const weatherData = await fetchWithHandling(url);
       const locationQuery = query;
 
@@ -62,13 +59,13 @@ document.addEventListener("DOMContentLoaded", () => {
     init();
   });
 
-// function getRandomCapital() {
-//   const randomIndex = Math.floor(Math.random() * worldCapitals.length);
-//   return worldCapitals[randomIndex];
-// }
+function getRandomCapital() {
+  const randomIndex = Math.floor(Math.random() * worldCapitals.length);
+  return worldCapitals[randomIndex];
+}
 
-// const randomCapital = getRandomCapital();
-// console.log(`${randomCapital.city}, ${randomCapital.country}`);
+const randomCapital = getRandomCapital();
+console.log(`${randomCapital.city}, ${randomCapital.country}`);
 
 // function clearData() {
 //   const locationContent = document.querySelector("#location-content");
@@ -82,67 +79,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 const worldBtn = document.querySelector("#world-btn");
-// const locationContent = document.querySelector("#location-content");
-// const weatherContent = document.querySelector("#weather-content");
+
+// let count = 0
 
 worldBtn.addEventListener("click", () => {
-  let queryWorld;
   clickEffects();
-  clearQuery(queryWorld);
-  console.log(`TEST1 for: ${queryWorld}`);
-
-  function getRandomCapital() {
-    const randomIndex = Math.floor(Math.random() * worldCapitals.length);
-    return worldCapitals[randomIndex];
-  }
-
-  const randomCapital = getRandomCapital();
-  console.log(`${randomCapital.city}, ${randomCapital.country}`);
-
-  queryWorld = `${randomCapital.city}, ${randomCapital.country}`;
+  
+  const queryWorld = `${randomCapital.city}, ${randomCapital.country}`;
   console.log(`Searching for: ${queryWorld}`);
 
   const urlWorld = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${queryWorld}?unitGroup=us&key=${k}&contentType=json`;
 
-  async function initWorld() {
-    clearDivText("location-content", "weather-content");
-    clearQuery(queryWorld);
-    console.log(`TEST2 for: ${queryWorld}`);
+  if (count > 0) {
+  location.reload();
+async function initWorld1() {
+  const weatherDataWorld = await fetchWithHandling(urlWorld);
+  const locationQueryWorld = randomCapital.city;
+  console.log(weatherDataWorld);
+  console.log(`Resolved address: ${weatherDataWorld.resolvedAddress}`);
+  populateWeatherData(locationQueryWorld, weatherDataWorld);
+  console.log(`TEST1 for: ${queryWorld}`);
+}
+initWorld1();
+  } else {
+  count +=1;
+  async function initWorld2() {
     const weatherDataWorld = await fetchWithHandling(urlWorld);
     const locationQueryWorld = randomCapital.city;
     console.log(weatherDataWorld);
     console.log(`Resolved address: ${weatherDataWorld.resolvedAddress}`);
     populateWeatherData(locationQueryWorld, weatherDataWorld);
-    console.log(`TEST3 for: ${queryWorld}`);
+
+    console.log(`TEST1 for: ${queryWorld}`);
+
+
+}
+  initWorld2();
   }
-  initWorld();
- 
 });
 
-// worldBtn.addEventListener("click", () => {
-//   clickEffects();
-
-//   const queryWorld = `${randomCapital.city}, ${randomCapital.country}`;
-//   console.log(`Searching for: ${queryWorld}`);
-
-//   const urlWorld = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${queryWorld}?unitGroup=us&key=${k}&contentType=json`;
-
-//   async function initWorld() {
-//     clearDivText("location-content", "weather-content");
-//     try {
-//       const weatherDataWorld = await fetchWithHandling(urlWorld);
-//       const locationQueryWorld = randomCapital.city;
-
-//       console.log(weatherDataWorld);
-//       console.log(`Resolved address: ${weatherDataWorld.resolvedAddress}`);
-//       populateWeatherData(locationQueryWorld, weatherDataWorld);
-//       console.log(`TEST1 for: ${queryWorld}`);
-//     } catch (error) {
-//       console.error("Error fetching weather data:", error);
-//     }
-//   }
-//   initWorld();
-// });
 
 
 

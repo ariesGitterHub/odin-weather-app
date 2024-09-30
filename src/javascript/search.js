@@ -2,7 +2,7 @@ import { createFormElement, createBtnElement } from "./basicFunctions.js";
 
 export function createSearch() {
   const searchContent = document.querySelector("#search-content");
-  const placeHolderText = "Please enter a location...";
+  const placeHolderText = "Enter a location...";
   const searchInput = createFormElement(
     "input",
     "text",
