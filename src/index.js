@@ -13,6 +13,7 @@ import {
   // createWeatherView,
 populateWeatherData
  } from "./javascript/weatherView.js";
+ import { playClickSound } from "./javascript/sound.js";
 
  import { worldCapitals } from "./data/worldCapitals.js";
  import { stateCapitals } from "./data/stateCapitals.js";
@@ -33,6 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
   createBtns();
   // toggleEarthImg();
   displayCF();
+
+  const btnSound = document.querySelectorAll("button");
+  btnSound.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      playClickSound(event);
+    });
+  });
 
   const searchInput = document.querySelector("#search-input");
   // let query = "";

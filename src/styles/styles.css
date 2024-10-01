@@ -277,6 +277,7 @@ margin: auto;
 
 #data-content {
   /* width: 33.25ch; */
+  width: fit-content;
     /* width: 320px; */
   display: flex;
     flex-direction: column;
@@ -286,7 +287,7 @@ margin: auto;
 }
 
 #location-content {
-      width: 300px;
+      width: 320px;
   /* width: 100vw; */
 /* margin: auto; */
   /* width: 33.25ch; */
@@ -321,9 +322,9 @@ margin: auto;
 }
 
 #weather-content {
-      width: 300px;
+      width: 320px;
   /* width: 100vw; */
-  height: fit-content;
+  /* height: fit-content; */
 /* margin: auto; */
   /* width: 33.25ch; */
   background-color: var(--light);
@@ -341,22 +342,19 @@ margin: auto;
   padding: .5rem;
 }
 
-#today-date {
-  font-size: 1.2rem;
-  /* text-align: left; */
-}
+
 
 #current-conditions {
   font-size: 1.2rem;
   /* text-align: left; */
 }
 
-#priority-numbers {
+/* #priority-numbers {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+} */
 
 #weather-icon {
   height: 15rem;
