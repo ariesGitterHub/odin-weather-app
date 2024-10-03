@@ -141,97 +141,44 @@ document.addEventListener("DOMContentLoaded", () => {
     initWorld();
   });
 
-  // const usaBtn = document.querySelector("#usa-btn");
+  const usaBtn = document.querySelector("#usa-btn");
 
-  // usaBtn.addEventListener("click", () => {
-  //   let queryUSA = null;
-  //   clickEffects();
+  usaBtn.addEventListener("click", () => {
+    let queryUSA = null;
+    clickEffects();
     
-  //   // clearQuery(queryUSA);
+    // clearQuery(queryUSA);
 
-  //   function getRandomUSACapital() {
-  //     const randomIndex = Math.floor(Math.random() * stateCapitals.length);
-  //     return stateCapitals[randomIndex];
-  //   }
+    function getRandomUSACapital() {
+      const randomIndex = Math.floor(Math.random() * stateCapitals.length);
+      return stateCapitals[randomIndex];
+    }
 
-  //   const randomUSACapital = getRandomUSACapital();
-  //   console.log(`Random state capital selected is ${randomUSACapital.capital}, ${randomUSACapital.abbr}`);
+    const randomUSACapital = getRandomUSACapital();
+    console.log(`Random state capital selected is ${randomUSACapital.capital}, ${randomUSACapital.abbr}`);
 
-  //   queryUSA = `${randomUSACapital.capital}, ${randomUSACapital.abbr}`;
-  //   // console.log(`Test 1 for queryUSA: ${queryUSA}`);
-  //   console.log(`(USA button click) state capital search for: ${queryUSA}`);
+    queryUSA = `${randomUSACapital.capital}, ${randomUSACapital.abbr}`;
+    // console.log(`Test 1 for queryUSA: ${queryUSA}`);
+    console.log(`(USA button click) state capital search for: ${queryUSA}`);
 
-  //   const urlUSA = `${alpha}${queryUSA}${bravo}${k}${charlie}`;
+    const urlUSA = `${alpha}${queryUSA}${bravo}${k}${charlie}`;
 
-  //   async function initUSA() {
-  //     weatherData = null;
-  //     weatherDataWorld = null;
+    async function initUSA() {
+      weatherData = null;
+      weatherDataWorld = null;
 
-  //     clearDivText("location-content", "weather-content");
+      clearDivText("location-content", "weather-content");
 
-  //     weatherDataUSA = await fetchWithHandling(urlUSA);
-  //     const locationQueryUSA = randomUSACapital.capital;
+      weatherDataUSA = await fetchWithHandling(urlUSA);
+      const locationQueryUSA = randomUSACapital.capital;
 
-  //     console.log(weatherDataUSA);
-  //     console.log(
-  //       `State capital resolved address: ${weatherDataUSA.resolvedAddress}`
-  //     );
+      console.log(weatherDataUSA);
+      console.log(
+        `State capital resolved address: ${weatherDataUSA.resolvedAddress}`
+      );
 
-  //     populateWeatherData(locationQueryUSA, weatherDataUSA);
-  //   }
-  //   initUSA();
-  // });
-
-// TO DO: TEST WHEN API CALL LIMIT RESETS TOMORROW
-
-const usaBtn = document.querySelector("#usa-btn");
-let isCooldown = false; // Flag to track the cooldown state
-
-usaBtn.addEventListener("click", () => {
-  if (isCooldown) return; 
-
-  isCooldown = true;
-
-  let queryUSA = null;
-  clickEffects();
-
-  function getRandomUSACapital() {
-    const randomIndex = Math.floor(Math.random() * stateCapitals.length);
-    return stateCapitals[randomIndex];
-  }
-
-  const randomUSACapital = getRandomUSACapital();
-  console.log(
-    `Random state capital selected is ${randomUSACapital.capital}, ${randomUSACapital.abbr}`
-  );
-
-  queryUSA = `${randomUSACapital.capital}, ${randomUSACapital.abbr}`;
-  console.log(`(USA button click) state capital search for: ${queryUSA}`);
-
-  const urlUSA = `${alpha}${queryUSA}${bravo}${k}${charlie}`;
-
-  async function initUSA() {
-    weatherData = null;
-    weatherDataWorld = null;
-
-    clearDivText("location-content", "weather-content");
-
-    weatherDataUSA = await fetchWithHandling(urlUSA);
-    const locationQueryUSA = randomUSACapital.capital;
-
-    console.log(weatherDataUSA);
-    console.log(
-      `State capital resolved address: ${weatherDataUSA.resolvedAddress}`
-    );
-
-    populateWeatherData(locationQueryUSA, weatherDataUSA);
-  }
-
-  initUSA();
-
-  setTimeout(() => {
-    isCooldown = false;
-  }, 300); 
-});
-
+      populateWeatherData(locationQueryUSA, weatherDataUSA);
+    }
+    initUSA();
+  });
 });

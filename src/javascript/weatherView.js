@@ -1,6 +1,6 @@
 import {
   createDivElement,
-  createSpanElement,
+
   createImgElement,
   createTextElement,
 } from "./basicFunctions";

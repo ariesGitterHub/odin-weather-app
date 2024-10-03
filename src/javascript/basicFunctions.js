@@ -1,9 +1,11 @@
+// DIV ELEMENT
 export function createDivElement(id) {
   const element = document.createElement("div");
   element.id = id;
   return element;
 }
 
+// SPAN ELEMENT
 export function createSpanElement(className, text) {
   const element = document.createElement("span");
   element.classList.add(className);
@@ -11,6 +13,7 @@ export function createSpanElement(className, text) {
   return element;
 }
 
+//BTN ELEMENT (i.e., button)
 export function createBtnElement(id, text) {
   const button = document.createElement("button");
   button.id = id;
@@ -18,6 +21,7 @@ export function createBtnElement(id, text) {
   return button;
 }
 
+// IMG ELEMENT
 export function createImgElement(id, src, alt = "") {
   const img = document.createElement("img");
   img.id = id;
@@ -26,13 +30,16 @@ export function createImgElement(id, src, alt = "") {
   return img;
 }
 
+// FORM ELEMENT
 export function createFormElement(tag, type, id, placeHolder) {
   const element = document.createElement(tag);
+  element.type = type;
   element.id = id;
   element.placeholder = placeHolder;
   return element;
 }
 
+// TEXT ELEMENT
 export function createTextElement(tag, id, textContent) {
   const element = document.createElement(tag);
   element.id = id;
@@ -40,12 +47,7 @@ export function createTextElement(tag, id, textContent) {
   return element;
 }
 
-// export function handleTextElement(id, textContent) {
-//   const element = document.getElementById(id);
-//   element.textContent = textContent;
-//   return element;
-// };
-
+//TOGGLE SWITCH MAKER
 export function createToggleSwitch(id, isChecked) {
   const label = document.createElement("label");
   label.htmlFor = id;
@@ -64,24 +66,7 @@ export function createToggleSwitch(id, isChecked) {
   return label;
 }
 
-// export function clearTextNodes(divId) {
-//   const div = document.getElementById(divId);
-//   if (div) {
-//     Array.from(div.childNodes).forEach((node) => {
-//       if (node.nodeType === Node.TEXT_NODE) {
-//         node.textContent = ""; // Clear text nodes
-//       }
-//     });
-//   }
-// }
-
-// export function clearDivText(divId) {
-//   const div = document.getElementById(divId);
-//   if (div) {
-//     div.innerHTML = ""; // Clears all text and child elements
-//   }
-// }
-
+// CLEAR DIVS
 export function clearDivText(divId1, divId2) {
   const div1 = document.getElementById(divId1);
   if (div1) {
@@ -94,18 +79,20 @@ export function clearDivText(divId1, divId2) {
   }
 }
 
+// CLEAR QUERY ??????
 export function clearQuery(query) {
   if (query !== "") {
     query = "";
   }
-
 }
 
+// CONVERT TO C FROM F
 export function convertToCelsius(temp) {
   const celsius = Math.round((((temp - 32) * 5) / 9) * 10) / 10;
   return celsius;
 }
 
+// CONVERT TO F FROM C
 export function convertToFahrenheit(temp) {
   const celsius = Math.round(((temp * 9) / 5 + 32) * 10) / 10;
   return celsius;
