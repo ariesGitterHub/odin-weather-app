@@ -253,7 +253,7 @@ export const worldCapitals = [
   },
   {
     country: "Ethiopia",
-    city: "Addis Abeba",
+    city: "Addis Ababa ",
   },
   {
     country: "Falkland Islands",
@@ -321,7 +321,7 @@ export const worldCapitals = [
   },
   {
     country: "Guam",
-    city: "Aga",
+    city: "Hagåtña",
   },
   {
     country: "Guatemala",
@@ -568,7 +568,7 @@ export const worldCapitals = [
     city: "Amsterdam",
   },
   {
-    country: "Netherlands Antilles",
+    country: "Curaçao",
     city: "Willemstad",
   },
   {
@@ -773,7 +773,7 @@ export const worldCapitals = [
   },
   {
     country: "Sri Lanka",
-    city: "Sri Jayawardenepura Kotte",
+    city: "Colombo",
   },
   {
     country: "Sudan",

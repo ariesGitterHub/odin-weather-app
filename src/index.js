@@ -1,22 +1,33 @@
 import "./styles/styles.css";
+import svgC from "./assets/c.svg";
+import svgF from "./assets/f.svg";
 
 import {
   // clearTextNodes,
   clearDivText,
   clearQuery,
+  // convertToCelsius,
 } from "./javascript/basicFunctions.js";
 import { createTitle } from "./javascript/title.js";
 import { createSearch } from "./javascript/search.js"
-import { createBtns, displayCF } from "./javascript/btns.js";
+import { createBtns,
+  //  displayFC 
+  } from "./javascript/btns.js";
 import { fetchWithHandling } from "./javascript/fetch.js";
 import { 
   // createWeatherView,
-populateWeatherData
+  // checkScale,
+populateWeatherData, 
+updateDataFC,
  } from "./javascript/weatherView.js";
  import { playClickSound } from "./javascript/sound.js";
 
  import { worldCapitals } from "./data/worldCapitals.js";
  import { stateCapitals } from "./data/stateCapitals.js";
+
+ let weatherData = null;
+ let weatherDataWorld = null;
+ let weatherDataUSA = null;
 
  function clickEffects() {
     const titleImg1 = document.querySelector("#title-img1");
@@ -33,13 +44,40 @@ document.addEventListener("DOMContentLoaded", () => {
   createSearch();
   createBtns();
   // toggleEarthImg();
-  displayCF();
+  // displayFC();
 
   const btnSound = document.querySelectorAll("button");
   btnSound.forEach((button) => {
     button.addEventListener("click", (event) => {
       playClickSound(event);
     });
+  });
+
+
+  const tempScaleBtn = document.querySelector("#temp-scale-btn");
+  tempScaleBtn.value = "F";
+  const tempScaleImg = document.querySelector("#temp-scale-img");
+  tempScaleImg.src = svgF;
+
+  tempScaleBtn.addEventListener("click", () => {
+    if (tempScaleImg.src === svgF && tempScaleBtn.value === "F") {
+      tempScaleBtn.value = "C";
+      tempScaleImg.src = svgC;
+      console.log("Temperature scale set to Celsius.");
+
+      if (weatherData || weatherDataUSA || weatherDataWorld) {
+        updateDataFC(weatherData || weatherDataUSA || weatherDataWorld);
+      }
+
+    } else {
+      tempScaleBtn.value = "F";
+      tempScaleImg.src = svgF;
+      console.log("Temperature scale set to Fahrenheit.");
+
+      if (weatherData || weatherDataUSA || weatherDataWorld) {
+        updateDataFC(weatherData || weatherDataUSA || weatherDataWorld);
+      }
+    }
   });
 
   const searchInput = document.querySelector("#search-input");
@@ -49,7 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchBtn = document.querySelector("#search-btn");
 
   searchBtn.addEventListener("click", () => {
+    weatherDataUSA = null;
+    weatherDataWorld = null;
     clickEffects();
+    // checkScale();
       // clearData();
     const query = searchInput.value;
     console.log(`Searching for: ${query}`);
@@ -59,7 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
     async function init() {
       clearDivText("location-content", "weather-content");
       
-      const weatherData = await fetchWithHandling(url);
+      // const weatherData = await fetchWithHandling(url);
+      weatherData = await fetchWithHandling(url);
       const locationQuery = query;
 
       console.log(weatherData);
@@ -95,6 +137,7 @@ const worldBtn = document.querySelector("#world-btn");
 worldBtn.addEventListener("click", () => {
   let queryWorld;
   clickEffects();
+  // checkScale();
   clearQuery(queryWorld);
   console.log(`TEST1 for: ${queryWorld}`);
 
@@ -112,10 +155,13 @@ worldBtn.addEventListener("click", () => {
   const urlWorld = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${queryWorld}?unitGroup=us&key=${k}&contentType=json`;
 
   async function initWorld() {
+    weatherData = null;
+    weatherDataUSA = null;
     clearDivText("location-content", "weather-content");
     // clearQuery(queryWorld);
     console.log(`TEST2 for: ${queryWorld}`);
-    const weatherDataWorld = await fetchWithHandling(urlWorld);
+    // const weatherDataWorld = await fetchWithHandling(urlWorld);
+    weatherDataWorld = await fetchWithHandling(urlWorld);
     const locationQueryWorld = randomCapital.city;
     console.log(weatherDataWorld);
     console.log(`Resolved address: ${weatherDataWorld.resolvedAddress}`);
@@ -159,6 +205,7 @@ const usaBtn = document.querySelector("#usa-btn");
 usaBtn.addEventListener("click", () => {
   let queryUSA;
   clickEffects();
+  // checkScale();
   clearQuery(queryUSA);
   console.log(`TEST1 for: ${queryUSA}`);
 
@@ -176,18 +223,26 @@ usaBtn.addEventListener("click", () => {
   const urlUSA = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${queryUSA}?unitGroup=us&key=${k}&contentType=json`;
 
   async function initUSA() {
+    weatherData = null;
+    weatherDataWorld = null;
     clearDivText("location-content", "weather-content");
     // clearQuery(queryWorld);
     console.log(`TEST2 for: ${queryUSA}`);
-    const weatherDataUSA = await fetchWithHandling(urlUSA);
+    // const weatherDataUSA = await fetchWithHandling(urlUSA);
+    weatherDataUSA = await fetchWithHandling(urlUSA);
     const locationQueryUSA = randomCapital.capital;
     console.log(weatherDataUSA);
     console.log(`Resolved address: ${weatherDataUSA.resolvedAddress}`);
     populateWeatherData(locationQueryUSA, weatherDataUSA);
     console.log(`TEST3 for: ${queryUSA}`);
+    // updateDataFC(weatherDataUSA);
+    // displayFC(weatherDataUSA);
+
   }
   initUSA();
 });
+
+
 
 });
 

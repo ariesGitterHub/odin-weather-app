@@ -1,13 +1,17 @@
 import svgEarth1 from "../assets/earth1.svg";
 // import svgEarth2 from "../assets/earth2.svg";
 import svgUSA from "../assets/usa.svg";
-import svgC from "../assets/c.svg";
+// import svgC from "../assets/c.svg";
 import svgF from "../assets/f.svg";
 import {
   createBtnElement,
   createImgElement,
   // createToggleSwitch,
 } from "./basicFunctions.js";
+// import { updateDataFC } from "./weatherView.js"
+
+// import { convertToCelsius } from "./basicFunctions.js";
+// import { convertToFahrenheit } from "./basicFunctions.js";
 
 // export function toggleEarthImg() {
 //   const worldImg = document.querySelector("#world-img");
@@ -26,28 +30,50 @@ import {
 //   }, 10000);
 // }
 
-export function displayCF() {
-  // const toggleC2F = document.querySelector("#toggle-c2f");
-  // const toggleSlider = document.querySelector("#toggle-slider");
-  const tempScaleBtn = document.querySelector("#temp-scale-btn");
-  tempScaleBtn.value = "F"
-  const tempScaleImg = document.querySelector("#temp-scale-img");
-  tempScaleImg.src = svgF;
-  // toggleSlider.append(tempScaleImg)
-  // toggleSlider.textContent = "°F/°C";
-  tempScaleBtn.addEventListener("click", () => {
-    // console.log(toggleC2F.checked);
-    if (tempScaleImg.src === svgF && tempScaleBtn.value === "F") {
-      // toggleSlider.textContent = "F";
-      tempScaleBtn.value = "C"
-      tempScaleImg.src = svgC;
-    } else {
-      // toggleSlider.textContent = "C";
-      tempScaleBtn.value = "F";
-      tempScaleImg.src = svgF;
-    }
-  });
-}
+// function refreshTemp() {
+//   const temperatures = document.querySelector("#temperatures");
+//   temperatures.style.fontSize = "2rem";
+// }
+
+// export function displayFC(data) {
+//   const tempScaleBtn = document.querySelector("#temp-scale-btn");
+//   tempScaleBtn.value = "F"
+//   const tempScaleImg = document.querySelector("#temp-scale-img");
+//   tempScaleImg.src = svgF;
+
+//   const temperatures = document.querySelector("#temperatures");
+
+//   tempScaleBtn.addEventListener("click", () => {
+//       if (tempScaleImg.src === svgF && tempScaleBtn.value === "F") {
+//         tempScaleBtn.value = "C"
+//         tempScaleImg.src = svgC;
+//         console.log("Temperature scale set to Celsius.");  
+
+//         temperatures.textContent = `Currently: ${convertToCelsius(
+//           data.currentConditions.temp
+//         )}°${tempScaleBtn.value} (Feels Like: ${convertToCelsius(
+//           data.currentConditions.feelslike
+//         )}°${tempScaleBtn.value})`;
+
+//     } else 
+//     // if (tempScaleImg.src === svgC && tempScaleBtn.value === "C") 
+//       {
+//         tempScaleBtn.value = "F";
+//         tempScaleImg.src = svgF;
+//         console.log("Temperature scale set to Fahrenheit.");
+
+//         temperatures.textContent = `Currently: ${data.currentConditions.temp}°${tempScaleBtn.value} (Feels Like: ${data.currentConditions.feelslike}°${tempScaleBtn.value})`;
+//         console.log("Temperature scale set to Fahrenheit.");
+
+//         // temperatures.textContent = `Currently: ${convertToFahrenheit(
+//         //   data.currentConditions.temp
+//         // )}°${tempScaleBtn.value} (Feels Like: ${convertToFahrenheit(
+//         //   data.currentConditions.feelslike
+//         // )}°${tempScaleBtn.value})`;
+//     }
+
+//   });
+// }
 
 export function createBtns() {
   const btnContent = document.querySelector("#btn-content");
@@ -59,7 +85,8 @@ export function createBtns() {
   // const tempScaleImg = createImgElement("temp-scale-img", "");
 
   const tempScaleBtn = createBtnElement("temp-scale-btn");
-  const tempScaleImg = createImgElement("temp-scale-img", "", "")  
+  tempScaleBtn.value = "F";
+  const tempScaleImg = createImgElement("temp-scale-img", svgF, "")  
   const usaBtn = createBtnElement("usa-btn");
   const usaImg = createImgElement("usa-img", svgUSA, "United States Icon");
 

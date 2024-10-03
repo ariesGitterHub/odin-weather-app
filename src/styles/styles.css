@@ -283,7 +283,7 @@ margin: auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  line-height: 1.25;
+  line-height: 1.5;
 }
 
 #location-content {
@@ -312,8 +312,9 @@ margin: auto;
 }
 
 #location-name {
-  font-size: 1.25rem;
+  font-size: 2rem;
   margin: 0;
+  text-align: center;
 }
 
 #resolved-address, #latitude-longitude {
@@ -345,7 +346,7 @@ margin: auto;
 
 
 #current-conditions {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   /* text-align: left; */
 }
 

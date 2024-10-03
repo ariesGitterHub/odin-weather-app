@@ -1,6 +1,5 @@
 import {
   createDivElement,
-  createSpanElement,
   createImgElement,
   createTextElement,
 } from "./basicFunctions";
@@ -28,7 +27,7 @@ import thunder from "../assets/thunder.svg";
 import wind from "../assets/wind.svg";
 // import { format, getDay } from "date-fns";
 
-import { convertToCelsius } from "./basicFunctions.js";
+import { convertToCelsius } from "./basicFunctions.js"
 
 // function reformatDate(date) {
 //   const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -56,80 +55,8 @@ import { convertToCelsius } from "./basicFunctions.js";
 //   let feelsTemp = `${data.currentConditions.feelslike}°F`;
 // }
 
-// export function dataFC(data) {
-//   let tempScaleBtn = document.querySelector("#temp-scale-btn");
-//   let currentTemp = data.currentConditions.temp;
-//   let feelsTemp = data.currentConditions.feelslike;
-//   let currentHumidity = data.currentConditions.humidity;
-//   let dewTemp = data.currentConditions.dew;
-//   let currentTempScale = "F";
-//   tempScaleBtn.addEventListener("click", (data) => {
-//     if (tempScaleBtn.value === "C") {
-//         currentTemp = convertToCelsius(data.currentConditions.temp);
-//         feelsTemp = convertToCelsius(data.currentConditions.feelslike);
-//         currentHumidity = convertToCelsius(data.currentConditions.humidity);
-//         dewTemp = convertToCelsius(data.currentConditions.dew);
-//         currentTempScale = "C";
-//     } else if (tempScaleBtn.value === "F") {
-//         currentTemp = data.currentConditions.temp;
-//         feelsTemp = data.currentConditions.feelslike;
-//         currentHumidity = data.currentConditions.humidity;
-//         dewTemp = data.currentConditions.dew;
-//         currentTempScale = "F";
-//       }
-//       return currentTemp, feelsTemp, currentHumidity, dewTemp, currentTempScale;
-//   })
-
-// }
-
-// function dataFC(data) {
-//   let tempScaleBtn = document.querySelector("#temp-scale-btn");
-
-//   // Initialize temperatures
-//   let currentTemp = data.currentConditions.temp;
-//   let feelsTemp = data.currentConditions.feelslike;
-//   let currentHumidity = data.currentConditions.humidity;
-//   let dewTemp = data.currentConditions.dew;
-//   let currentTempScale = "F";
-
-//   // Update temperatures on button click
-//   tempScaleBtn.addEventListener("click", () => {
-//     if (tempScaleBtn.value === "C") {
-//       currentTemp = convertToCelsius(data.currentConditions.temp);
-//       feelsTemp = convertToCelsius(data.currentConditions.feelslike);
-//       currentHumidity = data.currentConditions.humidity; // Humidity stays the same
-//       dewTemp = convertToCelsius(data.currentConditions.dew);
-//       currentTempScale = "C";
-//     } else {
-//       currentTemp = data.currentConditions.temp;
-//       feelsTemp = data.currentConditions.feelslike;
-//       currentHumidity = data.currentConditions.humidity;
-//       dewTemp = data.currentConditions.dew;
-//       currentTempScale = "F";
-//     }
-
-//     // Update displayed data after conversion
-//     populateWeatherData(data.query, {
-//       ...data,
-//       currentTemp,
-//       feelsTemp,
-//       currentHumidity,
-//       dewTemp,
-//       currentTempScale,
-//     });
-//   });
-
-//   return {
-//     currentTemp,
-//     feelsTemp,
-//     currentHumidity,
-//     dewTemp,
-//     currentTempScale,
-//   };
-// }
-
 export function populateWeatherData(query, data) {
-  // dataFC(data)
+
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
   const noWeatherDataAvailable = "No weather data available.";
   const dataContent = document.querySelector("#data-content");
@@ -234,44 +161,18 @@ export function populateWeatherData(query, data) {
     "Weather icon based on current conditions."
   );
 
-  const currentTemp = data.currentConditions.temp;
-  const feelsTemp = data.currentConditions.feelslike;
-  const currentHumidity = data.currentConditions.humidity;
-  const dewTemp = data.currentConditions.dew;
-  // const currentTempScale = "F";
-
-  //use classes
-  // const currentTempSpan = createSpanElement("current-temp", currentTemp);
-  // const feelsTempSpan = createSpanElement("feels-temp", feelsTemp);
-  // const currentHumiditySpan = createSpanElement("current-humidity", currentHumidity)
-  // const dewTempSpan = createSpanElement("dew-temp", dewTemp)
-  // const currentTempScaleSpan = createSpanElement("current-temp-scale", currentTempScale)
-
   const temperatures = createTextElement(
     "p",
     "temperatures",
-    ""
+    `Currently: ${data.currentConditions.temp}°${tempScaleBtn.value} (Feels Like: ${data.currentConditions.feelslike}°${tempScaleBtn.value})`
+    // `Currently: ${currentTemp} (Feels Like: ${feelsTemp})`
   );
+
   const moisture = createTextElement(
     "p",
     "moisture",
-    ""
+    `Humidity: ${data.currentConditions.humidity}% (Dew Point: ${data.currentConditions.dew}°${tempScaleBtn.value})`
   );
-
-  // const tempScaleBtn = document.querySelector("#temp-scale-btn");
-
-  if (tempScaleBtn.value === "C") {
-    temperatures.textContent = 
-    `Currently: ${convertToCelsius(currentTemp)}°C (Feels Like: ${convertToCelsius(feelsTemp)}°C)`
-
-    moisture.textContent = 
-    `Humidity: ${currentHumidity}% (Dew Point: ${convertToCelsius(dewTemp)}°C)`
-  } else {
-    temperatures.textContent = 
-    `Currently: ${currentTemp}°F (Feels Like: ${feelsTemp}°F)`
-    moisture.textContent = 
-    `Humidity: ${currentHumidity}% (Dew Point: ${dewTemp}°F)`
-  }
 
   dataContent.append(locationContent, weatherContent);
 
@@ -282,7 +183,11 @@ export function populateWeatherData(query, data) {
     sunriseSunset
   );
 
-  weatherContent.append(currentConditions, temperatures, moisture, weatherIcon);
+  weatherContent.append(
+    currentConditions, 
+    temperatures, 
+    moisture, 
+    weatherIcon);
 }
 
 // function convertToCelsius(temp) {
@@ -295,42 +200,18 @@ export function populateWeatherData(query, data) {
 //   return celsius;
 // }
 
-// export function updateDataFC(data) {
-//   const tempScaleBtn = document.querySelector("#temp-scale-btn");
-//   const temperatures = document.querySelector("#temperatures");
-//   // tempScaleBtn.addEventListener("click", () => {
-//     if (tempScaleBtn.value === "C") {
-//       temperatures.textContent = `Currently: ${convertToCelsius(
-//         data.currentConditions.temp
-//       )}°${tempScaleBtn.value} (Feels Like: ${convertToCelsius(
-//         data.currentConditions.feelslike
-//       )}°${tempScaleBtn.value})`;
-//     } else {
-//       temperatures.textContent = `Currently: ${data.currentConditions.temp}°${tempScaleBtn.value} (Feels Like: ${data.currentConditions.feelslike}°${tempScaleBtn.value})`;
-//     }
-//   // });
-// }
-
 export function updateDataFC(data) {
-  const currentTemp = data.currentConditions.temp;
-  const feelsTemp = data.currentConditions.feelslike;
-  const currentHumidity = data.currentConditions.humidity;
-  const dewTemp = data.currentConditions.dew;
-
-  const temperatures = document.querySelector("#temperatures");
-  const moisture = document.querySelector("#moisture");
-
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
+  const temperatures = document.querySelector("#temperatures");
+  // tempScaleBtn.addEventListener("click", () => {
     if (tempScaleBtn.value === "C") {
       temperatures.textContent = `Currently: ${convertToCelsius(
-        currentTemp
-      )}°C (Feels Like: ${convertToCelsius(feelsTemp)}°C)`;
-
-      moisture.textContent = `Humidity: ${currentHumidity}% (Dew Point: ${convertToCelsius(
-        dewTemp
-      )}°C)`;
+        data.currentConditions.temp
+      )}°${tempScaleBtn.value} (Feels Like: ${convertToCelsius(
+        data.currentConditions.feelslike
+      )}°${tempScaleBtn.value})`;
     } else {
-      temperatures.textContent = `Currently: ${currentTemp}°F (Feels Like: ${feelsTemp}°F)`;
-      moisture.textContent = `Humidity: ${currentHumidity}% (Dew Point: ${dewTemp}°F)`;
+      temperatures.textContent = `Currently: ${data.currentConditions.temp}°${tempScaleBtn.value} (Feels Like: ${data.currentConditions.feelslike}°${tempScaleBtn.value})`;
     }
+  // });
 }

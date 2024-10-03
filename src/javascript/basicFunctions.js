@@ -4,6 +4,13 @@ export function createDivElement(id) {
   return element;
 }
 
+export function createSpanElement(className, text) {
+  const element = document.createElement("span");
+  element.classList.add(className);
+  element.textContent = text;
+  return element;
+}
+
 export function createBtnElement(id, text) {
   const button = document.createElement("button");
   button.id = id;
@@ -92,4 +99,14 @@ export function clearQuery(query) {
     query = "";
   }
 
+}
+
+export function convertToCelsius(temp) {
+  const celsius = Math.round((((temp - 32) * 5) / 9) * 10) / 10;
+  return celsius;
+}
+
+export function convertToFahrenheit(temp) {
+  const celsius = Math.round(((temp * 9) / 5 + 32) * 10) / 10;
+  return celsius;
 }
