@@ -1,6 +1,7 @@
+import { format, parse } from "date-fns";
+
 import {
   createDivElement,
-
   createImgElement,
   createTextElement,
 } from "./basicFunctions";
@@ -158,10 +159,20 @@ export function populateWeatherData(query, data) {
     `(Latitude: ${data.latitude}, Longitude: ${data.longitude})`
   );
 
+  const parseSunrise = format(
+    parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
+    "hh:mm:ss a"
+  );
+
+  const parseSunset = format(
+    parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
+    "hh:mm:ss a"
+  );
+
   const sunriseSunset = createTextElement(
     "p",
     "sunrise-sunset",
-    `Sunrise: ${data.currentConditions.sunrise}, Sunset ${data.currentConditions.sunset}`
+    `Sunrise: ${parseSunrise}, Sunset: ${parseSunset}`
   );
 
   const weatherContent = createDivElement("weather-content");
@@ -247,30 +258,22 @@ export function populateWeatherData(query, data) {
   // const dewTempSpan = createSpanElement("dew-temp", dewTemp)
   // const currentTempScaleSpan = createSpanElement("current-temp-scale", currentTempScale)
 
-  const temperatures = createTextElement(
-    "p",
-    "temperatures",
-    ""
-  );
-  const moisture = createTextElement(
-    "p",
-    "moisture",
-    ""
-  );
+  const temperatures = createTextElement("p", "temperatures", "");
+  const moisture = createTextElement("p", "moisture", "");
 
   // const tempScaleBtn = document.querySelector("#temp-scale-btn");
 
   if (tempScaleBtn.value === "C") {
-    temperatures.textContent = 
-    `Currently: ${convertToCelsius(currentTemp)}°C (Feels Like: ${convertToCelsius(feelsTemp)}°C)`
+    temperatures.textContent = `Currently: ${convertToCelsius(
+      currentTemp
+    )}°C (Feels Like: ${convertToCelsius(feelsTemp)}°C)`;
 
-    moisture.textContent = 
-    `Humidity: ${currentHumidity}% (Dew Point: ${convertToCelsius(dewTemp)}°C)`
+    moisture.textContent = `Humidity: ${currentHumidity}% (Dew Point: ${convertToCelsius(
+      dewTemp
+    )}°C)`;
   } else {
-    temperatures.textContent = 
-    `Currently: ${currentTemp}°F (Feels Like: ${feelsTemp}°F)`
-    moisture.textContent = 
-    `Humidity: ${currentHumidity}% (Dew Point: ${dewTemp}°F)`
+    temperatures.textContent = `Currently: ${currentTemp}°F (Feels Like: ${feelsTemp}°F)`;
+    moisture.textContent = `Humidity: ${currentHumidity}% (Dew Point: ${dewTemp}°F)`;
   }
 
   dataContent.append(locationContent, weatherContent);
@@ -321,16 +324,16 @@ export function updateDataFC(data) {
   const moisture = document.querySelector("#moisture");
 
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
-    if (tempScaleBtn.value === "C") {
-      temperatures.textContent = `Currently: ${convertToCelsius(
-        currentTemp
-      )}°C (Feels Like: ${convertToCelsius(feelsTemp)}°C)`;
+  if (tempScaleBtn.value === "C") {
+    temperatures.textContent = `Currently: ${convertToCelsius(
+      currentTemp
+    )}°C (Feels Like: ${convertToCelsius(feelsTemp)}°C)`;
 
-      moisture.textContent = `Humidity: ${currentHumidity}% (Dew Point: ${convertToCelsius(
-        dewTemp
-      )}°C)`;
-    } else {
-      temperatures.textContent = `Currently: ${currentTemp}°F (Feels Like: ${feelsTemp}°F)`;
-      moisture.textContent = `Humidity: ${currentHumidity}% (Dew Point: ${dewTemp}°F)`;
-    }
+    moisture.textContent = `Humidity: ${currentHumidity}% (Dew Point: ${convertToCelsius(
+      dewTemp
+    )}°C)`;
+  } else {
+    temperatures.textContent = `Currently: ${currentTemp}°F (Feels Like: ${feelsTemp}°F)`;
+    moisture.textContent = `Humidity: ${currentHumidity}% (Dew Point: ${dewTemp}°F)`;
+  }
 }

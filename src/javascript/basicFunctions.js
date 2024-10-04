@@ -97,3 +97,11 @@ export function convertToFahrenheit(temp) {
   const celsius = Math.round(((temp * 9) / 5 + 32) * 10) / 10;
   return celsius;
 }
+
+export function contentChecker() {
+  const dataContent = document.querySelector("#data-content");
+
+  if (dataContent && dataContent.childElementCount > 0) {
+  clearDivText("location-content", "weather-content");
+  } 
+}

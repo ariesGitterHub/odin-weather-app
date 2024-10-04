@@ -10,8 +10,9 @@ let data = null;
 
 // }
 
-export async function fetchWithHandling(url) {
+//	https://api.weather.gov/points/40.2732,-76.8867
 
+export async function fetchWithHandling(url) {
   try {
     // clearData();
 
@@ -27,8 +28,8 @@ export async function fetchWithHandling(url) {
       data = await response.json();
       // console.log(data);
       // console.log(data.resolvedAddress);
-      
-        return data;
+
+      return data;
     } else {
       return null; // Return null for no data
     }
