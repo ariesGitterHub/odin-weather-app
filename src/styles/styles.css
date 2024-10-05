@@ -6,8 +6,9 @@
 :root {
   --light: #eaeff1;
   --dark: #000000;
+  --night: #173f58;
   --title: #ebcc84;
-  --bkgd: #777773;
+  --bkgd: #b1b1a7;
   --btn-color: #8bb6d8;
   --gradient-dk: #0c5baf;
   --gradient-lt: #a9c3e1;
@@ -31,7 +32,7 @@ body {
 /* HEADER */
 
 #header {
-  background-color: var(--btn-color);
+  background-color: var(--bkgd);
   margin: 0;
 }
 
@@ -210,39 +211,73 @@ body {
 
 #location-content {
   width: 320px;
-  background-color: var(--btn-color);
+  /* background-color: var(--light); */
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   box-shadow: 0 4px 8px var(--dark);
-  color: var(--dark);
+  /* color: var(--dark); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: var(--font-sans);
-  margin-bottom: 0.25rem; 
+  margin-bottom: 0.5rem; 
   padding: 0.5rem;
 }
 
 #location-name {
-  color: #362f07;
+  /* color: #362f07; */
   font-size: 1.5rem;
   margin: 0;
   text-align: center;
   text-transform: uppercase;
 }
 
-#resolved-address, #latitude-longitude {
-  font-size: 1rem;
+#resolved-address, #latitude-longitude, #sunrise-sunset, #moon-phase-text {
+  font-size: .95rem;
   text-align: center;
 }
 
+#moon-content {
+  width: 320px;
+  background-color: var(--night);
+  /* border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem; */
+  box-shadow: 0 4px 8px var(--dark);
+  color: var(--light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-sans);
+
+  margin-bottom: 0.5rem; 
+  /* margin-top: 0.25rem;  */
+  /* padding: 0.25rem; */
+}
+
+#moon-phase-text {
+  align-self: center;
+    font-size: 1.25rem;
+    margin-top:.25rem;
+    padding: 0;
+    text-align: center;
+
+}
+
+#moon-phase-img {
+  height: 1.25rem;
+  width: auto;
+  border: 1px solid var(--light);
+  border-radius: 50%;
+  margin-left: .5rem;
+  /* vertical-align: middle; */
+}
 /* ---> WEATHER-CONTENT */
 
 #weather-content {
   width: 320px;
-  background-color: var(--light);
-  border: 0.25rem solid var(--light);
+  /* background-color: var(--light); */
+  /* border: 0.25rem solid var(--light); */
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   box-shadow: 0 4px 8px var(--dark);
@@ -280,7 +315,7 @@ body {
 }
 
 #current-last-update {
-  font-size: 1rem;
+  font-size: .9rem;
 }
 
 #current-weather-text-img-cont {

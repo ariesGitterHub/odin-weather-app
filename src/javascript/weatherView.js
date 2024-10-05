@@ -27,9 +27,65 @@ import thunderShowersDay from "../assets/thunder-showers-day.svg";
 import thunderShowersNight from "../assets/thunder-showers-night.svg";
 import thunder from "../assets/thunder.svg";
 import wind from "../assets/wind.svg";
+
+import moon1New from "../assets/moon1-new.svg";
+import moon2WaxCre from "../assets/moon2-waxing-crescent.svg";
+import moon3FirQua from "../assets/moon3-first-quarter.svg";
+import moon4WaxGib from "../assets/moon4-waxing-gibbous.svg";
+import moon5Full from "../assets/moon5-full.svg";
+import moon6WanGib from "../assets/moon6-waning-gibbous.svg";
+import moon7LasQua from "../assets/moon7-last-quarter.svg";
+import moon8WanCre from "../assets/moon8-waning-crescent.svg";
+
 // import { format, getDay } from "date-fns";
 
 import { convertToCelsius } from "./basicFunctions.js";
+
+
+
+function styleDayNight(data) {
+
+
+  const parseLastUpdateLocalTime = format(
+    parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
+    "HH:mm:ss a"
+  );
+
+  const parseSunrise = format(
+    parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
+    "HH:mm:ss a"
+  );
+
+  const parseSunset = format(
+    parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
+    "HH:mm:ss a"
+  );
+
+
+  const locationContent = document.querySelector("#location-content");
+  const weatherContent = document.querySelector("#weather-content");
+
+
+  if (
+    parseLastUpdateLocalTime > parseSunrise
+    &&
+    parseLastUpdateLocalTime < parseSunset 
+    ) {
+    locationContent.style.backgroundColor = "var(--light)";
+    locationContent.style.color = "var(--dark)";
+    weatherContent.style.backgroundColor = "var(--light)";
+    weatherContent.style.color = "var(--dark)";
+  } else if (
+    parseLastUpdateLocalTime < parseSunrise 
+    ||
+    parseLastUpdateLocalTime > parseSunset
+  ) {
+    locationContent.style.backgroundColor = "var(--dark)";
+    locationContent.style.color = "var(--light)";
+    weatherContent.style.backgroundColor = "var(--dark)";
+    weatherContent.style.color = "var(--light)";
+  }
+}
 
 function weatherIconSRC(data) {
   switch (data.currentConditions.icon) {
@@ -82,6 +138,46 @@ function weatherIconSRC(data) {
   }
 }
 
+function getMoonPhase(data) {
+  const moonRatio = data.currentConditions.moonphase; // Use moonRatio consistently
+  let moonSrc;
+  let moonPhase;
+  console.log(`Moon Phase value: ${moonRatio}`);
+  
+  if (moonRatio === 0) {
+    moonSrc = moon1New;
+    moonPhase = "New Moon";
+  } else if (moonRatio > 0 && moonRatio < 0.25) {
+    moonSrc = moon2WaxCre;
+    moonPhase = "Waxing Crescent";
+  } else if (moonRatio === 0.25) {
+    moonSrc = moon3FirQua;
+    moonPhase = "First Quarter";
+  } else if (moonRatio > 0.25 && moonRatio < 0.5) {
+    moonSrc = moon4WaxGib;
+    moonPhase = "Waxing Gibbous";
+  } else if (moonRatio === 0.5) {
+    moonSrc = moon5Full;
+    moonPhase = "Full Moon";
+  } else if (moonRatio > 0.5 && moonRatio < 0.75) {
+    moonSrc = moon6WanGib;
+    moonPhase = "Waning Gibbous";
+  } else if (moonRatio === 0.75) {
+    moonSrc = moon7LasQua;
+    moonPhase = "Last Quarter";
+  } else if (moonRatio > 0.75 && moonRatio < 1) {
+    moonSrc = moon8WanCre; // Assuming this should be "Waning Crescent"
+    moonPhase = "Waning Crescent";
+  } else if (moonRatio === 1) {
+    moonSrc = moon1New; // Reset for a new cycle
+    moonPhase = "New Moon";
+  } else {
+    return "Invalid value";
+  }
+
+  return { moonSrc, moonPhase }; // Return the object at the end
+}
+
 export function populateWeatherData(query, data) {
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
   const noWeatherDataAvailable = "No weather data available.";
@@ -90,6 +186,21 @@ export function populateWeatherData(query, data) {
     console.error(noWeatherDataAvailable);
     return;
   }
+
+  const parseLastUpdateLocalTime = format(
+    parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
+    "hh:mm:ss a"
+  );
+
+  const parseSunrise = format(
+    parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
+    "hh:mm:ss a"
+  );
+
+  const parseSunset = format(
+    parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
+    "hh:mm:ss a"
+  );
 
   const locationContent = createDivElement("location-content");
 
@@ -111,21 +222,17 @@ export function populateWeatherData(query, data) {
     `(Latitude: ${data.latitude}, Longitude: ${data.longitude})`
   );
 
-  const parseSunrise = format(
-    parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
-    "hh:mm:ss a"
-  );
-
-  const parseSunset = format(
-    parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
-    "hh:mm:ss a"
-  );
-
   const sunriseSunset = createTextElement(
     "p",
     "sunrise-sunset",
     `Sunrise: ${parseSunrise}, Sunset: ${parseSunset}`
   );
+
+  const moonContent = createDivElement("moon-content")
+
+  // const moonPhaseCont = createDivElement("moon-phase-cont")
+  const moonPhaseText = createTextElement("p", "moon-phase-text", getMoonPhase(data).moonPhase)
+  const moonPhaseImg = createImgElement("moon-phase-img", getMoonPhase(data).moonSrc, "Current moon phase")
 
   const weatherContent = createDivElement("weather-content");
 
@@ -147,15 +254,10 @@ export function populateWeatherData(query, data) {
     `Currently: ${data.currentConditions.conditions}`
   );
 
-  const parseLastUpdate = format(
-    parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
-    "hh:mm:ss a"
-  );
-
   const currentLastUpdate = createTextElement(
     "p",
     "current-last-update",
-    `(Last updated at ${parseLastUpdate}.)`
+    `(Last updated at ${parseLastUpdateLocalTime} local time.)`
   );
 
   const currentWeatherIconImg = createImgElement(
@@ -198,14 +300,17 @@ export function populateWeatherData(query, data) {
     currentDewPoint.textContent = `Dew Point: ${currentDewTempData}°F`;
   }
 
-  dataContent.append(locationContent, weatherContent);
+  dataContent.append(locationContent, moonContent, weatherContent);
 
   locationContent.append(
     locationName,
     resolvedAddress,
     locationLatLon,
-    sunriseSunset
+    sunriseSunset,
   );
+
+  moonContent.append(moonPhaseText, moonPhaseImg);
+  // moonPhaseCont.append(moonPhaseText, moonPhaseImg);
 
   weatherContent.append(currentWeather);
   currentWeather.append(
@@ -222,6 +327,8 @@ export function populateWeatherData(query, data) {
     currentHumidity,
     currentDewPoint
   );
+
+    styleDayNight(data);
 }
 
 export function updateDataFC(data) {

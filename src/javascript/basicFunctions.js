@@ -67,7 +67,7 @@ export function createToggleSwitch(id, isChecked) {
 }
 
 // CLEAR DIVS
-export function clearDivText(divId1, divId2) {
+export function clearDivText(divId1, divId2, divId3) {
   const div1 = document.getElementById(divId1);
   if (div1) {
     div1.remove();
@@ -76,6 +76,11 @@ export function clearDivText(divId1, divId2) {
   const div2 = document.getElementById(divId2);
   if (div2) {
     div2.remove();
+  }
+
+  const div3 = document.getElementById(divId3);
+  if (div3) {
+    div3.remove();
   }
 }
 
@@ -102,6 +107,6 @@ export function contentChecker() {
   const dataContent = document.querySelector("#data-content");
 
   if (dataContent && dataContent.childElementCount > 0) {
-  clearDivText("location-content", "weather-content");
+  clearDivText("location-content", "moon-content", "weather-content");
   } 
 }

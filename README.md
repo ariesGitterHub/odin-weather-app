@@ -33,3 +33,6 @@ https://www.visualcrossing.com/resources/documentation/weather-api/how-to-includ
 installed: sudo apt install fonts-noto fonts-noto-cjk fonts-arabeyes fonts-wqy-microhei fonts-indic
 sudo apt-get install fonts-noto
 sudo apt-get install fonts-noto-cjk
+
+## Units of Measurement
+https://www.visualcrossing.com/resources/documentation/weather-data/weather-data-documentation/
