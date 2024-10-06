@@ -4,9 +4,16 @@
 
 
 :root {
-  --light: #eaeff1;
-  --dark: #000000;
+  --black: #000000;
+  --white: #ffffff;
+
+  --day: #f1f0ea;
+  --dawn: #c1c1c0;
   --night: #173f58;
+  --dusk: #375a70;
+
+  --moon-bkgd: #173F58;
+
   --title: #ebcc84;
   --bkgd: #b1b1a7;
   --btn-color: #8bb6d8;
@@ -48,7 +55,7 @@ body {
 }
 
 #title-text {
-  color: var(--dark);
+  color: var(--black);
   font-family: var(--font-hand);
   font-size: 2.5rem;
   font-weight: 900;
@@ -109,11 +116,11 @@ body {
 }
 
 #search-input {
-  background-color: var(--light);
+  background-color: var(--white);
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
-  border: 2px solid var(--btn-color);
-  box-shadow: 0 4px 8px var(--dark);
+  border: 1px solid var(--btn-color);
+  box-shadow: 0 4px 8px var(--black);
   font-size: 1rem;
   outline: none;
 }
@@ -122,9 +129,9 @@ body {
   width: fit-content;
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  box-shadow: 0 4px 8px var(--dark);
+  box-shadow: 0 4px 8px var(--black);
   background-color: var(--btn-color);
-  color: var(--dark);
+  color: var(--black);
   border: none;
   cursor: pointer;
   transition: var(--btn-transition);
@@ -159,17 +166,17 @@ body {
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  box-shadow: 0 4px 8px var(--dark);
+  box-shadow: 0 4px 8px var(--black);
   background-color: var(--btn-color);
-  color: var(--light);
+  color: var(--white);
   border: none;
   cursor: pointer;
-  outline: 1px solid var(--light);
+  outline: 1px solid var(--white);
   transition: var(--btn-transition);
 }
 
 #temp-scale-btn, #usa-btn {
-  border: 0.125rem solid var(--dark);
+  border: 0.125rem solid var(--black);
   padding: 0.15rem;
 }
 
@@ -214,7 +221,7 @@ body {
   /* background-color: var(--light); */
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  box-shadow: 0 4px 8px var(--dark);
+  box-shadow: 0 4px 8px var(--black);
   /* color: var(--dark); */
   display: flex;
   flex-direction: column;
@@ -240,11 +247,11 @@ body {
 
 #moon-content {
   width: 320px;
-  background-color: var(--night);
+  background-color: var(--moon-bkgd);
   /* border-top-left-radius: 1rem;
   border-top-right-radius: 1rem; */
-  box-shadow: 0 4px 8px var(--dark);
-  color: var(--light);
+  box-shadow: 0 4px 8px var(--black);
+  color: var(--white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -261,13 +268,12 @@ body {
     margin-top:.25rem;
     padding: 0;
     text-align: center;
-
 }
 
 #moon-phase-img {
   height: 1.25rem;
   width: auto;
-  border: 1px solid var(--light);
+  border: 1px solid var(--white);
   border-radius: 50%;
   margin-left: .5rem;
   /* vertical-align: middle; */
@@ -280,8 +286,8 @@ body {
   /* border: 0.25rem solid var(--light); */
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  box-shadow: 0 4px 8px var(--dark);
-  color: var(--dark);
+  box-shadow: 0 4px 8px var(--black);
+  /* color: var(--dark); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -301,7 +307,7 @@ body {
 }
 
 #current-conditions, #current-last-update {
-  color:var(--dark);
+  /* color:var(--dark); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -309,9 +315,14 @@ body {
 }
 
 #current-conditions {
-  font-size: .9rem;
+  /* align-self: start; */
+  font-size: 1rem;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+#chance-of-precipitation {
+  align-self: start;
 }
 
 #current-last-update {
@@ -330,13 +341,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  margin-right: 1rem;
 }
 
 
-#current-weather-title {
+/* #current-weather-title {
   font-size: 1.25rem;
   color: red;
-}
+} */
 
 #temperatures, #moisture {
   font-size: 1rem;
@@ -345,7 +357,9 @@ body {
 #current-weather-icon-img{
   height: 7.5rem;
   width: auto;
-  margin-left: .5rem;
+  border-radius: 50%;
+  margin: .5rem;
+  padding: 0;
 
 }
 

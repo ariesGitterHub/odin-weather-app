@@ -1,6 +1,7 @@
 import { format, parse } from "date-fns";
 
 import {
+  createBreakElement,
   createDivElement,
   createImgElement,
   createTextElement,
@@ -64,26 +65,32 @@ function styleDayNight(data) {
 
   const locationContent = document.querySelector("#location-content");
   const weatherContent = document.querySelector("#weather-content");
-
+  const currentWeatherIconImg = document.querySelector("#current-weather-icon-img");
 
   if (
     parseLastUpdateLocalTime > parseSunrise
     &&
     parseLastUpdateLocalTime < parseSunset 
     ) {
-    locationContent.style.backgroundColor = "var(--light)";
-    locationContent.style.color = "var(--dark)";
-    weatherContent.style.backgroundColor = "var(--light)";
-    weatherContent.style.color = "var(--dark)";
+    // locationContent.style.backgroundColor = "var(--day)";
+    locationContent.style.backgroundImage = "linear-gradient(to bottom right, var(--day), var(--dawn))";
+    locationContent.style.color = "var(--night)";
+    // weatherContent.style.backgroundColor = "var(--day)";
+    weatherContent.style.backgroundImage = "linear-gradient(to bottom right, var(--day), var(--dawn))";
+    weatherContent.style.color = "var(--night)";
+    currentWeatherIconImg.style.border = "1px solid var(--night)";
   } else if (
     parseLastUpdateLocalTime < parseSunrise 
     ||
     parseLastUpdateLocalTime > parseSunset
   ) {
-    locationContent.style.backgroundColor = "var(--dark)";
-    locationContent.style.color = "var(--light)";
-    weatherContent.style.backgroundColor = "var(--dark)";
-    weatherContent.style.color = "var(--light)";
+    // locationContent.style.backgroundColor = "var(--night)";
+    locationContent.style.backgroundImage = "linear-gradient(to bottom right, var(--night), var(--dusk))";
+    locationContent.style.color = "var(--day)";
+    // weatherContent.style.backgroundColor = "var(--night)";
+    weatherContent.style.backgroundImage = "linear-gradient(to bottom right, var(--night), var(--dusk))";
+    weatherContent.style.color = "var(--day)";
+    currentWeatherIconImg.style.border = "1px solid var(--day)";
   }
 }
 
@@ -254,17 +261,13 @@ export function populateWeatherData(query, data) {
     `Currently: ${data.currentConditions.conditions}`
   );
 
-  const currentLastUpdate = createTextElement(
-    "p",
-    "current-last-update",
-    `(Last updated at ${parseLastUpdateLocalTime} local time.)`
-  );
-
   const currentWeatherIconImg = createImgElement(
     "current-weather-icon-img",
     weatherIconSRC(data),
     "Weather icon based on current conditions."
   );
+
+  const br1 = createBreakElement("break");
 
   const currentTempData = data.currentConditions.temp;
   const currentFeelsTempData = data.currentConditions.feelslike;
@@ -295,10 +298,20 @@ export function populateWeatherData(query, data) {
       currentDewTempData
     )}°C)`;
   } else {
-    currentTemperature.textContent = `Temperature: ${currentTempData}°C`;
-    currentFeelsTemperature.textContent = `Feels Like: ${currentFeelsTempData}°C`;
+    currentTemperature.textContent = `Temperature: ${currentTempData}°F`;
+    currentFeelsTemperature.textContent = `Feels Like: ${currentFeelsTempData}°F`;
     currentDewPoint.textContent = `Dew Point: ${currentDewTempData}°F`;
   }
+
+  const chanceOfPrecipitation = createTextElement("p", "chance-of-precipitation", `Chance of Precipitation: ${data.currentConditions.precipprob}%`)
+
+  const br2 = createBreakElement("br");
+
+  const currentLastUpdate = createTextElement(
+    "p",
+    "current-last-update",
+    `(Last updated at ${parseLastUpdateLocalTime} local time.)`
+  );
 
   dataContent.append(locationContent, moonContent, weatherContent);
 
@@ -316,16 +329,19 @@ export function populateWeatherData(query, data) {
   currentWeather.append(
     currentConditions,
     currentWeatherTextImgCont,
+    chanceOfPrecipitation,
+    br2,
     currentLastUpdate
   );
   currentWeatherTextImgCont.append(currentWeatherTextCont, currentWeatherIconImg);
   currentWeatherTextCont.append(
     // currentWeatherTitle,
     // currentConditions,
+    // br1,
     currentTemperature,
     currentFeelsTemperature,
     currentHumidity,
-    currentDewPoint
+    currentDewPoint,
   );
 
     styleDayNight(data);
@@ -355,8 +371,8 @@ export function updateDataFC(data) {
       currentDewTempData
     )}°C`;
   } else {
-    currentTemperature.textContent = `Temperature: ${currentTempData}°C`;
-    currentFeelsTemperature.textContent = `Feels Like: ${currentFeelsTempData}°C`;
+    currentTemperature.textContent = `Temperature: ${currentTempData}°F`;
+    currentFeelsTemperature.textContent = `Feels Like: ${currentFeelsTempData}°F`;
     currentDewPoint.textContent = `Dew Point: ${currentDewTempData}°F`;
   }
 }

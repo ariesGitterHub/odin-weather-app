@@ -13,6 +13,12 @@ export function createSpanElement(className, text) {
   return element;
 }
 
+export function createBreakElement(className) {
+  const element = document.createElement("br");
+  element.classList.add(className);
+  return element;
+}
+
 //BTN ELEMENT (i.e., button)
 export function createBtnElement(id, text) {
   const button = document.createElement("button");
