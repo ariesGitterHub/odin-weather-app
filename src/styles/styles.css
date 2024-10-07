@@ -25,6 +25,8 @@
   --font-hand: "Caveat", cursive;
   --font-sans: "Josefin Sans", sans-serif;
   --btn-transition: background-color 0.5s, transform 0.3s;
+
+  --width-tile: 325px;
 }
 
 * {
@@ -58,12 +60,22 @@ body {
 /* ---> TITLE-CONTENT */
 
 #title-content {
-  width: 320px;
+  width: var(--width-tile);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
-  padding: 1rem 1rem 0 1rem;
+  padding: 0;
+}
+
+#title-img-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  /* padding: 1rem 1rem 0 1rem; */
 }
 
 #title-text {
@@ -71,6 +83,8 @@ body {
   font-family: var(--font-hand);
   font-size: 2.5rem;
   font-weight: 900;
+  margin:0;
+  padding: 0;
 }
 
 #title-img1 {
@@ -109,10 +123,19 @@ body {
   animation: spin-lr 0.5s linear;
 }
 
+#MMM {
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: .25rem;
+}
+
 /* ---> SEARCH-CONTENT */
 
 #search-content {
-  width: 320px;
+  width: var(--width-tile);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -165,7 +188,7 @@ body {
 /* ---> BTN-CONTENT */
 
 #btn-content {
-  width: 320px;
+  width: var(--width-tile);
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -222,14 +245,15 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: .25rem;
-  line-height: 1.5;
+  /* margin: .25rem; */
+  margin: auto;
+  line-height: 1.25;
 }
 
 /* ---> LOCATION-CONTENT */
 
 #location-content {
-  width: 320px;
+  width: var(--width-tile);
   /* background-color: var(--light); */
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
@@ -258,7 +282,7 @@ body {
 }
 
 #moon-content {
-  /* width: 320px; */
+  /* width: var(--width-tile); */
   /* background-color: var(--moon-bkgd); */
   /* border-top-left-radius: 1rem;
   border-top-right-radius: 1rem; */
@@ -294,7 +318,7 @@ body {
 /* ---> WEATHER-CONTENT */
 
 #weather-content {
-  width: 320px;
+  width: var(--width-tile);
   /* background-color: var(--light); */
   /* border: 0.25rem solid var(--light); */
   border-bottom-left-radius: 1rem;
@@ -371,20 +395,11 @@ body {
 
 }
 
-#footer-content {
+/* #footer-content {
   width: 320px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
   padding: 1rem 1rem 0 1rem;
-}
-
-/* FOOTER-CONTENT */
-
-#MMM {
-  font-family: var(--font-hand);
-  font-size: 1.25rem;
-  font-weight: 900;
-  text-align: center;
-}
+} */

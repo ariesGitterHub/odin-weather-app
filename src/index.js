@@ -11,7 +11,7 @@ import { createWeatherView, updateDataFC } from "./javascript/weatherView.js";
 import { playClickSound } from "./javascript/sound.js";
 import { worldCapitals } from "./data/worldCapitals.js";
 import { stateCapitals } from "./data/stateCapitals.js";
-import { createFooter } from "./javascript/footer.js";
+// import { createFooter } from "./javascript/footer.js";
 
 let weatherData = null;
 let weatherDataWorld = null;
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createTitle();
   createSearch();
   createBtns();
-  createFooter();
+  // createFooter();
 
   const btnSound = document.querySelectorAll("button");
   btnSound.forEach((button) => {

@@ -125,7 +125,7 @@ export function createWeatherView(data) {
     )}°C`;
     currentDewPoint.textContent = `Dew Point: ${convertToCelsius(
       currentDewTempData
-    )}°C)`;
+    )}°C`;
   } else {
     currentTemperature.textContent = `Temperature: ${currentTempData}°F`;
     currentFeelsTemperature.textContent = `Feels Like: ${currentFeelsTempData}°F`;
