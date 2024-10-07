@@ -7,7 +7,7 @@ import {
   createBtnElement,
   createImgElement,
   // createToggleSwitch,
-} from "./basicFunctions.js";
+} from "./functionsBasic.js";
 // import { updateDataFC } from "./weatherView.js"
 
 // import { convertToCelsius } from "./basicFunctions.js";

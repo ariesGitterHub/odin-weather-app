@@ -1,4 +1,4 @@
-import { createTextElement } from "./basicFunctions.js";
+import { createTextElement } from "./functionsBasic.js";
 
 export function createFooter() {
   const footerContent = document.querySelector("#footer-content");
@@ -6,7 +6,7 @@ export function createFooter() {
   const footerText = createTextElement(
     "p",
     "MMM",
-    "A Mad Muffin Man Design Studio, ©2024"
+    "Mad Muffin Man Design Studio, ©2024"
   );
 
   footerContent.append(footerText);

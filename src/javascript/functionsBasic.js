@@ -97,18 +97,6 @@ export function clearQuery(query) {
   }
 }
 
-// CONVERT TO C FROM F
-export function convertToCelsius(temp) {
-  const celsius = Math.round((((temp - 32) * 5) / 9) * 10) / 10;
-  return celsius;
-}
-
-// CONVERT TO F FROM C
-export function convertToFahrenheit(temp) {
-  const celsius = Math.round(((temp * 9) / 5 + 32) * 10) / 10;
-  return celsius;
-}
-
 export function contentChecker() {
   const dataContent = document.querySelector("#data-content");
 
@@ -116,3 +104,4 @@ export function contentChecker() {
   clearDivText("location-content", "moon-content", "weather-content");
   } 
 }
+

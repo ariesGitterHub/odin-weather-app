@@ -1,4 +1,4 @@
-import { createFormElement, createBtnElement } from "./basicFunctions.js";
+import { createFormElement, createBtnElement } from "./functionsBasic.js";
 
 export function createSearch() {
   const searchContent = document.querySelector("#search-content");

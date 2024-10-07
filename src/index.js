@@ -1,12 +1,13 @@
 import "./styles/styles.css";
 import svgC from "./assets/c.svg";
 import svgF from "./assets/f.svg";
-import { contentChecker } from "./javascript/basicFunctions.js";
+import { contentChecker } from "./javascript/functionsBasic.js";
 import { createTitle } from "./javascript/title.js";
 import { createSearch } from "./javascript/search.js";
 import { createBtns } from "./javascript/btns.js";
 import { fetchWithHandling } from "./javascript/fetch.js";
-import { populateWeatherData, updateDataFC } from "./javascript/weatherView.js";
+import { createLocationView } from "./javascript/locationView.js";
+import { createWeatherView, updateDataFC } from "./javascript/weatherView.js";
 import { playClickSound } from "./javascript/sound.js";
 import { worldCapitals } from "./data/worldCapitals.js";
 import { stateCapitals } from "./data/stateCapitals.js";
@@ -101,8 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(
         `Search bar resolved address: ${weatherData.resolvedAddress}`
       );
-
-      populateWeatherData(locationQuerySearch, weatherData);
+      createLocationView(locationQuerySearch, weatherData);
+      createWeatherView(weatherData);
     }
 
     initSearch();
@@ -152,8 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(
         `World capital resolved address: ${weatherDataWorld.resolvedAddress}`
       );
-
-      populateWeatherData(locationQueryWorld, weatherDataWorld);
+      createLocationView(locationQueryWorld, weatherDataWorld);
+      createWeatherView(weatherDataWorld);
     }
     initWorld();
 
@@ -245,8 +246,9 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(
         `State capital resolved address: ${weatherDataUSA.resolvedAddress}`
       );
-
-      populateWeatherData(locationQueryUSA, weatherDataUSA);
+      
+      createLocationView(locationQueryUSA, weatherDataUSA);
+      createWeatherView(weatherDataUSA);
     }
 
     initUSA();

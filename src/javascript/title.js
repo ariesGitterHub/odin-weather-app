@@ -1,6 +1,6 @@
 import svgTitleWindAndLeaves from "../assets/titleWindAndLeaves.svg";
 import svgTitleWeathervane from "../assets/titleWeathervane.svg"
-import { createImgElement, createTextElement } from "./basicFunctions.js";
+import { createImgElement, createTextElement } from "./functionsBasic.js";
 
 export function createTitle() {
   const titleContent = document.querySelector("#title-content");
