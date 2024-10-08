@@ -180,3 +180,27 @@ export function getWeatherIconSRC(data) {
       return null;
   }
 }
+
+export function getWindDirection(data) {
+  const windDegrees = data.currentConditions.winddir;
+  let windDesc;
+  if (windDegrees >= 348.75 || windDegrees < 11.25) windDesc = "N";
+  else if (windDegrees >= 11.25 && windDegrees < 33.75) windDesc = "NNE";
+  else if (windDegrees >= 33.75 && windDegrees < 56.25) windDesc = "NE";
+  else if (windDegrees >= 56.25 && windDegrees < 78.75) windDesc = "ENE";
+  else if (windDegrees >= 78.75 && windDegrees < 101.25) windDesc = "E";
+  else if (windDegrees >= 101.25 && windDegrees < 123.75) windDesc = "ESE";
+  else if (windDegrees >= 123.75 && windDegrees < 146.25) windDesc = "SE";
+  else if (windDegrees >= 146.25 && windDegrees < 168.75) windDesc = "SSE";
+  else if (windDegrees >= 168.75 && windDegrees < 191.25) windDesc = "S";
+  else if (windDegrees >= 191.25 && windDegrees < 213.75) windDesc = "SSW";
+  else if (windDegrees >= 213.75 && windDegrees < 236.25) windDesc = "SW";
+  else if (windDegrees >= 236.25 && windDegrees < 258.75) windDesc = "WSW";
+  else if (windDegrees >= 258.75 && windDegrees < 281.25) windDesc = "W";
+  else if (windDegrees >= 281.25 && windDegrees < 303.75) windDesc = "WNW";
+  else if (windDegrees >= 303.75 && windDegrees < 326.25) windDesc = "NW";
+  else if (windDegrees >= 326.25 && windDegrees < 348.75) windDesc = "NNW";
+  else windDesc = "Unknown direction";
+
+  return windDesc;
+}

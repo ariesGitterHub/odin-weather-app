@@ -6,12 +6,20 @@ export function createDivElement(id) {
 }
 
 // SPAN ELEMENT
-export function createSpanElement(className, text) {
+// export function createSpanElement(className, text) {
+//   const element = document.createElement("span");
+//   element.classList.add(className);
+//   element.textContent = text;
+//   return element;
+// }
+
+export function createSpanElement(id, text) {
   const element = document.createElement("span");
-  element.classList.add(className);
+  element.id = id;
   element.textContent = text;
   return element;
 }
+
 
 export function createBreakElement(className) {
   const element = document.createElement("br");

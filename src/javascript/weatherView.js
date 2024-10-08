@@ -1,8 +1,9 @@
 import { format, parse } from "date-fns";
 
 import {
-  createBreakElement,
+  // createBreakElement,
   createDivElement,
+  // createSpanElement,
   createImgElement,
   createTextElement,
 } from "./functionsBasic.js";
@@ -10,9 +11,8 @@ import {
 
 // import { format, getDay } from "date-fns";
 
-import { convertToCelsius, styleDayNight } from "./functionsWeather.js";
-// import { styleDayNight } from "./functionsWeather.js";
-import { getWeatherIconSRC } from "./functionsWeather.js";
+import { convertToCelsius, styleDayNight, getWeatherIconSRC, getWindDirection } from "./functionsWeather.js";
+
 
 export function createWeatherView(data) {
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
@@ -139,9 +139,9 @@ export function createWeatherView(data) {
     currentDewPoint.textContent = `Dew Point: ${currentDewTempData}°F`;
   }
   const chanceOfPrecipitationData = data.currentConditions.precipprob;
-  const currentPrecipTypeData = data.currentConditions.preciptype;
-  const currentPrecipInchesData = data.currentConditions.precip;
-  const currentSnowInchesData = data.currentConditions.snow;
+  // const currentPrecipTypeData = data.currentConditions.preciptype;
+  // const currentPrecipInchesData = data.currentConditions.precip;
+  // const currentSnowInchesData = data.currentConditions.snow;
 
   // const chanceOfPrecipitation = createTextElement(
   //   "p",
@@ -156,6 +156,21 @@ export function createWeatherView(data) {
     "chance-of-precipitation",
     `Chance of Precipitation: ${chanceOfPrecipitationData}%`
   );
+
+  // let precipType = "";
+  // if (currentPrecipTypeData) {
+  //   precipType = currentPrecipTypeData.length > 0 ? currentPrecipTypeData[0] : "";
+  // }
+
+
+  // const chanceOfPrecipitation = createTextElement(
+  //   "p",
+  //   "chance-of-precipitation",
+  //   `Chance of Precipitation: ${
+  //     precipType ? precipType.charAt(0).toUpperCase() + precipType.slice(1) : ""
+  //   } ${chanceOfPrecipitationData}%`
+  // );
+
 
   // const br2 = createBreakElement("br");
 
@@ -176,6 +191,17 @@ export function createWeatherView(data) {
   const currentWindSpeedMPHData = data.currentConditions.windspeed;
   const currentWindDirectionData = data.currentConditions.winddir;
   const currentWindGustMPHData = data.currentConditions.windgust;
+
+  let windContent = "";
+  if (currentWindSpeedMPHData && currentWindDirectionData && currentWindGustMPHData) {
+    windContent = `Wind: ${currentWindSpeedMPHData} mph ${getWindDirection(data)} (Gusts: ${currentWindGustMPHData} mph)`;
+  } else if (currentWindSpeedMPHData && currentWindDirectionData) {
+    windContent = `Wind: ${currentWindSpeedMPHData} mph ${getWindDirection(data)}`;
+  } else {
+    windContent = "";
+  }
+
+  const currentWindInfo = createTextElement("p", "current-win-info", windContent)
 
   const currentUVIndexData = data.currentConditions.uvindex;
   const currentUVIndex = createTextElement("p", "current-UV-index", `UV Index (0-10): ${currentUVIndexData}`);
@@ -202,6 +228,7 @@ export function createWeatherView(data) {
     currentConditionsText,
     currentWeatherTextImgCont,
     chanceOfPrecipitation,
+    currentWindInfo,
     // currentPrecipType,
     // currentUVIndex,
     // br2,
