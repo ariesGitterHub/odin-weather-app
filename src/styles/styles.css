@@ -7,7 +7,7 @@
   --black: #000000;
   --white: #ffffff;
 
-  --day: #d7d9d9;
+  --day: #d7d9d9; 
   --dawn: #969c9c;
   --night: #173f58;
   --dusk: #0e505d;
@@ -191,9 +191,9 @@ body {
    /* width: var(--width-tile); */
   width: fit-content;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 4.2rem;
   margin: auto;
   padding: 0 0 1rem 0;
 }
@@ -356,14 +356,6 @@ body {
   align-items: center;
 }
 
-#current-conditions-title, #current-conditions-text, #current-last-update {
-  /* color:var(--dark); */
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  /* text-align: left; */
-}
-
 #current-conditions-text {
   /* align-self: start; */
   font-size: 1.15rem;
@@ -392,6 +384,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  line-height: 1.25;
   margin-right: 1rem;
 }
 
@@ -401,11 +394,11 @@ body {
 }
 
 #current-weather-icon-img{
-  height: 7.5rem;
+  height: 5.5rem;
   width: auto;
-  border-radius: 50%;
+  border-radius: 1rem;
   margin: .5rem;
-  padding: 0;
+  padding: .25rem;
 
 }
 
