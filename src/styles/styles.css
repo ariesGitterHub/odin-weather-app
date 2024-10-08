@@ -363,7 +363,7 @@ body {
   text-transform: uppercase;
 }
 
-#chance-of-precipitation {
+#chance-of-precipitation, #current-precip-type, #current-UV-index {
   align-self: start;
 }
 
@@ -388,13 +388,20 @@ body {
   margin-right: 1rem;
 }
 
-#current-temperature, #current-feels-temperature, #current-humidity, #current-dew-point, #chance-of-precipitation  {
+#current-temperature, #current-feels-temperature, #current-humidity, #current-dew-point, #chance-of-precipitation
+, #current-precip-type, #current-UV-index
+  {
   /* color:red; */
   font-size: 1rem;
+  text-align: left;
+}
+
+#current-precip-type {
+  text-transform: capitalize;
 }
 
 #current-weather-icon-img{
-  height: 5.25rem;
+  height: 6.5rem;
   width: auto;
   border-radius: 1rem;
   margin: .5rem;

@@ -139,9 +139,46 @@ export function createWeatherView(data) {
     currentDewPoint.textContent = `Dew Point: ${currentDewTempData}°F`;
   }
   const chanceOfPrecipitationData = data.currentConditions.precipprob;
-  const chanceOfPrecipitation = createTextElement("p", "chance-of-precipitation", `Chance of Precipitation: ${chanceOfPrecipitationData}%`);
+  const currentPrecipTypeData = data.currentConditions.preciptype;
+  const currentPrecipInchesData = data.currentConditions.precip;
+  const currentSnowInchesData = data.currentConditions.snow;
 
-  const br2 = createBreakElement("br");
+  // const chanceOfPrecipitation = createTextElement(
+  //   "p",
+  //   "chance-of-precipitation",
+  //   `Precipitation chance (${
+  //     currentPrecipTypeData ? currentPrecipTypeData : ""
+  //   }): ${chanceOfPrecipitationData}%`
+  // );
+
+  const chanceOfPrecipitation = createTextElement(
+    "p",
+    "chance-of-precipitation",
+    `Chance of Precipitation: ${chanceOfPrecipitationData}%`
+  );
+
+  // const br2 = createBreakElement("br");
+
+// let precipContent = "";
+
+// if (currentPrecipTypeData && currentPrecipInchesData) {
+// } else if (currentPrecipTypeData && currentSnowInchesData) {
+//   precipContent = `${currentPrecipTypeData}: ${currentSnowInchesData} inches`
+// }
+
+  // const currentPrecipType = createTextElement(
+  //   "p",
+  //   "current-precip-type",
+  //   // `${currentPrecipTypeData ? currentPrecipTypeData : ""}: ${currentPrecipInches ? currentPrecipInches : ""}`
+  //   precipContent
+  // );
+
+  const currentWindSpeedMPHData = data.currentConditions.windspeed;
+  const currentWindDirectionData = data.currentConditions.winddir;
+  const currentWindGustMPHData = data.currentConditions.windgust;
+
+  const currentUVIndexData = data.currentConditions.uvindex;
+  const currentUVIndex = createTextElement("p", "current-UV-index", `UV Index (0-10): ${currentUVIndexData}`);
 
 
   dataContent.append(
@@ -164,7 +201,9 @@ export function createWeatherView(data) {
     currentLastUpdate,
     currentConditionsText,
     currentWeatherTextImgCont,
-    chanceOfPrecipitation
+    chanceOfPrecipitation,
+    // currentPrecipType,
+    // currentUVIndex,
     // br2,
   );
   currentWeatherTextImgCont.append(currentWeatherTextCont, currentWeatherIconImg);
@@ -176,8 +215,12 @@ export function createWeatherView(data) {
     currentFeelsTemperature,
     currentHumidity,
     currentDewPoint,
+    currentUVIndex,
   );
 
+  // if (currentPrecipTypeData > 0) {
+  //   weatherContent.append(currentPrecipType);
+  // }
     styleDayNight(data);
 }
 
