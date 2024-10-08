@@ -75,7 +75,7 @@ export function styleDayNight(data) {
     weatherContent.style.backgroundImage =
       "linear-gradient(to bottom right, var(--day), var(--dawn))";
     weatherContent.style.color = "var(--night)";
-    currentWeatherIconImg.style.border = "1px solid var(--night)";
+    currentWeatherIconImg.style.border = "1px dashed var(--night)";
   } else if (
     parseLastUpdateLocalTime < parseSunrise ||
     parseLastUpdateLocalTime > parseSunset
@@ -86,7 +86,7 @@ export function styleDayNight(data) {
     weatherContent.style.backgroundImage =
       "linear-gradient(to bottom right, var(--dusk), var(--night))";
     weatherContent.style.color = "var(--day)";
-    currentWeatherIconImg.style.border = "1px solid var(--day)";
+    currentWeatherIconImg.style.border = "1px dashed var(--day)";
   }
 }
 
