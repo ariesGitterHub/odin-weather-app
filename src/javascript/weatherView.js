@@ -83,6 +83,13 @@ export function createWeatherView(data) {
     "current-conditions-title",
     "Current Location Conditions"
   );
+
+  const currentLastUpdate = createTextElement(
+    "p",
+    "current-last-update",
+    `(Last updated at ${parseLastUpdateLocalTime} local time.)`
+  );
+
   const currentConditionsData = data.currentConditions.conditions;  
   const currentConditionsText = createTextElement(
     "p",
@@ -136,11 +143,6 @@ export function createWeatherView(data) {
 
   const br2 = createBreakElement("br");
 
-  const currentLastUpdate = createTextElement(
-    "p",
-    "current-last-update",
-    `(Last updated at ${parseLastUpdateLocalTime} local time.)`
-  );
 
   dataContent.append(
     // locationContent, moonContent, 
@@ -159,11 +161,11 @@ export function createWeatherView(data) {
   weatherContent.append(currentWeather);
   currentWeather.append(
     currentConditionsTitle,
+    currentLastUpdate,
     currentConditionsText,
     currentWeatherTextImgCont,
-    chanceOfPrecipitation,
-    br2,
-    currentLastUpdate
+    chanceOfPrecipitation
+    // br2,
   );
   currentWeatherTextImgCont.append(currentWeatherTextCont, currentWeatherIconImg);
   currentWeatherTextCont.append(
