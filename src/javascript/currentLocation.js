@@ -1,12 +1,10 @@
 import { format, parse } from "date-fns";
 import {
-  // createBreakElement,
   createDivElement,
   createImgElement,
   createTextElement,
 } from "./functionsBasic.js";
 
-import { styleDayNight } from "./functionsWeather.js";
 import { getMoonPhase } from "./functionsWeather.js";
 
 export function createLocationView(query, data) {
@@ -16,11 +14,6 @@ export function createLocationView(query, data) {
     console.error(noWDataAvailable);
     return;
   }
-
-  // const parseLastUpdateLocalTime = format(
-  //   parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
-  //   "hh:mm:ss a"
-  // );
 
   const parseSunrise = format(
     parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
@@ -54,9 +47,8 @@ export function createLocationView(query, data) {
     `Sunrise: ${parseSunrise}, Sunset: ${parseSunset}`
   );
 
-  const moonContent = createDivElement("moon-content");
+  const moonPhaseTextImgCont = createDivElement("moon-phase-text-img-cont");
 
-  // const moonPhaseCont = createDivElement("moon-phase-cont")
   const moonPhaseText = createTextElement(
     "p",
     "moon-phase-text",
@@ -68,18 +60,15 @@ export function createLocationView(query, data) {
     "Current moon phase"
   );
 
-  dataContent.append(locationContent, moonContent);
+  dataContent.append(locationContent);
 
   locationContent.append(
     locationName,
     resolvedAddress,
     locationLatLon,
     sunriseSunset,
-    moonContent,
+    moonPhaseTextImgCont
   );
 
-  moonContent.append(moonPhaseText, moonPhaseImg);
-  // moonPhaseCont.append(moonPhaseText, moonPhaseImg);
-
-  // styleDayNight(data);
+  moonPhaseTextImgCont.append(moonPhaseText, moonPhaseImg);
 }

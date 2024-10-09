@@ -6,8 +6,9 @@ import { createTitle } from "./javascript/title.js";
 import { createSearch } from "./javascript/search.js";
 import { createBtns } from "./javascript/btns.js";
 import { fetchWithHandling } from "./javascript/fetch.js";
-import { createLocationView } from "./javascript/locationView.js";
-import { createWeatherView, updateDataFC } from "./javascript/weatherView.js";
+import { createLocationView } from "./javascript/currentLocation.js";
+import { createAlertView } from "./javascript/currentAlert.js";
+import { createWeatherView, updateDataFC } from "./javascript/currentWeather.js";
 import { playClickSound } from "./javascript/sound.js";
 import { worldCapitals } from "./data/worldCapitals.js";
 import { stateCapitals } from "./data/stateCapitals.js";
@@ -103,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `Search bar resolved address: ${weatherData.resolvedAddress}`
       );
       createLocationView(locationQuerySearch, weatherData);
+      createAlertView(weatherData);
       createWeatherView(weatherData);
     }
 

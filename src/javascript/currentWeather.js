@@ -87,13 +87,13 @@ export function createWeatherView(data) {
   const currentConditionsTitle = createTextElement(
     "p",
     "current-conditions-title",
-    "Current Location Conditions"
+    "Current Local Conditions"
   );
 
   const currentLastUpdate = createTextElement(
     "p",
     "current-last-update",
-    `(Last updated at ${parseLastUpdateLocalTime} local time.)`
+    `(Updated at ${parseLastUpdateLocalTime} local time.)`
   );
 
   const currentConditionsData = data.currentConditions.conditions;  
@@ -198,16 +198,18 @@ export function createWeatherView(data) {
   const currentWindDirectionData = data.currentConditions.winddir;
   const currentWindGustMPHData = data.currentConditions.windgust;
 
-  let windContent = "";
+  let windInfo = "";
   if (currentWindSpeedMPHData && currentWindDirectionData && currentWindGustMPHData) {
-    windContent = `Wind: ${currentWindSpeedMPHData} mph ${getWindDirection(data)} (Gusts: ${currentWindGustMPHData} mph)`;
+    windInfo = `Wind: ${currentWindSpeedMPHData} mph ${getWindDirection(
+      data
+    )} (Gusts: ${currentWindGustMPHData} mph)`;
   } else if (currentWindSpeedMPHData && currentWindDirectionData) {
-    windContent = `Wind: ${currentWindSpeedMPHData} mph ${getWindDirection(data)}`;
+    windInfo = `Wind: ${currentWindSpeedMPHData} mph ${getWindDirection(data)}`;
   } else {
-    windContent = "";
+    windInfo = "";
   }
 
-  const currentWindInfo = createTextElement("p", "current-win-info", windContent)
+  const currentWindInfo = createTextElement("p", "current-win-info", windInfo);
 
   const currentUVIndexData = data.currentConditions.uvindex;
   const currentUVIndex = createTextElement(

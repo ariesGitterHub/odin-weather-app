@@ -61,6 +61,14 @@ export function createTextElement(tag, id, textContent) {
   return element;
 }
 
+export function createTextClassElement(tag, className, text) {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.textContent = text;
+  return element;
+}
+
+
 //TOGGLE SWITCH MAKER
 export function createToggleSwitch(id, isChecked) {
   const label = document.createElement("label");
