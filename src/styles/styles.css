@@ -19,8 +19,7 @@
   --night: #122f41;
   --dusk: #0e505d;
 
-  --alert: #411212;
-  --alert-lt: #5d0e0e;
+  --alert: #7e0a0a;
 
   --font-hand: "Caveat", cursive;
   --font-sans: "Josefin Sans", sans-serif;
@@ -239,7 +238,7 @@ body {
 
 #data-content {
     /* width: var(--width-tile); */
-  width: fit-content;
+  /* width: fit-content; */
   background-color: transparent;
   display: grid;
   justify-content: center;
@@ -308,30 +307,35 @@ body {
 #alert-content {
 height: fit-content;
 width: auto;
-background-image: linear-gradient(to bottom right, var(--alert-lt), var(--alert));
+/* background-image: linear-gradient(to bottom right, var(--alert-lt), var(--alert)); */
+/* background: radial-gradient(var(--alert), var(--alert-lt)); */
+background-color: var(--alert);
 border: 1px dashed var(--day);
 box-shadow: 0 4px 8px var(--black);
 color: var(--day);
 display: flex;
 flex-direction: column;
 justify-content: center;
-align-items: center;
+align-items: start;
 font-family: var(--font-sans);
-margin-top: .25rem;
-margin-bottom: .25rem;
+/* margin-top: .25rem; */
+/* margin-bottom: .25rem; */
 padding: .5rem;
   text-transform: uppercase;
 }
 
 #alert-title {
+  align-self: center;
   font-size: 1.25rem;
   font-weight: 900;
-
+  /* text-align: center; */
 }
 
 .alert-headlines {
-  font-size: .95rem;
+  font-size: .9rem;
+  inline-size: 320px;
   padding: .5rem;
+  word-wrap: normal;
 }
 
 /* ---> WEATHER-CONTENT */

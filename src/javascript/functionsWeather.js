@@ -69,10 +69,10 @@ export function styleDayNight(data) {
     parseLastUpdateLocalTime > parseSunrise &&
     parseLastUpdateLocalTime < parseSunset
   ) {
-    locationContent.style.backgroundImage =
+    locationContent.style.background =
       "linear-gradient(to top left, var(--day), var(--dawn))";
     locationContent.style.color = "var(--night)";
-    weatherContent.style.backgroundImage =
+    weatherContent.style.background =
       "linear-gradient(to bottom right, var(--day), var(--dawn))";
     weatherContent.style.color = "var(--night)";
     currentWeatherIconImg.style.border = "1px dashed var(--night)";
@@ -80,10 +80,10 @@ export function styleDayNight(data) {
     parseLastUpdateLocalTime < parseSunrise ||
     parseLastUpdateLocalTime > parseSunset
   ) {
-    locationContent.style.backgroundImage =
+    locationContent.style.background =
       "linear-gradient(to top left, var(--dusk), var(--night))";
     locationContent.style.color = "var(--day)";
-    weatherContent.style.backgroundImage =
+    weatherContent.style.background =
       "linear-gradient(to bottom right, var(--dusk), var(--night))";
     weatherContent.style.color = "var(--day)";
     currentWeatherIconImg.style.border = "1px dashed var(--day)";

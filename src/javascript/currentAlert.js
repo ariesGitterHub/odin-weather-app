@@ -26,26 +26,34 @@ export function createAlertView(data) {
   //     "hh:mm:ss a"
   //   );
 
-  const alertContent = createDivElement("alert-content");
-  const alertTitle = createTextElement("p", "alert-title", "Weather Alert")
+
 
   const alertsData = data.alerts;
 //   const alertsHeadlineData = data.alerts.headline;
 
 function getAlertInfo() {
-  if (alertsData) {
+  if (!alertsData) {
+    console.error(noWDataAvailable);
+    return;
+  } else if (alertsData.length > 0) {
+    console.log(alertsData);
+
+    const alertContent = createDivElement("alert-content");
+    const alertTitle = createTextElement("p", "alert-title", "Weather Alert");
+    dataContent.append(alertContent);
+    alertContent.append(alertTitle);
+
     alertsData.forEach((alert) => {
       const alertHeadline = createTextClassElement(
         "p",
         "alert-headlines",
-        `➡ ${alert.headline}`
+        `➤ ${alert.event}: ${alert.headline} (ends: ${alert.ends})`
       );
       alertContent.append(alertHeadline);
     });
   }
 }
 
-dataContent.append(alertContent);
-alertContent.append(alertTitle);
+// alertContent.append(alertTitle);
 getAlertInfo();
 }

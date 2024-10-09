@@ -156,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `World capital resolved address: ${weatherDataWorld.resolvedAddress}`
       );
       createLocationView(locationQueryWorld, weatherDataWorld);
+      createAlertView(weatherDataWorld);
       createWeatherView(weatherDataWorld);
     }
     initWorld();
@@ -250,6 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       
       createLocationView(locationQueryUSA, weatherDataUSA);
+      createAlertView(weatherDataUSA);
       createWeatherView(weatherDataUSA);
     }
 
