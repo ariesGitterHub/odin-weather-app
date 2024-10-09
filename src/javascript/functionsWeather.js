@@ -124,7 +124,7 @@ export function getMoonPhase(data) {
     moonSrc = moon1New;
     moonPhase = "New Moon";
   } else {
-    return "Invalid value";
+    return "Invalid Value";
   }
 
   return { moonSrc, moonPhase };
@@ -200,7 +200,20 @@ export function getWindDirection(data) {
   else if (windDegrees >= 281.25 && windDegrees < 303.75) windDesc = "WNW";
   else if (windDegrees >= 303.75 && windDegrees < 326.25) windDesc = "NW";
   else if (windDegrees >= 326.25 && windDegrees < 348.75) windDesc = "NNW";
-  else windDesc = "Unknown direction";
+  else windDesc = "Unknown Wind Direction";
 
   return windDesc;
+}
+
+export function getUVIndexValue(data) {
+  const uvIndex = data.currentConditions.uvindex;
+  let uvWarning;
+  if (uvIndex >= 0 && uvIndex <= 2) uvWarning = "(Low Risk)";
+  else if (uvIndex >= 3 && uvIndex <= 5) uvWarning = "(Moderate Risk)";
+  else if (uvIndex >= 6 && uvIndex <= 7) uvWarning = "(High Risk)";
+  else if (uvIndex >= 8 && uvIndex <= 10) uvWarning = "(Very High Risk)";
+  else if (uvIndex >= 11) uvWarning = "(Extreme Risk)";
+  else uvWarning = "Unknown UV Index";
+
+  return uvWarning;
 }

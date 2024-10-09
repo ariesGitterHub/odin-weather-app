@@ -11,7 +11,13 @@ import {
 
 // import { format, getDay } from "date-fns";
 
-import { convertToCelsius, styleDayNight, getWeatherIconSRC, getWindDirection } from "./functionsWeather.js";
+import {
+  convertToCelsius,
+  styleDayNight,
+  getWeatherIconSRC,
+  getWindDirection,
+  getUVIndexValue,
+} from "./functionsWeather.js";
 
 
 export function createWeatherView(data) {
@@ -204,7 +210,11 @@ export function createWeatherView(data) {
   const currentWindInfo = createTextElement("p", "current-win-info", windContent)
 
   const currentUVIndexData = data.currentConditions.uvindex;
-  const currentUVIndex = createTextElement("p", "current-UV-index", `UV Index (0-10): ${currentUVIndexData}`);
+  const currentUVIndex = createTextElement(
+    "p",
+    "current-UV-index",
+    `UV Index: ${currentUVIndexData} ${getUVIndexValue(data)}`
+  );
 
 
   dataContent.append(
@@ -227,8 +237,9 @@ export function createWeatherView(data) {
     currentLastUpdate,
     currentConditionsText,
     currentWeatherTextImgCont,
+    currentUVIndex,
     chanceOfPrecipitation,
-    currentWindInfo,
+    currentWindInfo
     // currentPrecipType,
     // currentUVIndex,
     // br2,
@@ -242,7 +253,7 @@ export function createWeatherView(data) {
     currentFeelsTemperature,
     currentHumidity,
     currentDewPoint,
-    currentUVIndex,
+    // currentUVIndex,
   );
 
   // if (currentPrecipTypeData > 0) {
