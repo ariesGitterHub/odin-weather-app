@@ -4,8 +4,10 @@ import svgUSA from "../assets/usa.svg";
 // import svgC from "../assets/c.svg";
 import svgF from "../assets/f.svg";
 import {
+  createDivElement,
   createBtnElement,
   createImgElement,
+  // createTextClassElement,
   // createToggleSwitch,
 } from "./functionsBasic.js";
 // import { updateDataFC } from "./weatherView.js"
@@ -97,4 +99,40 @@ export function createBtns() {
   tempScaleBtn.append(tempScaleImg);
   // toggleC2F.append(tempScaleImg);
   usaBtn.append(usaImg); 
+}
+
+export function createMiddleBtns(data) {
+
+    // const noWDataAvailable = "No data currently available.";
+    const dataContent = document.querySelector("#data-content");
+
+    const alertsData = data.alerts;
+
+    function checkForAlertInfo() {
+
+        const middleContent = createDivElement("middle-content");
+        const hourlyBtn = createBtnElement("hourly-btn", "Hourly Forecast");
+        const alertBtn = createBtnElement("alert-btn", "Alert");
+        const sevenDayBtn = createBtnElement("seven-day-btn", "7 Day Forecast");
+
+      if (alertsData.length > 0) {
+        console.log(alertsData);
+        dataContent.append(middleContent);
+        middleContent.append(hourlyBtn, alertBtn, sevenDayBtn, );
+        middleContent.style.justifyContent = "space-between";
+
+        // alertsData.forEach((alert) => {
+        //   const alertHeadline = createTextClassElement(
+        //     "p",
+        //     "alert-headlines",
+        //     `➤ ${alert.event}: ${alert.headline} (ends: ${alert.ends})`
+        //   );
+        //   middleContent.append(alertHeadline);
+        // });
+      } else {
+        dataContent.append(middleContent);
+        middleContent.append(hourlyBtn, sevenDayBtn);
+      }
+    }
+    checkForAlertInfo();
 }

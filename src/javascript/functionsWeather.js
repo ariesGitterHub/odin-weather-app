@@ -60,6 +60,7 @@ export function styleDayNight(data) {
   );
 
   const locationContent = document.querySelector("#location-content");
+  const middleContent = document.querySelector("#middle-content");
   const weatherContent = document.querySelector("#weather-content");
   const currentWeatherIconImg = document.querySelector(
     "#current-weather-icon-img"
@@ -72,6 +73,8 @@ export function styleDayNight(data) {
     locationContent.style.background =
       "linear-gradient(to top left, var(--day), var(--dawn))";
     locationContent.style.color = "var(--night)";
+    middleContent.style.background = "var(--day)";
+    // middleContent.style.color = "var(--night)";
     weatherContent.style.background =
       "linear-gradient(to bottom right, var(--day), var(--dawn))";
     weatherContent.style.color = "var(--night)";
@@ -83,6 +86,8 @@ export function styleDayNight(data) {
     locationContent.style.background =
       "linear-gradient(to top left, var(--dusk), var(--night))";
     locationContent.style.color = "var(--day)";
+    middleContent.style.background = "var(--dusk)";
+    // middleContent.style.color = "var(--day)";
     weatherContent.style.background =
       "linear-gradient(to bottom right, var(--dusk), var(--night))";
     weatherContent.style.color = "var(--day)";

@@ -117,7 +117,7 @@ export function contentChecker() {
   const dataContent = document.querySelector("#data-content");
 
   if (dataContent && dataContent.childElementCount > 0) {
-  clearDivText("location-content", "alert-content", "weather-content");
+  clearDivText("location-content", "middle-content", "weather-content");
   } 
 }
 

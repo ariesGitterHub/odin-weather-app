@@ -4,10 +4,11 @@ import svgF from "./assets/f.svg";
 import { contentChecker } from "./javascript/functionsBasic.js";
 import { createTitle } from "./javascript/title.js";
 import { createSearch } from "./javascript/search.js";
-import { createBtns } from "./javascript/btns.js";
+import { createBtns, createMiddleBtns } from "./javascript/btns.js";
 import { fetchWithHandling } from "./javascript/fetch.js";
 import { createLocationView } from "./javascript/currentLocation.js";
-import { createAlertView } from "./javascript/currentAlert.js";
+// import { createAlertView } from "./javascript/currentAlert.js";
+
 import { createWeatherView, updateDataFC } from "./javascript/currentWeather.js";
 import { playClickSound } from "./javascript/sound.js";
 import { worldCapitals } from "./data/worldCapitals.js";
@@ -104,7 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
         `Search bar resolved address: ${weatherData.resolvedAddress}`
       );
       createLocationView(locationQuerySearch, weatherData);
-      createAlertView(weatherData);
+      createMiddleBtns(weatherData);
+      //createAlertView(weatherData);
       createWeatherView(weatherData);
     }
 
@@ -156,7 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
         `World capital resolved address: ${weatherDataWorld.resolvedAddress}`
       );
       createLocationView(locationQueryWorld, weatherDataWorld);
-      createAlertView(weatherDataWorld);
+      createMiddleBtns(weatherDataWorld);
+      // createAlertView(weatherDataWorld);
       createWeatherView(weatherDataWorld);
     }
     initWorld();
@@ -251,7 +254,8 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       
       createLocationView(locationQueryUSA, weatherDataUSA);
-      createAlertView(weatherDataUSA);
+      createMiddleBtns(weatherDataUSA);
+      // createAlertView(weatherDataUSA);
       createWeatherView(weatherDataUSA);
     }
 
