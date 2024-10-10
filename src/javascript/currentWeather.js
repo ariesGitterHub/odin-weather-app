@@ -4,6 +4,7 @@ import {
   // createBreakElement,
   createDivElement,
   // createSpanElement,
+  createBtnElement,
   createImgElement,
   createTextElement,
 } from "./functionsBasic.js";
@@ -19,6 +20,44 @@ import {
   getUVIndexValue,
 } from "./functionsWeather.js";
 
+export function createWeatherBtns(data) {
+  // const noWDataAvailable = "No data currently available.";
+  const dataContent = document.querySelector("#data-content");
+  // const weatherContent = document.querySelector("#weather-content");
+  const weatherContent = createDivElement("weather-content");
+  dataContent.append(weatherContent);
+  const alertsData = data.alerts;
+
+  function checkForAlertInfo() {
+    const weatherBtnContent = createDivElement("weather-btn-content");
+    const hourlyBtn = createBtnElement("hourly-btn", "Hourly Forecast");
+    const alertBtn = createBtnElement("alert-btn", "Alert");
+    const sevenDayBtn = createBtnElement("seven-day-btn", "7 Day Forecast");
+
+    if (alertsData.length > 0) {
+      console.log(alertsData);
+      // dataContent.append(middleContent);
+      weatherContent.append(weatherBtnContent);
+
+      weatherBtnContent.append(hourlyBtn, alertBtn, sevenDayBtn);
+      // weatherBtnContent.style.justifyContent = "space-between";
+
+      // alertsData.forEach((alert) => {
+      //   const alertHeadline = createTextClassElement(
+      //     "p",
+      //     "alert-headlines",
+      //     `➤ ${alert.event}: ${alert.headline} (ends: ${alert.ends})`
+      //   );
+      //   middleContent.append(alertHeadline);
+      // });
+    } else {
+      // dataContent.append(middleContent);
+      weatherContent.append(weatherBtnContent);
+      weatherBtnContent.append(hourlyBtn, sevenDayBtn);
+    }
+  }
+  checkForAlertInfo();
+}
 
 export function createWeatherView(data) {
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
@@ -76,7 +115,8 @@ export function createWeatherView(data) {
   // const moonPhaseText = createTextElement("p", "moon-phase-text", getMoonPhase(data).moonPhase)
   // const moonPhaseImg = createImgElement("moon-phase-img", getMoonPhase(data).moonSrc, "Current moon phase")
 
-  const weatherContent = createDivElement("weather-content");
+  // const weatherContent = createDivElement("weather-content");
+  const weatherContent = document.querySelector("#weather-content");
 
   const currentWeather = createDivElement("current-weather");
 
@@ -219,9 +259,9 @@ export function createWeatherView(data) {
   );
 
 
-  dataContent.append(
-    // locationContent, moonContent, 
-    weatherContent);
+  // dataContent.append(
+
+  //   weatherContent);
 
   // locationContent.append(
   //   locationName,

@@ -36,3 +36,6 @@ sudo apt-get install fonts-noto-cjk
 
 ## Units of Measurement
 https://www.visualcrossing.com/resources/documentation/weather-data/weather-data-documentation/
+
+## Sunrise, Sunset, Moon Icons
+Modified variants of moon phase icons from https://www.svgrepo.com/collection/iconhub-glyph-icons/

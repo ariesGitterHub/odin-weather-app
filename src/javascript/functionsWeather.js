@@ -73,7 +73,9 @@ export function styleDayNight(data) {
     locationContent.style.background =
       "linear-gradient(to top left, var(--day), var(--dawn))";
     locationContent.style.color = "var(--night)";
-    middleContent.style.background = "var(--day)";
+    // middleContent.style.background = "var(--day)";
+    // middleContent.style.background =
+    //   "linear-gradient(to top left, var(--day), var(--dawn))";
     // middleContent.style.color = "var(--night)";
     weatherContent.style.background =
       "linear-gradient(to bottom right, var(--day), var(--dawn))";
@@ -86,7 +88,7 @@ export function styleDayNight(data) {
     locationContent.style.background =
       "linear-gradient(to top left, var(--dusk), var(--night))";
     locationContent.style.color = "var(--day)";
-    middleContent.style.background = "var(--dusk)";
+    // middleContent.style.background = "var(--dusk)";
     // middleContent.style.color = "var(--day)";
     weatherContent.style.background =
       "linear-gradient(to bottom right, var(--dusk), var(--night))";
