@@ -62,7 +62,7 @@ export function createWeatherBtns(data) {
 export function createWeatherView(data) {
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
   const noWeatherDataAvailable = "No weather data available.";
-  const dataContent = document.querySelector("#data-content");
+  // const dataContent = document.querySelector("#data-content");
   if (!data) {
     console.error(noWeatherDataAvailable);
     return;
