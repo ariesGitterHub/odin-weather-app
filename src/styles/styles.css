@@ -351,6 +351,11 @@ body {
   padding: 0.5rem;
 }
 
+#weather-bkgd-img {
+  height: fit-content;
+  width: 320px;
+}
+
 
 /* ---/---> MIDDLE-CONTENT */
 
@@ -381,7 +386,7 @@ text-transform: uppercase;
 
 #weather-btn-content {
   /* height: fit-content; */
-  /* width: auto; */
+  width: 320px;
   /* background-image: linear-gradient(to bottom right, var(--alert-lt), var(--alert)); */
   /* background: radial-gradient(var(--alert), var(--alert-lt)); */
   /* background-color: var(--alert); */
@@ -390,15 +395,15 @@ text-transform: uppercase;
   /* color: var(--day); */
   display: flex;
   /* flex-direction: column; */
-  justify-content: cneter;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 2rem;
+  /* gap: 1.25rem; */
   font-family: var(--font-sans);
   /* margin-top: .125rem;
   margin-bottom: .125rem; */
   /* opacity: .65; */
   padding: .5rem;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 #hourly-btn, #alert-btn, #seven-day-btn {
@@ -430,7 +435,7 @@ text-transform: uppercase;
 
 #hourly-btn, #seven-day-btn {
   height: 3rem;
-  width: 5rem;
+  width: 5.5rem;
   background-color: var(--btn-color);
    border-radius: 1rem;
   color: var(--black);
@@ -486,7 +491,11 @@ text-transform: uppercase;
 
 #current-conditions-title {
   align-self: center;
-  font-size: 1rem;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; */
+  font-size: .95rem;
   text-transform: uppercase;
 }
 
@@ -501,14 +510,14 @@ text-transform: uppercase;
   font-size: 1.15rem;
   font-weight: 900;
   text-transform: uppercase;
-  margin-bottom: .25rem;
+  /* margin-bottom: .25rem; */
+  margin: .5rem;
+  /* text-wrap: wrap; */
 }
 
 #chance-of-precipitation, #current-win-info, #current-UV-index {
   align-self: start;
 }
-
-
 
 #current-weather-text-img-cont {
   display: flex;
@@ -530,13 +539,13 @@ text-transform: uppercase;
 
 #current-temperature, #current-feels-temperature, #current-humidity, #current-dew-point, #chance-of-precipitation, #current-win-info, #current-UV-index {
   align-self: start;
-  font-size: 1rem;
+  font-size: 1.15rem;
 }
 
 #current-weather-icon-img{
-  align-self: end;
-  height: 5.75rem;
+  align-self: start;
+  height: 7rem;
   width: auto;
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   padding: .25rem;
 }
