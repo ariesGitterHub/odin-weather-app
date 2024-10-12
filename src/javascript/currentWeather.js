@@ -1,5 +1,14 @@
 import { format, parse } from "date-fns";
 
+import svgTemperature from "../assets/temperature.svg";
+import svgFeelsLikeTemperature from "../assets/feels-like-temperature.svg";
+import svgHumidity from "../assets/humidity.svg";
+import svgDewPoint from "../assets/dew-point.svg";
+import svgUVIndex from "../assets/uv-index.svg";
+import svgChanceOfPrecipitation from "../assets/chance-of-precipitation.svg";
+import svgWindSm from "../assets/wind-sm.svg";
+
+
 import {
   createDivElement,
   createBtnElement,
@@ -54,8 +63,11 @@ export function createWeatherView(data) {
 
   const weatherContent = document.querySelector("#weather-content");
   const currentWeather = createDivElement("current-weather");
-  const currentWeatherTextImgCont = createDivElement("current-weather-text-img-cont");
-  const currentWeatherTextCont = createDivElement("current-weather-text-cont");
+  const currentWeatherTopTextImgCont = createDivElement("current-weather-top-text-img-cont");
+  const currentWeatherTopTextCont = createDivElement("current-weather-top-text-cont");
+  const currentWeatherBotTextCont = createDivElement(
+    "current-weather-bot-text-cont"
+  );
   const currentConditionsTitle = createTextElement(
     "p",
     "current-conditions-title",
@@ -80,44 +92,71 @@ export function createWeatherView(data) {
   );
 
   const currentTempData = data.currentConditions.temp;
-  const currentFeelsTempData = data.currentConditions.feelslike;
+  const currentFeelsLikeTemperatureData = data.currentConditions.feelslike;
   const currentHumidityData = data.currentConditions.humidity;
   const currentDewTempData = data.currentConditions.dew;
 
-  const currentTemperature = createTextElement("p", "current-temperature", "");
-  const currentFeelsTemperature = createTextElement(
+
+  const currentTemperatureDiv =  createDivElement("current-temperature-div");
+  const currentTemperatureImg = createImgElement(
+    "current-temperature-img",
+    svgTemperature,
+    "Temperature Icon"
+  );
+  const currentTemperatureText = createTextElement("p", "current-temperature-text", "");
+
+  const currentFeelsLikeTemperatureDiv = createDivElement("current-feels-like-temperature-div");
+  const currentFeelsLikeTemperatureImg = createImgElement(
+    "current-feels-like-temperature-img",
+    svgFeelsLikeTemperature,
+    "Feels Like Temperature Icon"
+  );
+  const currentFeelsLikeTemperatureText = createTextElement(
     "p",
-    "current-feels-temperature",
+    "current-feels-like-temperature-text",
     ""
   );
-  const currentHumidity = createTextElement(
+
+  const currentHumidityDiv =  createDivElement("current-humidity-div");
+  const currentHumidityImg = createImgElement("current-humidity-img", svgHumidity, "Humidity Icon");
+  const currentHumidityText = createTextElement(
     "p",
-    "current-humidity",
-    `Humidity: ${currentHumidityData}%`
+    "current-humidity-text",
+    `${currentHumidityData}%`
   );
-  const currentDewPoint = createTextElement("p", "current-dew-point", "");
+
+  const currentDewPointDiv =  createDivElement("current-dew-point-div");
+  const currentDewPointImg = createImgElement("current-dew-point-img", svgDewPoint, "Dew Point Icon");
+  const currentDewPointText = createTextElement("p", "current-dew-point-text", "");
 
   if (tempScaleBtn.value === "C") {
-    currentTemperature.textContent = `Temperature: ${convertToCelsius(
-      currentTempData
-    )}°C`;
-    currentFeelsTemperature.textContent = `Feels Like: ${convertToCelsius(
-      currentFeelsTempData
-    )}°C`;
-    currentDewPoint.textContent = `Dew Point: ${convertToCelsius(
-      currentDewTempData
-    )}°C`;
+    currentTemperatureText.textContent = `${convertToCelsius(currentTempData)}°C`;
+    currentFeelsLikeTemperatureText.textContent = `${convertToCelsius(currentFeelsLikeTemperatureData)}°C`;
+    currentDewPointText.textContent = `${convertToCelsius(
+      currentDewTempData)}°C`;
   } else {
-    currentTemperature.textContent = `Temperature: ${currentTempData}°F`;
-    currentFeelsTemperature.textContent = `Feels Like: ${currentFeelsTempData}°F`;
-    currentDewPoint.textContent = `Dew Point: ${currentDewTempData}°F`;
+    currentTemperatureText.textContent = `${currentTempData}°F`;
+    currentFeelsLikeTemperatureText.textContent = `${currentFeelsLikeTemperatureData}°F`;
+    currentDewPointText.textContent = `${currentDewTempData}°F`;
   }
+
+  const currentUVIndexData = data.currentConditions.uvindex;
+  const currentUVIndexDiv = createDivElement("current-uv-index-div");
+  const currentUVIndexImg = createImgElement("current-uv-index-img", svgUVIndex, "UV Index Icon");
+  const currentUVIndexText = createTextElement(
+    "p",
+    "current-UV-index-text",
+    `${currentUVIndexData} ${getUVIndexValue(data)}`
+  );
+
+
   const chanceOfPrecipitationData = data.currentConditions.precipprob;
- 
-  const chanceOfPrecipitation = createTextElement(
+  const currentChanceOfPrecipitationDiv = createDivElement("current-chance-of-precipitation-div");
+  const currentChanceOfPrecipitationImg = createImgElement("current-chance-of-precipitation-img", svgChanceOfPrecipitation, "Chance of Precipitation Icon")
+  const currentChanceOfPrecipitationText = createTextElement(
     "p",
     "chance-of-precipitation",
-    `Chance of Precipitation: ${chanceOfPrecipitationData}%`
+    `${chanceOfPrecipitationData}%`
   );
 
   const currentWindSpeedMPHData = data.currentConditions.windspeed;
@@ -126,70 +165,87 @@ export function createWeatherView(data) {
 
   let windInfo = "";
   if (currentWindSpeedMPHData && currentWindDirectionData && currentWindGustMPHData) {
-    windInfo = `Wind: ${currentWindSpeedMPHData} mph ${getWindDirection(
+    windInfo = `${currentWindSpeedMPHData} mph ${getWindDirection(
       data
     )} (Gusts: ${currentWindGustMPHData} mph)`;
   } else if (currentWindSpeedMPHData && currentWindDirectionData) {
-    windInfo = `Wind: ${currentWindSpeedMPHData} mph ${getWindDirection(data)}`;
+    windInfo = `${currentWindSpeedMPHData} mph ${getWindDirection(data)}`;
   } else {
     windInfo = "";
   }
 
-  const currentWindInfo = createTextElement("p", "current-win-info", windInfo);
+  const currentWindInfoDiv = createDivElement("current-wind-info-div");
+  const currentWindInfoImg = createImgElement("current-wind-info-img", svgWindSm, "Wind Icon");
+  const currentWindInfoText = createTextElement("p", "current-win-info-text", windInfo);
 
-  const currentUVIndexData = data.currentConditions.uvindex;
-  const currentUVIndex = createTextElement(
-    "p",
-    "current-UV-index",
-    `UV Index: ${currentUVIndexData} ${getUVIndexValue(data)}`
-  );
 
   weatherContent.append(currentWeather);
     currentWeather.append(
       currentConditionsTitle,
       currentLastUpdate,
       currentConditionsText,
-      currentWeatherTextImgCont,
-      currentUVIndex,
-      chanceOfPrecipitation,
-      currentWindInfo
+      currentWeatherTopTextImgCont,
+      currentWeatherBotTextCont,
+      // currentUVIndex,
+      // chanceOfPrecipitation,
+      // currentWindInfo
     );
 
-  currentWeatherTextImgCont.append(currentWeatherTextCont, currentWeatherIconImg);
-  currentWeatherTextCont.append(
-    currentTemperature,
-    currentFeelsTemperature,
-    currentHumidity,
-    currentDewPoint,
+  currentWeatherTopTextImgCont.append(
+    currentWeatherTopTextCont,
+    currentWeatherIconImg
   );
-  styleDayNight(data);
+
+  currentWeatherTopTextCont.append(
+    currentTemperatureDiv,
+    currentFeelsLikeTemperatureDiv,
+    currentHumidityDiv,
+    currentDewPointDiv,
+  );
+
+  currentTemperatureDiv.append(currentTemperatureImg, currentTemperatureText);
+  currentFeelsLikeTemperatureDiv.append(currentFeelsLikeTemperatureImg, currentFeelsLikeTemperatureText);
+  currentHumidityDiv.append(currentHumidityImg, currentHumidityText);
+  currentDewPointDiv.append(currentDewPointImg, currentDewPointText);
+
+  currentWeatherBotTextCont.append(
+    currentUVIndexDiv,
+    currentChanceOfPrecipitationDiv,
+    currentWindInfoDiv,
+  );
+
+  currentUVIndexDiv.append(currentUVIndexImg, currentUVIndexText);
+  currentChanceOfPrecipitationDiv.append(currentChanceOfPrecipitationImg, currentChanceOfPrecipitationText);
+  currentWindInfoDiv.append(currentWindInfoImg, currentWindInfoText);
+
+      styleDayNight(data);
 }
 
 export function updateDataFC(data) {
   const currentTempData = data.currentConditions.temp;
-  const currentFeelsTempData = data.currentConditions.feelslike;
+  const currentFeelsLikeTemperatureData = data.currentConditions.feelslike;
   const currentDewTempData = data.currentConditions.dew;
 
-  const currentTemperature = document.querySelector("#current-temperature");
-  const currentFeelsTemperature = document.querySelector(
-    "#current-feels-temperature"
+  const currentTemperatureText = document.querySelector("#current-temperature-text");
+  const currentFeelsLikeTemperatureText = document.querySelector(
+    "#current-feels-like-temperature-text"
   );
-  const currentDewPoint = document.querySelector("#current-dew-point");
+  const currentDewPointText = document.querySelector("#current-dew-point-text");
 
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
   if (tempScaleBtn.value === "C") {
-    currentTemperature.textContent = `Temperature: ${convertToCelsius(
+    currentTemperatureText.textContent = `${convertToCelsius(
       currentTempData
     )}°C`;
-    currentFeelsTemperature.textContent = `Feels Like: ${convertToCelsius(
-      currentFeelsTempData
+    currentFeelsLikeTemperatureText.textContent = `${convertToCelsius(
+      currentFeelsLikeTemperatureData
     )}°C`;
-    currentDewPoint.textContent = `Dew Point: ${convertToCelsius(
+    currentDewPointText.textContent = `${convertToCelsius(
       currentDewTempData
     )}°C`;
   } else {
-    currentTemperature.textContent = `Temperature: ${currentTempData}°F`;
-    currentFeelsTemperature.textContent = `Feels Like: ${currentFeelsTempData}°F`;
-    currentDewPoint.textContent = `Dew Point: ${currentDewTempData}°F`;
+    currentTemperatureText.textContent = `${currentTempData}°F`;
+    currentFeelsLikeTemperatureText.textContent = `${currentFeelsLikeTemperatureData}°F`;
+    currentDewPointText.textContent = `${currentDewTempData}°F`;
   }
 }

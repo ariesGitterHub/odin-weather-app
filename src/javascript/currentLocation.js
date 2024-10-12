@@ -1,3 +1,5 @@
+import svgLatitude from "../assets/latitude.svg";
+import svgLongitude from "../assets/longitude.svg";
 import svgSunrise from "../assets/sunrise.svg";
 import svgSunset from "../assets/sunset.svg";
 
@@ -38,37 +40,55 @@ export function createLocationView(query, data) {
     data.resolvedAddress
   );
 
-    const locationLatLonDiv = createDivElement("location-lat-lon-div");
+const locationLatLonSunDiv = createDivElement("location-lat-lon-sun-div");
 
-  const locationLatitude = createTextElement(
-    "p",
-    "location-latitude",
-    `Latitude: ${data.latitude}/ `
+  const locationLatLonDiv = createDivElement("location-lat-lon-div");
+  const locationLatitudeDiv = createDivElement("location-latitude-div");
+  const locationLatitudeImg = createImgElement(
+    "location-latitude-img",
+    svgLatitude,
+    "Latitude Icon"
   );
 
-    const locationLongitude = createTextElement(
-      "p",
-      "location-longitude",
-      `Longitude: ${data.longitude}`
-    );
+  const locationLatitudeText = createTextElement(
+    "p",
+    "location-latitude-text",
+    data.latitude
+  );
+  const locationLongitudeDiv = createDivElement("location-longitude-div");
+  const locationLongitudeImg = createImgElement(
+    "location-longitude-img",
+    svgLongitude,
+    "Longitude Icon"
+  );
+
+  const locationLongitudeText = createTextElement(
+    "p",
+    "location-longitude-text",
+    data.longitude
+  );
 
   const sunriseSunsetDiv = createDivElement("sunrise-sunset-div");
 
-  // const sunriseImg = createImgElement("sunrise-img", svgSunrise, "Sunrise Icon");
+  const sunriseDiv = createDivElement("sunrise-div");
+
+  const sunriseImg = createImgElement("sunrise-img", svgSunrise, "Sunrise Icon");
 
   const sunriseText = createTextElement(
     "p",
     "sunrise-text",
-    `Sunrise: ${parseSunrise}/`
+    parseSunrise,
   );
 
-    // const sunsetImg = createImgElement(
-    //   "sunset-img",
-    //   svgSunset,
-    //   "Sunrise Icon"
-    // );
+    const sunsetDiv = createDivElement("sunset-div");
 
-    const sunsetText = createTextElement("p", "sunset-text", `Sunset: ${parseSunset}`);
+    const sunsetImg = createImgElement(
+      "sunset-img",
+      svgSunset,
+      "Sunrise Icon"
+    );
+
+  const sunsetText = createTextElement("p", "sunset-text", parseSunset);
 
   const moonPhaseTextImgCont = createDivElement("moon-phase-text-img-cont");
 
@@ -88,17 +108,31 @@ export function createLocationView(query, data) {
   locationContent.append(
     locationName,
     resolvedAddress,
-locationLatLonDiv,
-    sunriseSunsetDiv,
+locationLatLonSunDiv,
     moonPhaseTextImgCont
   );
 
-locationLatLonDiv.append(locationLatitude, locationLongitude);
+  locationLatLonSunDiv.append(locationLatLonDiv, sunriseSunsetDiv);
+
+locationLatLonDiv.append(locationLatitudeDiv, locationLongitudeDiv);
+
+locationLatitudeDiv.append(
+  locationLatitudeImg,
+  locationLatitudeText,);
+locationLongitudeDiv.append(
+  locationLongitudeImg,
+  locationLongitudeText,);
 
   sunriseSunsetDiv.append(
-    // sunriseImg,
-     sunriseText,
-      // sunsetImg,
-       sunsetText); 
+    sunriseDiv,
+    sunsetDiv
+  ); 
+
+    sunsetDiv.append(
+      sunsetImg,
+      sunsetText,
+  );
+
+      sunriseDiv.append(sunriseImg, sunriseText);
   moonPhaseTextImgCont.append(moonPhaseText, moonPhaseImg);
 }
