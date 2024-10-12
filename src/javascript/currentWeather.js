@@ -175,7 +175,16 @@ export function createWeatherView(data) {
   }
 
   const currentWindInfoDiv = createDivElement("current-wind-info-div");
-  const currentWindInfoImg = createImgElement("current-wind-info-img", svgWindSm, "Wind Icon");
+
+  const currentWindInfoImg = createImgElement("current-wind-info-img", "");
+
+  if (windInfo) {
+    currentWindInfoImg.src = svgWindSm;
+    currentWindInfoImg.alt = "Wind Icon";
+  } else {
+    currentWindInfoImg.src = ""
+
+  }
   const currentWindInfoText = createTextElement("p", "current-win-info-text", windInfo);
 
 
