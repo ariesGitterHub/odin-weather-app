@@ -70,30 +70,30 @@ export function styleDayNight(data) {
     parseLastUpdateLocalTime > parseSunrise &&
     parseLastUpdateLocalTime < parseSunset
   ) {
-    locationContent.style.background =
-      "linear-gradient(to top left, var(--day), var(--dawn))";
-    locationContent.style.color = "var(--night)";
+    // locationContent.style.background =
+    //   "linear-gradient(to top left, var(--day), var(--dawn))";
+    // locationContent.style.color = "var(--night)";
     // middleContent.style.background = "var(--day)";
     // middleContent.style.background =
     //   "linear-gradient(to top left, var(--day), var(--dawn))";
     // middleContent.style.color = "var(--night)";
-    weatherContent.style.background =
-      "linear-gradient(to bottom right, var(--day), var(--dawn))";
-    weatherContent.style.color = "var(--night)";
-    currentWeatherIconImg.style.border = "1px dashed var(--night)";
+    // weatherContent.style.background =
+    //   "linear-gradient(to bottom right, var(--day), var(--dawn))";
+    // weatherContent.style.color = "var(--night)";
+    // currentWeatherIconImg.style.border = "1px dashed var(--night)";
   } else if (
     parseLastUpdateLocalTime < parseSunrise ||
     parseLastUpdateLocalTime > parseSunset
   ) {
-    locationContent.style.background =
-      "linear-gradient(to top left, var(--dusk), var(--night))";
-    locationContent.style.color = "var(--day)";
+    // locationContent.style.background =
+    //   "linear-gradient(to top left, var(--dusk), var(--night))";
+    // locationContent.style.color = "var(--day)";
     // middleContent.style.background = "var(--dusk)";
     // middleContent.style.color = "var(--day)";
-    weatherContent.style.background =
-      "linear-gradient(to bottom right, var(--dusk), var(--night))";
-    weatherContent.style.color = "var(--day)";
-    currentWeatherIconImg.style.border = "1px dashed var(--day)";
+    // weatherContent.style.background =
+    //   "linear-gradient(to bottom right, var(--dusk), var(--night))";
+    // weatherContent.style.color = "var(--day)";
+    // currentWeatherIconImg.style.border = "1px dashed var(--day)";
   }
 }
 
@@ -215,11 +215,11 @@ export function getWindDirection(data) {
 export function getUVIndexValue(data) {
   const uvIndex = data.currentConditions.uvindex;
   let uvWarning;
-  if (uvIndex >= 0 && uvIndex <= 2) uvWarning = "(Low Risk)";
-  else if (uvIndex >= 3 && uvIndex <= 5) uvWarning = "(Moderate Risk)";
-  else if (uvIndex >= 6 && uvIndex <= 7) uvWarning = "(High Risk)";
-  else if (uvIndex >= 8 && uvIndex <= 10) uvWarning = "(Very High Risk)";
-  else if (uvIndex >= 11) uvWarning = "(Extreme Risk)";
+  if (uvIndex >= 0 && uvIndex <= 2) uvWarning = "(low risk)";
+  else if (uvIndex >= 3 && uvIndex <= 5) uvWarning = "(moderate risk)";
+  else if (uvIndex >= 6 && uvIndex <= 7) uvWarning = "(high risk)";
+  else if (uvIndex >= 8 && uvIndex <= 10) uvWarning = "(very high risk)";
+  else if (uvIndex >= 11) uvWarning = "(extreme risk)";
   else uvWarning = "Unknown UV Index";
 
   return uvWarning;

@@ -10,7 +10,7 @@ import { createLocationView } from "./javascript/currentLocation.js";
 // import { createAlertView } from "./javascript/currentAlert.js";
 
 import {
-  createWeatherBtns, 
+  // createWeatherBtns, 
   createWeatherView,
   updateDataFC,
 } from "./javascript/currentWeather.js";
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `Search bar resolved address: ${weatherData.resolvedAddress}`
       );
       createLocationView(locationQuerySearch, weatherData);
-      createWeatherBtns(weatherData);
+      // createWeatherBtns(weatherData);
       //createAlertView(weatherData);
       createWeatherView(weatherData);
     }
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `World capital resolved address: ${weatherDataWorld.resolvedAddress}`
       );
       createLocationView(locationQueryWorld, weatherDataWorld);
-      createWeatherBtns(weatherDataWorld);
+      // createWeatherBtns(weatherDataWorld);
       // createAlertView(weatherDataWorld);
       createWeatherView(weatherDataWorld);
     }
@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       
       createLocationView(locationQueryUSA, weatherDataUSA);
-      createWeatherBtns(weatherDataUSA);
+      // createWeatherBtns(weatherDataUSA);
       // createAlertView(weatherDataUSA);
       createWeatherView(weatherDataUSA);
     }
