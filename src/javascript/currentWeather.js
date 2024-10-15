@@ -4,10 +4,17 @@ import svgTemperature from "../assets/temperature.svg";
 import svgHumidity from "../assets/humidity.svg";
 import svgDewPoint from "../assets/dew-point.svg";
 import svgUVIndex from "../assets/uv-index.svg";
+import svgCloudCover from "../assets/cloud-cover.svg";
+import svgSunrise from "../assets/sunrise.svg";
+import svgSunset from "../assets/sunset.svg";
 import svgChanceOfPrecipitation from "../assets/chance-of-precipitation.svg";
 import svgWindSm from "../assets/wind-sm.svg";
 
 import { getMoonPhase } from "./functionsWeather.js";
+
+import svgHourly from "../assets/hourly.svg";
+import svgAlert from "../assets/alert.svg";
+import svgMultiDay from "../assets/multi-day.svg";
 
 import {
   createDivElement,
@@ -40,6 +47,16 @@ export function createWeatherView(data) {
     parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
     "hh:mm:ssa"
   );
+
+    const parseSunrise = format(
+      parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
+      "hh:mm:ssa"
+    );
+
+    const parseSunset = format(
+      parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
+      "hh:mm:ssa"
+    );
 
   // const weatherContent = document.querySelector("#weather-content");
   const currentWeather = createDivElement("current-weather");
@@ -82,17 +99,27 @@ export function createWeatherView(data) {
   const alertsData = data.alerts;
   const weatherBtnContent = createDivElement("weather-btn-content");
   function checkForAlertInfo() {
-    const hourlyBtn = createBtnElement("hourly-btn", "24H");
-    const alertBtn = createBtnElement("alert-btn", "!");
-    const sevenDayBtn = createBtnElement("seven-day-btn", "10D");
+    const hourlyBtn = createBtnElement("hourly-btn", "");
+    const alertBtn = createBtnElement("alert-btn", "");
+    const multiDayBtn = createBtnElement("multi-day-btn", "");
+
+    const hourlyBtnImg = createImgElement("hourly-btn-img", svgHourly, "Hourly Forecast Icon");
+    const alertBtnImg = createImgElement("alert-btn-img", svgAlert, "Weather Alert Icon");
+    const multiDayBtnImg = createImgElement("multi-day-btn-img", svgMultiDay, "Multi-Day Forecast Icon");
 
     if (alertsData.length > 0) {
       console.log(alertsData);
-      weatherBtnContent.append(hourlyBtn, alertBtn, sevenDayBtn);
+      weatherBtnContent.append(hourlyBtn, alertBtn, multiDayBtn);
       // weatherBtnContent.style.justifyContent = "space-between"
+      hourlyBtn.append(hourlyBtnImg);
+      alertBtn.append(alertBtnImg);
+      multiDayBtn.append(multiDayBtnImg);
+
     } else {
-      weatherBtnContent.append(hourlyBtn, sevenDayBtn);
+      weatherBtnContent.append(hourlyBtn, multiDayBtn);
       // weatherBtnContent.style.justifyContent = "space-evenly";
+        hourlyBtn.append(hourlyBtnImg);
+        multiDayBtn.append(multiDayBtnImg);
     }
   }
   checkForAlertInfo();
@@ -101,6 +128,7 @@ export function createWeatherView(data) {
   const currentFeelsLikeTemperatureData = data.currentConditions.feelslike;
   const currentHumidityData = data.currentConditions.humidity;
   const currentDewTempData = data.currentConditions.dew;
+ 
 
   const currentTemperatureDiv = createDivElement("current-temperature-div");
   const currentTemperatureImg = createImgElement(
@@ -187,6 +215,49 @@ export function createWeatherView(data) {
     `${currentUVIndexData} ${getUVIndexValue(data)}`
   );
 
+ const currentCloudCoverData = data.currentConditions.cloudcover;
+    const currentCloudCoverDiv = createDivElement(
+      "current-cloud-cover-div"
+    );
+    const currentCloudCoverImg = createImgElement(
+      "current-cloud-cover-img",
+      svgCloudCover,
+      "Cloud Cover Icon"
+    );
+    const currentCloudCoverText = createTextElement(
+      "p",
+      "current-cloud-cover-text",
+      `${currentCloudCoverData}%`
+    );
+
+    // const sunriseSunsetDiv = createDivElement("sunrise-sunset-div");
+
+    const sunriseDiv = createDivElement("sunrise-div");
+
+    const sunriseImg = createImgElement(
+      "sunrise-img",
+      svgSunrise,
+      "Sunrise Icon"
+    );
+
+    const sunriseText = createTextElement(
+      "p",
+      "sunrise-text",
+      // `Sunrise: ${parseSunrise}`
+      parseSunrise
+    );
+
+    const sunsetDiv = createDivElement("sunset-div");
+
+    const sunsetImg = createImgElement("sunset-img", svgSunset, "Sunrise Icon");
+
+    const sunsetText = createTextElement(
+      "p",
+      "sunset-text",
+      // `Sunset: ${parseSunset}`
+      parseSunset
+    );
+
   const moonPhaseTextImgCont = createDivElement("moon-phase-text-img-cont");
 
   const moonPhaseText = createTextElement(
@@ -259,7 +330,7 @@ export function createWeatherView(data) {
   currentWeather.append(
     currentConditionsTitle,
     currentLastUpdate,
-    currentConditionsText,
+    // currentConditionsText,
     currentWeatherIconBtnsDiv,
     currentWeatherDivCont
     // currentWeatherTopTextImgCont,
@@ -269,7 +340,11 @@ export function createWeatherView(data) {
     // currentWindInfo
   );
 
-  currentWeatherIconBtnsDiv.append(currentWeatherIconImg, weatherBtnContent);
+  currentWeatherIconBtnsDiv.append(
+    weatherBtnContent,
+    currentConditionsText,
+    currentWeatherIconImg
+  );
   // currentWeatherTopTextImgCont.append(
   //   currentWeatherTopTextCont,
 
@@ -283,18 +358,23 @@ export function createWeatherView(data) {
     currentHumidityDiv,
     currentDewPointDiv,
     currentChanceOfPrecipitationDiv,
+    currentWindInfoDiv,
 
     // currentMoistureDiv,
 
     currentUVIndexDiv,
+    currentCloudCoverDiv,
+    sunriseDiv,
+
+    sunsetDiv,
     moonPhaseTextImgCont,
 
-    currentWindInfoDiv
   );
 
   currentTemperatureDiv.append(currentTemperatureImg, currentTemperatureText);
   // currentFeelsLikeTemperatureDiv.append(currentFeelsLikeTemperatureImg, currentFeelsLikeTemperatureText);
   currentHumidityDiv.append(currentHumidityImg, currentHumidityText);
+  currentCloudCoverDiv.append(currentCloudCoverImg, currentCloudCoverText)
   currentDewPointDiv.append(currentDewPointImg, currentDewPointText);
 
   // currentMoistureDiv.append(currentHumidityDiv, currentDewPointDiv, currentChanceOfPrecipitationDiv)
@@ -307,6 +387,11 @@ export function createWeatherView(data) {
   // );
 
   currentUVIndexDiv.append(currentUVIndexImg, currentUVIndexText);
+
+      sunsetDiv.append(sunsetImg, sunsetText);
+
+      sunriseDiv.append(sunriseImg, sunriseText);
+
   moonPhaseTextImgCont.append(moonPhaseImg, moonPhaseText);
   currentChanceOfPrecipitationDiv.append(
     currentChanceOfPrecipitationImg,
