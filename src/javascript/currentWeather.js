@@ -85,15 +85,21 @@ export function createWeatherView(data) {
     currentConditionsData
   );
 
+  const threeInARow = createDivElement("three-in-a-row");
+
   const currentWeatherIconBtnsDiv = createDivElement(
     "current-weather-icon-btns-div"
   );
+
+  const currentWeatherTemperature = createDivElement("current-weather-temperature");
 
   const currentWeatherIconImg = createImgElement(
     "current-weather-icon-img",
     getWeatherIconSRC(data),
     "Weather icon based on current conditions."
   );
+
+  const currentWeatherMoisture = createDivElement("current-weather-moisture")
 
   // dataContent.append(weatherContent);
   const alertsData = data.alerts;
@@ -332,7 +338,7 @@ export function createWeatherView(data) {
     currentLastUpdate,
     // currentConditionsText,
     currentWeatherIconBtnsDiv,
-    currentWeatherDivCont
+    // currentWeatherDivCont
     // currentWeatherTopTextImgCont,
     // currentWeatherBotTextCont,
     // currentUVIndex,
@@ -343,21 +349,33 @@ export function createWeatherView(data) {
   currentWeatherIconBtnsDiv.append(
     weatherBtnContent,
     currentConditionsText,
-    currentWeatherIconImg
+    // currentWeatherIconImg,
+    threeInARow,
+    currentWeatherDivCont,
   );
+
+  threeInARow.append(currentWeatherTemperature, currentWeatherIconImg, currentWeatherMoisture)
   // currentWeatherTopTextImgCont.append(
   //   currentWeatherTopTextCont,
 
   // );
 
+  currentWeatherTemperature.append(currentTemperatureDiv);
+
+  currentWeatherMoisture.append(
+    currentHumidityDiv,
+    currentDewPointDiv,
+    currentChanceOfPrecipitationDiv
+  );
+
   currentWeatherDivCont.append(
-    currentTemperatureDiv,
+    // currentTemperatureDiv,
 
     // currentFeelsLikeTemperatureDiv,
 
-    currentHumidityDiv,
-    currentDewPointDiv,
-    currentChanceOfPrecipitationDiv,
+    // currentHumidityDiv,
+    // currentDewPointDiv,
+    // currentChanceOfPrecipitationDiv,
     currentWindInfoDiv,
 
     // currentMoistureDiv,

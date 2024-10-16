@@ -154,31 +154,40 @@ export function getWeatherIconSRC(data) {
     case "partly-cloudy-night":
       return partlyCloudyNight;
     case "rain-snow-showers-day":
-      return rainSnowShowersDay;
+      // return rainSnowShow
+      ersDay;
+      return rainSnow;
     case "rain-snow-showers-night":
-      return rainSnowShowersNight;
+      // return rainSnowShowersNight;
+      return rainSnow;  
     case "rain-snow":
       return rainSnow;
     case "rain":
       return rain;
     case "showers-day":
-      return showersDay;
+      // return showersDay;
+      return rain;
     case "showers-night":
-      return showersNight;
+      // return showersNight;
+      return rain;
     case "sleet":
       return sleet;
     case "snow-showers-day":
-      return snowShowersDay;
-    case "snow-showers-nigh":
-      return snowShowersNight;
+      // return snowShowersDay;
+      return snow;
+    case "snow-showers-night":
+      // return snowShowersNight;
+      return snow;
     case "snow":
       return snow;
     case "thunder-rain":
       return thunderRain;
     case "thunder-showers-day":
-      return thunderShowersDay;
+      // return thunderShowersDay;
+      return thunderRain;
     case "thunder-showers-night":
-      return thunderShowersNight;
+      // return thunderShowersNight;
+      return thunderRain;
     case "thunder":
       return thunder;
     case "wind":
@@ -224,3 +233,4 @@ export function getUVIndexValue(data) {
 
   return uvWarning;
 }
+
