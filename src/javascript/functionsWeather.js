@@ -59,41 +59,30 @@ export function styleDayNight(data) {
     "HH:mm:ss a"
   );
 
-  const locationContent = document.querySelector("#location-content");
-  const middleContent = document.querySelector("#middle-content");
   const weatherContent = document.querySelector("#weather-content");
-  const currentWeatherIconImg = document.querySelector(
-    "#current-weather-icon-img"
-  );
+  const conditionsText = document.querySelector("#conditions-text");
+  const lastUpdate = document.querySelector("#last-update");
+
 
   if (
     parseLastUpdateLocalTime > parseSunrise &&
     parseLastUpdateLocalTime < parseSunset
   ) {
-    // locationContent.style.background =
-    //   "linear-gradient(to top left, var(--day), var(--dawn))";
-    // locationContent.style.color = "var(--night)";
-    // middleContent.style.background = "var(--day)";
-    // middleContent.style.background =
-    //   "linear-gradient(to top left, var(--day), var(--dawn))";
-    // middleContent.style.color = "var(--night)";
-    // weatherContent.style.background =
-    //   "linear-gradient(to bottom right, var(--day), var(--dawn))";
-    // weatherContent.style.color = "var(--night)";
-    // currentWeatherIconImg.style.border = "1px dashed var(--night)";
+    weatherContent.style.background =
+      "var(--day-time)";
+    conditionsText.style.color= "var(--black)";
+    lastUpdate.style.color = "var(--black)";
+
   } else if (
     parseLastUpdateLocalTime < parseSunrise ||
     parseLastUpdateLocalTime > parseSunset
   ) {
-    // locationContent.style.background =
-    //   "linear-gradient(to top left, var(--dusk), var(--night))";
-    // locationContent.style.color = "var(--day)";
-    // middleContent.style.background = "var(--dusk)";
-    // middleContent.style.color = "var(--day)";
-    // weatherContent.style.background =
-    //   "linear-gradient(to bottom right, var(--dusk), var(--night))";
-    // weatherContent.style.color = "var(--day)";
-    // currentWeatherIconImg.style.border = "1px dashed var(--day)";
+    weatherContent.style.background =
+      "var(--night-time)";
+    conditionsText.style.color = "var(--white)";
+    lastUpdate.style.color = "var(--white)";
+
+
   }
 }
 
@@ -154,8 +143,7 @@ export function getWeatherIconSRC(data) {
     case "partly-cloudy-night":
       return partlyCloudyNight;
     case "rain-snow-showers-day":
-      // return rainSnowShow
-      ersDay;
+      // return rainSnowShowers
       return rainSnow;
     case "rain-snow-showers-night":
       // return rainSnowShowersNight;
@@ -197,6 +185,48 @@ export function getWeatherIconSRC(data) {
   }
 }
 
+export function getWeatherIconBkgdColor(data) {
+  let imgBkgdColor = "";
+
+  switch (data.currentConditions.icon) {
+    case "clear-day":
+    case "partly-cloudy-day":
+      imgBkgdColor = "var(--day-sky)";
+      break;
+    case "clear-night":
+    case "partly-cloudy-night":
+      imgBkgdColor = "var(--night-sky)";
+      break;
+    case "cloudy":
+    case "fog":
+    case "hail":
+    case "rain":
+    case "sleet":
+    case "snow":
+    case "thunder":
+    case "wind":
+      imgBkgdColor = "var(--overcast-sky)";
+      break;
+    case "rain-snow-showers-day":
+    case "showers-day":
+    case "snow-showers-day":
+    case "thunder-showers-day":
+      imgBkgdColor = "var(--day-overcast-sky)";
+      break;
+    case "rain-snow-showers-night":
+    case "showers-night":
+    case "snow-showers-night":
+    case "thunder-showers-night":
+      imgBkgdColor = "var(--night-overcast-sky)";
+      break;
+    default:
+      imgBkgdColor = "";
+      break;
+  }
+
+  return imgBkgdColor;
+}
+
 export function getWindDirection(data) {
   const windDegrees = data.currentConditions.winddir;
   let windDesc;
@@ -236,5 +266,23 @@ export function getUVIndexValue(data) {
   else uvWarning = "Unknown UV Index";
 
   return uvWarning;
+}
+
+export function getTemperatureColor(data) {
+  const feelsLikeTemperatureData = data.currentConditions.feelslike;
+  let temperatureColor;
+  if (feelsLikeTemperatureData < 32) temperatureColor = "var(--very-cold)";
+  else if (feelsLikeTemperatureData >= 32 && feelsLikeTemperatureData < 50)
+    temperatureColor = "var(--cold)";
+  else if (feelsLikeTemperatureData >= 50 && feelsLikeTemperatureData < 68)
+    temperatureColor = "var(--mild)";
+  else if (feelsLikeTemperatureData >= 68 && feelsLikeTemperatureData < 86)
+    temperatureColor = "var(--warm)";
+  else if (feelsLikeTemperatureData >= 86 && feelsLikeTemperatureData < 104)
+    temperatureColor = "var(--hot)";
+  else if (feelsLikeTemperatureData >= 104) temperatureColor = "var(--very-hot)";
+  else temperatureColor = "Unknown Temperature";
+
+  return temperatureColor;
 }
 

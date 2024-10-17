@@ -8,7 +8,6 @@ import svgSunrise from "../assets/sunrise.svg";
 import svgSunset from "../assets/sunset.svg";
 import svgChanceOfPrecipitation from "../assets/chance-of-precipitation.svg";
 import svgWindSm from "../assets/wind-sm.svg";
-import { getMoonPhase } from "./functionsWeather.js";
 
 import {
   createDivElement,
@@ -20,13 +19,18 @@ import {
   convertToCelsius,
   styleDayNight,
   getWeatherIconSRC,
+  getWeatherIconBkgdColor,
+  getTemperatureColor,
   getWindDirection,
   getUVIndexValue,
+  getMoonPhase,
 } from "./functionsWeather.js";
 
 export function createWeatherView(data) {
   const dataContent = document.querySelector("#data-content");
+
   const weatherContent = createDivElement("weather-content");
+
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
   const noWeatherDataAvailable = "No weather data available.";
 
@@ -67,6 +71,9 @@ export function createWeatherView(data) {
   //   "conditions-title",
   //   "Current Conditions"
   // );
+
+  // weatherContent.style.backgroundColor = getTempColorBkgd(data);
+
  
   const conditionsText = createTextElement(
     "p",
@@ -83,9 +90,11 @@ export function createWeatherView(data) {
 
   const weatherCont1 = createDivElement("weather-cont1");
 
-  const weatherTempIconCont = createDivElement("weather-temp-icon-cont");
+  // const weatherTempIconCont = createDivElement("weather-temp-icon-cont");
 
-  const weatherTemperatureCont = createDivElement("weather-temperature-cont");
+  const weatherTemperatureCont = createDivElement(
+    "weather-temperature-cont"
+  );
   // const temperatureDiv = createDivElement("temperature-div");
   // const temperatureImg = createImgElement(
   //   "temperature-img",
@@ -95,6 +104,10 @@ export function createWeatherView(data) {
   const temperatureText = createTextElement("p", "temperature-text", "");
   const feelsLikeTemperatureText = createTextElement("p", "feels-like-temperature-text", "");
 
+  // temperatureText.style.color = getTemperatureColor(data);
+  // feelsLikeTemperatureText.color = getTemperatureColor(data);
+
+  weatherTemperatureCont.style.backgroundColor = getTemperatureColor(data);
 
   const weatherIconCont = createDivElement("weather-icon-cont");
 
@@ -103,6 +116,9 @@ export function createWeatherView(data) {
     getWeatherIconSRC(data),
     "Weather icon based on current conditions."
   );
+
+  weatherIconCont.style.backgroundColor = getWeatherIconBkgdColor(data);
+
   const weatherMoistureCont = createDivElement("weather-moisture-cont")
   const humidityDiv = createDivElement("humidity-div");
   const humidityImg = createImgElement(
@@ -201,9 +217,7 @@ export function createWeatherView(data) {
     `${getUVIndexValue(data)}`
   );
 
-  const cloudCoverDiv = createDivElement(
-    "cloud-cover-div"
-  );
+  const cloudCoverDiv = createDivElement("cloud-cover-div");
   const cloudCoverImg = createImgElement(
     "cloud-cover-img",
     svgCloudCover,
@@ -265,7 +279,7 @@ export function createWeatherView(data) {
   weatherCont1.append(
     weatherTemperatureCont,
     weatherIconCont,
-    weatherTempIconCont,
+    // weatherTempIconCont,
     // weatherMoistureCont,
   );
 
@@ -285,8 +299,8 @@ export function createWeatherView(data) {
   weatherCont2.append(
     weatherMoistureCont,
     windInfoDiv,
-    uvIndexDiv,
     cloudCoverDiv,
+    uvIndexDiv,
     sunriseDiv,
     sunsetDiv,
     moonPhaseDiv

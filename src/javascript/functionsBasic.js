@@ -1,7 +1,8 @@
 // DIV ELEMENT
-export function createDivElement(id) {
+export function createDivElement(id, className) {
   const element = document.createElement("div");
   element.id = id;
+  element.className = className;
   return element;
 }
 
