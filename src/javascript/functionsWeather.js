@@ -6,19 +6,19 @@ import fog from "../assets/fog.svg";
 import hail from "../assets/hail.svg";
 import partlyCloudyDay from "../assets/partly-cloudy-day.svg";
 import partlyCloudyNight from "../assets/partly-cloudy-night.svg";
-import rainSnowShowersDay from "../assets/rain-snow-showers-day.svg";
-import rainSnowShowersNight from "../assets/rain-snow-showers-night.svg";
+// import rainSnowShowersDay from "../assets/rain-snow-showers-day.svg";
+// import rainSnowShowersNight from "../assets/rain-snow-showers-night.svg";
 import rainSnow from "../assets/rain-snow.svg";
 import rain from "../assets/rain.svg";
-import showersDay from "../assets/showers-day.svg";
-import showersNight from "../assets/showers-night.svg";
+// import showersDay from "../assets/showers-day.svg";
+// import showersNight from "../assets/showers-night.svg";
 import sleet from "../assets/sleet.svg";
-import snowShowersDay from "../assets/snow-showers-day.svg";
-import snowShowersNight from "../assets/snow-showers-night.svg";
+// import snowShowersDay from "../assets/snow-showers-day.svg";
+// import snowShowersNight from "../assets/snow-showers-night.svg";
 import snow from "../assets/snow.svg";
 import thunderRain from "../assets/thunder-rain.svg";
-import thunderShowersDay from "../assets/thunder-showers-day.svg";
-import thunderShowersNight from "../assets/thunder-showers-night.svg";
+// import thunderShowersDay from "../assets/thunder-showers-day.svg";
+// import thunderShowersNight from "../assets/thunder-showers-night.svg";
 import thunder from "../assets/thunder.svg";
 import wind from "../assets/wind.svg";
 
@@ -222,13 +222,17 @@ export function getWindDirection(data) {
 }
 
 export function getUVIndexValue(data) {
-  const uvIndex = data.currentConditions.uvindex;
+  const uvIndexData = data.currentConditions.uvindex;
   let uvWarning;
-  if (uvIndex >= 0 && uvIndex <= 2) uvWarning = "(low risk)";
-  else if (uvIndex >= 3 && uvIndex <= 5) uvWarning = "(moderate risk)";
-  else if (uvIndex >= 6 && uvIndex <= 7) uvWarning = "(high risk)";
-  else if (uvIndex >= 8 && uvIndex <= 10) uvWarning = "(very high risk)";
-  else if (uvIndex >= 11) uvWarning = "(extreme risk)";
+  if (uvIndexData >= 0 && uvIndexData <= 2)
+    uvWarning = `${uvIndexData} (low risk)`;
+  else if (uvIndexData >= 3 && uvIndexData <= 5)
+    uvWarning = `${uvIndexData} (moderate risk)`;
+  else if (uvIndexData >= 6 && uvIndexData <= 7)
+    uvWarning = `${uvIndexData} (high risk)`;
+  else if (uvIndexData >= 8 && uvIndexData <= 10)
+    uvWarning = `${uvIndexData} (very high risk)`;
+  else if (uvIndexData >= 11) uvWarning = `${uvIndexData} (extreme risk)`;
   else uvWarning = "Unknown UV Index";
 
   return uvWarning;

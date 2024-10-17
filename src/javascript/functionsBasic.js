@@ -35,6 +35,13 @@ export function createBtnElement(id, text) {
   return button;
 }
 
+export function createRoundBtnElement(id, className) {
+  const button = document.createElement("button");
+  button.id = id;
+  button.className = className;
+  return button;
+}
+
 // IMG ELEMENT
 export function createImgElement(id, src, alt = "") {
   const img = document.createElement("img");

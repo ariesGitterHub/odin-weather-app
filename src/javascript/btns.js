@@ -5,7 +5,8 @@ import svgUSA from "../assets/usa.svg";
 import svgF from "../assets/f.svg";
 import {
   createDivElement,
-  createBtnElement,
+  // createBtnElement,
+  createRoundBtnElement,
   createImgElement,
   // createTextClassElement,
   // createToggleSwitch,
@@ -80,16 +81,16 @@ import {
 export function createBtns() {
   const btnContent = document.querySelector("#btn-content");
 
-  const worldBtn = createBtnElement("world-btn");
+  const worldBtn = createRoundBtnElement("world-btn", "round-btn");
   const worldImg = createImgElement("world-img", svgEarth1, "Earth Icon");
 
   // const toggleC2F = createToggleSwitch("toggle-c2f", true);
   // const tempScaleImg = createImgElement("temp-scale-img", "");
 
-  const tempScaleBtn = createBtnElement("temp-scale-btn");
+  const tempScaleBtn = createRoundBtnElement("temp-scale-btn", "round-btn");
   tempScaleBtn.value = "F";
   const tempScaleImg = createImgElement("temp-scale-img", svgF, "")  
-  const usaBtn = createBtnElement("usa-btn");
+  const usaBtn = createRoundBtnElement("usa-btn", "round-btn");
   const usaImg = createImgElement("usa-img", svgUSA, "United States Icon");
 
   btnContent.append(worldBtn, tempScaleBtn,
