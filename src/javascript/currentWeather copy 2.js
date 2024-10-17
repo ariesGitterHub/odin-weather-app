@@ -12,7 +12,7 @@ import { getMoonPhase } from "./functionsWeather.js";
 
 import {
   createDivElement,
-  // createRoundBtnElement,
+  createRoundBtnElement,
   createImgElement,
   createTextElement,
 } from "./functionsBasic.js";
@@ -263,16 +263,16 @@ export function createWeatherView(data) {
   );
 
   weatherCont1.append(
-    weatherTemperatureCont,
-    weatherIconCont,
+    // weatherTemperatureCont,
+    // weatherIconCont,
     weatherTempIconCont,
-    // weatherMoistureCont,
+    weatherMoistureCont
   );
 
-  // weatherTempIconCont.append(
-  //   weatherTemperatureCont,
-  //   weatherIconCont,
-  // );
+  weatherTempIconCont.append(
+    weatherTemperatureCont,
+    weatherIconCont,
+  );
 
   weatherTemperatureCont.append(
     // temperatureDiv,
@@ -282,20 +282,19 @@ export function createWeatherView(data) {
 
   weatherIconCont.append(weatherIconImg);
 
+  weatherMoistureCont.append(
+    humidityDiv,
+    dewPointDiv,
+    chanceOfPrecipitationDiv
+  );
+
   weatherCont2.append(
-    weatherMoistureCont,
     windInfoDiv,
     uvIndexDiv,
     cloudCoverDiv,
     sunriseDiv,
     sunsetDiv,
-    moonPhaseDiv
-  );
-
-  weatherMoistureCont.append(
-    humidityDiv,
-    dewPointDiv,
-    chanceOfPrecipitationDiv
+    moonPhaseDiv,
   );
 
   //temperatureDiv.append(

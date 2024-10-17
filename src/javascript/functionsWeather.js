@@ -225,14 +225,14 @@ export function getUVIndexValue(data) {
   const uvIndexData = data.currentConditions.uvindex;
   let uvWarning;
   if (uvIndexData >= 0 && uvIndexData <= 2)
-    uvWarning = `${uvIndexData} (low risk)`;
+    uvWarning = `${uvIndexData} (low)`;
   else if (uvIndexData >= 3 && uvIndexData <= 5)
-    uvWarning = `${uvIndexData} (moderate risk)`;
+    uvWarning = `${uvIndexData} (moderate)`;
   else if (uvIndexData >= 6 && uvIndexData <= 7)
-    uvWarning = `${uvIndexData} (high risk)`;
+    uvWarning = `${uvIndexData} (high)`;
   else if (uvIndexData >= 8 && uvIndexData <= 10)
-    uvWarning = `${uvIndexData} (very high risk)`;
-  else if (uvIndexData >= 11) uvWarning = `${uvIndexData} (extreme risk)`;
+    uvWarning = `${uvIndexData} (very high)`;
+  else if (uvIndexData >= 11) uvWarning = `${uvIndexData} (extreme)`;
   else uvWarning = "Unknown UV Index";
 
   return uvWarning;
