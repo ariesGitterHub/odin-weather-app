@@ -59,29 +59,48 @@ export function styleDayNight(data) {
     "HH:mm:ss a"
   );
 
+  // const locationContent = document.querySelector("#location-content")
   const weatherContent = document.querySelector("#weather-content");
   const conditionsText = document.querySelector("#conditions-text");
   const lastUpdate = document.querySelector("#last-update");
-
+  // const weatherCont2Divs = document.querySelectorAll(".invert");
 
   if (
     parseLastUpdateLocalTime > parseSunrise &&
     parseLastUpdateLocalTime < parseSunset
   ) {
+    // locationContent.style.backgroundColor = "var(--black)";
+    // locationContent.style.color = "var(--white)";
     weatherContent.style.background =
       "var(--day-time)";
+    // weatherContent.style.border = "1px solid var(--black)";
     conditionsText.style.color= "var(--black)";
     lastUpdate.style.color = "var(--black)";
+
+    // weatherCont2Divs.forEach((element) => {
+      // element.style.backgroundColor = "var(--black)";
+      // element.style.color = "var(--white)";
+      // element.style.border = "0.125rem solid var(--black)";
+      // element.style.outline = "1px solid var(--white)";
+    // });
 
   } else if (
     parseLastUpdateLocalTime < parseSunrise ||
     parseLastUpdateLocalTime > parseSunset
   ) {
+    // locationContent.style.backgroundColor = "var(--white)";
+    // locationContent.style.color = "var(--black)";
     weatherContent.style.background =
       "var(--night-time)";
+    // weatherContent.style.border = "1px solid var(--white)";
     conditionsText.style.color = "var(--white)";
     lastUpdate.style.color = "var(--white)";
-
+    // weatherCont2Divs.forEach((element) => {
+      // element.style.backgroundColor = "var(--white)";
+      // element.style.color = "var(--black)";
+      // element.style.border = "0.125rem solid var(--white)";
+      // element.style.outline = "1px solid var(--black)";
+    // });
 
   }
 }

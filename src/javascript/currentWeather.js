@@ -120,7 +120,7 @@ export function createWeatherView(data) {
   weatherIconCont.style.backgroundColor = getWeatherIconBkgdColor(data);
 
   const weatherMoistureCont = createDivElement("weather-moisture-cont")
-  const humidityDiv = createDivElement("humidity-div");
+  const humidityDiv = createDivElement("humidity-div", "invert");
   const humidityImg = createImgElement(
     "humidity-img",
     svgHumidity,
@@ -131,7 +131,7 @@ export function createWeatherView(data) {
     "humidity-text",
     `${humidityData}%`
   );
-  const dewPointDiv = createDivElement("dew-point-div");
+  const dewPointDiv = createDivElement("dew-point-div", "invert");
   const dewPointImg = createImgElement(
     "dew-point-img",
     svgDewPoint,
@@ -140,7 +140,8 @@ export function createWeatherView(data) {
   const dewPointText = createTextElement("p", "dew-point-text", "");
 
   const chanceOfPrecipitationDiv = createDivElement(
-    "chance-of-precipitation-div"
+    "chance-of-precipitation-div",
+    "invert"
   );
   const chanceOfPrecipitationImg = createImgElement(
     "chance-of-precipitation-img",
@@ -189,7 +190,7 @@ export function createWeatherView(data) {
       windInfo = `${windSpeedMPHData}mph`;
     }
 
-    const windInfoDiv = createDivElement("wind-info-div");
+    const windInfoDiv = createDivElement("wind-info-div", "invert");
 
     const windInfoImg = createImgElement("wind-info-img", "");
     const windInfoText = createTextElement("p", "win-info-text", windInfo);
@@ -204,7 +205,7 @@ export function createWeatherView(data) {
       windInfoImg.style.border = "none";
     }
 
-  const uvIndexDiv = createDivElement("uv-index-div");
+  const uvIndexDiv = createDivElement("uv-index-div", "invert");
   const uvIndexImg = createImgElement(
     "uv-index-img",
     svgUVIndex,
@@ -217,7 +218,7 @@ export function createWeatherView(data) {
     `${getUVIndexValue(data)}`
   );
 
-  const cloudCoverDiv = createDivElement("cloud-cover-div");
+  const cloudCoverDiv = createDivElement("cloud-cover-div", "invert");
   const cloudCoverImg = createImgElement(
     "cloud-cover-img",
     svgCloudCover,
@@ -229,7 +230,7 @@ export function createWeatherView(data) {
     `${cloudCoverData}%`
   );
 
-  const sunriseDiv = createDivElement("sunrise-div");
+  const sunriseDiv = createDivElement("sunrise-div", "invert");
 
   const sunriseImg = createImgElement(
     "sunrise-img",
@@ -243,7 +244,7 @@ export function createWeatherView(data) {
     parseSunrise
   );
 
-  const sunsetDiv = createDivElement("sunset-div");
+  const sunsetDiv = createDivElement("sunset-div", "invert");
 
   const sunsetImg = createImgElement("sunset-img", svgSunset, "Sunrise Icon");
 
@@ -253,7 +254,7 @@ export function createWeatherView(data) {
     parseSunset
   );
 
-  const moonPhaseDiv = createDivElement("moon-phase-div");
+  const moonPhaseDiv = createDivElement("moon-phase-div", "invert");
 
   const moonPhaseText = createTextElement(
     "p",
