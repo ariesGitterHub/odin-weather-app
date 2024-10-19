@@ -1,13 +1,17 @@
 import "./styles/styles.css";
 import svgC from "./assets/c.svg";
 import svgF from "./assets/f.svg";
-import { contentChecker } from "./javascript/functionsBasic.js";
+import {
+  contentChecker,
+  clickLocationContentBtn,
+} from "./javascript/functionsBasic.js";
 import { createTitle } from "./javascript/title.js";
 import { createSearch } from "./javascript/search.js";
 import { createBtns } from "./javascript/btns.js";
 import { fetchWithHandling } from "./javascript/fetch.js";
 import { createLocationView } from "./javascript/currentLocation.js";
-// import { createAlertView } from "./javascript/currentAlert.js";
+import { createDaysView } from "./javascript/currentDays.js";
+import { createAlertsView } from "./javascript/currentAlerts.js";
 
 import {
   // createWeatherBtns, 
@@ -109,9 +113,15 @@ document.addEventListener("DOMContentLoaded", () => {
         `Search bar resolved address: ${weatherData.resolvedAddress}`
       );
       createLocationView(locationQuerySearch, weatherData);
-      // createWeatherBtns(weatherData);
-      //createAlertView(weatherData);
+
+      createAlertsView(weatherData);
+      clickLocationContentBtn("alerts", weatherData);
+
+      createDaysView(weatherData);
+      clickLocationContentBtn("days", weatherData);
+
       createWeatherView(weatherData);
+
     }
 
     initSearch();
@@ -162,9 +172,16 @@ document.addEventListener("DOMContentLoaded", () => {
         `World capital resolved address: ${weatherDataWorld.resolvedAddress}`
       );
       createLocationView(locationQueryWorld, weatherDataWorld);
-      // createWeatherBtns(weatherDataWorld);
-      // createAlertView(weatherDataWorld);
+      
+      createAlertsView(weatherDataWorld);
+      clickLocationContentBtn("alerts", weatherDataWorld);
+
+      createDaysView(weatherDataWorld);
+      clickLocationContentBtn("days", weatherDataWorld);
+
       createWeatherView(weatherDataWorld);
+
+
     }
     initWorld();
 
@@ -258,9 +275,15 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       
       createLocationView(locationQueryUSA, weatherDataUSA);
-      // createWeatherBtns(weatherDataUSA);
-      // createAlertView(weatherDataUSA);
+
+      createAlertsView(weatherDataUSA);
+      clickLocationContentBtn("alerts", weatherDataUSA);
+
+      createDaysView(weatherDataUSA);
+      clickLocationContentBtn("days", weatherDataUSA);
+
       createWeatherView(weatherDataUSA);
+
     }
 
     initUSA();
@@ -269,4 +292,10 @@ document.addEventListener("DOMContentLoaded", () => {
       isCooldown = false;
     }, setTimeoutValue);
   });
+
+  // const alertBtn = document.querySelector("#alert-btn");
+  
+  // alertBtn.addEventListener("click", () => {
+  //   toggleDiv("alert-content");
+  // });
 });

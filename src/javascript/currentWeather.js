@@ -1,5 +1,4 @@
 import { format, parse } from "date-fns";
-// import svgTemperature from "../assets/temperature.svg";
 import svgHumidity from "../assets/humidity.svg";
 import svgDewPoint from "../assets/dew-point.svg";
 import svgUVIndex from "../assets/uv-index.svg";
@@ -7,23 +6,25 @@ import svgCloudCover from "../assets/cloud-cover.svg";
 import svgSunrise from "../assets/sunrise.svg";
 import svgSunset from "../assets/sunset.svg";
 import svgChanceOfPrecipitation from "../assets/chance-of-precipitation.svg";
-import svgWindSm from "../assets/wind-sm.svg";
+import svgWindInfo from "../assets/wind-sm.svg";
 
 import {
   createDivElement,
-  // createRoundBtnElement,
   createImgElement,
-  createTextElement,
+  createSoloTextElement,
+  createDataCurrentElements,
 } from "./functionsBasic.js";
+
 import {
   convertToCelsius,
   styleDayNight,
   getWeatherIconSRC,
   getWeatherIconBkgdColor,
-  getTemperatureColor,
+  getTempColor,
   getWindDirection,
   getUVIndexValue,
   getMoonPhase,
+  // initializeFC,
 } from "./functionsWeather.js";
 
 export function createWeatherView(data) {
@@ -35,8 +36,9 @@ export function createWeatherView(data) {
   const noWeatherDataAvailable = "No weather data available.";
 
   const conditionsData = data.currentConditions.conditions;
-  const temperatureData = data.currentConditions.temp;
-  const feelsLikeTemperatureData = data.currentConditions.feelslike;
+  const iconData = data.currentConditions.icon;
+  const tempData = data.currentConditions.temp;
+  const feelsLikeData = data.currentConditions.feelslike;
   const humidityData = data.currentConditions.humidity;
   const dewPointData = data.currentConditions.dew;
   const chanceOfPrecipitationData = data.currentConditions.precipprob;
@@ -56,244 +58,166 @@ export function createWeatherView(data) {
     "hh:mm:ssa"
   );
 
-    const parseSunrise = format(
-      parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
-      "hh:mm:ssa"
-    );
+  const parseSunrise = format(
+    parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
+    "hh:mm:ssa"
+  );
 
-    const parseSunset = format(
-      parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
-      "hh:mm:ssa"
-    );
+  const parseSunset = format(
+    parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
+    "hh:mm:ssa"
+  );
 
-  // const conditionsTitle = createTextElement(
-  //   "p",
-  //   "conditions-title",
-  //   "Current Conditions"
-  // );
-
-  // weatherContent.style.backgroundColor = getTempColorBkgd(data);
-
- 
-  const conditionsText = createTextElement(
+  const conditionsText = createSoloTextElement(
     "p",
     "conditions-text",
     conditionsData
   );
 
-  const lastUpdate = createTextElement(
+  const lastUpdate = createSoloTextElement(
     "p",
     "last-update",
     `(Updated at ${parseLastUpdateLocalTime} location time.)`
   );
 
-
   const weatherCont1 = createDivElement("weather-cont1");
 
-  // const weatherTempIconCont = createDivElement("weather-temp-icon-cont");
+  const weatherTempCont = createDivElement("weather-temp-cont");
 
-  const weatherTemperatureCont = createDivElement(
-    "weather-temperature-cont"
+  const tempText = createSoloTextElement("p", "temp-text", "");
+  const feelsLikeText = createSoloTextElement(
+    "p",
+    "feels-like-text",
+    ""
   );
-  // const temperatureDiv = createDivElement("temperature-div");
-  // const temperatureImg = createImgElement(
-  //   "temperature-img",
-  //   svgTemperature,
-  //   "Temperature Icon"
-  // );
-  const temperatureText = createTextElement("p", "temperature-text", "");
-  const feelsLikeTemperatureText = createTextElement("p", "feels-like-temperature-text", "");
 
-  // temperatureText.style.color = getTemperatureColor(data);
-  // feelsLikeTemperatureText.color = getTemperatureColor(data);
-
-  weatherTemperatureCont.style.backgroundColor = getTemperatureColor(data);
+  weatherTempCont.style.backgroundColor = getTempColor(data);
 
   const weatherIconCont = createDivElement("weather-icon-cont");
 
   const weatherIconImg = createImgElement(
     "weather-icon-img",
-    getWeatherIconSRC(data),
-    "Weather icon based on current conditions."
+    getWeatherIconSRC(iconData),
+    "Weather icon based on current conditions.",
+    ""
   );
 
   weatherIconCont.style.backgroundColor = getWeatherIconBkgdColor(data);
 
-  const weatherMoistureCont = createDivElement("weather-moisture-cont")
-  const humidityDiv = createDivElement("humidity-div", "invert");
-  const humidityImg = createImgElement(
-    "humidity-img",
-    svgHumidity,
-    "Humidity Icon"
-  );
-  const humidityText = createTextElement(
-    "p",
-    "humidity-text",
-    `${humidityData}%`
-  );
-  const dewPointDiv = createDivElement("dew-point-div", "invert");
-  const dewPointImg = createImgElement(
-    "dew-point-img",
-    svgDewPoint,
-    "Dew Point Icon"
-  );
-  const dewPointText = createTextElement("p", "dew-point-text", "");
+  const weatherMoistureCont = createDivElement("weather-moisture-cont");
 
-  const chanceOfPrecipitationDiv = createDivElement(
-    "chance-of-precipitation-div",
-    "invert"
-  );
-  const chanceOfPrecipitationImg = createImgElement(
-    "chance-of-precipitation-img",
+  const {
+    targetDiv: humidityDiv,
+    targetImg: humidityImg,
+    targetText: humidityText,
+  } = createDataCurrentElements("humidity", svgHumidity, `${humidityData}%`);
+
+  const {
+    targetDiv: dewPointDiv,
+    targetImg: dewPointImg,
+    targetText: dewPointText,
+  } = createDataCurrentElements("dew-point", svgDewPoint, "");
+
+  const {
+    targetDiv: chanceOfPrecipitationDiv,
+    targetImg: chanceOfPrecipitationImg,
+    targetText: chanceOfPrecipitationText,
+  } = createDataCurrentElements(
+    "chance-of-precipitation",
     svgChanceOfPrecipitation,
-    "Chance of Precipitation Icon"
-  );
-  const chanceOfPrecipitationText = createTextElement(
-    "p",
-    "chance-of-precipitation-text",
     `${chanceOfPrecipitationData}%`
   );
 
   if (tempScaleBtn.value === "C") {
     dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-    if (temperatureData !== feelsLikeTemperatureData) {
-      temperatureText.textContent = `${convertToCelsius(temperatureData)}°C`;
-      feelsLikeTemperatureText.textContent = `(Feels like ${convertToCelsius(feelsLikeTemperatureData)}°C)`;
+    if (tempData !== feelsLikeData) {
+      tempText.textContent = `${convertToCelsius(tempData)}°C`;
+      feelsLikeText.textContent = `(Feels like ${convertToCelsius(
+        feelsLikeData
+      )}°C)`;
     } else {
-      temperatureText.textContent = `${convertToCelsius(
-      temperatureData)}°C`;
+      tempText.textContent = `${convertToCelsius(tempData)}°C`;
     }
   } else {
     dewPointText.textContent = `${dewPointData}°F`;
-    if (temperatureData !== feelsLikeTemperatureData) {
-      temperatureText.textContent = `${temperatureData}°F`;
-      feelsLikeTemperatureText.textContent = `(Feels like ${feelsLikeTemperatureData}°F)`; 
+    if (tempData !== feelsLikeData) {
+      tempText.textContent = `${tempData}°F`;
+      feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
     } else {
-        temperatureText.textContent = `${temperatureData}°F`;
+      tempText.textContent = `${tempData}°F`;
     }
   }
 
-
-
-
   const weatherCont2 = createDivElement("weather-cont2");
 
-    let windInfo = "";
+  let windInfo = "";
 
-    if (windSpeedMPHData && windDirectionData && windGustMPHData) {
-      windInfo = `${windSpeedMPHData}mph ${getWindDirection(
-        data
-      )} (gusts: ${windGustMPHData}mph)`;
-    } else if (windSpeedMPHData && windDirectionData) {
-      windInfo = `${windSpeedMPHData}mph ${getWindDirection(data)}`;
-    } else {
-      windInfo = `${windSpeedMPHData}mph`;
-    }
+  if (windSpeedMPHData && windDirectionData && windGustMPHData) {
+    windInfo = `${windSpeedMPHData}mph ${getWindDirection(
+      data
+    )} (gusts: ${windGustMPHData}mph)`;
+  } else if (windSpeedMPHData && windDirectionData) {
+    windInfo = `${windSpeedMPHData}mph ${getWindDirection(data)}`;
+  } else {
+    windInfo = `${windSpeedMPHData}mph`;
+  }
 
-    const windInfoDiv = createDivElement("wind-info-div", "invert");
+  const {
+    targetDiv: windInfoDiv,
+    targetImg: windInfoImg,
+    targetText: windInfoText,
+  } = createDataCurrentElements("wind-info", svgWindInfo, windInfo);
 
-    const windInfoImg = createImgElement("wind-info-img", "");
-    const windInfoText = createTextElement("p", "win-info-text", windInfo);
-
-    if (windInfo !== "") {
-      windInfoImg.src = svgWindSm;
-      windInfoImg.alt = "Wind Icon";
-      windInfoDiv.append(windInfoImg, windInfoText);
-    } else if (windInfo === "") {
-      windInfoImg.src = "";
-      windInfoImg.alt = "";
-      windInfoImg.style.border = "none";
-    }
-
-  const uvIndexDiv = createDivElement("uv-index-div", "invert");
-  const uvIndexImg = createImgElement(
-    "uv-index-img",
+  const {
+    targetDiv: uvIndexDiv,
+    targetImg: uvIndexImg,
+    targetText: uvIndexText,
+  } = createDataCurrentElements(
+    "uv-index",
     svgUVIndex,
-    "UV Index Icon"
-  );
-  const uvIndexText = createTextElement(
-    "p",
-    "uv-index-text",
-    // `${uvIndexData} ${getUVIndexValue(data)}`
     `${getUVIndexValue(data)}`
   );
 
-  const cloudCoverDiv = createDivElement("cloud-cover-div", "invert");
-  const cloudCoverImg = createImgElement(
-    "cloud-cover-img",
+  const {
+    targetDiv: cloudCoverDiv,
+    targetImg: cloudCoverImg,
+    targetText: cloudCoverText,
+  } = createDataCurrentElements(
+    "cloud-cover",
     svgCloudCover,
-    "Cloud Cover Icon"
-  );
-  const cloudCoverText = createTextElement(
-    "p",
-    "cloud-cover-text",
     `${cloudCoverData}%`
   );
 
-  const sunriseDiv = createDivElement("sunrise-div", "invert");
+  const {
+    targetDiv: sunriseDiv,
+    targetImg: sunriseImg,
+    targetText: sunriseText,
+  } = createDataCurrentElements("sunrise", svgSunrise, parseSunrise);
 
-  const sunriseImg = createImgElement(
-    "sunrise-img",
-    svgSunrise,
-    "Sunrise Icon"
-  );
+  const {
+    targetDiv: sunsetDiv,
+    targetImg: sunsetImg,
+    targetText: sunsetText,
+  } = createDataCurrentElements("sunset", svgSunset, parseSunset);
 
-  const sunriseText = createTextElement(
-    "p",
-    "sunrise-text",
-    parseSunrise
-  );
-
-  const sunsetDiv = createDivElement("sunset-div", "invert");
-
-  const sunsetImg = createImgElement("sunset-img", svgSunset, "Sunrise Icon");
-
-  const sunsetText = createTextElement(
-    "p",
-    "sunset-text",
-    parseSunset
-  );
-
-  const moonPhaseDiv = createDivElement("moon-phase-div", "invert");
-
-  const moonPhaseText = createTextElement(
-    "p",
-    "moon-phase-text",
+  const {
+    targetDiv: moonPhaseDiv,
+    targetImg: moonPhaseImg,
+    targetText: moonPhaseText,
+  } = createDataCurrentElements(
+    "moon-phase",
+    getMoonPhase(data).moonSrc,
     getMoonPhase(data).moonPhase
   );
-  const moonPhaseImg = createImgElement(
-    "moon-phase-img",
-    getMoonPhase(data).moonSrc,
-    "Current Moon Phase Icon"
-  );
+
+  // initializeFC(data);
 
   dataContent.append(weatherContent);
-  weatherContent.append(
-    // conditionsTitle,
-    conditionsText,
-    lastUpdate,
-    weatherCont1,
-    // weatherBtnCont,
-    weatherCont2
-  );
+  weatherContent.append(conditionsText, lastUpdate, weatherCont1, weatherCont2);
 
-  weatherCont1.append(
-    weatherTemperatureCont,
-    weatherIconCont,
-    // weatherTempIconCont,
-    // weatherMoistureCont,
-  );
+  weatherCont1.append(weatherTempCont, weatherIconCont);
 
-  // weatherTempIconCont.append(
-  //   weatherTemperatureCont,
-  //   weatherIconCont,
-  // );
-
-  weatherTemperatureCont.append(
-    // temperatureDiv,
-    temperatureText,
-    feelsLikeTemperatureText,
-  );
+  weatherTempCont.append(tempText, feelsLikeText);
 
   weatherIconCont.append(weatherIconImg);
 
@@ -313,14 +237,10 @@ export function createWeatherView(data) {
     chanceOfPrecipitationDiv
   );
 
-  //temperatureDiv.append(
-    // temperatureImg,
-    //  temperatureText
-    //);
-
   humidityDiv.append(humidityImg, humidityText);
-  cloudCoverDiv.append(cloudCoverImg, cloudCoverText)
+  cloudCoverDiv.append(cloudCoverImg, cloudCoverText);
   dewPointDiv.append(dewPointImg, dewPointText);
+  windInfoDiv.append(windInfoImg, windInfoText);
   uvIndexDiv.append(uvIndexImg, uvIndexText);
   sunsetDiv.append(sunsetImg, sunsetText);
   sunriseDiv.append(sunriseImg, sunriseText);
@@ -334,38 +254,36 @@ export function createWeatherView(data) {
 }
 
 export function updateDataFC(data) {
-  const temperatureData = data.currentConditions.temp;
-  const feelsLikeTemperatureData = data.currentConditions.feelslike;
+  const tempData = data.currentConditions.temp;
+  const feelsLikeData = data.currentConditions.feelslike;
   const dewPointData = data.currentConditions.dew;
 
-  const temperatureText = document.querySelector("#temperature-text");
-  const feelsLikeTemperatureText = document.querySelector("#feels-like-temperature-text");
- 
+  const tempText = document.querySelector("#temp-text");
+  const feelsLikeText = document.querySelector(
+    "#feels-like-text"
+  );
+
   const dewPointText = document.querySelector("#dew-point-text");
 
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
 
   if (tempScaleBtn.value === "C") {
-    dewPointText.textContent = `${convertToCelsius(
-      dewPointData
-    )}°C`;
-    if (temperatureData !== feelsLikeTemperatureData) {
-      temperatureText.textContent = `${convertToCelsius(temperatureData)}°C`;
-      feelsLikeTemperatureText.textContent = `(Feels like ${convertToCelsius(feelsLikeTemperatureData)}°C)`;
-
+    dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+    if (tempData !== feelsLikeData) {
+      tempText.textContent = `${convertToCelsius(tempData)}°C`;
+      feelsLikeText.textContent = `(Feels like ${convertToCelsius(
+        feelsLikeData
+      )}°C)`;
     } else {
-      temperatureText.textContent = `${convertToCelsius(
-        temperatureData
-      )}°C`;
+      tempText.textContent = `${convertToCelsius(tempData)}°C`;
     }
   } else {
     dewPointText.textContent = `${dewPointData}°F`;
-    if (temperatureData !== feelsLikeTemperatureData) {
-      temperatureText.textContent = `${temperatureData}°F`;
-      feelsLikeTemperatureText.textContent = `(Feels like ${feelsLikeTemperatureData}°F)`;
-
+    if (tempData !== feelsLikeData) {
+      tempText.textContent = `${tempData}°F`;
+      feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
     } else {
-      temperatureText.textContent = `${temperatureData}°F`;
+      tempText.textContent = `${tempData}°F`;
     }
   }
 }

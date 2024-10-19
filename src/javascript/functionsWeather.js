@@ -146,7 +146,7 @@ export function getMoonPhase(data) {
 }
 
 export function getWeatherIconSRC(data) {
-  switch (data.currentConditions.icon) {
+  switch (data) {
     case "clear-day":
       return clearDay;
     case "clear-night":
@@ -287,21 +287,54 @@ export function getUVIndexValue(data) {
   return uvWarning;
 }
 
-export function getTemperatureColor(data) {
-  const feelsLikeTemperatureData = data.currentConditions.feelslike;
-  let temperatureColor;
-  if (feelsLikeTemperatureData < 32) temperatureColor = "var(--very-cold)";
-  else if (feelsLikeTemperatureData >= 32 && feelsLikeTemperatureData < 50)
-    temperatureColor = "var(--cold)";
-  else if (feelsLikeTemperatureData >= 50 && feelsLikeTemperatureData < 68)
-    temperatureColor = "var(--mild)";
-  else if (feelsLikeTemperatureData >= 68 && feelsLikeTemperatureData < 86)
-    temperatureColor = "var(--warm)";
-  else if (feelsLikeTemperatureData >= 86 && feelsLikeTemperatureData < 104)
-    temperatureColor = "var(--hot)";
-  else if (feelsLikeTemperatureData >= 104) temperatureColor = "var(--very-hot)";
-  else temperatureColor = "Unknown Temperature";
+export function getTempColor(data) {
+  const feelsLikeData = data.currentConditions.feelslike;
+  let tempColor;
+  if (feelsLikeData < 32) tempColor = "var(--very-cold)";
+  else if (feelsLikeData >= 32 && feelsLikeData < 50)
+    tempColor = "var(--cold)";
+  else if (feelsLikeData >= 50 && feelsLikeData < 68)
+    tempColor = "var(--mild)";
+  else if (feelsLikeData >= 68 && feelsLikeData < 86)
+    tempColor = "var(--warm)";
+  else if (feelsLikeData >= 86 && feelsLikeData < 104)
+    tempColor = "var(--hot)";
+  else if (feelsLikeData >= 104) tempColor = "var(--very-hot)";
+  else tempColor = "Unknown Temperature";
 
-  return temperatureColor;
+  return tempColor;
 }
+
+export function initializeFC(data) {
+  const tempScaleBtn = document.querySelector("#temp-scale-btn");
+  const tempData = data.currentConditions.temp;
+  const feelsLikeData = data.currentConditions.feelslike;
+  const dewPointData = data.currentConditions.dew;
+
+  const dewPointText = document.querySelector("#dew-point-text");
+  const tempText = document.querySelector("#temp-text");
+  const feelsLikeText = document.querySelector("#feels-like-text");
+
+  if (tempScaleBtn.value === "C") {
+    dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+    tempText.textContent = `${convertToCelsius(tempData)}°C`;
+    feelsLikeText.textContent = `(Feels like ${convertToCelsius(feelsLikeData)}°C)`;
+  } else {
+    dewPointText.textContent = `${dewPointData}°F`;
+    tempText.textContent = `${tempData}°F`;
+    feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
+  }
+}
+
+  
+  // if (tempScaleBtn.value === "C") {
+  //   dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;      
+  //   tempText.textContent = `${convertToCelsius(tempData)}°C`;
+  //   feelsLikeText.textContent = `(Feels like ${convertToCelsius(feelsLikeData)}°C)`;
+  //   }
+  // } else {
+  //   dewPointText.textContent = `${dewPointData}°F`;
+  //   tempText.textContent = `${tempData}°F`;
+  //   feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
+  // }
 

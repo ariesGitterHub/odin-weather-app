@@ -1,6 +1,10 @@
 import svgTitleWindAndLeaves from "../assets/titleWindAndLeaves.svg";
-import svgTitleWeathervane from "../assets/titleWeathervane.svg"
-import { createDivElement, createImgElement, createTextElement } from "./functionsBasic.js";
+import svgTitleWeathervane from "../assets/titleWeathervane.svg";
+import {
+  createDivElement,
+  createImgElement,
+  createSoloTextElement,
+} from "./functionsBasic.js";
 
 export function createTitle() {
   const titleContent = document.querySelector("#title-content");
@@ -13,11 +17,15 @@ export function createTitle() {
     "Wind And Leaves Icon"
   );
 
-  const titleText = createTextElement("h1", "title-text", "Weathervane");
+  const titleText = createSoloTextElement("h1", "title-text", "Weathervane");
 
-  const titleImg2 = createImgElement("title-img2", svgTitleWeathervane, "Weathervane Icon");
+  const titleImg2 = createImgElement(
+    "title-img2",
+    svgTitleWeathervane,
+    "Weathervane Icon"
+  );
 
-  const mmmText = createTextElement(
+  const mmmText = createSoloTextElement(
     "p",
     "MMM",
     "Mad Muffin Man Design Studio, ©2024"
