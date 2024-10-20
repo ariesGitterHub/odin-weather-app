@@ -1,27 +1,4 @@
-// DIV ELEMENT
-export function createDivElement(id, className) {
-  const element = document.createElement("div");
-  element.id = id;
-  element.className = className;
-  return element;
-}
-
-// SPAN ELEMENT
-// export function createSpanElement(className, text) {
-//   const element = document.createElement("span");
-//   element.classList.add(className);
-//   element.textContent = text;
-//   return element;
-// }
-
-export function createSpanElement(id, text) {
-  const element = document.createElement("span");
-  element.id = id;
-  element.textContent = text;
-  return element;
-}
-
-
+// BR ELEMENT
 export function createBreakElement(className) {
   const element = document.createElement("br");
   element.classList.add(className);
@@ -29,18 +6,20 @@ export function createBreakElement(className) {
 }
 
 //BTN ELEMENT (i.e., button)
-export function createBtnElement(id, text) {
+export function createBtnElement(id, textContent, className) {
   const button = document.createElement("button");
   button.id = id;
-  button.textContent = text;
+  button.textContent = textContent;
+  button.className = className;
   return button;
 }
 
-export function createRoundBtnElement(id, className) {
-  const button = document.createElement("button");
-  button.id = id;
-  button.className = className;
-  return button;
+// DIV ELEMENT
+export function createDivElement(id, className) {
+  const element = document.createElement("div");
+  element.id = id;
+  element.className = className;
+  return element;
 }
 
 // IMG ELEMENT
@@ -62,22 +41,15 @@ export function createFormElement(tag, type, id, placeHolder) {
   return element;
 }
 
-// TEXT ELEMENT
-export function createSoloTextElement(tag, id, textContent) {
-  const element = document.createElement(tag);
-  element.id = id;
-  element.textContent = textContent;
+ // SPAN ELEMENT
+export function createSpanElement(className) {
+  const element = document.createElement("br");
+  element.classList.add(className);
   return element;
 }
 
-// export function createTextClassElement(tag, className, text) {
-//   const element = document.createElement(tag);
-//   element.className = className;
-//   element.textContent = text;
-//   return element;
-// }
-
-export function createMultiTextElement(tag, id, textContent, className) {
+// TEXT ELEMENT
+export function createTextElement(tag, id, textContent, className) {
   const element = document.createElement(tag);
   element.id = id;
   element.textContent = textContent;
@@ -85,25 +57,24 @@ export function createMultiTextElement(tag, id, textContent, className) {
   return element;
 }
 
-
 //TOGGLE SWITCH MAKER
-export function createToggleSwitch(id, isChecked) {
-  const label = document.createElement("label");
-  label.htmlFor = id;
+// export function createToggleSwitch(id, isChecked) {
+//   const label = document.createElement("label");
+//   label.htmlFor = id;
 
-  const input = document.createElement("input");
-  input.type = "checkbox";
-  input.id = id;
-  input.checked = isChecked;
+//   const input = document.createElement("input");
+//   input.type = "checkbox";
+//   input.id = id;
+//   input.checked = isChecked;
 
-  const span = document.createElement("span");
-  span.id = "toggle-slider";
+//   const span = document.createElement("span");
+//   span.id = "toggle-slider";
 
-  label.appendChild(input);
-  label.appendChild(span);
+//   label.appendChild(input);
+//   label.appendChild(span);
 
-  return label;
-}
+//   return label;
+// }
 
 // CLEAR DIVS
 export function clearDivText(divId1, divId2, divId3, divId4) {
@@ -128,13 +99,6 @@ export function clearDivText(divId1, divId2, divId3, divId4) {
   }
 }
 
-// CLEAR QUERY ??????
-export function clearQuery(query) {
-  if (query !== "") {
-    query = "";
-  }
-}
-
 export function contentChecker() {
   const dataContent = document.querySelector("#data-content");
 
@@ -143,6 +107,12 @@ export function contentChecker() {
   } 
 }
 
+// CLEAR QUERY
+// export function clearQuery(query) {
+//   if (query !== "") {
+//     query = "";
+//   }
+// }
 
 export function toggleContentDiv(id) {
   const targetDiv = document.getElementById(id);
@@ -168,7 +138,6 @@ export function clickLocationContentBtn(id, data) {
   }
 }
 
-
 export function getTodayDate() {
   const today = new Date();
   const year = today.getFullYear();
@@ -177,44 +146,22 @@ export function getTodayDate() {
   return `${year}-${month}-${day}`;
 }
 
-
-
-export function createDataCurrentElements(target, targetSrc, targetData) {
-  const targetDiv = createDivElement(`${target}-div`, "data-current-div");
+export function createWeatherElements(targetWord, targetSrc, targetData, groupClass) {
+  const targetDiv = createDivElement(
+    `${targetWord}-div`, 
+    `${groupClass}-div`
+  );
   const targetImg = createImgElement(
-    `${target}-img`,
+    `${targetWord}-img`,
     targetSrc,
-    `${target} icon`,
-    "data-current-img"
+    `${targetWord} icon`,
+    `${groupClass}-img`
   );
-  const targetText = createMultiTextElement(
-    "p",
-    `${target}-text`,
+  const targetText = createTextElement(
+    `p`,
+    `${targetWord}-text`,
     targetData,
-    "data-current-text"
-  );
-  return {
-    targetDiv,
-    targetImg,
-    targetText,
-  };
-}
-
-
-
-export function createDataDaysElements(target, targetSrc, targetData) {
-  const targetDiv = createDivElement(`${target}-div`, "data-days-div");
-  const targetImg = createImgElement(
-    `${target}-img`,
-    targetSrc,
-    `${target} icon`,
-    "data-days-img"
-  );
-  const targetText = createMultiTextElement(
-    "p",
-    `${target}-text`,
-    targetData,
-    "data-days-text"
+    `${groupClass}-text`
   );
   return {
     targetDiv,

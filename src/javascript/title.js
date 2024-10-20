@@ -3,32 +3,35 @@ import svgTitleWeathervane from "../assets/titleWeathervane.svg";
 import {
   createDivElement,
   createImgElement,
-  createSoloTextElement,
+  createTextElement,
 } from "./functionsBasic.js";
 
 export function createTitle() {
-  const titleContent = document.querySelector("#title-content");
+  const titleContent = document.querySelector("#title-content", "");
 
-  const titleImgDiv = createDivElement("title-img-div");
+  const titleImgDiv = createDivElement("title-img-div", "");
 
   const titleImg1 = createImgElement(
     "title-img1",
     svgTitleWindAndLeaves,
-    "Wind And Leaves Icon"
+    "Wind And Leaves Icon",
+    ""
   );
 
-  const titleText = createSoloTextElement("h1", "title-text", "Weathervane");
+  const titleText = createTextElement("h1", "title-text", "Weathervane", "");
 
   const titleImg2 = createImgElement(
     "title-img2",
     svgTitleWeathervane,
-    "Weathervane Icon"
+    "Weathervane Icon",
+    ""
   );
 
-  const mmmText = createSoloTextElement(
+  const mmmText = createTextElement(
     "p",
     "MMM",
-    "Mad Muffin Man Design Studio, ©2024"
+    "Mad Muffin Man Design Studio, ©2024",
+    ""
   );
 
   titleContent.append(titleImgDiv, mmmText);

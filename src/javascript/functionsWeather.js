@@ -6,19 +6,11 @@ import fog from "../assets/fog.svg";
 import hail from "../assets/hail.svg";
 import partlyCloudyDay from "../assets/partly-cloudy-day.svg";
 import partlyCloudyNight from "../assets/partly-cloudy-night.svg";
-// import rainSnowShowersDay from "../assets/rain-snow-showers-day.svg";
-// import rainSnowShowersNight from "../assets/rain-snow-showers-night.svg";
 import rainSnow from "../assets/rain-snow.svg";
 import rain from "../assets/rain.svg";
-// import showersDay from "../assets/showers-day.svg";
-// import showersNight from "../assets/showers-night.svg";
 import sleet from "../assets/sleet.svg";
-// import snowShowersDay from "../assets/snow-showers-day.svg";
-// import snowShowersNight from "../assets/snow-showers-night.svg";
 import snow from "../assets/snow.svg";
 import thunderRain from "../assets/thunder-rain.svg";
-// import thunderShowersDay from "../assets/thunder-showers-day.svg";
-// import thunderShowersNight from "../assets/thunder-showers-night.svg";
 import thunder from "../assets/thunder.svg";
 import wind from "../assets/wind.svg";
 
@@ -162,38 +154,30 @@ export function getWeatherIconSRC(data) {
     case "partly-cloudy-night":
       return partlyCloudyNight;
     case "rain-snow-showers-day":
-      // return rainSnowShowers
       return rainSnow;
     case "rain-snow-showers-night":
-      // return rainSnowShowersNight;
       return rainSnow;  
     case "rain-snow":
       return rainSnow;
     case "rain":
       return rain;
     case "showers-day":
-      // return showersDay;
       return rain;
     case "showers-night":
-      // return showersNight;
       return rain;
     case "sleet":
       return sleet;
     case "snow-showers-day":
-      // return snowShowersDay;
       return snow;
     case "snow-showers-night":
-      // return snowShowersNight;
       return snow;
     case "snow":
       return snow;
     case "thunder-rain":
       return thunderRain;
     case "thunder-showers-day":
-      // return thunderShowersDay;
       return thunderRain;
     case "thunder-showers-night":
-      // return thunderShowersNight;
       return thunderRain;
     case "thunder":
       return thunder;
@@ -207,7 +191,7 @@ export function getWeatherIconSRC(data) {
 export function getWeatherIconBkgdColor(data) {
   let imgBkgdColor = "";
 
-  switch (data.currentConditions.icon) {
+  switch (data) {
     case "clear-day":
     case "partly-cloudy-day":
       imgBkgdColor = "var(--day-sky)";
@@ -247,7 +231,7 @@ export function getWeatherIconBkgdColor(data) {
 }
 
 export function getWindDirection(data) {
-  const windDegrees = data.currentConditions.winddir;
+  const windDegrees = data;
   let windDesc;
   if (windDegrees >= 348.75 || windDegrees < 11.25) windDesc = "N";
   else if (windDegrees >= 11.25 && windDegrees < 33.75) windDesc = "NNE";
@@ -271,7 +255,7 @@ export function getWindDirection(data) {
 }
 
 export function getUVIndexValue(data) {
-  const uvIndexData = data.currentConditions.uvindex;
+  const uvIndexData = data;
   let uvWarning;
   if (uvIndexData >= 0 && uvIndexData <= 2)
     uvWarning = `${uvIndexData} (low)`;
@@ -288,7 +272,7 @@ export function getUVIndexValue(data) {
 }
 
 export function getTempColor(data) {
-  const feelsLikeData = data.currentConditions.feelslike;
+  const feelsLikeData = data;
   let tempColor;
   if (feelsLikeData < 32) tempColor = "var(--very-cold)";
   else if (feelsLikeData >= 32 && feelsLikeData < 50)

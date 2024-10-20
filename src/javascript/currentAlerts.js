@@ -1,7 +1,6 @@
 import {
   createDivElement,
-  createSoloTextElement,
-  createMultiTextElement,
+  createTextElement,
 } from "./functionsBasic.js";
 
 export function createAlertsView(data) {
@@ -17,32 +16,41 @@ export function createAlertsView(data) {
     } else if (alertsData.length > 0) {
       console.log(alertsData);
 
-      const alertsContent = createDivElement("alerts-content");
+      const alertsContent = createDivElement("alerts-content", "");
 
-      const alertsTitle = createSoloTextElement("p", "alerts-title", "Weather Alert");
+      const alertsTitle = createTextElement(
+        "p",
+        "alerts-title",
+        "Weather Alert",
+        "alerts"
+      );
       dataContent.append(alertsContent);
       alertsContent.append(alertsTitle);
 
       alertsData.forEach((alerts) => {
-        const alertsHeadline = createMultiTextElement(
+        const alertsHeadline = createTextElement(
           "p",
           "alerts-headline",
-          `${alerts.headline}`
+          `${alerts.headline}`,
+          "alerts"
         );
-        const alertsStartEnd = createMultiTextElement(
+        const alertsStartEnd = createTextElement(
           "p",
           "alerts-start-end",
-          `(Starts: ${alerts.onset}, Ends: ${alerts.ends})`
+          `(Starts: ${alerts.onset}, Ends: ${alerts.ends})`,
+          "alerts"
         );
-        const alertsDescription = createMultiTextElement(
+        const alertsDescription = createTextElement(
           "p",
           "alerts-description",
-          `${alerts.description}`
+          `${alerts.description}`,
+          "alerts"
         );
-        const alertsAsterisks = createMultiTextElement(
+        const alertsAsterisks = createTextElement(
           "p",
           "alerts-asterisks",
-          "***"
+          "***",
+          "alerts"
         );
 
         alertsContent.append(

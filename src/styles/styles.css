@@ -60,7 +60,7 @@
 
 * {
   box-sizing: border-box;
-  /* border: 1px dashed red; */
+  border: 1px dashed red;
   /* KEEP ABOVE: USE FOR TESTS */
   margin: 0;
   padding: 0;
@@ -327,62 +327,92 @@ line-height: 1.25;;
 /* ---> DAYS-CONTENT */
 
 #days-content {
+  height: fit-content;
   width: var(--width);
-  background-color: var(--grey);
+  background-color: var(--white);
   color: var(--black);
   display: none;
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    gap: .25rem;
+    flex-wrap: wrap;
+  margin: auto;
   padding: .25rem;
 
 }
 
 #days-title {
   align-self: center;
-  color: var(--white);
+  color: var(--black);
   font-size: 1.1rem;
   margin-bottom: .5rem;
   text-align: center;
+  text-transform: uppercase;
 }
 
-.days-row {
-  height: 5.75rem;
+.days-row-cont {
+  height: fit-content;
   width: fit-content;
   border: var(--btn-border);
+  /* border-radius: .75rem; */
   display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: center;
     gap: .25rem;
-  font-family: var(--font-sans);
-  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.days-col-cont {
+  height: fit-content;
+  width: fit-content;
+  /* border: var(--btn-border);
+  outline: var(--btn-outline); */
+  /* border-radius: .75rem; */
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
   text-align: center;
 }
 
-.days-side-left, .days-side-right {
+.days-weather-cont {
+  /* height: fit-content;
+  width: fit-content; */
+    /* border: var(--btn-border);
+  outline: var(--btn-outline); */
   display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
 }
 
-.days-date-text, .days-temp-hi-text, .days-temp-lo-text, .days-icon-cont, .days-chance-of-precip-prob-text {
-  height: 3rem;
-  width: 3rem;
-  background-color: var(--white);
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.days-date-text-cont {
+  height: 2rem;
+  width: 8rem;
+}
+
+.days-date-text {
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 1rem;
   padding: .25rem;
+  text-align: center;
+}
+
+.days-icon-cont{
+  height: 5.25rem;
+  width: auto;
+  /* border-radius: .75rem; */
 }
 
 .days-icon-img {
-  height: 3rem;
+  height: 4.5rem;
   width: auto;
+  /* border-radius: .75rem; */
 }
 /* 
 .days-temp-hi-lo {
@@ -395,9 +425,41 @@ line-height: 1.25;;
     align-items: center;
 } */
 
-#days-content .data-img {
+/* #days-content .data-img {
   background-color: var(--white);
+} */
+
+/* .data-days-div {
+  height: fit-content;
+  width: fit-content;
+  background-color: var(--white);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-sans);
 }
+
+.data-days-img {
+  height: 2rem;
+  width: auto;
+
+  border: var(--btn-border) ;
+  border-radius: 50%;
+    display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+} */
+
+/* .data-days-text {
+    display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+font-size: 1rem;
+} */
 
 /* ---> WEATHER-CONTENT */
 
@@ -419,6 +481,7 @@ line-height: 1.25;;
 }
 
 #conditions-text, #last-update {
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -488,15 +551,22 @@ line-height: 1.25;;
 
 /* #humidity-div,
 #dew-point-div, 
-#chance-of-precipitation-div,
+#precip-prob-div,
 #wind-info-div, 
 #cloud-cover-div,
 #uv-index-div, 
 #sunrise-div,
 #sunset-div,
 #moon-phase-div  */
-.data-current-div
+.current-div,
+.days-temp-hi-div,
+.days-temp-lo-div,
+.days-humidity-div,
+.days-precip-prob-div,
+.days-wind-info-div,
+.days-uv-index-div
 {
+  height: 2.25rem;
   width: fit-content;
   background-color: var(--black);
   border: var(--btn-border);
@@ -506,41 +576,52 @@ line-height: 1.25;;
   display: flex;
     justify-content: center;
     align-items: center;
+    /* flex-wrap: nowrap; */
   outline: var(--btn-outline);
 }
 
 /* #humidity-img, 
 #dew-point-img,
-#chance-of-precipitation-img, 
+#precip-prob-img, 
 #wind-info-img,
 #cloud-cover-img,
 #uv-index-img,
 #sunrise-img,
 #sunset-img,
 #moon-phase-img  */
-.data-current-img
+.current-img,
+.days-temp-hi-img,
+.days-temp-lo-img, 
+.days-humidity-img, 
+.days-precip-prob-img,
+.days-wind-info-img,
+.days-uv-index-img
 {
-  height: 2.25rem;
+  height: 2rem;
   width: auto;
   border-radius: 50%;
 }
 
 #humidity-img, 
 #dew-point-img,
-#chance-of-precipitation-img 
+#precip-prob-img,
+.days-humidity-img,
+.days-precip-prob-img
 {
   background-color: var(--water);
 }
 
 #wind-info-img,
-#cloud-cover-img
+#cloud-cover-img,
+.days-wind-info-img
 {
   background-color: var(--air);
 }
 
 #uv-index-img,
 #sunrise-img,
-#sunset-img
+#sunset-img,
+.days-uv-index-img
 {
   background-color: var(--sun);
 }
@@ -560,18 +641,25 @@ line-height: 1.25;;
 
 /* #humidity-text, 
 #dew-point-text, 
-#chance-of-precipitation-text, 
+#precip-prob-text, 
 #win-info-text, 
 #cloud-cover-text,
 #uv-index-text, 
 #sunrise-text,
 #sunset-text,
 #moon-phase-text  */
-.data-current-text
+.current-text,
+.days-temp-hi-text,
+.days-temp-lo-text,
+.days-humidity-text,
+.days-precip-prob-text,
+.days-wind-info-text,
+.days-uv-index-text
 {
   font-size: 1rem;
   padding: .25rem .5rem .25rem .25rem;
   text-align: left;
+  text-wrap: nowrap;
 }
 
 

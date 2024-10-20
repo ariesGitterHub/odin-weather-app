@@ -5,14 +5,14 @@ import svgUVIndex from "../assets/uv-index.svg";
 import svgCloudCover from "../assets/cloud-cover.svg";
 import svgSunrise from "../assets/sunrise.svg";
 import svgSunset from "../assets/sunset.svg";
-import svgChanceOfPrecipitation from "../assets/chance-of-precipitation.svg";
+import svgPrecipProb from "../assets/chance-of-precipitation.svg";
 import svgWindInfo from "../assets/wind-sm.svg";
 
 import {
   createDivElement,
   createImgElement,
-  createSoloTextElement,
-  createDataCurrentElements,
+  createTextElement,
+  createWeatherElements,
 } from "./functionsBasic.js";
 
 import {
@@ -30,7 +30,7 @@ import {
 export function createWeatherView(data) {
   const dataContent = document.querySelector("#data-content");
 
-  const weatherContent = createDivElement("weather-content");
+  const weatherContent = createDivElement("weather-content", "");
 
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
   const noWeatherDataAvailable = "No weather data available.";
@@ -41,8 +41,9 @@ export function createWeatherView(data) {
   const feelsLikeData = data.currentConditions.feelslike;
   const humidityData = data.currentConditions.humidity;
   const dewPointData = data.currentConditions.dew;
-  const chanceOfPrecipitationData = data.currentConditions.precipprob;
+  const precipProbData = data.currentConditions.precipprob;
   const cloudCoverData = data.currentConditions.cloudcover;
+  const uvIndexData = data.currentConditions.uvindex;
 
   const windSpeedMPHData = data.currentConditions.windspeed;
   const windDirectionData = data.currentConditions.winddir;
@@ -68,32 +69,35 @@ export function createWeatherView(data) {
     "hh:mm:ssa"
   );
 
-  const conditionsText = createSoloTextElement(
+  const conditionsText = createTextElement(
     "p",
     "conditions-text",
-    conditionsData
-  );
-
-  const lastUpdate = createSoloTextElement(
-    "p",
-    "last-update",
-    `(Updated at ${parseLastUpdateLocalTime} location time.)`
-  );
-
-  const weatherCont1 = createDivElement("weather-cont1");
-
-  const weatherTempCont = createDivElement("weather-temp-cont");
-
-  const tempText = createSoloTextElement("p", "temp-text", "");
-  const feelsLikeText = createSoloTextElement(
-    "p",
-    "feels-like-text",
+    `Currently: ${conditionsData}`,
     ""
   );
 
-  weatherTempCont.style.backgroundColor = getTempColor(data);
+  const lastUpdate = createTextElement(
+    "p",
+    "last-update",
+    `(Updated at ${parseLastUpdateLocalTime} location time.)`,
+    ""
+  );
 
-  const weatherIconCont = createDivElement("weather-icon-cont");
+  const weatherCont1 = createDivElement("weather-cont1", "");
+
+  const weatherTempCont = createDivElement("weather-temp-cont", "");
+
+  const tempText = createTextElement("p", "temp-text", "", "");
+  const feelsLikeText = createTextElement(
+    "p",
+    "feels-like-text",
+    "",
+    ""
+  );
+
+  weatherTempCont.style.backgroundColor = getTempColor(feelsLikeData);
+
+  const weatherIconCont = createDivElement("weather-icon-cont", "");
 
   const weatherIconImg = createImgElement(
     "weather-icon-img",
@@ -102,30 +106,31 @@ export function createWeatherView(data) {
     ""
   );
 
-  weatherIconCont.style.backgroundColor = getWeatherIconBkgdColor(data);
+  weatherIconCont.style.backgroundColor = getWeatherIconBkgdColor(iconData);
 
-  const weatherMoistureCont = createDivElement("weather-moisture-cont");
+  const weatherMoistureCont = createDivElement("weather-moisture-cont", "");
 
   const {
     targetDiv: humidityDiv,
     targetImg: humidityImg,
     targetText: humidityText,
-  } = createDataCurrentElements("humidity", svgHumidity, `${humidityData}%`);
+  } = createWeatherElements("humidity", svgHumidity, `${humidityData}%`, "current");
 
   const {
     targetDiv: dewPointDiv,
     targetImg: dewPointImg,
     targetText: dewPointText,
-  } = createDataCurrentElements("dew-point", svgDewPoint, "");
+  } = createWeatherElements("dew-point", svgDewPoint, "", "current");
 
   const {
-    targetDiv: chanceOfPrecipitationDiv,
-    targetImg: chanceOfPrecipitationImg,
-    targetText: chanceOfPrecipitationText,
-  } = createDataCurrentElements(
-    "chance-of-precipitation",
-    svgChanceOfPrecipitation,
-    `${chanceOfPrecipitationData}%`
+    targetDiv: precipProbDiv,
+    targetImg: precipProbImg,
+    targetText: precipProbText,
+  } = createWeatherElements(
+    "precip-prob",
+    svgPrecipProb,
+    `${precipProbData}%`,
+    "current"
   );
 
   if (tempScaleBtn.value === "C") {
@@ -148,16 +153,16 @@ export function createWeatherView(data) {
     }
   }
 
-  const weatherCont2 = createDivElement("weather-cont2");
+  const weatherCont2 = createDivElement("weather-cont2", "");
 
   let windInfo = "";
 
   if (windSpeedMPHData && windDirectionData && windGustMPHData) {
     windInfo = `${windSpeedMPHData}mph ${getWindDirection(
-      data
+      windDirectionData
     )} (gusts: ${windGustMPHData}mph)`;
   } else if (windSpeedMPHData && windDirectionData) {
-    windInfo = `${windSpeedMPHData}mph ${getWindDirection(data)}`;
+    windInfo = `${windSpeedMPHData}mph ${getWindDirection(windDirectionData)}`;
   } else {
     windInfo = `${windSpeedMPHData}mph`;
   }
@@ -166,48 +171,46 @@ export function createWeatherView(data) {
     targetDiv: windInfoDiv,
     targetImg: windInfoImg,
     targetText: windInfoText,
-  } = createDataCurrentElements("wind-info", svgWindInfo, windInfo);
+  } = createWeatherElements("wind-info", svgWindInfo, windInfo, "current");
 
   const {
     targetDiv: uvIndexDiv,
     targetImg: uvIndexImg,
     targetText: uvIndexText,
-  } = createDataCurrentElements(
-    "uv-index",
-    svgUVIndex,
-    `${getUVIndexValue(data)}`
-  );
+  } = createWeatherElements("uv-index", svgUVIndex, `${getUVIndexValue(uvIndexData)}`, "current");
 
   const {
     targetDiv: cloudCoverDiv,
     targetImg: cloudCoverImg,
     targetText: cloudCoverText,
-  } = createDataCurrentElements(
+  } = createWeatherElements(
     "cloud-cover",
     svgCloudCover,
-    `${cloudCoverData}%`
+    `${cloudCoverData}%`,
+    "current"
   );
 
   const {
     targetDiv: sunriseDiv,
     targetImg: sunriseImg,
     targetText: sunriseText,
-  } = createDataCurrentElements("sunrise", svgSunrise, parseSunrise);
+  } = createWeatherElements("sunrise", svgSunrise, parseSunrise, "current");
 
   const {
     targetDiv: sunsetDiv,
     targetImg: sunsetImg,
     targetText: sunsetText,
-  } = createDataCurrentElements("sunset", svgSunset, parseSunset);
+  } = createWeatherElements("sunset", svgSunset, parseSunset, "current");
 
   const {
     targetDiv: moonPhaseDiv,
     targetImg: moonPhaseImg,
     targetText: moonPhaseText,
-  } = createDataCurrentElements(
+  } = createWeatherElements(
     "moon-phase",
     getMoonPhase(data).moonSrc,
-    getMoonPhase(data).moonPhase
+    getMoonPhase(data).moonPhase,
+    "current"
   );
 
   // initializeFC(data);
@@ -234,7 +237,7 @@ export function createWeatherView(data) {
   weatherMoistureCont.append(
     humidityDiv,
     dewPointDiv,
-    chanceOfPrecipitationDiv
+    precipProbDiv
   );
 
   humidityDiv.append(humidityImg, humidityText);
@@ -245,9 +248,9 @@ export function createWeatherView(data) {
   sunsetDiv.append(sunsetImg, sunsetText);
   sunriseDiv.append(sunriseImg, sunriseText);
   moonPhaseDiv.append(moonPhaseImg, moonPhaseText);
-  chanceOfPrecipitationDiv.append(
-    chanceOfPrecipitationImg,
-    chanceOfPrecipitationText
+  precipProbDiv.append(
+    precipProbImg,
+    precipProbText
   );
 
   styleDayNight(data);

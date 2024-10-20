@@ -1,7 +1,7 @@
 import {
   createDivElement,
-  createSoloTextElement,
-  createRoundBtnElement,
+  createTextElement,
+  createBtnElement,
   createImgElement,
 } from "./functionsBasic.js";
 
@@ -15,6 +15,8 @@ export function createLocationView(query, data) {
   const noWDataAvailable = "No data currently available.";
   const dataContent = document.querySelector("#data-content");
   const alertsData = data.alerts;
+  const feelsLikeData = data.currentConditions.feelslike;
+
 
   if (!data) {
     console.error(noWDataAvailable);
@@ -22,44 +24,49 @@ export function createLocationView(query, data) {
   }
 
   const locationContent = createDivElement("location-content");
-  locationContent.style.color = getTempColor(data);
+  locationContent.style.color = getTempColor(feelsLikeData);
 
-  const locationName = createSoloTextElement("h1", "location-name", query);
+  const locationName = createTextElement("h1", "location-name", query, "");
 
-  const resolvedAddress = createSoloTextElement(
+  const resolvedAddress = createTextElement(
     "p",
     "resolved-address",
-    data.resolvedAddress
+    data.resolvedAddress,
+    ""
   );
 
   const locationLatLonDiv = createDivElement("location-lat-lon-div");
-  const locationLatLonText = createSoloTextElement(
+  const locationLatLonText = createTextElement(
     "p",
     "location-lat-lon-text",
-    `Latitude: ${data.latitude}/Longitude: ${data.longitude}`
+    `Latitude: ${data.latitude}/Longitude: ${data.longitude}`,
+    ""
   );
 
     const weatherBtnCont = createDivElement("weather-btn-cont");
 
     function checkForAlertInfo() {
-      const hoursBtn = createRoundBtnElement("hours-btn", "round-btn");
-      const alertsBtn = createRoundBtnElement("alerts-btn", "round-btn");
-      const daysBtn = createRoundBtnElement("days-btn", "round-btn");
+      const hoursBtn = createBtnElement("hours-btn", "", "round-btn");
+      const alertsBtn = createBtnElement("alerts-btn", "", "round-btn");
+      const daysBtn = createBtnElement("days-btn", "", "round-btn");
 
       const hoursBtnImg = createImgElement(
         "hours-btn-img",
         svgHours,
-        "Hourly Forecast Icon"
+        "Hourly Forecast Icon",
+        ""
       );
       const alertsBtnImg = createImgElement(
         "alerts-btn-img",
         svgAlerts,
-        "Weather Alert Icon"
+        "Weather Alert Icon",
+        ""
       );
       const daysBtnImg = createImgElement(
         "days-btn-img",
         svgDays,
-        "Multi-Day Forecast Icon"
+        "Multi-Day Forecast Icon",
+        ""
       );
 
       if (alertsData.length > 0) {
