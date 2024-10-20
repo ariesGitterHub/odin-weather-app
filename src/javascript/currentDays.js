@@ -49,14 +49,11 @@ export function createDaysView(data) {
           "EEE MMM dd"
         );
 
-
-
-        const daysRowCont = createDivElement("", "days-row-cont");
         const daysColCont = createDivElement("", "days-col-cont");
 
-        const daysDateTextCont = createDivElement("", "days-date-text-cont");
+        const daysDateConditionCont = createDivElement("", "days-date-condition-cont");
 
-                function checkForToday() {
+        function checkForToday() {
           const todayIs = getTodayDate();
           if (todayIs === days.datetime) {
             return "Today";
@@ -74,6 +71,10 @@ export function createDaysView(data) {
           "days-date-text"
         );
 
+        const daysConditionText = createTextElement("p", "", `(${days.conditions})`, "days-condition-text")
+        
+        const daysRowCont = createDivElement("", "days-row-cont")
+
         const daysIconCont = createDivElement("", "days-icon-cont");
         const daysIconImg = createImgElement(
           "",
@@ -82,7 +83,11 @@ export function createDaysView(data) {
           "days-icon-img"
         );
 
-daysIconImg.style.backgroundColor = getWeatherIconBkgdColor(days.icon);
+      daysIconCont.style.backgroundColor = getWeatherIconBkgdColor(
+        days.icon
+      );
+
+      daysIconImg.style.backgroundColor = getWeatherIconBkgdColor(days.icon);
         const daysWeatherCont = createDivElement("", "days-weather-cont");
 
 
@@ -168,9 +173,11 @@ const {
 );
 
 
-        daysContent.append(daysRowCont);
-        daysRowCont.append(daysColCont, daysWeatherCont);
-        daysColCont.append(daysDateTextCont, daysIconCont);
+        daysContent.append(daysColCont);
+        daysColCont.append(daysDateConditionCont, daysRowCont);
+        daysDateConditionCont.append(daysDateText, daysConditionText);
+        daysRowCont.append(daysIconCont, daysWeatherCont);
+        daysIconCont.append(daysIconImg);
         daysWeatherCont.append(
           daysTempHiDiv,
           daysTempLoDiv,
@@ -179,8 +186,6 @@ const {
           daysWindInfoDiv,
           daysUVIndexDiv
         );
-        daysDateTextCont.append(daysDateText);
-        daysIconCont.append(daysIconImg);
         daysTempHiDiv.append(daysTempHiImg, daysTempHiText);
         daysTempLoDiv.append(daysTempLoImg, daysTempLoText);
         daysHumidityDiv.append(daysHumidityImg, daysHumidityText);
