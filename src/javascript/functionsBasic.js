@@ -1,3 +1,5 @@
+import { playClickSound } from "./sound.js";
+
 // BR ELEMENT
 export function createBreakElement(className) {
   const element = document.createElement("br");
@@ -41,7 +43,7 @@ export function createFormElement(tag, type, id, placeHolder) {
   return element;
 }
 
- // SPAN ELEMENT
+// SPAN ELEMENT
 export function createSpanElement(className) {
   const element = document.createElement("br");
   element.classList.add(className);
@@ -103,8 +105,13 @@ export function contentChecker() {
   const dataContent = document.querySelector("#data-content");
 
   if (dataContent && dataContent.childElementCount > 0) {
-  clearDivText("location-content", "alerts-content", "days-content", "weather-content");
-  } 
+    clearDivText(
+      "location-content",
+      "alerts-content",
+      "days-content",
+      "weather-content"
+    );
+  }
 }
 
 // CLEAR QUERY
@@ -123,12 +130,22 @@ export function toggleContentDiv(id) {
   }
 }
 
+export function getBtnSoundEffect() {
+  const btnSound = document.querySelectorAll("button");
+  btnSound.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      playClickSound(event);
+    });
+  });
+}
+
 export function clickLocationContentBtn(id, data) {
   const dataSet = data[id];
   const targetBtn = document.getElementById(`${id}-btn`);
   if (dataSet && targetBtn) {
     // const targetBtn = document.getElementById(`${id}-btn`);
     targetBtn.addEventListener("click", () => {
+      getBtnSoundEffect();
       toggleContentDiv(`${id}-content`);
     });
   } else {
@@ -148,7 +165,7 @@ export function getTodayDate() {
 
 // export function createWeatherElements(targetWord, targetSrc, targetData, groupClass) {
 //   const targetDiv = createDivElement(
-//     `${targetWord}-div`, 
+//     `${targetWord}-div`,
 //     `${groupClass}-div`
 //   );
 //   const targetImg = createImgElement(

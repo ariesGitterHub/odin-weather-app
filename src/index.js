@@ -4,6 +4,7 @@ import svgF from "./assets/f.svg";
 import {
   contentChecker,
   clickLocationContentBtn,
+  getBtnSoundEffect,
 } from "./javascript/functionsBasic.js";
 import { createTitle } from "./javascript/title.js";
 import { createSearch } from "./javascript/search.js";
@@ -40,14 +41,17 @@ document.addEventListener("DOMContentLoaded", () => {
   createTitle();
   createSearch();
   createBtns();
+
+  getBtnSoundEffect();
+
   // createFooter();
 
-  const btnSound = document.querySelectorAll("button");
-  btnSound.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      playClickSound(event);
-    });
-  });
+  // const btnSound = document.querySelectorAll("button");
+  // btnSound.forEach((button) => {
+  //   button.addEventListener("click", (event) => {
+  //     playClickSound(event);
+  //   });
+  // });
 
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
   tempScaleBtn.value = "F";
