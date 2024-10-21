@@ -392,23 +392,20 @@ line-height: 1.25;
   text-transform: uppercase;
 } */
 
-.days-row-cont {
+.days-col-row-cont1 {
   height: fit-content;
-  width: fit-content;
+  /* width: fit-content; */
+  width: 300px;
   background-color: var(--black);
   border-top-left-radius: 0;
   border-top-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
 
-  /* border-radius: .75rem; */
-  /* border: var(--btn-border);
-  outline: var(--btn-outline); */
-  /* border-radius: .75rem; */
   display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: start;
+    flex-direction: column;
+    /* justify-content: start;
+    align-items: start; */
     gap: .5rem;
     /* flex-wrap: wrap; */
 
@@ -417,24 +414,43 @@ line-height: 1.25;
   /* text-align: center; */
 }
 
-.days-icon-cont{
+.days-col-row-cont2 {
   height: fit-content;
-  width: fit-content;
+  width: 300px;
+  display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* align-items: center; */
+    gap: .5rem;
+  margin: auto;
+  }
+
+.days-icon-cont, .days-temp-hi-cont, .days-temp-lo-cont {
+  height: 4.25rem;
+  /* width: fit-content; */
+  width: 4.25rem;
   border: var(--btn-border);
   outline: var(--btn-outline);
   border-radius: .75rem;
   display: flex;
-  /* flex-direction: column; */
-  justify-content: start;
-  /* align-items: center; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  line-height: 1.15;
   padding: .25rem;
+  text-align: center;
 }
 
 .days-icon-img {
   /* height: 4.75rem; */
-    height: 2.75rem;
+    height: 3.5rem;
   width: auto;
   /* border-radius: .75rem; */
+}
+
+.days-temp-hi-text, .days-temp-lo-text {
+  font-size: 1.25rem;
 }
 
 .days-weather-cont {
@@ -551,8 +567,8 @@ padding: .25rem;
 #sunset-div,
 #moon-phase-div  */
 .current-div,
-.days-temp-hi-div,
-.days-temp-lo-div,
+/* .days-temp-hi-div,
+.days-temp-lo-div, */
 .days-humidity-div,
 .days-dew-point-div,
 .days-precip-prob-div,
@@ -587,8 +603,8 @@ padding: .25rem;
 #sunset-img,
 #moon-phase-img  */
 .current-img,
-.days-temp-hi-img,
-.days-temp-lo-img, 
+/* .days-temp-hi-img,
+.days-temp-lo-img,  */
 .days-humidity-img, 
 .days-dew-point-img, 
 .days-precip-prob-img,
@@ -656,8 +672,8 @@ padding: .25rem;
 #sunset-text,
 #moon-phase-text  */
 .current-text,
-.days-temp-hi-text,
-.days-temp-lo-text,
+/* .days-temp-hi-text,
+.days-temp-lo-text, */
 .days-humidity-text,
 .days-dew-point-text,
 .days-precip-prob-text,

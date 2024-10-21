@@ -14,14 +14,12 @@ import { createDaysView } from "./javascript/currentDays.js";
 import { createAlertsView } from "./javascript/currentAlerts.js";
 
 import {
-  // createWeatherBtns, 
   createWeatherView,
   updateDataFC,
 } from "./javascript/currentWeather.js";
 import { playClickSound } from "./javascript/sound.js";
 import { worldCapitals } from "./data/worldCapitals.js";
 import { stateCapitals } from "./data/stateCapitals.js";
-// import { createFooter } from "./javascript/footer.js";
 
 let weatherData = null;
 let weatherDataWorld = null;

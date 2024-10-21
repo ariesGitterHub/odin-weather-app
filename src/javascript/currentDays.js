@@ -88,7 +88,9 @@ export function createDaysView(data) {
 
         const daysConditionText = createTextElement("p", "", `(${days.conditions})`, "days-condition-text")
         
-        const daysRowCont = createDivElement("", "days-row-cont")
+        const daysColRowCont1 = createDivElement("", "days-col-row-cont1");
+
+        const daysColRowCont2 = createDivElement("", "days-col-row-cont2");
 
         const daysIconCont = createDivElement("", "days-icon-cont");
         const daysIconImg = createImgElement(
@@ -111,35 +113,45 @@ export function createDaysView(data) {
 // const daysTempLoText = createTextElement("p", "", `LO ${days.tempmin}°F`, "days-temp-lo-text");
 // daysTempLoText.style.backgroundColor = getTempColor(days.tempmin);
 
-const {
-  targetDiv: daysTempHiDiv,
-  targetImg: daysTempHiImg,
-  targetText: daysTempHiText,
-} = createWeatherElements(
-  "",
-  svgTempHi,
-  `${days.tempmax}°F`,
-  "days-temp-hi",
-  false
-);
+// const {
+//   targetDiv: daysTempHiDiv,
+//   targetImg: daysTempHiImg,
+//   targetText: daysTempHiText,
+// } = createWeatherElements(
+//   "",
+//   svgTempHi,
+//   `${days.tempmax}°F`,
+//   "days-temp-hi",
+//   false
+// );
 
-daysTempHiImg.style.backgroundColor = getTempColor(days.tempmax);
-daysTempHiText.style.color = getTempColor(days.tempmax);
+const daysTempHiCont = createDivElement("", "days-temp-hi-cont");
+daysTempHiCont.style.backgroundColor = getTempColor(days.tempmax);
 
-const {
-  targetDiv: daysTempLoDiv,
-  targetImg: daysTempLoImg,
-  targetText: daysTempLoText,
-} = createWeatherElements(
-  "",
-  svgTempLo,
-  `${days.tempmin}°F`,
-  "days-temp-lo",
-  false
-);
+const daysTempLoCont = createDivElement("", "days-temp-lo-cont");
+daysTempLoCont.style.backgroundColor = getTempColor(days.tempmin);
 
-daysTempLoImg.style.backgroundColor = getTempColor(days.tempmin);
-daysTempLoText.style.color = getTempColor(days.tempmin);
+const daysTempHiText = createTextElement("p", "", `High ${days.tempmax}°F`, "days-temp-hi-text");
+
+const daysTempLoText = createTextElement("p", "", `Low ${days.tempmin}°F`, "days-temp-lo-text");
+
+// daysTempHiImg.style.backgroundColor = getTempColor(days.tempmax);
+// daysTempHiText.style.color = getTempColor(days.tempmax);
+
+// const {
+//   targetDiv: daysTempLoDiv,
+//   targetImg: daysTempLoImg,
+//   targetText: daysTempLoText,
+// } = createWeatherElements(
+//   "",
+//   svgTempLo,
+//   `${days.tempmin}°F`,
+//   "days-temp-lo",
+//   false
+// );
+
+// daysTempLoImg.style.backgroundColor = getTempColor(days.tempmin);
+// daysTempLoText.style.color = getTempColor(days.tempmin);
 
 const {
   targetDiv: daysHumidityDiv,
@@ -244,24 +256,34 @@ const {
 
 
         daysContent.append(daysColCont);
-        daysColCont.append(daysDateConditionCont, daysRowCont);
+        daysColCont.append(daysDateConditionCont, daysColRowCont1);
         daysDateConditionCont.append(daysDateText, daysConditionText);
-        daysRowCont.append(
+        daysColRowCont1.append(
+          daysColRowCont2,
+          // daysIconCont,
+          daysWeatherCont
+          // daysIconCont,
+          // daysTempHiDiv,
+          // daysTempLoDiv,
+          // daysHumidityDiv,
+          // daysPrecipProbDiv,
+          // daysWindInfoDiv,
+          // daysUVIndexDiv
+        );
+        daysColRowCont2.append(
           daysIconCont,
-          daysWeatherCont,
-            // daysIconCont,
-            // daysTempHiDiv,
-            // daysTempLoDiv,
-            // daysHumidityDiv,
-            // daysPrecipProbDiv,
-            // daysWindInfoDiv,
-            // daysUVIndexDiv
-          );
+          daysTempHiCont,
+          daysTempLoCont
+          // daysTempHiText,
+          // daysTempLoText
+        );
         daysIconCont.append(daysIconImg);
+        daysTempHiCont.append(daysTempHiText);
+        daysTempLoCont.append(daysTempLoText);
         daysWeatherCont.append(
           // daysIconCont,
-          daysTempHiDiv,
-          daysTempLoDiv,
+          // daysTempHiDiv,
+          // daysTempLoDiv,
           daysHumidityDiv,
           daysDewPointDiv,
           daysPrecipProbDiv,
@@ -275,8 +297,8 @@ const {
         );
         // daysXXXDiv.append(daysXXXImg, daysXXXText);
 
-        daysTempHiDiv.append(daysTempHiImg, daysTempHiText);
-        daysTempLoDiv.append(daysTempLoImg, daysTempLoText);
+        // daysTempHiDiv.append(daysTempHiImg, daysTempHiText);
+        // daysTempLoDiv.append(daysTempLoImg, daysTempLoText);
         daysHumidityDiv.append(daysHumidityImg, daysHumidityText);
         daysDewPointDiv.append(daysDewPointImg, daysDewPointText);
         daysPrecipProbDiv.append(daysPrecipProbImg, daysPrecipProbText);

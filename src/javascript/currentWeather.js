@@ -218,7 +218,7 @@ export function createWeatherView(data) {
   dataContent.append(weatherContent);
   weatherContent.append(conditionsText, lastUpdate, weatherCont1, weatherCont2);
 
-  weatherCont1.append(weatherTempCont, weatherIconCont);
+  weatherCont1.append(weatherIconCont, weatherTempCont);
 
   weatherTempCont.append(tempText, feelsLikeText);
 
