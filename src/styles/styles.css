@@ -14,16 +14,16 @@
   
   --day-sky: #1288c8;
   --overcast-sky: #545759;
-  --night-sky: #151f3a;
+  --night-sky: #0d1529;
   --day-overcast-sky: #62747e;
   --night-overcast-sky: #20272b;
 
-  --very-cold: #64a7f4;
-  --cold: #a6c1f2;
-  --mild: #bef2b3;
+  --very-cold: #a0a5ed;
+  --cold: #a5bdec;
+  --mild: #bdddae;
   --warm: #f0ef9e;
-  --hot: #f0af76;
-  --very-hot: #f07d7d;
+  --hot: #e2bc9a;
+  --very-hot: #f09595;
 
   --water: #85cfe7;
   --air: #a8bc8d;
@@ -327,16 +327,16 @@ line-height: 1.25;
 /* ---> DAYS-CONTENT */
 
 #days-content {
-  height: fit-content;
+  /* height: fit-content; */
   width: var(--width);
   background-color: var(--white);
   display: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: start;
     flex-wrap: wrap;
   font-family: var(--font-sans);
-  /* margin: auto; */
+  margin: auto;
   padding: .5rem;
 }
 
@@ -397,9 +397,9 @@ line-height: 1.25;
   width: fit-content;
   background-color: var(--black);
   border-top-left-radius: 0;
-  /* border-top-right-radius: 1rem; */
+  border-top-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
-  /* border-bottom-right-radius: 1rem; */
+  border-bottom-right-radius: 1rem;
 
   /* border-radius: .75rem; */
   /* border: var(--btn-border);
