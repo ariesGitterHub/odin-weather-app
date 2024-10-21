@@ -322,3 +322,49 @@ export function initializeFC(data) {
   //   feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
   // }
 
+export function getMonthBkgdColor(data) {
+  let contBkgdColor = "";
+  switch (data) {
+    case "Jan":
+      contBkgdColor = "var(--jan)";
+      break;
+    case "Feb":
+      contBkgdColor = "var(--feb)";
+      break;
+    case "Mar":
+      contBkgdColor = "var(--mar)";
+      break;
+    case "Apr":
+      contBkgdColor = "var(--apr)";
+      break;
+    case "May":
+      contBkgdColor = "var(--may)";
+      break;
+    case "Jun":
+      contBkgdColor = "var(--jun)";
+      break;
+    case "Jul":
+      contBkgdColor = "var(--jul)";
+      break;
+    case "Aug":
+      contBkgdColor = "var(--aug)";
+      break;
+    case "Sep":
+      contBkgdColor = "var(--sep)";
+      break;
+    case "Oct":
+      contBkgdColor = "var(--oct)";
+      break;
+    case "Nov":
+      contBkgdColor = "var(--nov)";
+      break;
+    case "Dec":
+      contBkgdColor = "var(--dec)";
+    break;
+    default:
+      contBkgdColor = "var(--gray)";
+      break;
+  }
+
+  return contBkgdColor;
+}

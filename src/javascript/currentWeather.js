@@ -36,18 +36,22 @@ export function createWeatherView(data) {
   const noWeatherDataAvailable = "No weather data available.";
 
   const conditionsData = data.currentConditions.conditions;
-  const iconData = data.currentConditions.icon;
   const tempData = data.currentConditions.temp;
   const feelsLikeData = data.currentConditions.feelslike;
+  const iconData = data.currentConditions.icon;
+
   const humidityData = data.currentConditions.humidity;
   const dewPointData = data.currentConditions.dew;
   const precipProbData = data.currentConditions.precipprob;
-  const cloudCoverData = data.currentConditions.cloudcover;
-  const uvIndexData = data.currentConditions.uvindex;
-  const moonPhaseData = data.currentConditions.moonphase;
+
   const windSpeedMPHData = data.currentConditions.windspeed;
   const windDirectionData = data.currentConditions.winddir;
   const windGustMPHData = data.currentConditions.windgust;
+  const cloudCoverData = data.currentConditions.cloudcover;
+
+  const uvIndexData = data.currentConditions.uvindex;
+
+  const moonPhaseData = data.currentConditions.moonphase;
 
   if (!data) {
     console.error(noWeatherDataAvailable);
@@ -133,26 +137,6 @@ export function createWeatherView(data) {
     "current"
   );
 
-  if (tempScaleBtn.value === "C") {
-    dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-    if (tempData !== feelsLikeData) {
-      tempText.textContent = `${convertToCelsius(tempData)}°C`;
-      feelsLikeText.textContent = `(Feels like ${convertToCelsius(
-        feelsLikeData
-      )}°C)`;
-    } else {
-      tempText.textContent = `${convertToCelsius(tempData)}°C`;
-    }
-  } else {
-    dewPointText.textContent = `${dewPointData}°F`;
-    if (tempData !== feelsLikeData) {
-      tempText.textContent = `${tempData}°F`;
-      feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
-    } else {
-      tempText.textContent = `${tempData}°F`;
-    }
-  }
-
   const weatherCont2 = createDivElement("weather-cont2", "");
 
   let windInfo = "";
@@ -215,6 +199,31 @@ export function createWeatherView(data) {
 
   // initializeFC(data);
 
+    function initializeCurrentFC() {
+      if (tempScaleBtn.value === "C") {
+        dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+        if (tempData !== feelsLikeData) {
+          tempText.textContent = `${convertToCelsius(tempData)}°C`;
+          feelsLikeText.textContent = `(Feels like ${convertToCelsius(
+            feelsLikeData
+          )}°C)`;
+        } else {
+          tempText.textContent = `${convertToCelsius(tempData)}°C`;
+        }
+      } else {
+        dewPointText.textContent = `${dewPointData}°F`;
+        if (tempData !== feelsLikeData) {
+          tempText.textContent = `${tempData}°F`;
+          feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
+        } else {
+          tempText.textContent = `${tempData}°F`;
+        }
+      }
+    }
+
+      initializeCurrentFC();
+
+
   dataContent.append(weatherContent);
   weatherContent.append(conditionsText, lastUpdate, weatherCont1, weatherCont2);
 
@@ -256,7 +265,7 @@ export function createWeatherView(data) {
   styleDayNight(data);
 }
 
-export function updateDataFC(data) {
+export function updateToCurrentFC(data) {
   const tempData = data.currentConditions.temp;
   const feelsLikeData = data.currentConditions.feelslike;
   const dewPointData = data.currentConditions.dew;

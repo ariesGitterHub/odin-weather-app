@@ -15,8 +15,9 @@ import { createAlertsView } from "./javascript/currentAlerts.js";
 
 import {
   createWeatherView,
-  updateDataFC,
+  updateToCurrentFC,
 } from "./javascript/currentWeather.js";
+import { updateToDaysFC } from "./javascript/currentDays.js"
 import { playClickSound } from "./javascript/sound.js";
 import { worldCapitals } from "./data/worldCapitals.js";
 import { stateCapitals } from "./data/stateCapitals.js";
@@ -60,7 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Temperature scale set to Celsius.");
 
       if (weatherData || weatherDataUSA || weatherDataWorld) {
-        updateDataFC(weatherData || weatherDataUSA || weatherDataWorld);
+        updateToCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        updateToDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
       }
     } else {
       tempScaleBtn.value = "F";
@@ -68,7 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Temperature scale set to Fahrenheit.");
 
       if (weatherData || weatherDataUSA || weatherDataWorld) {
-        updateDataFC(weatherData || weatherDataUSA || weatherDataWorld);
+        updateToCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        updateToDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
       }
     }
   });

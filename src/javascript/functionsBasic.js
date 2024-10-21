@@ -103,7 +103,7 @@ export function contentChecker() {
   const dataContent = document.querySelector("#data-content");
 
   if (dataContent && dataContent.childElementCount > 0) {
-  clearDivText("location-content", "alert-content", "days-content", "weather-content");
+  clearDivText("location-content", "alerts-content", "days-content", "weather-content");
   } 
 }
 

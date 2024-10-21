@@ -10,7 +10,7 @@ export function createAlertsView(data) {
   const alertsData = data.alerts;
 
   function getAlertsInfo() {
-    if (!alertsData) {
+    if (!data) {
       console.error(noWDataAvailable);
       return;
     } else if (alertsData.length > 0) {
@@ -28,29 +28,35 @@ export function createAlertsView(data) {
       alertsContent.append(alertsTitle);
 
       alertsData.forEach((alerts) => {
+
+        const headlineData = alerts.headline;
+        const onsetData = alerts.onset;
+        const endData = alerts.ends;
+        const descriptionData = alerts.description;
+
         const alertsHeadline = createTextElement(
           "p",
-          "alerts-headline",
-          `${alerts.headline}`,
-          "alerts"
+          "",
+          headlineData,
+          "alerts-headline"
         );
         const alertsStartEnd = createTextElement(
           "p",
-          "alerts-start-end",
-          `(Starts: ${alerts.onset}, Ends: ${alerts.ends})`,
-          "alerts"
+          "",
+          `(Starts: ${onsetData}, Ends: ${endData})`,
+          "alerts-start-end"
         );
         const alertsDescription = createTextElement(
           "p",
-          "alerts-description",
-          `${alerts.description}`,
-          "alerts"
+          "",
+          descriptionData,
+          "alerts-description"
         );
         const alertsAsterisks = createTextElement(
           "p",
-          "alerts-asterisks",
+          "",
           "***",
-          "alerts"
+          "alerts-asterisks"
         );
 
         alertsContent.append(
@@ -62,6 +68,5 @@ export function createAlertsView(data) {
       });
     }
   }
-
   getAlertsInfo();
 }
