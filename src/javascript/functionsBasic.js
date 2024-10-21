@@ -146,23 +146,55 @@ export function getTodayDate() {
   return `${year}-${month}-${day}`;
 }
 
-export function createWeatherElements(targetWord, targetSrc, targetData, groupClass) {
+// export function createWeatherElements(targetWord, targetSrc, targetData, groupClass) {
+//   const targetDiv = createDivElement(
+//     `${targetWord}-div`, 
+//     `${groupClass}-div`
+//   );
+//   const targetImg = createImgElement(
+//     `${targetWord}-img`,
+//     targetSrc,
+//     `${targetWord} icon`,
+//     `${groupClass}-img`
+//   );
+//   const targetText = createTextElement(
+//     `p`,
+//     `${targetWord}-text`,
+//     targetData,
+//     `${groupClass}-text`
+//   );
+//   return {
+//     targetDiv,
+//     targetImg,
+//     targetText,
+//   };
+// }
+
+// THIS WAS SO MUCH FUN TO BUILD!!!
+export function createWeatherElements(
+  targetWord,
+  targetSrc,
+  targetData,
+  groupClass,
+  useId = true
+) {
   const targetDiv = createDivElement(
-    `${targetWord}-div`, 
+    useId ? `${targetWord}-div` : "",
     `${groupClass}-div`
   );
   const targetImg = createImgElement(
-    `${targetWord}-img`,
+    useId ? `${targetWord}-img` : "",
     targetSrc,
     `${targetWord} icon`,
     `${groupClass}-img`
   );
   const targetText = createTextElement(
-    `p`,
-    `${targetWord}-text`,
+    "p",
+    useId ? `${targetWord}-text` : "",
     targetData,
     `${groupClass}-text`
   );
+
   return {
     targetDiv,
     targetImg,

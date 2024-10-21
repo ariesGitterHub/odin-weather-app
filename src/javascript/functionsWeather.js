@@ -98,7 +98,7 @@ export function styleDayNight(data) {
 }
 
 export function getMoonPhase(data) {
-  const moonRatio = data.currentConditions.moonphase;
+  const moonRatio = data;
   let moonSrc;
   let moonPhase;
   console.log(`Moon Phase value: ${moonRatio}`);

@@ -44,7 +44,7 @@ export function createWeatherView(data) {
   const precipProbData = data.currentConditions.precipprob;
   const cloudCoverData = data.currentConditions.cloudcover;
   const uvIndexData = data.currentConditions.uvindex;
-
+  const moonPhaseData = data.currentConditions.moonphase;
   const windSpeedMPHData = data.currentConditions.windspeed;
   const windDirectionData = data.currentConditions.winddir;
   const windGustMPHData = data.currentConditions.windgust;
@@ -208,8 +208,8 @@ export function createWeatherView(data) {
     targetText: moonPhaseText,
   } = createWeatherElements(
     "moon-phase",
-    getMoonPhase(data).moonSrc,
-    getMoonPhase(data).moonPhase,
+    getMoonPhase(moonPhaseData).moonSrc,
+    getMoonPhase(moonPhaseData).moonPhase,
     "current"
   );
 
