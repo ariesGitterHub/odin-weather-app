@@ -139,24 +139,43 @@ export function toggleContentDiv(id) {
 
 export function unToggleContentDiv(id) {
   // const targetDiv = document.getElementById(id);
+  // const hoursBtn = document.querySelector("#hours-btn");
   const hoursContent = document.querySelector("#hours-content");
+
+  const alertsBtn = document.querySelector("#alerts-btn");
   const alertsContent = document.querySelector("#alerts-content");
+
+  // const daysbtn = document.querySelector("#days-btn");
   const daysContent = document.querySelector("#days-content");
 
-  // hours-btn
-  if (id !== "alerts" && id !== "days") {
-    alertsContent.style.display = "none";
-    daysContent.style.display = "none";
-  } 
-  // alert-btn
+  // If alertsBtn is present, for three button: hours, alerts, days
+  if (alertsBtn) {
+    // hours-btn    
+    if (id !== "alerts" && id !== "days") {
+      alertsContent.style.display = "none";
+      daysContent.style.display = "none";
+    }
+    // alert-btn
     else if (id !== "hours" && id !== "days") {
-    hoursContent.style.display = "none";
-    daysContent.style.display = "none";
+      hoursContent.style.display = "none";
+      daysContent.style.display = "none";
+    }
+    // days-btn
+    else {
+      hoursContent.style.display = "none";
+      alertsContent.style.display = "none";
+    }
   } 
-  // days-btn
+  // Otherwise only two btns: hours and days
   else {
-    hoursContent.style.display = "none";
-    alertsContent.style.display = "none";
+    // hours-btn
+    if (id !== "days") {
+      daysContent.style.display = "none";
+    }
+    // days-btn
+    else {
+      hoursContent.style.display = "none";
+    }
   }
 }
 

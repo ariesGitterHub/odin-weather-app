@@ -35,7 +35,7 @@ export function createHoursView(data) {
 
   // const limitedDaysData = data.days.slice(0, 1);
     const limitedDaysData = data.days[0];
-  const hoursData = limitedDaysData.hours;
+  const hoursData = limitedDaysData.hours.slice(0, 3);
 console.log(hoursData)
   
   function getHoursInfo() {
