@@ -37,14 +37,15 @@ export function createDaysView(data) {
   const dataContent = document.querySelector("#data-content");
 
   const daysData = data.days;
-  const limitedDaysData = daysData.slice(0, 10); // Only iterates 10 out of 15 days
+  const limitedDaysData = daysData.slice(0, 1); // Only iterates 10 out of 15 days
 
   function getDaysInfo() {
     if (!data) {
       console.error(noWDataAvailable);
       return;
-    } else if (daysData.length > 0) {
-      console.log(daysData);
+    } 
+    //else if (daysData.length > 0) {
+      // console.log(daysData);
 
       const daysContent = createDivElement("days-content", "");
 
@@ -65,10 +66,10 @@ export function createDaysView(data) {
         const conditionsData = days.conditions;
 
         // const tempData = days.temp;
+        // const feelsLikeData = days.feelslike;
         const tempMaxData = days.tempmax;
         const tempMinData = days.tempmin;
 
-        // const feelsLikeData = days.feelslike;
         const iconData = days.icon;
 
         const humidityData = days.humidity;
@@ -83,6 +84,7 @@ export function createDaysView(data) {
         const uvIndexData = days.uvindex;
 
         const moonPhaseData = days.moonphase;
+
         const parseDaysDate = format(
           parse(dateTimeData, "yyyy-MM-dd", new Date()),
           "EEE, MMM dd"
@@ -98,11 +100,18 @@ export function createDaysView(data) {
           "MMM"
         );
 
-        console.log(parseDaysMonth);
+        // console.log(parseDaysMonth);
 
         const daysTileCont = createDivElement("", "days-tile-cont");
 
         const daysConditionCont = createDivElement("", "days-condition-cont");
+
+        const daysConditionText = createTextElement(
+          "p",
+          "",
+          conditionsData,
+          "days-condition-text"
+        );
 
         function checkForToday() {
           const todayIs = getTodayDate();
@@ -112,13 +121,6 @@ export function createDaysView(data) {
             return parseDaysDate;
           }
         }
-
-        const daysConditionText = createTextElement(
-          "p",
-          "",
-          conditionsData,
-          "days-condition-text"
-        );
 
         const daysDateCont = createDivElement("", "days-date-cont");
 
@@ -357,7 +359,7 @@ export function createDaysView(data) {
         daysMoonPhaseDiv.append(daysMoonPhaseImg, daysMoonPhaseText);
       });
     }
-  }
+  //}
   getDaysInfo();
 }
 
@@ -386,7 +388,7 @@ export function createDaysView(data) {
 //   });
 // }
 
-export function updateToDaysFC(data) {
+export function updateDaysFC(data) {
   const daysData = data.days;
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
 

@@ -1,22 +1,19 @@
 import { format, parse } from "date-fns";
-// import svgTempHi from "../assets/hi.svg";
-// import svgTempLo from "../assets/lo.svg";
 import svgHumidity from "../assets/humidity.svg";
 import svgDewPoint from "../assets/dew-point.svg";
 import svgUVIndex from "../assets/uv-index.svg";
 import svgCloudCover from "../assets/cloud-cover.svg";
-import svgSunrise from "../assets/sunrise.svg";
-import svgSunset from "../assets/sunset.svg";
 import svgPrecipProb from "../assets/chance-of-precipitation.svg";
 import svgWindInfo from "../assets/wind-sm.svg";
 
 import {
-  getTodayDate,
+  // getTodayDate,
   createDivElement,
   createImgElement,
   createTextElement,
   createWeatherElements,
-  
+  // getCurrentTimeIn24Format,
+  roundUp24FormatToNextHour
 } from "./functionsBasic.js";
 
 import {
@@ -25,193 +22,185 @@ import {
   getTempColor,
   getWeatherIconBkgdColor,
   getUVIndexValue,
-  getMoonPhase,
+  // getMoonPhase,
   getMonthBkgdColor,
   convertToCelsius,
 } from "./functionsWeather.js";
 
-export function createDaysView(data) {
+export function createHoursView(data) {
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
 
   const noWDataAvailable = "No data currently available.";
   const dataContent = document.querySelector("#data-content");
 
-  const daysData = data.days;
-  const limitedDaysData = daysData.slice(0, 10); // Only iterates 10 out of 15 days
-
-  function getDaysInfo() {
+  // const limitedDaysData = data.days.slice(0, 1);
+    const limitedDaysData = data.days[0];
+  const hoursData = limitedDaysData.hours;
+console.log(hoursData)
+  
+  function getHoursInfo() {
     if (!data) {
       console.error(noWDataAvailable);
       return;
-    } else if (daysData.length > 0) {
-      console.log(daysData);
+    } 
+    //else if (hoursData.length > 0) {
+    //console.log(hoursData);
 
-      const daysContent = createDivElement("days-content", "");
+      const hoursContent = createDivElement("hours-content", "");
 
-      const daysTitle = createTextElement(
+      const hoursTitle = createTextElement(
         "p",
-        "days-title",
-        //"10 Day Forecast",
-        `${limitedDaysData.length} Day Forecast`,
+        "hours-title",
+        // `${hoursData.length} Hourly Forecast`,
+        "Hourly Forecast",
         ""
       );
 
-      dataContent.append(daysContent);
-      daysContent.append(daysTitle);
+      dataContent.append(hoursContent);
+      hoursContent.append(hoursTitle);
 
-      limitedDaysData.forEach((days) => {
-        const dateTimeData = days.datetime;
+      hoursData.forEach((hours) => {
+        const dateTimeData = hours.datetime;
 
-        const conditionsData = days.conditions;
+        const conditionsData = hours.conditions;
 
-        // const tempData = days.temp;
-        const tempMaxData = days.tempmax;
-        const tempMinData = days.tempmin;
+        const tempData = hours.temp;
+        const feelsLikeData = hours.feelslike;
+        // const tempMaxData = hours.tempmax;
+        // const tempMinData = hours.tempmin;
 
-        // const feelsLikeData = days.feelslike;
-        const iconData = days.icon;
+        const iconData = hours.icon;
 
-        const humidityData = days.humidity;
-        const dewPointData = days.dew;
-        const precipProbData = days.precipprob;
+        const humidityData = hours.humidity;
+        const dewPointData = hours.dew;
+        const precipProbData = hours.precipprob;
 
-        const windSpeedMPHData = days.windspeed;
-        const windDirectionData = days.winddir;
-        const windGustMPHData = days.windgust;
-        const cloudCoverData = days.cloudcover;
+        const windSpeedMPHData = hours.windspeed;
+        const windDirectionData = hours.winddir;
+        const windGustMPHData = hours.windgust;
+        const cloudCoverData = hours.cloudcover;
 
-        const uvIndexData = days.uvindex;
+        const uvIndexData = hours.uvindex;
 
-        const moonPhaseData = days.moonphase;
-        const parseDaysDate = format(
-          parse(dateTimeData, "yyyy-MM-dd", new Date()),
-          "EEE, MMM dd"
+        // Get HH:mm:ss (24hr format) from array and convert to HH
+        const parseArrTimeStrToHour = format(
+          parse(dateTimeData, "HH:mm:ss", new Date()),
+          "HH"
         );
 
-        const parseDaysMonthDayDate = format(
-          parse(dateTimeData, "yyyy-MM-dd", new Date()),
-          "MMM dd"
+        console.log(parseArrTimeStrToHour);
+
+        // Turn HH array result into a number for "math-ing" (sic)
+        const parseArrStrHourToNum = parseInt(parseArrTimeStrToHour);
+
+        console.log(parseArrStrHourToNum);
+
+        // Get the current time (24hr format) and round to next hour
+        const nowTimeRoundUpHour = roundUp24FormatToNextHour();
+
+        console.log(nowTimeRoundUpHour);
+
+        // Turn the current hour to a number for the mathing
+
+        const parseNowTimeRoundUpHour = parseInt(nowTimeRoundUpHour);
+
+        console.log(parseNowTimeRoundUpHour);
+
+        const parseHoursTime = format(
+          parse(dateTimeData, "HH:mm:ss", new Date()),
+          "hha"
         );
 
-        const parseDaysMonth = format(
-          parse(dateTimeData, "yyyy-MM-dd", new Date()),
-          "MMM"
-        );
+        const hoursTileCont = createDivElement("", "hours-tile-cont");
 
-        console.log(parseDaysMonth);
+        const hoursConditionCont = createDivElement("", "hours-condition-cont");
 
-        const daysTileCont = createDivElement("", "days-tile-cont");
-
-        const daysConditionCont = createDivElement("", "days-condition-cont");
-
-        function checkForToday() {
-          const todayIs = getTodayDate();
-          if (todayIs === dateTimeData) {
-            return `Today, ${parseDaysMonthDayDate}`;
-          } else {
-            return parseDaysDate;
-          }
-        }
-
-        const daysConditionText = createTextElement(
+        const hoursConditionText = createTextElement(
           "p",
           "",
           conditionsData,
-          "days-condition-text"
+          "hours-condition-text"
         );
 
-        const daysDateCont = createDivElement("", "days-date-cont");
+        const hoursTimeCont = createDivElement("", "hours-time-cont");
+        hoursTimeCont.style.backgroundColor = getMonthBkgdColor(parseHoursTime);
 
-        daysDateCont.style.backgroundColor = getMonthBkgdColor(parseDaysMonth);
-
-        const daysDateText = createTextElement(
+        const hoursTimeText = createTextElement(
           "p",
           "",
           // parseDaysDate
-          checkForToday(),
-          "days-date-text"
+          parseHoursTime,
+          "hours-time-text"
         );
 
-        const parseSunrise = format(
-          parse(days.sunrise, "HH:mm:ss", new Date()),
-          "hh:mm:ssa"
-        );
+        const hoursColRowCont1 = createDivElement("", "hours-col-row-cont1");
 
-        const parseSunset = format(
-          parse(days.sunset, "HH:mm:ss", new Date()),
-          "hh:mm:ssa"
-        );
+        const hoursColRowCont2 = createDivElement("", "hours-col-row-cont2");
 
-        const daysColRowCont1 = createDivElement("", "days-col-row-cont1");
-
-        const daysColRowCont2 = createDivElement("", "days-col-row-cont2");
-
-        const daysIconCont = createDivElement("", "days-icon-cont");
-        const daysIconImg = createImgElement(
+        const hoursIconCont = createDivElement("", "hours-icon-cont");
+        const hoursIconImg = createImgElement(
           "",
           getWeatherIconSRC(iconData),
           "Weather icon based on forecast conditions.",
-          "days-icon-img"
+          "hours-icon-img"
         );
 
-        daysIconCont.style.backgroundColor = getWeatherIconBkgdColor(iconData);
+        hoursIconCont.style.backgroundColor = getWeatherIconBkgdColor(iconData);
 
-        daysIconImg.style.backgroundColor = getWeatherIconBkgdColor(iconData);
-        const daysWeatherCont = createDivElement("", "days-weather-cont");
+        hoursIconImg.style.backgroundColor = getWeatherIconBkgdColor(iconData);
+        const hoursWeatherCont = createDivElement("", "hours-weather-cont");
 
-        const daysTempMaxCont = createDivElement("", "days-temp-max-cont");
-        daysTempMaxCont.style.backgroundColor = getTempColor(tempMaxData);
+        const hoursTempCont = createDivElement("", "hours-temp-cont");
+        hoursTempCont.style.backgroundColor = getTempColor(tempData);
 
-        const daysTempMinCont = createDivElement("", "days-temp-min-cont");
-        daysTempMinCont.style.backgroundColor = getTempColor(tempMinData);
+        const hoursTempText = createTextElement("p", "", "", "hours-temp-text");
 
-        const daysTempMaxText = createTextElement(
+        const hoursFeelsLikeCont = createDivElement(
+          "",
+          "hours-feels-like-cont"
+        );
+        hoursFeelsLikeCont.style.backgroundColor = getTempColor(tempData);
+
+        const hoursFeelsLikeText = createTextElement(
           "p",
           "",
           "",
-          "days-temp-max-text"
-        );
-
-        const daysTempMinText = createTextElement(
-          "p",
-          "",
-          "",
-          "days-temp-min-text"
+          "hours-feels-like-text"
         );
 
         const {
-          targetDiv: daysHumidityDiv,
-          targetImg: daysHumidityImg,
-          targetText: daysHumidityText,
+          targetDiv: hoursHumidityDiv,
+          targetImg: hoursHumidityImg,
+          targetText: hoursHumidityText,
         } = createWeatherElements(
           "",
           svgHumidity,
           `${humidityData}%`,
-          "days-humidity",
+          "hours-humidity",
           false
         );
 
         const {
-          targetDiv: daysDewPointDiv,
-          targetImg: daysDewPointImg,
-          targetText: daysDewPointText,
+          targetDiv: hoursDewPointDiv,
+          targetImg: hoursDewPointImg,
+          targetText: hoursDewPointText,
         } = createWeatherElements(
           "",
           svgDewPoint,
           `${dewPointData}°F`,
-          "days-dew-point",
+          "hours-dew-point",
           false
         );
 
         const {
-          targetDiv: daysPrecipProbDiv,
-          targetImg: daysPrecipProbImg,
-          targetText: daysPrecipProbText,
+          targetDiv: hoursPrecipProbDiv,
+          targetImg: hoursPrecipProbImg,
+          targetText: hoursPrecipProbText,
         } = createWeatherElements(
           "",
           svgPrecipProb,
           `${precipProbData}%`,
-          "days-precip-prob",
+          "hours-precip-prob",
           false
         );
 
@@ -230,189 +219,127 @@ export function createDaysView(data) {
         }
 
         const {
-          targetDiv: daysWindInfoDiv,
-          targetImg: daysWindInfoImg,
-          targetText: daysWindInfoText,
+          targetDiv: hoursWindInfoDiv,
+          targetImg: hoursWindInfoImg,
+          targetText: hoursWindInfoText,
         } = createWeatherElements(
           "",
           svgWindInfo,
           windInfo,
-          "days-wind-info",
+          "hours-wind-info",
           false
         );
 
         const {
-          targetDiv: daysCloudCoverDiv,
-          targetImg: daysCloudCoverImg,
-          targetText: daysCloudCoverText,
+          targetDiv: hoursCloudCoverDiv,
+          targetImg: hoursCloudCoverImg,
+          targetText: hoursCloudCoverText,
         } = createWeatherElements(
           "",
           svgCloudCover,
           `${cloudCoverData}%`,
-          "days-cloud-cover",
+          "hours-cloud-cover",
           false
         );
 
         const {
-          targetDiv: daysUVIndexDiv,
-          targetImg: daysUVIndexImg,
-          targetText: daysUVIndexText,
+          targetDiv: hoursUVIndexDiv,
+          targetImg: hoursUVIndexImg,
+          targetText: hoursUVIndexText,
         } = createWeatherElements(
           "",
           svgUVIndex,
           `${getUVIndexValue(uvIndexData)}`,
-          "days-uv-index",
+          "hours-uv-index",
           false
         );
 
-        const {
-          targetDiv: daysSunriseDiv,
-          targetImg: daysSunriseImg,
-          targetText: daysSunriseText,
-        } = createWeatherElements(
-          "",
-          svgSunrise,
-          parseSunrise,
-          "days-sunrise",
-          false
-        );
-
-        const {
-          targetDiv: daysSunsetDiv,
-          targetImg: daysSunsetImg,
-          targetText: daysSunsetText,
-        } = createWeatherElements(
-          "",
-          svgSunset,
-          parseSunset,
-          "days-sunset",
-          false
-        );
-
-        const {
-          targetDiv: daysMoonPhaseDiv,
-          targetImg: daysMoonPhaseImg,
-          targetText: daysMoonPhaseText,
-        } = createWeatherElements(
-          "",
-          getMoonPhase(moonPhaseData).moonSrc,
-          getMoonPhase(moonPhaseData).moonPhase,
-          "days-moon-phase",
-          false
-        );
-
-        function initializeDaysFC() {
+        function initializeHoursFC() {
           if (tempScaleBtn.value === "C") {
-            daysDewPointText.textContent = `${convertToCelsius(
+            hoursDewPointText.textContent = `${convertToCelsius(
               dewPointData
             )}°C`;
-            daysTempMaxText.textContent = `High ${convertToCelsius(
-              tempMaxData
-            )}°C`;
-            daysTempMinText.textContent = `Low ${convertToCelsius(
-              tempMinData
+            hoursTempText.textContent = `Temp ${convertToCelsius(tempData)}°C`;
+            hoursFeelsLikeText.textContent = `Feels ${convertToCelsius(
+              feelsLikeData
             )}°C`;
           } else {
-            daysDewPointText.textContent = `${dewPointData}°F`;
-            daysTempMaxText.textContent = `High ${tempMaxData}°F`;
-            daysTempMinText.textContent = `Low ${tempMinData}°F`;
+            hoursDewPointText.textContent = `${dewPointData}°F`;
+            hoursTempText.textContent = `Temp ${tempData}°F`;
+            hoursFeelsLikeText.textContent = `Feels ${feelsLikeData}°F`;
           }
         }
 
-        initializeDaysFC();
+        initializeHoursFC();
 
-        daysContent.append(daysTileCont);
-        daysTileCont.append(daysConditionCont, daysColRowCont1);
-        daysConditionCont.append(daysConditionText);
-        daysColRowCont1.append(daysColRowCont2, daysWeatherCont);
-        daysColRowCont2.append(
-          daysDateCont,
-          daysIconCont,
-          daysTempMaxCont,
-          daysTempMinCont
+        hoursContent.append(hoursTileCont);
+        hoursTileCont.append(hoursConditionCont, hoursColRowCont1);
+        hoursConditionCont.append(hoursConditionText);
+        hoursColRowCont1.append(hoursColRowCont2, hoursWeatherCont);
+
+        if (tempData !== feelsLikeData) {
+          hoursColRowCont2.append(
+            hoursTimeCont,
+            hoursIconCont,
+            hoursTempCont,
+            hoursFeelsLikeCont
+          );
+        } else {
+          hoursColRowCont2.append(hoursTimeCont, hoursIconCont, hoursTempCont);
+        }
+        // hoursColRowCont2.append(hoursTimeCont, hoursIconCont, hoursTempCont, hoursFeelsLikeCont);
+
+        hoursTimeCont.append(hoursTimeText);
+        hoursIconCont.append(hoursIconImg);
+        hoursTempCont.append(hoursTempText);
+        hoursFeelsLikeCont.append(hoursFeelsLikeText);
+        hoursWeatherCont.append(
+          hoursHumidityDiv,
+          hoursDewPointDiv,
+          hoursPrecipProbDiv,
+          hoursWindInfoDiv,
+          hoursCloudCoverDiv,
+          hoursUVIndexDiv
         );
-        daysDateCont.append(daysDateText);
-        daysIconCont.append(daysIconImg);
-        daysTempMaxCont.append(daysTempMaxText);
-        daysTempMinCont.append(daysTempMinText);
-        daysWeatherCont.append(
-          daysHumidityDiv,
-          daysDewPointDiv,
-          daysPrecipProbDiv,
-          daysWindInfoDiv,
-          daysCloudCoverDiv,
-          daysUVIndexDiv,
-          daysSunriseDiv,
-          daysSunsetDiv,
-          daysMoonPhaseDiv
-        );
-        daysHumidityDiv.append(daysHumidityImg, daysHumidityText);
-        daysDewPointDiv.append(daysDewPointImg, daysDewPointText);
-        daysPrecipProbDiv.append(daysPrecipProbImg, daysPrecipProbText);
-        daysWindInfoDiv.append(daysWindInfoImg, daysWindInfoText);
-        daysCloudCoverDiv.append(daysCloudCoverImg, daysCloudCoverText);
-        daysUVIndexDiv.append(daysUVIndexImg, daysUVIndexText);
-        daysSunriseDiv.append(daysSunriseImg, daysSunriseText);
-        daysSunsetDiv.append(daysSunsetImg, daysSunsetText);
-        daysMoonPhaseDiv.append(daysMoonPhaseImg, daysMoonPhaseText);
+        hoursHumidityDiv.append(hoursHumidityImg, hoursHumidityText);
+        hoursDewPointDiv.append(hoursDewPointImg, hoursDewPointText);
+        hoursPrecipProbDiv.append(hoursPrecipProbImg, hoursPrecipProbText);
+        hoursWindInfoDiv.append(hoursWindInfoImg, hoursWindInfoText);
+        hoursCloudCoverDiv.append(hoursCloudCoverImg, hoursCloudCoverText);
+        hoursUVIndexDiv.append(hoursUVIndexImg, hoursUVIndexText);
       });
     }
-  }
-  getDaysInfo();
+  //}
+  getHoursInfo();
 }
 
-// export function updateToDaysFC(data) {
-//   const daysData = data.days;
+// export function updateToHoursFC(data) {
+//   const hoursData = data.days.hours;
 //   const tempScaleBtn = document.querySelector("#temp-scale-btn");
 
-//   daysData.forEach((days) => {
-//     const tempMaxData = days.tempmax;
-//     const tempMinData = days.tempmin;
-//     const dewPointData = days.dew;
+//   hoursData.forEach((hours, index) => {
+//     const tempMaxData = hours.tempmax;
+//     const tempMinData = hours.tempmin;
+//     const dewPointData = hours.dew;
 
-//     const daysTempMaxText = document.querySelectorAll(".days-temp-max-text");
-//     const daysTempMinText = document.querySelectorAll(".days-temp-min-text")
-//     const daysDewPointText = document.querySelectorAll(".days-dew-point-text")
+//     const hoursTempMaxText = document.querySelectorAll(".hours-temp-max-text")[
+//       index
+//     ];
+//     const hoursTempMinText = document.querySelectorAll(".hours-temp-min-text")[
+//       index
+//     ];
+//     const hoursDewPointText = document.querySelectorAll(".hours-dew-point-text")[
+//       index
+//     ];
 
 //     if (tempScaleBtn.value === "C") {
-//       daysDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-//       daysTempMaxText.textContent = `High ${convertToCelsius(tempMaxData)}°C`;
-//       daysTempMinText.textContent = `Low ${convertToCelsius(tempMinData)}°C`;
+//       hoursDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+//       hoursTempMaxText.textContent = `High ${convertToCelsius(tempMaxData)}°C`;
+//       hoursTempMinText.textContent = `Low ${convertToCelsius(tempMinData)}°C`;
 //     } else {
-//       daysDewPointText.textContent = `${dewPointData}°F`;
-//       daysTempMaxText.textContent = `High ${tempMaxData}°F`;
-//       daysTempMinText.textContent = `Low ${tempMinData}°F`;
+//       hoursDewPointText.textContent = `${dewPointData}°F`;
+//       hoursTempMaxText.textContent = `High ${tempMaxData}°F`;
+//       hoursTempMinText.textContent = `Low ${tempMinData}°F`;
 //     }
 //   });
 // }
-
-export function updateToDaysFC(data) {
-  const daysData = data.days;
-  const tempScaleBtn = document.querySelector("#temp-scale-btn");
-
-  daysData.forEach((days, index) => {
-    const tempMaxData = days.tempmax;
-    const tempMinData = days.tempmin;
-    const dewPointData = days.dew;
-
-    const daysTempMaxText = document.querySelectorAll(".days-temp-max-text")[
-      index
-    ];
-    const daysTempMinText = document.querySelectorAll(".days-temp-min-text")[
-      index
-    ];
-    const daysDewPointText = document.querySelectorAll(".days-dew-point-text")[
-      index
-    ];
-
-    if (tempScaleBtn.value === "C") {
-      daysDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-      daysTempMaxText.textContent = `High ${convertToCelsius(tempMaxData)}°C`;
-      daysTempMinText.textContent = `Low ${convertToCelsius(tempMinData)}°C`;
-    } else {
-      daysDewPointText.textContent = `${dewPointData}°F`;
-      daysTempMaxText.textContent = `High ${tempMaxData}°F`;
-      daysTempMinText.textContent = `Low ${tempMinData}°F`;
-    }
-  });
-}

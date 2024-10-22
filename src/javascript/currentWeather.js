@@ -24,7 +24,6 @@ import {
   getWindDirection,
   getUVIndexValue,
   getMoonPhase,
-  // initializeFC,
 } from "./functionsWeather.js";
 
 export function createWeatherView(data) {
@@ -265,7 +264,7 @@ export function createWeatherView(data) {
   styleDayNight(data);
 }
 
-export function updateToCurrentFC(data) {
+export function updateCurrentFC(data) {
   const tempData = data.currentConditions.temp;
   const feelsLikeData = data.currentConditions.feelslike;
   const dewPointData = data.currentConditions.dew;

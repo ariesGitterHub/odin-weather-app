@@ -11,15 +11,17 @@ import { createSearch } from "./javascript/search.js";
 import { createBtns } from "./javascript/btns.js";
 import { fetchWithHandling } from "./javascript/fetch.js";
 import { createLocationView } from "./javascript/currentLocation.js";
-import { createDaysView } from "./javascript/currentDays.js";
-import { createAlertsView } from "./javascript/currentAlerts.js";
+import { createDaysView, updateDaysFC } from "./javascript/currentDays.js";
 
+import { createHoursView, updateHoursFC } from "./javascript/currentHours.js";
+import { createAlertsView } from "./javascript/currentAlerts.js";
 import {
   createWeatherView,
-  updateToCurrentFC,
+  updateCurrentFC,
 } from "./javascript/currentWeather.js";
-import { updateToDaysFC } from "./javascript/currentDays.js"
-import { playClickSound } from "./javascript/sound.js";
+
+import {  } from "./javascript/currentDays.js"
+// import { playClickSound } from "./javascript/sound.js";
 import { worldCapitals } from "./data/worldCapitals.js";
 import { stateCapitals } from "./data/stateCapitals.js";
 
@@ -41,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
   createTitle();
   createSearch();
   createBtns();
-
   getBtnSoundEffect();
 
   // createFooter();
@@ -65,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Temperature scale set to Celsius.");
 
       if (weatherData || weatherDataUSA || weatherDataWorld) {
-        updateToCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        updateToDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
+        updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        updateDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
       }
     } else {
       tempScaleBtn.value = "F";
@@ -74,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Temperature scale set to Fahrenheit.");
 
       if (weatherData || weatherDataUSA || weatherDataWorld) {
-        updateToCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        updateToDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
+        updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        updateDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
       }
     }
   });
@@ -119,11 +120,20 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       createLocationView(locationQuerySearch, weatherData);
 
+      createHoursView(weatherData);
+      clickLocationContentBtn("hours"
+        // , weatherData
+      );
+
       createAlertsView(weatherData);
-      clickLocationContentBtn("alerts", weatherData);
+      clickLocationContentBtn("alerts"
+        // , weatherData
+      );
 
       createDaysView(weatherData);
-      clickLocationContentBtn("days", weatherData);
+      clickLocationContentBtn("days"
+        // , weatherData
+      );
 
       createWeatherView(weatherData);
 
@@ -177,12 +187,21 @@ document.addEventListener("DOMContentLoaded", () => {
         `World capital resolved address: ${weatherDataWorld.resolvedAddress}`
       );
       createLocationView(locationQueryWorld, weatherDataWorld);
+
+      createHoursView(weatherDataWorld);
+      clickLocationContentBtn("hours"
+        // , weatherDataWorld
+      );
       
       createAlertsView(weatherDataWorld);
-      clickLocationContentBtn("alerts", weatherDataWorld);
+      clickLocationContentBtn("alerts"
+        // , weatherDataWorld
+      );
 
       createDaysView(weatherDataWorld);
-      clickLocationContentBtn("days", weatherDataWorld);
+      clickLocationContentBtn("days"
+        // , weatherDataWorld
+      );
 
       createWeatherView(weatherDataWorld);
 
@@ -281,11 +300,20 @@ document.addEventListener("DOMContentLoaded", () => {
       
       createLocationView(locationQueryUSA, weatherDataUSA);
 
+      createHoursView(weatherDataUSA);
+      clickLocationContentBtn("hours",
+        //  weatherDataUSA
+        );
+
       createAlertsView(weatherDataUSA);
-      clickLocationContentBtn("alerts", weatherDataUSA);
+      clickLocationContentBtn("alerts"
+        // , weatherDataUSA
+      );
 
       createDaysView(weatherDataUSA);
-      clickLocationContentBtn("days", weatherDataUSA);
+      clickLocationContentBtn("days"
+        // , weatherDataUSA
+      );
 
       createWeatherView(weatherDataUSA);
 

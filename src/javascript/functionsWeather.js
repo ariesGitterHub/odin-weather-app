@@ -101,7 +101,7 @@ export function getMoonPhase(data) {
   const moonRatio = data;
   let moonSrc;
   let moonPhase;
-  console.log(`Moon Phase value: ${moonRatio}`);
+  // console.log(`Moon Phase value: ${moonRatio}`);
 
   if (moonRatio === 0) {
     moonSrc = moon1New;

@@ -70,7 +70,7 @@ export function createLocationView(query, data) {
       );
 
       if (alertsData.length > 0) {
-        console.log(alertsData);
+        // console.log(alertsData);
         weatherBtnCont.append(hoursBtn, alertsBtn, daysBtn);
         hoursBtn.append(hoursBtnImg);
         alertsBtn.append(alertsBtnImg);

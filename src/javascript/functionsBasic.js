@@ -79,7 +79,8 @@ export function createTextElement(tag, id, textContent, className) {
 // }
 
 // CLEAR DIVS
-export function clearDivText(divId1, divId2, divId3, divId4) {
+
+export function clearDivText(divId1, divId2, divId3, divId4, divId5) {
   const div1 = document.getElementById(divId1);
   if (div1) {
     div1.remove();
@@ -99,6 +100,11 @@ export function clearDivText(divId1, divId2, divId3, divId4) {
   if (div4) {
     div4.remove();
   }
+
+  const div5 = document.getElementById(divId5);
+  if (div5) {
+    div5.remove();
+  }
 }
 
 export function contentChecker() {
@@ -107,6 +113,7 @@ export function contentChecker() {
   if (dataContent && dataContent.childElementCount > 0) {
     clearDivText(
       "location-content",
+      "hours-content",
       "alerts-content",
       "days-content",
       "weather-content"
@@ -130,6 +137,29 @@ export function toggleContentDiv(id) {
   }
 }
 
+export function unToggleContentDiv(id) {
+  // const targetDiv = document.getElementById(id);
+  const hoursContent = document.querySelector("#hours-content");
+  const alertsContent = document.querySelector("#alerts-content");
+  const daysContent = document.querySelector("#days-content");
+
+  // hours-btn
+  if (id !== "alerts" && id !== "days") {
+    alertsContent.style.display = "none";
+    daysContent.style.display = "none";
+  } 
+  // alert-btn
+    else if (id !== "hours" && id !== "days") {
+    hoursContent.style.display = "none";
+    daysContent.style.display = "none";
+  } 
+  // days-btn
+  else {
+    hoursContent.style.display = "none";
+    alertsContent.style.display = "none";
+  }
+}
+
 export function getBtnSoundEffect() {
   const btnSound = document.querySelectorAll("button");
   btnSound.forEach((button) => {
@@ -139,13 +169,21 @@ export function getBtnSoundEffect() {
   });
 }
 
-export function clickLocationContentBtn(id, data) {
-  const dataSet = data[id];
+export function clickLocationContentBtn(id
+  // , data
+)
+   {
+  // const dataSet = data[id];
+  // console.log(`This dataSet: ${dataSet}`);
+  
   const targetBtn = document.getElementById(`${id}-btn`);
-  if (dataSet && targetBtn) {
+  if (
+    // dataSet &&
+     targetBtn) {
     // const targetBtn = document.getElementById(`${id}-btn`);
     targetBtn.addEventListener("click", () => {
       getBtnSoundEffect();
+      unToggleContentDiv(id);
       toggleContentDiv(`${id}-content`);
     });
   } else {
@@ -161,6 +199,36 @@ export function getTodayDate() {
   const month = (today.getMonth() + 1).toString().padStart(2, "0");
   const day = today.getDate().toString().padStart(2, "0");
   return `${year}-${month}-${day}`;
+}
+
+export function getCurrentTimeIn24Format () {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0"); 
+  return `${hours}:${minutes}:${seconds}`;
+};
+
+export function roundUp24FormatToNextHour() {
+  const now = new Date();
+
+  // Round up to the next hour
+  now.setMinutes(0); // Set minutes to 0
+  now.setSeconds(0); // Set seconds to 0
+
+  // If it's not already at the top of the hour, add 1 hour
+  if (now.getHours() < 23) {
+    now.setHours(now.getHours() + 1);
+  } else {
+    // Handle the case for 23:00 to 00:00 (next day)
+    now.setHours(0);
+  }
+
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+
+  return `${hours}:${minutes}:${seconds}`;  
 }
 
 // export function createWeatherElements(targetWord, targetSrc, targetData, groupClass) {

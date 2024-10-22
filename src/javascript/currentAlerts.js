@@ -14,7 +14,7 @@ export function createAlertsView(data) {
       console.error(noWDataAvailable);
       return;
     } else if (alertsData.length > 0) {
-      console.log(alertsData);
+      // console.log(alertsData);
 
       const alertsContent = createDivElement("alerts-content", "");
 
