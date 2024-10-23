@@ -24,8 +24,8 @@ import {
   getTempColor,
   getWeatherIconBkgdColor,
   getUVIndexValue,
-  // getMoonPhase,
   getMonthBkgdColor,
+  styleHoursDayNight,
   convertToCelsius,
 } from "./functionsWeather.js";
 
@@ -86,7 +86,7 @@ export function createHoursView(data) {
     console.log(typeof lastUpdateHHNum);
     
     const startHour = lastUpdateHHNum;
-    const finalHour = startHour + 12;
+    const finalHour = startHour + 24;
 
     const limitedDaysData = [data.days[0], data.days[1]];
     const hoursData = limitedDaysData
@@ -97,6 +97,8 @@ export function createHoursView(data) {
 
     const dateTimeDate0Data = data.days[0].datetime;
     console.log(`DAYS0 DATETIME: ${dateTimeDate0Data}`);
+       const sunrise0Data = data.days[0].sunrise;
+       console.log(`SUNRISE 0 TIME: ${sunrise0Data}`);
 
     const dateTimeDate1Data = data.days[1].datetime;
     console.log(`DAYS1 DATETIME: ${dateTimeDate1Data}`);
@@ -106,6 +108,9 @@ export function createHoursView(data) {
 
     dataContent.append(hoursContent);
     hoursContent.append(hoursTitle);
+
+    const sunrise0Time = data.days[0].sunrise;
+    const sunset0Time = data.days[0].sunset;
 
     hoursData.forEach((hours, index) => {
       const dateTimeData = hours.datetime;
@@ -131,11 +136,15 @@ export function createHoursView(data) {
 
       const uvIndexData = hours.uvindex;
 
-      // GETS YOU 06AM, eg...
+      // GETS YOU 06AM, eg...USE one H to kill leading zero!!!
       const parseHoursTime = format(
         parse(dateTimeData, "HH:mm:ss", new Date()),
-        "hha"
+        "ha"
       );
+      console.log(`parseHoursTime is ---> ${parseHoursTime}`);
+
+      // const noLeadingZero = yourstr.replace(/^0(?:0:0?)?/, "");
+      
 
       const parseHoursTimeNum = parseInt(parseHoursTime);
       console.log(`parseHoursTimeNum is a ${typeof parseHoursTimeNum}`);
@@ -153,12 +162,12 @@ export function createHoursView(data) {
 
       const parseTodayDate = format(
         parse(todayIs, "yyyy-MM-dd", new Date()),
-        "MMM dd"
+        "MMM d"
       );
 
       const parseTomorrowDate = format(
         parse(tomorrowIs, "yyyy-MM-dd", new Date()),
-        "MMM dd"
+        "MMM d"
       );
       // dateTimeData
 
@@ -169,7 +178,7 @@ export function createHoursView(data) {
       function checkHourGetDate() {
         let hourlyTimeisWhatDate = "";
         let count = index
-        if ((startHour + count) <= 23) {
+        if (startHour + count > 0 && startHour + count <= 23) {
           hourlyTimeisWhatDate = parseTodayDate;
         } else {
           hourlyTimeisWhatDate = parseTomorrowDate;
@@ -189,7 +198,17 @@ export function createHoursView(data) {
       );
 
       const hoursTimeCont = createDivElement("", "hours-time-cont");
-      // hoursTimeCont.style.backgroundColor = getMonthBkgdColor(parseHoursTime);
+      hoursTimeCont.style.backgroundColor = styleHoursDayNight(
+        dateTimeData,
+        sunrise0Time, 
+        sunset0Time
+      ).colorBkgd;
+
+      hoursTimeCont.style.color = styleHoursDayNight(
+        dateTimeData,
+        sunrise0Time,
+        sunset0Time
+      ).colorText;
 
       const hoursTimeText = createTextElement(
         "p",
@@ -198,6 +217,7 @@ export function createHoursView(data) {
         `${parseHoursTime}, ${checkHourGetDate()}`,
         "hours-time-text"
       );
+
 
       const hoursColRowCont1 = createDivElement("", "hours-col-row-cont1");
 

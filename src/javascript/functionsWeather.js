@@ -35,7 +35,7 @@ export function convertToFahrenheit(temp) {
   return celsius;
 }
 
-export function styleDayNight(data) {
+export function styleTileDayNight(data) {
   const parseLastUpdateLocalTime = format(
     parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
     "HH:mm:ss a"
@@ -63,38 +63,61 @@ export function styleDayNight(data) {
   ) {
     // locationContent.style.backgroundColor = "var(--black)";
     // locationContent.style.color = "var(--white)";
-    weatherContent.style.background =
-      "var(--day-time)";
+    weatherContent.style.background = "var(--day-time)";
     // weatherContent.style.border = "1px solid var(--black)";
-    conditionsText.style.color= "var(--black)";
+    conditionsText.style.color = "var(--black)";
     lastUpdate.style.color = "var(--black)";
 
     // weatherCont2Divs.forEach((element) => {
-      // element.style.backgroundColor = "var(--black)";
-      // element.style.color = "var(--white)";
-      // element.style.border = "0.125rem solid var(--black)";
-      // element.style.outline = "1px solid var(--white)";
+    // element.style.backgroundColor = "var(--black)";
+    // element.style.color = "var(--white)";
+    // element.style.border = "0.125rem solid var(--black)";
+    // element.style.outline = "1px solid var(--white)";
     // });
-
   } else if (
     parseLastUpdateLocalTime < parseSunrise ||
     parseLastUpdateLocalTime > parseSunset
   ) {
     // locationContent.style.backgroundColor = "var(--white)";
     // locationContent.style.color = "var(--black)";
-    weatherContent.style.background =
-      "var(--night-time)";
+    weatherContent.style.background = "var(--night-time)";
     // weatherContent.style.border = "1px solid var(--white)";
     conditionsText.style.color = "var(--white)";
     lastUpdate.style.color = "var(--white)";
     // weatherCont2Divs.forEach((element) => {
-      // element.style.backgroundColor = "var(--white)";
-      // element.style.color = "var(--black)";
-      // element.style.border = "0.125rem solid var(--white)";
-      // element.style.outline = "1px solid var(--black)";
+    // element.style.backgroundColor = "var(--white)";
+    // element.style.color = "var(--black)";
+    // element.style.border = "0.125rem solid var(--white)";
+    // element.style.outline = "1px solid var(--black)";
     // });
-
   }
+}
+
+export function styleHoursDayNight(data, sunrise, sunset) {
+  const parseHourTime = format(
+    parse(data, "HH:mm:ss", new Date()),
+    "HH:mm:ss a"
+  );
+  const parseSunrise = format(
+    parse(sunrise, "HH:mm:ss", new Date()),
+    "HH:mm:ss a"
+  );
+  const parseSunset = format(
+    parse(sunset, "HH:mm:ss", new Date()),
+    "HH:mm:ss a"
+  );
+  let colorText = "";
+  let colorBkgd = "";
+  if (parseHourTime > parseSunrise && parseHourTime < parseSunset) {
+    colorText = "var(--black)";
+    colorBkgd = "var(--day)";
+  } else if (parseHourTime < parseSunrise || parseHourTime > parseSunset) {
+    colorText = "var(--white)";
+    colorBkgd = "var(--night)";
+  } else {
+    return "Invalid Value";
+  }
+  return { colorText, colorBkgd };
 }
 
 export function getMoonPhase(data) {
@@ -156,7 +179,7 @@ export function getWeatherIconSRC(data) {
     case "rain-snow-showers-day":
       return rainSnow;
     case "rain-snow-showers-night":
-      return rainSnow;  
+      return rainSnow;
     case "rain-snow":
       return rainSnow;
     case "rain":
@@ -257,8 +280,7 @@ export function getWindDirection(data) {
 export function getUVIndexValue(data) {
   const uvIndexData = data;
   let uvWarning;
-  if (uvIndexData >= 0 && uvIndexData <= 2)
-    uvWarning = `${uvIndexData} (low)`;
+  if (uvIndexData >= 0 && uvIndexData <= 2) uvWarning = `${uvIndexData} (low)`;
   else if (uvIndexData >= 3 && uvIndexData <= 5)
     uvWarning = `${uvIndexData} (moderate)`;
   else if (uvIndexData >= 6 && uvIndexData <= 7)
@@ -275,14 +297,10 @@ export function getTempColor(data) {
   const feelsLikeData = data;
   let tempColor;
   if (feelsLikeData < 32) tempColor = "var(--very-cold)";
-  else if (feelsLikeData >= 32 && feelsLikeData < 50)
-    tempColor = "var(--cold)";
-  else if (feelsLikeData >= 50 && feelsLikeData < 68)
-    tempColor = "var(--mild)";
-  else if (feelsLikeData >= 68 && feelsLikeData < 86)
-    tempColor = "var(--warm)";
-  else if (feelsLikeData >= 86 && feelsLikeData < 104)
-    tempColor = "var(--hot)";
+  else if (feelsLikeData >= 32 && feelsLikeData < 50) tempColor = "var(--cold)";
+  else if (feelsLikeData >= 50 && feelsLikeData < 68) tempColor = "var(--mild)";
+  else if (feelsLikeData >= 68 && feelsLikeData < 86) tempColor = "var(--warm)";
+  else if (feelsLikeData >= 86 && feelsLikeData < 104) tempColor = "var(--hot)";
   else if (feelsLikeData >= 104) tempColor = "var(--very-hot)";
   else tempColor = "Unknown Temperature";
 
@@ -302,7 +320,9 @@ export function initializeFC(data) {
   if (tempScaleBtn.value === "C") {
     dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
     tempText.textContent = `${convertToCelsius(tempData)}°C`;
-    feelsLikeText.textContent = `(Feels like ${convertToCelsius(feelsLikeData)}°C)`;
+    feelsLikeText.textContent = `(Feels like ${convertToCelsius(
+      feelsLikeData
+    )}°C)`;
   } else {
     dewPointText.textContent = `${dewPointData}°F`;
     tempText.textContent = `${tempData}°F`;
@@ -310,17 +330,16 @@ export function initializeFC(data) {
   }
 }
 
-  
-  // if (tempScaleBtn.value === "C") {
-  //   dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;      
-  //   tempText.textContent = `${convertToCelsius(tempData)}°C`;
-  //   feelsLikeText.textContent = `(Feels like ${convertToCelsius(feelsLikeData)}°C)`;
-  //   }
-  // } else {
-  //   dewPointText.textContent = `${dewPointData}°F`;
-  //   tempText.textContent = `${tempData}°F`;
-  //   feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
-  // }
+// if (tempScaleBtn.value === "C") {
+//   dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+//   tempText.textContent = `${convertToCelsius(tempData)}°C`;
+//   feelsLikeText.textContent = `(Feels like ${convertToCelsius(feelsLikeData)}°C)`;
+//   }
+// } else {
+//   dewPointText.textContent = `${dewPointData}°F`;
+//   tempText.textContent = `${tempData}°F`;
+//   feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
+// }
 
 export function getMonthBkgdColor(data) {
   let contBkgdColor = "";
@@ -360,7 +379,7 @@ export function getMonthBkgdColor(data) {
       break;
     case "Dec":
       contBkgdColor = "var(--dec)";
-    break;
+      break;
     default:
       contBkgdColor = "var(--gray)";
       break;
@@ -368,3 +387,60 @@ export function getMonthBkgdColor(data) {
 
   return contBkgdColor;
 }
+
+// export function getDayBkgdColor(data) {
+//   // const funcDataTimeDate = dataTimeData;
+//   const sunrise0 = data.days[0].sunrise;
+//   const sunset0 = data.days[0].sunset;
+//   const sunrise1 = data.days[1].sunrise;
+//   const sunset1 = data.days[1].sunset;
+
+//   // const parseDataTimeData = format(
+//   //   parse(funcDataTimeDate, "HH:mm:ss", new Date()),
+//   //   "HH:mm:ss"
+//   // );
+
+//     const parseSunrise0 = format(
+//       parse(sunrise0, "HH:mm:ss", new Date()),
+//       "HH:mm:ss"
+//     );
+
+//   const parseSunset0 = format(
+//     parse(sunset0, "HH:mm:ss", new Date()),
+//     "HH:mm:ss"
+//   );
+
+//       const parseSunrise1 = format(
+//     parse(sunrise1, "HH:mm:ss", new Date()),
+//     "HH:mm:ss"
+//   );
+
+//   const parseSunset1 = format(
+//     parse(sunset1, "HH:mm:ss", new Date()),
+//     "HH:mm:ss a"
+//   );
+//   let colorText = "";
+//   let colorBkgd = "";
+
+//   if (dateTimeData === data.days[0].hours.datetime) {
+//     if (dataTimeData > parseSunrise0 && dataTimeData < parseSunset0) {
+//         colorText = "var(--black)";
+//         colorBkgd = "var(--day-time)";
+//     } else if (dataTimeData < parseSunrise0 || dataTimeData > parseSunset0) {
+//         colorText = "var(--white)";
+//         colorBkgd = "var(--night-time)";
+//     }
+//   } else if (dateTimeData === data.days[1].hours.datetime) {
+//     if (dataTimeData > parseSunrise1 && dataTimeData < parseSunset1) {
+//         colorText = "var(--black)";
+//         colorBkgd = "var(--day-time)";
+//     } else if (dataTimeData < parseSunrise1 || dataTimeData > parseSunset1) {
+//         colorText = "var(--white)";
+//         colorBkgd = "var(--night-time)";
+//     } else {
+//     return "Invalid Value";
+//   }
+
+//   return { colorText, colorBkgd };
+// }
+// }

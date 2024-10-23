@@ -37,7 +37,7 @@ export function createDaysView(data) {
   const dataContent = document.querySelector("#data-content");
 
   const daysData = data.days;
-  const limitedDaysData = daysData.slice(0, 1); // Only iterates 10 out of 15 days
+  const limitedDaysData = daysData.slice(0, 15); // Only iterates 10 out of 15 days
 
   function getDaysInfo() {
     if (!data) {
@@ -87,12 +87,12 @@ export function createDaysView(data) {
 
         const parseDaysDate = format(
           parse(dateTimeData, "yyyy-MM-dd", new Date()),
-          "EEE, MMM dd"
+          "E, MMM d"
         );
 
         const parseDaysMonthDayDate = format(
           parse(dateTimeData, "yyyy-MM-dd", new Date()),
-          "MMM dd"
+          "MMM d"
         );
 
         const parseDaysMonth = format(
@@ -136,12 +136,12 @@ export function createDaysView(data) {
 
         const parseSunrise = format(
           parse(days.sunrise, "HH:mm:ss", new Date()),
-          "hh:mm:ssa"
+          "h:mm:ssa"
         );
 
         const parseSunset = format(
           parse(days.sunset, "HH:mm:ss", new Date()),
-          "hh:mm:ssa"
+          "h:mm:ssa"
         );
 
         const daysColRowCont1 = createDivElement("", "days-col-row-cont1");

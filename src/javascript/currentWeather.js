@@ -17,7 +17,7 @@ import {
 
 import {
   convertToCelsius,
-  styleDayNight,
+  styleTileDayNight,
   getWeatherIconSRC,
   getWeatherIconBkgdColor,
   getTempColor,
@@ -59,17 +59,17 @@ export function createWeatherView(data) {
 
   const parseLastUpdateLocalTime = format(
     parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
-    "hh:mma"
+    "h:mma"
   );
 
   const parseSunrise = format(
     parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
-    "hh:mm:ssa"
+    "h:mm:ssa"
   );
 
   const parseSunset = format(
     parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
-    "hh:mm:ssa"
+    "h:mm:ssa"
   );
 
   const conditionsText = createTextElement(
@@ -261,7 +261,7 @@ export function createWeatherView(data) {
     precipProbText
   );
 
-  styleDayNight(data);
+  styleTileDayNight(data);
 }
 
 export function updateCurrentFC(data) {

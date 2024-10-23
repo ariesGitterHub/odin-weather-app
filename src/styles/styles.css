@@ -431,6 +431,7 @@ line-height: var(--line-height-basic);
   text-align: center;
 }
 
+
 .hours-time-cont {
 background-color: var(--white);
 
@@ -442,8 +443,12 @@ background-color: var(--white);
 }
 
 .hours-time-text, .hours-temp-text, .hours-feels-like-text, .days-date-text, .days-temp-max-text, .days-temp-min-text {
-  font-size: 1.1rem;
+  font-size: 1.075rem;
 }
+
+/* .hours-time-text, .days-date-text {
+text-transform: uppercase;
+} */
 
 .hours-weather-cont, .days-weather-cont {
   align-self: flex-end;
