@@ -19,7 +19,7 @@
   
   --day-sky: #1288c8;
   --overcast-sky: #545759;
-  --night-sky: #0d1529;
+  --night-sky: #16203a;
   --day-overcast-sky: #62747e;
   --night-overcast-sky: #20272b;
 
@@ -431,18 +431,17 @@ line-height: var(--line-height-basic);
   text-align: center;
 }
 
-/* .hours-temp-cont {
-  min-width: 4.5rem;
-  width: fit-content;
+.hours-time-cont {
+background-color: var(--white);
 
-} */
+}
 
 .days-icon-img {
   height: 3.5rem;
   width: auto;
 }
 
-.hours-date-text, .hours-temp-text, .hours-feels-like-text, .days-date-text, .days-temp-max-text, .days-temp-min-text {
+.hours-time-text, .hours-temp-text, .hours-feels-like-text, .days-date-text, .days-temp-max-text, .days-temp-min-text {
   font-size: 1.1rem;
 }
 

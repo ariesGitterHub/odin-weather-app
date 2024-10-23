@@ -220,6 +220,16 @@ export function getTodayDate() {
   return `${year}-${month}-${day}`;
 }
 
+export function getTomorrowDate() {
+  const today = new Date(); // Get today's date
+  today.setDate(today.getDate() + 1); // Add one day to today's date
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, "0"); // Month is zero-indexed
+  const day = today.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`; // Format as "YYYY-MM-DD"
+}
+
+
 export function getCurrentTimeIn24Format () {
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, "0");
@@ -228,26 +238,22 @@ export function getCurrentTimeIn24Format () {
   return `${hours}:${minutes}:${seconds}`;
 };
 
-export function roundUp24FormatToNextHour() {
-  const now = new Date();
+// export function roundUpToNextHour(time) {
+//   let [hours, minutes] = time.split(':').map(Number);
+//   if (minutes > 0) {
+//     hours += 1;
+//   }
+//   if (hours === 24) {
+//     hours = 0;
+//   }
+//   return `${String(hours).padStart(2, '0')}:00`;
+// }
 
-  // Round up to the next hour
-  now.setMinutes(0); // Set minutes to 0
-  now.setSeconds(0); // Set seconds to 0
 
-  // If it's not already at the top of the hour, add 1 hour
-  if (now.getHours() < 23) {
-    now.setHours(now.getHours() + 1);
-  } else {
-    // Handle the case for 23:00 to 00:00 (next day)
-    now.setHours(0);
-  }
 
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  const seconds = String(now.getSeconds()).padStart(2, "0");
-
-  return `${hours}:${minutes}:${seconds}`;  
+export function roundUpToNextHourNum(time) {
+  let [hours, minutes] = time.split(":").map(Number);
+  return minutes > 0 ? (hours + 1) % 24 : hours;
 }
 
 // export function createWeatherElements(targetWord, targetSrc, targetData, groupClass) {

@@ -59,7 +59,7 @@ export function createWeatherView(data) {
 
   const parseLastUpdateLocalTime = format(
     parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
-    "hh:mm:ssa"
+    "hh:mma"
   );
 
   const parseSunrise = format(
