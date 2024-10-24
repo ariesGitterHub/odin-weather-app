@@ -54,9 +54,11 @@ export function createFormElement(tag, type, id, placeHolder) {
 }
 
 // SPAN ELEMENT
-export function createSpanElement(className) {
-  const element = document.createElement("br");
-  element.classList.add(className);
+export function createSpanElement(id, textContent, className) {
+  const element = document.createElement("span");
+  element.id = id;
+  element.textContent = textContent;
+  element.className = className;
   return element;
 }
 

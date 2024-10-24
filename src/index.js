@@ -15,7 +15,10 @@ import { createHoursView, updateHoursFC } from "./javascript/contentHours.js";
 import { createAlertsView } from "./javascript/contentAlerts.js";
 import { createDaysView, updateDaysFC } from "./javascript/contentDays.js";
 
-import { createWeatherView, updateCurrentFC } from "./javascript/contentWeather.js";
+import {
+  createWeatherView,
+  updateCurrentFC,
+} from "./javascript/contentWeather.js";
 
 import { fetchWithHandling } from "./javascript/fetch.js";
 
@@ -69,8 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCurrentFC();
       updateHoursFC();
       updateDaysFC();
-      }
-
+    }
   });
 
   const searchInput = document.querySelector("#search-input");
@@ -81,6 +83,64 @@ document.addEventListener("DOMContentLoaded", () => {
   const charlie = "&contentType=json";
   let isCooldown = false;
   const setTimeoutValue = 1000;
+
+  // ***
+  // const searchBtn = document.querySelector("#search-btn");
+
+  // searchBtn.addEventListener("click", () => {
+  //   if (isCooldown) return;
+
+  //   isCooldown = true;
+
+  //   weatherDataUSA = null;
+  //   weatherDataWorld = null;
+
+  //   clickEffects();
+
+  //   const querySearch = searchInput.value;
+  //   console.log(`Search bar query is for: ${querySearch}`);
+
+  //   const url = `${alpha}${querySearch}${bravo}${k}${charlie}`;
+
+  //   async function initSearch() {
+  //     contentChecker();
+
+  //     weatherData = await fetchWithHandling(url);
+
+  //     const locationQuerySearch = querySearch;
+
+  //     console.log(weatherData);
+  //     console.log(
+  //       `Search bar resolved address: ${weatherData.resolvedAddress}`
+  //     );
+  //     createLocationView(locationQuerySearch, weatherData);
+
+  //     createHoursView(weatherData);
+  //     clickLocationContentBtn(
+  //       "hours"
+  //     );
+
+  //     createAlertsView(weatherData);
+  //     clickLocationContentBtn(
+  //       "alerts"
+  //     );
+
+  //     createDaysView(weatherData);
+  //     clickLocationContentBtn(
+  //       "days"
+  //     );
+
+  //     createWeatherView(weatherData);
+  //   }
+
+  //   initSearch();
+
+  //   setTimeout(() => {
+  //     isCooldown = false;
+  //   }, setTimeoutValue);
+  // });
+
+  // ***
 
   const searchBtn = document.querySelector("#search-btn");
 
@@ -100,43 +160,110 @@ document.addEventListener("DOMContentLoaded", () => {
     const url = `${alpha}${querySearch}${bravo}${k}${charlie}`;
 
     async function initSearch() {
-      // clearDivText("location-content", "weather-content");
-      contentChecker(); 
-      
-      weatherData = await fetchWithHandling(url);
-      const locationQuerySearch = querySearch;
+      contentChecker();
 
-      console.log(weatherData);
-      console.log(
-        `Search bar resolved address: ${weatherData.resolvedAddress}`
-      );
-      createLocationView(locationQuerySearch, weatherData);
+      // Fetch weather data and handle errors
+      const weatherData = await fetchWithHandling(url);
 
-      createHoursView(weatherData);
-      clickLocationContentBtn("hours"
-        // , weatherData
-      );
+      // Call createMessageView to handle displaying messages
+      createMessageView(weatherData);
 
-      createAlertsView(weatherData);
-      clickLocationContentBtn("alerts"
-        // , weatherData
-      );
+      // Proceed if there’s valid data
+      if (weatherData && !weatherData.error) {
+        const locationQuerySearch = querySearch;
 
-      createDaysView(weatherData);
-      clickLocationContentBtn("days"
-        // , weatherData
-      );
+        console.log(weatherData);
+        console.log(
+          `Search bar resolved address: ${weatherData.resolvedAddress}`
+        );
 
-      createWeatherView(weatherData);
-      // clickLocationContentBtnOutlineColor();
+        createLocationView(locationQuerySearch, weatherData);
+        createHoursView(weatherData);
+        clickLocationContentBtn("hours");
+
+        createAlertsView(weatherData);
+        clickLocationContentBtn("alerts");
+
+        createDaysView(weatherData);
+        clickLocationContentBtn("days");
+
+        createWeatherView(weatherData);
+      }
+
+      // Reset cooldown after processing
+      setTimeout(() => {
+        isCooldown = false;
+      }, setTimeoutValue);
     }
 
     initSearch();
-
-    setTimeout(() => {
-      isCooldown = false;
-    }, setTimeoutValue);
   });
+
+  // ****
+
+  // const worldBtn = document.querySelector("#world-btn");
+
+  // worldBtn.addEventListener("click", () => {
+  //   if (isCooldown) return;
+
+  //   isCooldown = true;
+
+  //   let queryWorld;
+  //   clickEffects();
+
+  //   function getRandomWorldCapital() {
+  //     const randomIndex = Math.floor(Math.random() * worldCapitals.length);
+  //     return worldCapitals[randomIndex];
+  //   }
+
+  //   const randomWorldCapital = getRandomWorldCapital();
+  //   console.log(
+  //     `Random world capital selected is ${randomWorldCapital.city}, ${randomWorldCapital.country}`
+  //   );
+
+  //   queryWorld = `${randomWorldCapital.city}, ${randomWorldCapital.country}`;
+  //   console.log(`(World button click) world capital search for: ${queryWorld}`);
+
+  //   const urlWorld = `${alpha}${queryWorld}${bravo}${k}${charlie}`;
+
+  //   async function initWorld() {
+  //     weatherData = null;
+  //     weatherDataUSA = null;
+
+  //     contentChecker();
+
+  //     weatherDataWorld = await fetchWithHandling(urlWorld);
+  //     const locationQueryWorld = randomWorldCapital.city;
+
+  //     console.log(weatherDataWorld);
+  //     console.log(
+  //       `World capital resolved address: ${weatherDataWorld.resolvedAddress}`
+  //     );
+  //     createLocationView(locationQueryWorld, weatherDataWorld);
+
+  //     createHoursView(weatherDataWorld);
+  //     clickLocationContentBtn("hours"
+  //     );
+
+  //     createAlertsView(weatherDataWorld);
+  //     clickLocationContentBtn("alerts"
+  //     );
+
+  //     createDaysView(weatherDataWorld);
+  //     clickLocationContentBtn("days"
+  //     );
+
+  //     createWeatherView(weatherDataWorld);
+
+  //   }
+  //   initWorld();
+
+  //   setTimeout(() => {
+  //     isCooldown = false;
+  //   }, setTimeoutValue);
+  // });
+
+  // ****
 
   const worldBtn = document.querySelector("#world-btn");
 
@@ -147,8 +274,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let queryWorld;
     clickEffects();
-    // changeWorldBtnSrc();
-    // clearQuery(queryWorld);
 
     function getRandomWorldCapital() {
       const randomIndex = Math.floor(Math.random() * worldCapitals.length);
@@ -169,51 +294,56 @@ document.addEventListener("DOMContentLoaded", () => {
       weatherData = null;
       weatherDataUSA = null;
 
-      // clearDivText("location-content", "weather-content");
       contentChecker();
 
+      // Fetch weather data for the random world capital
       weatherDataWorld = await fetchWithHandling(urlWorld);
-      const locationQueryWorld = randomWorldCapital.city;
 
-      console.log(weatherDataWorld);
-      console.log(
-        `World capital resolved address: ${weatherDataWorld.resolvedAddress}`
-      );
-      createLocationView(locationQueryWorld, weatherDataWorld);
+      // Call createMessageView to handle displaying messages
+      createMessageView(weatherDataWorld);
 
-      createHoursView(weatherDataWorld);
-      clickLocationContentBtn("hours"
-        // , weatherDataWorld
-      );
-      
-      createAlertsView(weatherDataWorld);
-      clickLocationContentBtn("alerts"
-        // , weatherDataWorld
-      );
+      // Proceed if there’s valid data
+      if (weatherDataWorld && !weatherDataWorld.error) {
+        const locationQueryWorld = randomWorldCapital.city;
 
-      createDaysView(weatherDataWorld);
-      clickLocationContentBtn("days"
-        // , weatherDataWorld
-      );
+        console.log(weatherDataWorld);
+        console.log(
+          `World capital resolved address: ${weatherDataWorld.resolvedAddress}`
+        );
 
-      createWeatherView(weatherDataWorld);
+        createLocationView(locationQueryWorld, weatherDataWorld);
+        createHoursView(weatherDataWorld);
+        clickLocationContentBtn("hours");
 
+        createAlertsView(weatherDataWorld);
+        clickLocationContentBtn("alerts");
 
+        createDaysView(weatherDataWorld);
+        clickLocationContentBtn("days");
+
+        createWeatherView(weatherDataWorld);
+      }
+
+      // Reset cooldown after processing
+      setTimeout(() => {
+        isCooldown = false;
+      }, setTimeoutValue);
     }
-    initWorld();
 
-    setTimeout(() => {
-      isCooldown = false;
-    }, setTimeoutValue);
+    initWorld();
   });
+
+  // *****
 
   // const usaBtn = document.querySelector("#usa-btn");
 
   // usaBtn.addEventListener("click", () => {
+  //   if (isCooldown) return;
+
+  //   isCooldown = true;
+
   //   let queryUSA = null;
   //   clickEffects();
-
-  //   // clearQuery(queryUSA);
 
   //   function getRandomUSACapital() {
   //     const randomIndex = Math.floor(Math.random() * stateCapitals.length);
@@ -221,10 +351,11 @@ document.addEventListener("DOMContentLoaded", () => {
   //   }
 
   //   const randomUSACapital = getRandomUSACapital();
-  //   console.log(`Random state capital selected is ${randomUSACapital.capital}, ${randomUSACapital.abbr}`);
+  //   console.log(
+  //     `Random state capital selected is ${randomUSACapital.capital}, ${randomUSACapital.abbr}`
+  //   );
 
   //   queryUSA = `${randomUSACapital.capital}, ${randomUSACapital.abbr}`;
-  //   // console.log(`Test 1 for queryUSA: ${queryUSA}`);
   //   console.log(`(USA button click) state capital search for: ${queryUSA}`);
 
   //   const urlUSA = `${alpha}${queryUSA}${bravo}${k}${charlie}`;
@@ -233,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //     weatherData = null;
   //     weatherDataWorld = null;
 
-  //     clearDivText("location-content", "weather-content");
+  //     contentChecker();
 
   //     weatherDataUSA = await fetchWithHandling(urlUSA);
   //     const locationQueryUSA = randomUSACapital.capital;
@@ -243,15 +374,33 @@ document.addEventListener("DOMContentLoaded", () => {
   //       `State capital resolved address: ${weatherDataUSA.resolvedAddress}`
   //     );
 
-  //     populateWeatherData(locationQueryUSA, weatherDataUSA);
+  //     createLocationView(locationQueryUSA, weatherDataUSA);
+
+  //     createHoursView(weatherDataUSA);
+  //     clickLocationContentBtn("hours",
+  //       );
+
+  //     createAlertsView(weatherDataUSA);
+  //     clickLocationContentBtn("alerts"
+  //     );
+
+  //     createDaysView(weatherDataUSA);
+  //     clickLocationContentBtn("days"
+  //     );
+
+  //     createWeatherView(weatherDataUSA);
   //   }
+
   //   initUSA();
+
+  //   setTimeout(() => {
+  //     isCooldown = false;
+  //   }, setTimeoutValue);
   // });
 
-  // TO DO: TEST WHEN API CALL LIMIT RESETS TOMORROW
+  // *****
 
   const usaBtn = document.querySelector("#usa-btn");
-  // let isCooldown = false;
 
   usaBtn.addEventListener("click", () => {
     if (isCooldown) return;
@@ -280,50 +429,42 @@ document.addEventListener("DOMContentLoaded", () => {
       weatherData = null;
       weatherDataWorld = null;
 
-      // clearDivText("location-content", "weather-content");
-      contentChecker(); 
+      contentChecker();
 
+      // Fetch weather data for the random USA capital
       weatherDataUSA = await fetchWithHandling(urlUSA);
-      const locationQueryUSA = randomUSACapital.capital;
 
-      console.log(weatherDataUSA);
-      console.log(
-        `State capital resolved address: ${weatherDataUSA.resolvedAddress}`
-      );
-      
-      createLocationView(locationQueryUSA, weatherDataUSA);
+      // Call createMessageView to handle displaying messages
+      createMessageView(weatherDataUSA);
 
-      createHoursView(weatherDataUSA);
-      clickLocationContentBtn("hours",
-        //  weatherDataUSA
+      // Proceed if there’s valid data
+      if (weatherDataUSA && !weatherDataUSA.error) {
+        const locationQueryUSA = randomUSACapital.capital;
+
+        console.log(weatherDataUSA);
+        console.log(
+          `State capital resolved address: ${weatherDataUSA.resolvedAddress}`
         );
 
-      createAlertsView(weatherDataUSA);
-      clickLocationContentBtn("alerts"
-        // , weatherDataUSA
-      );
+        createLocationView(locationQueryUSA, weatherDataUSA);
+        createHoursView(weatherDataUSA);
+        clickLocationContentBtn("hours");
 
-      createDaysView(weatherDataUSA);
-      clickLocationContentBtn("days"
-        // , weatherDataUSA
-      );
+        createAlertsView(weatherDataUSA);
+        clickLocationContentBtn("alerts");
 
-      createWeatherView(weatherDataUSA);
+        createDaysView(weatherDataUSA);
+        clickLocationContentBtn("days");
 
+        createWeatherView(weatherDataUSA);
+      }
+
+      // Reset cooldown after processing
+      setTimeout(() => {
+        isCooldown = false;
+      }, setTimeoutValue);
     }
 
     initUSA();
-
-    setTimeout(() => {
-      isCooldown = false;
-    }, setTimeoutValue);
   });
-
-  // const alertBtn = document.querySelector("#alert-btn");
-  
-  // alertBtn.addEventListener("click", () => {
-  //   toggleDiv("alert-content");
-  // });
-
-
 });

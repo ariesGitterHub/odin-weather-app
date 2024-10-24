@@ -1,47 +1,79 @@
 
 let data = null;
 
-// function clearData() {
-//   const locationContent = document.querySelector("#location-content");
-//   locationContent.innerHtml = "";
-//   const weatherContent = document.querySelector("#weather-content");
-//   weatherContent.innerHtml = "";
+// export async function fetchWithHandling(url) {
+//   try {
+//     const response = await fetch(url);
 
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
 
+//     const contentType = response.headers.get("Content-Type");
+
+//     if (contentType && contentType.includes("application/json")) {
+//       data = await response.json();
+
+//       return data;
+//     } else {
+//       return null;
+//     }
+//   } catch (error) {
+//     console.error("Fetch error: ", error.message);
+//     return null; 
+//   }
 // }
-
-//	https://api.weather.gov/points/40.2732,-76.8867
 
 export async function fetchWithHandling(url) {
   try {
-    // clearData();
-
     const response = await fetch(url);
+
     // Check for HTTP errors
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      let errorMessage = "An unknown error occurred.";
+
+      switch (response.status) {
+        case 400:
+          errorMessage =
+            "Invalid input: Please check your entries and try again.";
+          break;
+        case 403:
+          errorMessage =
+            "Access denied: You do not have permission to access this resource.";
+          break;
+        case 404:
+          errorMessage =
+            "The requested resource was not found. Please check the URL and try again.";
+          break;
+        case 429:
+          errorMessage = "Too many requests: Please try again later.";
+          break;
+        case 500:
+          errorMessage =
+            "Server error: There’s a problem with the service. Please try again later.";
+          break;
+        default:
+          errorMessage = `HTTP error! Status: ${response.status}`;
+      }
+
+      return { error: errorMessage };
     }
-    // Handle different types of responses
+
     const contentType = response.headers.get("Content-Type");
 
     if (contentType && contentType.includes("application/json")) {
       data = await response.json();
-      // console.log(data);
-      // console.log(data.resolvedAddress);
-
       return data;
     } else {
       return null; // Return null for no data
     }
   } catch (error) {
     console.error("Fetch error: ", error.message);
-    return null; // Optionally return null or throw further up
+    return {
+      error:
+        "Network error: Please check your internet connection and try again.",
+    };
   }
 }
-
-// export function getWeatherData() {
-//   return weatherData; // Can be null if fetch hasn't been called yet
-// }
-
 
   

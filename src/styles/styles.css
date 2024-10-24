@@ -6,16 +6,11 @@
   --black: #161716;
   --gray: #7f8680;
   --white: #e8f0e9;
-  --alerts: #942e2e;
+  --alerts: #a41b1b;
  
   --btn-color:#b6c4b6;
-/* 
-  --btn-gradient-dk:#6b6e6b;
-  --btn-gradient-lt: #b9c4b9; */
-  
   --btn-gradient-dk:#111211b6;
   --btn-gradient-lt: #666e66a9;
-
   
   --day-sky: #1288c8;
   --overcast-sky: #545759;
@@ -76,7 +71,6 @@
   --font-size-basic: 1rem;
   --font-weight-content-title: 700;
   
-
   /* IMG PRESETS */
   --img-size-title: 2.25rem;
 
@@ -92,6 +86,57 @@
   --rem-sm: 0.25rem;
   --width: 100vw;
 }
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* END RESETS */
 
 * {
   box-sizing: border-box;
@@ -128,6 +173,7 @@ body::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
   margin: auto;
+  padding-top: .5rem;
 }
 
 #title-img-div {
@@ -140,6 +186,7 @@ body::-webkit-scrollbar {
   color: var(--alerts);
   font-family: var(--font-hand);
   font-size: var(--font-size-title);
+  font-weight: 900;
 }
 
 #title-img1, #title-img2 {
@@ -177,8 +224,8 @@ body::-webkit-scrollbar {
   color: var(--white);
   font-family: var(--font-hand);
   font-size: var(--font-size-basic);
-  margin-top: -0.5rem;
-  margin-bottom: .25rem;
+  /* margin-top: -0.5rem; */
+  margin-bottom: .5rem;
   text-align: center;
 }
 
@@ -233,7 +280,7 @@ body::-webkit-scrollbar {
 }
 
 
-/* ---> MAIN-BTN-CONTENT */
+/* ---> HEADER-BTN-CONTENT */
 
 #btn-content {
   width: var(--width);
@@ -244,6 +291,7 @@ body::-webkit-scrollbar {
   margin: auto;
   padding: var(--rem-lg) 0 var(--rem-lg) 0;
 }
+
 
 /* MESSAGE-CONTENT */
 
@@ -260,8 +308,12 @@ body::-webkit-scrollbar {
 #message-text {
   color: var(--white);
   font-family: var(--font-hand);
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-content-title);
   text-align: center;
+}
+
+.message-span {
+  color: var(--alerts);
 }
 
 /* DATA-CONTENT */
@@ -334,13 +386,14 @@ body::-webkit-scrollbar {
   /* text-transform: uppercase; */
   }
 
-#hours-title, #alerts-title, #days-title {
+#hours-title-text, #alerts-title-text, #days-title-text {
   align-self: center;
   font-size: var(--font-size-content-title);
-  font-weight:var(--font-weight-content-title);
+  font-weight:var(--font-weight-subtitle);
   margin: var(--margin-content-title);
   text-align: center;
   text-transform: uppercase;
+  padding: .25rem 0 .25rem 0;
 }
 
 .alerts-headline {
@@ -370,23 +423,26 @@ body::-webkit-scrollbar {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-font-family: var(--font-sans);
+  font-family: var(--font-sans);
   /* margin: auto; */
   /* padding: .5rem; */
 }
 
 #hours-title-text, #days-title-text {
-font-family: var(--font-hand);
-font-size: 2.5rem;
   color: var(--white);
+  font-family: var(--font-hand);
+  font-size: 2.5rem;
+
 }
 
 .hours-tile-cont, .days-tile-cont {
   height: fit-content;
-  width: fit-content;
+  /* width: fit-content; */
+    width: var(--width);
   background-color: var(--black);
+
   border-top: 1px dashed var(--white);
-    border-bottom: 1px dashed var(--white);
+    /* border-bottom: 1px dashed var(--white); */
     /* border-top-left-radius: 1rem;
   border-top-right-radius: 1rem; */
   /* border-radius: 1rem; */
@@ -399,6 +455,7 @@ font-size: 2.5rem;
         gap: .5rem;
   /* margin: .25rem .25rem .5rem .25rem; */
   /* margin: .5rem; */
+  margin: auto;
   padding: 1rem .25rem 1rem .25rem;
 }
 
@@ -482,7 +539,7 @@ text-transform: uppercase;
 } */
 
 .hours-weather-cont, .days-weather-cont {
-  align-self: flex-end;
+  /* align-self: flex-end; */
   display: flex;
     flex-direction: row;
     justify-content: center;
