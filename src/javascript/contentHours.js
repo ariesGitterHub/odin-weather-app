@@ -42,9 +42,7 @@ export function createHoursView(data) {
     }
 
     const numberOfHours = 24; // The number of hours you want the hourly forecast to cover
-
     const hoursContent = createDivElement("hours-content", "");
-
     const hoursTitleText = createTextElement(
       "p",
       "hours-title-text",
@@ -53,31 +51,18 @@ export function createHoursView(data) {
     );
     const currentFeelsLikeData = data.currentConditions.feelslike;
     hoursTitleText.style.color = getTempColor(currentFeelsLikeData);
-
     const dateTimeLastUpdateData = data.currentConditions.datetime;
-
     const parseLastUpdateLocalTime = format(
       parse(dateTimeLastUpdateData, "HH:mm:ss", new Date()),
       "HH:mm"
     );
-
     const lastUpdateHHNum = roundUpToNextHourNum(parseLastUpdateLocalTime);
-
     const startHour = lastUpdateHHNum;
-
     const finalHour = startHour + numberOfHours;
-
     const limitedDaysData = [data.days[0], data.days[1]];
     const hoursData = limitedDaysData
       .flatMap((day) => day.hours)
       .slice(startHour, finalHour);
-
-    // const dateTimeDate0Data = data.days[0].datetime;
-    // const sunrise0Data = data.days[0].sunrise;
-    // const dateTimeDate1Data = data.days[1].datetime;
-
-    // const dateTimeHour0Data = data.days[0].hours.datetime;
-    // const dateTimeHour1Data = data.days[1].hours.datetime;
 
     dataContent.append(hoursContent);
     hoursContent.append(hoursTitleText);
@@ -87,23 +72,17 @@ export function createHoursView(data) {
 
     hoursData.forEach((hours, index) => {
       const dateTimeData = hours.datetime;
-
       const conditionsData = hours.conditions;
-
       const tempData = hours.temp;
       const feelsLikeData = hours.feelslike;
-
       const iconData = hours.icon;
-
       const humidityData = hours.humidity;
       const dewPointData = hours.dew;
       const precipProbData = hours.precipprob;
-
       const windSpeedMPHData = hours.windspeed;
       const windDirectionData = hours.winddir;
       const windGustMPHData = hours.windgust;
       const cloudCoverData = hours.cloudcover;
-
       const uvIndexData = hours.uvindex;
 
       // GETS YOU 06AM, eg...USE one H to kill leading zero!!!
@@ -114,17 +93,14 @@ export function createHoursView(data) {
 
       const todayIs = getTodayDate();
       const tomorrowIs = getTomorrowDate();
-
       const parseTodayDate = format(
         parse(todayIs, "yyyy-MM-dd", new Date()),
         "MMM d"
       );
-
       const parseTomorrowDate = format(
         parse(tomorrowIs, "yyyy-MM-dd", new Date()),
         "MMM d"
       );
-
       function checkHourGetDate() {
         let hourlyTimeisWhatDate = "";
         let count = index;
@@ -137,66 +113,52 @@ export function createHoursView(data) {
       }
 
       const hoursTileCont = createDivElement("", "hours-tile-cont");
-
       const hoursConditionCont = createDivElement("", "hours-condition-cont");
-
       const hoursConditionText = createTextElement(
         "p",
         "",
         conditionsData,
         "hours-condition-text"
       );
-
       const hoursTimeCont = createDivElement("", "hours-time-cont");
       hoursTimeCont.style.backgroundColor = styleHoursDayNight(
         dateTimeData,
         sunrise0Time,
         sunset0Time
       ).colorBkgd;
-
       hoursTimeCont.style.color = styleHoursDayNight(
         dateTimeData,
         sunrise0Time,
         sunset0Time
       ).colorText;
-
       const hoursTimeText = createTextElement(
         "p",
         "",
         `${parseHoursTime}, ${checkHourGetDate()}`,
         "hours-time-text"
       );
-
       const hoursColRowCont = createDivElement("", "hours-col-row-cont");
       const hoursIconCont = createDivElement("", "hours-icon-cont");
-
       const hoursIconImg = createImgElement(
         "",
         getWeatherIconSRC(iconData),
         "Weather icon based on forecast conditions.",
         "hours-icon-img"
       );
-
       hoursIconCont.style.backgroundColor = getWeatherIconBkgdColor(iconData);
       hoursIconImg.style.backgroundColor = getWeatherIconBkgdColor(iconData);
-
       const hoursWeatherCont = createDivElement("", "hours-weather-cont");
-
       const hoursTempCont = createDivElement("", "hours-temp-cont");
       hoursTempCont.style.backgroundColor = getTempColor(tempData);
-
       const hoursTempText = createTextElement("p", "", "", "hours-temp-text");
-
       const hoursFeelsLikeCont = createDivElement("", "hours-feels-like-cont");
       hoursFeelsLikeCont.style.backgroundColor = getTempColor(tempData);
-
       const hoursFeelsLikeText = createTextElement(
         "p",
         "",
         "",
         "hours-feels-like-text"
       );
-
       const {
         targetDiv: hoursHumidityDiv,
         targetImg: hoursHumidityImg,
@@ -208,7 +170,6 @@ export function createHoursView(data) {
         "hours-humidity",
         false
       );
-
       const {
         targetDiv: hoursDewPointDiv,
         targetImg: hoursDewPointImg,
@@ -220,7 +181,6 @@ export function createHoursView(data) {
         "hours-dew-point",
         false
       );
-
       const {
         targetDiv: hoursPrecipProbDiv,
         targetImg: hoursPrecipProbImg,
@@ -234,7 +194,6 @@ export function createHoursView(data) {
       );
 
       let windInfo = "";
-
       if (windSpeedMPHData && windDirectionData && windGustMPHData) {
         windInfo = `${windSpeedMPHData}mph ${getWindDirection(
           windDirectionData
@@ -246,7 +205,6 @@ export function createHoursView(data) {
       } else {
         windInfo = `${windSpeedMPHData}mph`;
       }
-
       const {
         targetDiv: hoursWindInfoDiv,
         targetImg: hoursWindInfoImg,
@@ -258,7 +216,6 @@ export function createHoursView(data) {
         "hours-wind-info",
         false
       );
-
       const {
         targetDiv: hoursCloudCoverDiv,
         targetImg: hoursCloudCoverImg,
@@ -270,7 +227,6 @@ export function createHoursView(data) {
         "hours-cloud-cover",
         false
       );
-
       const {
         targetDiv: hoursUVIndexDiv,
         targetImg: hoursUVIndexImg,
@@ -282,20 +238,6 @@ export function createHoursView(data) {
         "hours-uv-index",
         false
       );
-
-      // function initializeHoursFC() {
-      //   if (tempScaleBtn.value === "C") {
-      //     hoursDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-      //     hoursTempText.textContent = `Temp ${convertToCelsius(tempData)}°C`;
-      //     hoursFeelsLikeText.textContent = `Feels ${convertToCelsius(
-      //       feelsLikeData
-      //     )}°C`;
-      //   } else {
-      //     hoursDewPointText.textContent = `${dewPointData}°F`;
-      //     hoursTempText.textContent = `Temp ${tempData}°F`;
-      //     hoursFeelsLikeText.textContent = `Feels ${feelsLikeData}°F`;
-      //   }
-      // }
 
       function initializeHoursFC() {
         hoursDewPointText.dataset.dew = dewPointData;
@@ -314,16 +256,15 @@ export function createHoursView(data) {
           hoursFeelsLikeText.textContent = `Feels ${feelsLikeData}°F`;
         }
       }
+
       initializeHoursFC();
 
       hoursContent.append(hoursTileCont);
-
       hoursTileCont.append(
         hoursConditionCont,
         hoursColRowCont,
         hoursWeatherCont
       );
-
       hoursConditionCont.append(hoursConditionText);
 
       if (tempData !== feelsLikeData) {
@@ -341,7 +282,6 @@ export function createHoursView(data) {
       hoursIconCont.append(hoursIconImg);
       hoursTempCont.append(hoursTempText);
       hoursFeelsLikeCont.append(hoursFeelsLikeText);
-
       hoursWeatherCont.append(
         hoursHumidityDiv,
         hoursDewPointDiv,
@@ -350,7 +290,6 @@ export function createHoursView(data) {
         hoursCloudCoverDiv,
         hoursUVIndexDiv
       );
-
       hoursHumidityDiv.append(hoursHumidityImg, hoursHumidityText);
       hoursDewPointDiv.append(hoursDewPointImg, hoursDewPointText);
       hoursPrecipProbDiv.append(hoursPrecipProbImg, hoursPrecipProbText);
@@ -359,58 +298,9 @@ export function createHoursView(data) {
       hoursUVIndexDiv.append(hoursUVIndexImg, hoursUVIndexText);
     });
   }
-  //}
+
   getHoursInfo();
 }
-
-// export function updateHoursFC(data) {
-//   const numberOfHours = 24;
-//   const dateTimeLastUpdateData = data.currentConditions.datetime;
-
-//   const parseLastUpdateLocalTime = format(
-//     parse(dateTimeLastUpdateData, "HH:mm:ss", new Date()),
-//     "HH:mm"
-//   );
-
-//   const lastUpdateHHNum = roundUpToNextHourNum(parseLastUpdateLocalTime);
-
-//   const startHour = lastUpdateHHNum;
-
-//   const finalHour = startHour + numberOfHours;
-
-//   const limitedDaysData = [data.days[0], data.days[1]];
-//   const hoursData = limitedDaysData
-//     .flatMap((day) => day.hours)
-//     .slice(startHour, finalHour);
-
-//   const tempScaleBtn = document.querySelector("#temp-scale-btn");
-
-//   hoursData.forEach((hours, index) => {
-//     const tempData = hours.temp;
-//     const feelsLikeData = hours.feelslike;
-//     const dewPointData = hours.dew;
-
-//     const hoursTempText = document.querySelectorAll(".hours-temp-text")[index];
-//     const hoursFeelsLikeText = document.querySelectorAll(
-//       ".hours-feels-like-text"
-//     )[index];
-//     const hoursDewPointText = document.querySelectorAll(
-//       ".hours-dew-point-text"
-//     )[index];
-
-//     if (tempScaleBtn.value === "C") {
-//       hoursDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-//       hoursTempText.textContent = `Temp ${convertToCelsius(tempData)}°C`;
-//       hoursFeelsLikeText.textContent = `Feels ${convertToCelsius(
-//         feelsLikeData
-//       )}°C`;
-//     } else {
-//       hoursDewPointText.textContent = `${dewPointData}°F`;
-//       hoursTempText.textContent = `Temp ${tempData}°F`;
-//       hoursFeelsLikeText.textContent = `Feels ${feelsLikeData}°F`;
-//     }
-//   });
-// }
 
 export function updateHoursFC() {
   const hoursDewPointText = document.querySelectorAll(".hours-dew-point-text");

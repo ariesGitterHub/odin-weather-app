@@ -1,7 +1,4 @@
-import {
-  createDivElement,
-  createTextElement,
-} from "./functionsBasic.js";
+import { createDivElement, createTextElement } from "./functionsBasic.js";
 
 export function createAlertsView(data) {
   const noWDataAvailable = "No data currently available.";
@@ -14,21 +11,17 @@ export function createAlertsView(data) {
       console.error(noWDataAvailable);
       return;
     } else if (alertsData.length > 0) {
-      // console.log(alertsData);
-
       const alertsContent = createDivElement("alerts-content", "");
-
       const alertsTitle = createTextElement(
         "p",
         "alerts-title",
         "Weather Alert",
-        "alerts"
+        ""
       );
       dataContent.append(alertsContent);
       alertsContent.append(alertsTitle);
 
       alertsData.forEach((alerts) => {
-
         const headlineData = alerts.headline;
         const onsetData = alerts.onset;
         const endData = alerts.ends;

@@ -1,4 +1,14 @@
-import { playClickSound } from "./sound.js";
+import btnAudioFile from "../assets/sound-click.mp3";
+
+const btnAudio = new Audio(btnAudioFile);
+btnAudio.preload = "auto";
+
+export function playClickSound() {
+  btnAudio.currentTime = 0; // Reset the audio to the beginning
+  btnAudio.play();
+}
+
+// import { playClickSound } from "./sound.js";
 
 // BR ELEMENT
 export function createBreakElement(className) {
@@ -80,30 +90,30 @@ export function createTextElement(tag, id, textContent, className) {
 
 // CLEAR DIVS
 
-export function clearDivText(divId1, divId2, divId3, divId4, divId5) {
+export function clearDivText(divId1, divId2, divId3, divId4, divId5, divId6) {
   const div1 = document.getElementById(divId1);
   if (div1) {
     div1.remove();
   }
-
   const div2 = document.getElementById(divId2);
   if (div2) {
     div2.remove();
   }
-
   const div3 = document.getElementById(divId3);
   if (div3) {
     div3.remove();
   }
-
   const div4 = document.getElementById(divId4);
   if (div4) {
     div4.remove();
   }
-
   const div5 = document.getElementById(divId5);
   if (div5) {
     div5.remove();
+  }
+  const div6 = document.getElementById(divId6);
+  if (div6) {
+    div6.remove();
   }
 }
 
@@ -112,6 +122,7 @@ export function contentChecker() {
 
   if (dataContent && dataContent.childElementCount > 0) {
     clearDivText(
+      "message-content",
       "location-content",
       "hours-content",
       "alerts-content",
@@ -128,24 +139,28 @@ export function contentChecker() {
 //   }
 // }
 
-export function toggleContentDiv(id) {
-  const targetDiv = document.getElementById(id);
+export function toggleContentDivStyleBtn(id) {
+  const targetDiv = document.getElementById(`${id}-content`);
+  const targetBtn = document.getElementById(`${id}-btn`);
   if (targetDiv.style.display === "none") {
     targetDiv.style.display = "flex";
+    targetBtn.style.backgroundColor = "var(--alerts)"
   } else {
     targetDiv.style.display = "none";
+    targetBtn.style.backgroundColor = "var(--white)";
+
   }
 }
 
-export function unToggleContentDiv(id) {
+export function unToggleContentDivStyleBtn(id) {
   // const targetDiv = document.getElementById(id);
-  // const hoursBtn = document.querySelector("#hours-btn");
+  const hoursBtn = document.querySelector("#hours-btn");
   const hoursContent = document.querySelector("#hours-content");
 
   const alertsBtn = document.querySelector("#alerts-btn");
   const alertsContent = document.querySelector("#alerts-content");
 
-  // const daysbtn = document.querySelector("#days-btn");
+  const daysBtn = document.querySelector("#days-btn");
   const daysContent = document.querySelector("#days-content");
 
   // If alertsBtn is present, for three button: hours, alerts, days
@@ -153,17 +168,25 @@ export function unToggleContentDiv(id) {
     // hours-btn    
     if (id !== "alerts" && id !== "days") {
       alertsContent.style.display = "none";
+      alertsBtn.style.backgroundColor = "var(--white)"
       daysContent.style.display = "none";
+      daysBtn.style.backgroundColor = "var(--white)";
+
     }
     // alert-btn
     else if (id !== "hours" && id !== "days") {
       hoursContent.style.display = "none";
+      hoursBtn.style.backgroundColor = "var(--white)";
       daysContent.style.display = "none";
+      daysBtn.style.backgroundColor = "var(--white)";
+
     }
     // days-btn
     else {
       hoursContent.style.display = "none";
+      hoursBtn.style.backgroundColor = "var(--white)";
       alertsContent.style.display = "none";
+      alertsBtn.style.backgroundColor = "var(--white)";
     }
   } 
   // Otherwise only two btns: hours and days
@@ -171,10 +194,13 @@ export function unToggleContentDiv(id) {
     // hours-btn
     if (id !== "days") {
       daysContent.style.display = "none";
+      daysBtn.style.backgroundColor = "var(--white)";
+
     }
     // days-btn
     else {
       hoursContent.style.display = "none";
+      hoursBtn.style.backgroundColor = "var(--white)";
     }
   }
 }
@@ -202,15 +228,78 @@ export function clickLocationContentBtn(id
     // const targetBtn = document.getElementById(`${id}-btn`);
     targetBtn.addEventListener("click", () => {
       getBtnSoundEffect();
-      unToggleContentDiv(id);
-      toggleContentDiv(`${id}-content`);
+      unToggleContentDivStyleBtn(id);
+      // toggleContentDiv(`${id}-content`);
+      // toggleContentDiv(id);
+      toggleContentDivStyleBtn(id);
     });
   } else {
     console.error(
       `Button with ID ${id}-btn not found or no ${id} data is available.`
     );
+
   }
 }
+
+export function checkContentStyleBtn() {
+
+}
+
+// export function clickLocationContentBtnOutlineColor(
+//   id
+//   // , data
+// ) {
+//   // const dataSet = data[id];
+//   // console.log(`This dataSet: ${dataSet}`);
+
+//   const targetBtn = document.getElementById(`${id}-btn`);
+//   const targetContent = document.getElementById(`${id}-content`);
+//   if (
+//     // dataSet &&
+//     targetBtn && targetContent
+//   ) {
+//     // const targetBtn = document.getElementById(`${id}-btn`);
+//     targetContent.addEventListener("change", (event) => {
+//       event.style.outlineColor = "var(--alerts)"
+//     });
+//   } else {
+//     console.error(
+//       `Content with ID ${id}-content not found or no ${id} data is available.`
+//     );
+//   }
+// }
+
+
+// export function activeBtnOutline() {
+//   const hoursContent = document.querySelector("#hours-content");
+//   const hoursBtn = document.querySelector("#hours-btn");
+//   const alertsContent = document.querySelector("#alerts-content");
+//   const alertsBtn = document.querySelector("#alerts-btn");
+//   const daysContent = document.querySelector("#days-content");
+//   const daysBtn = document.querySelector("#days-btn");
+
+//   if (hoursBtn || alertsBtn || daysBtn) {
+//     if (hoursContent && !alertsContent && !daysContent) {
+//       hoursBtn.style.outlineColor = "var(--alerts)";
+//       alertsBtn.style.outlineColor = "var(--white)";
+//       daysBtn.style.outlineColor = "var(--white)";
+//     } else if (!hoursContent && alertsContent && !daysContent) {
+//       hoursBtn.style.outlineColor = "var(--white)";
+//       alertsBtn.style.outlineColor = "var(--alerts)";
+//       daysBtn.style.outlineColor = "var(--white)";
+//     } else if (!hoursContent && !alertsContent && daysContent) {
+//       hoursBtn.style.outlineColor = "var(--white)";
+//       alertsBtn.style.outlineColor = "var(--white)";
+//       daysBtn.style.outlineColor = "var(--alerts)";
+//     } else {
+//       hoursBtn.style.outlineColor = "var(--white)";
+//       alertsBtn.style.outlineColor = "var(--white)";
+//       daysBtn.style.outlineColor = "var(--white)";
+//     }
+//   } else {
+//     return
+//   }
+// }
 
 export function getTodayDate() {
   const today = new Date();
@@ -311,3 +400,13 @@ export function createWeatherElements(
     targetText,
   };
 }
+
+
+// export function changeWorldBtnSrc() {
+//   const worldBtnImg = document.querySelector("#world-btn-img");
+//   if (worldBtnImg.src = svgEarth1) {
+//     worldBtnImg.src = svgEarth2;
+//   } else {
+//     worldBtnImg.src = svgEarth1;
+//   }
+// }

@@ -1,33 +1,32 @@
 import "./styles/styles.css";
+
 import svgC from "./assets/c.svg";
 import svgF from "./assets/f.svg";
+
+import { createTitle } from "./javascript/headerTitle.js";
+import { createSearch } from "./javascript/headerSearch.js";
+import { createBtns } from "./javascript/headerBtns.js";
+
+import { createMessageView } from "./javascript/contentMessages.js";
+
+import { createLocationView } from "./javascript/contentLocation.js";
+
+import { createHoursView, updateHoursFC } from "./javascript/contentHours.js";
+import { createAlertsView } from "./javascript/contentAlerts.js";
+import { createDaysView, updateDaysFC } from "./javascript/contentDays.js";
+
+import { createWeatherView, updateCurrentFC } from "./javascript/contentWeather.js";
+
+import { fetchWithHandling } from "./javascript/fetch.js";
+
+import { worldCapitals } from "./data/worldCapitals.js";
+import { stateCapitals } from "./data/stateCapitals.js";
+
 import {
   contentChecker,
   clickLocationContentBtn,
   getBtnSoundEffect,
 } from "./javascript/functionsBasic.js";
-import { createTitle } from "./javascript/title.js";
-import { createSearch } from "./javascript/search.js";
-import { createBtns } from "./javascript/btns.js";
-import { fetchWithHandling } from "./javascript/fetch.js";
-import { createLocationView } from "./javascript/currentLocation.js";
-import { createDaysView, 
-  updateDaysFC
- } from "./javascript/currentDays.js";
-
-import { createHoursView, 
-  updateHoursFC
- } from "./javascript/currentHours.js";
-import { createAlertsView } from "./javascript/currentAlerts.js";
-import {
-  createWeatherView,
-  updateCurrentFC,
-} from "./javascript/currentWeather.js";
-
-import {  } from "./javascript/currentDays.js"
-// import { playClickSound } from "./javascript/sound.js";
-import { worldCapitals } from "./data/worldCapitals.js";
-import { stateCapitals } from "./data/stateCapitals.js";
 
 let weatherData = null;
 let weatherDataWorld = null;
@@ -47,24 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
   createTitle();
   createSearch();
   createBtns();
+  createMessageView();
   getBtnSoundEffect();
-
-  // createFooter();
-
-  // const btnSound = document.querySelectorAll("button");
-  // btnSound.forEach((button) => {
-  //   button.addEventListener("click", (event) => {
-  //     playClickSound(event);
-  //   });
-  // });
 
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
   tempScaleBtn.value = "F";
   const tempScaleImg = document.querySelector("#temp-scale-img");
   tempScaleImg.src = svgF;
-
-  // const hoursContent = document.querySelector("#hours-content");
-  // const daysContent = document.querySelector("#days-content");
 
   tempScaleBtn.addEventListener("click", () => {
     if (tempScaleImg.src === svgF && tempScaleBtn.value === "F") {
@@ -140,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       createWeatherView(weatherData);
-
+      // clickLocationContentBtnOutlineColor();
     }
 
     initSearch();
@@ -159,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let queryWorld;
     clickEffects();
+    // changeWorldBtnSrc();
     // clearQuery(queryWorld);
 
     function getRandomWorldCapital() {
@@ -335,4 +324,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // alertBtn.addEventListener("click", () => {
   //   toggleDiv("alert-content");
   // });
+
+
 });

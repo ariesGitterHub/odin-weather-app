@@ -9,12 +9,12 @@
   --alerts: #942e2e;
  
   --btn-color:#b6c4b6;
-
+/* 
   --btn-gradient-dk:#6b6e6b;
-  /* --btn-gradient-hours-dk:#bd0df2;
-  --btn-gradient-alert-dk:#e6f20d;
-  --btn-gradient-days-dk:#08edf5; */
-  --btn-gradient-lt: #b9c4b9;
+  --btn-gradient-lt: #b9c4b9; */
+  
+  --btn-gradient-dk:#111211b6;
+  --btn-gradient-lt: #666e66a9;
 
   
   --day-sky: #1288c8;
@@ -137,7 +137,7 @@ body::-webkit-scrollbar {
 }
 
 #title-text {
-  color: var(--white);
+  color: var(--alerts);
   font-family: var(--font-hand);
   font-size: var(--font-size-title);
 }
@@ -245,6 +245,24 @@ body::-webkit-scrollbar {
   padding: var(--rem-lg) 0 var(--rem-lg) 0;
 }
 
+/* MESSAGE-CONTENT */
+
+#message-content {
+  width: var(--width);
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  line-height: var(--line-height-basic);
+  padding: 1.5rem;
+}
+
+#message-text {
+  color: var(--white);
+  font-family: var(--font-hand);
+  font-size: var(--font-size-title);
+  text-align: center;
+}
 
 /* DATA-CONTENT */
 
@@ -322,7 +340,7 @@ body::-webkit-scrollbar {
   font-weight:var(--font-weight-content-title);
   margin: var(--margin-content-title);
   text-align: center;
-  /* text-transform: uppercase; */
+  text-transform: uppercase;
 }
 
 .alerts-headline {

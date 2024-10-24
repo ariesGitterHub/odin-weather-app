@@ -1,3 +1,5 @@
+// UNUSED; KEEP THIS FILE AS A FUTURE PROJECT TEMPLATE
+
 import { createTextElement } from "./functionsBasic.js";
 
 export function createFooter() {
