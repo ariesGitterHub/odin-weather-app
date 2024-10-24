@@ -6,7 +6,7 @@
   --black: #161716;
   --gray: #7f8680;
   --white: #e8f0e9;
-  --alerts: #a41b1b;
+  --alerts: #d04141;
  
   --btn-color:#b6c4b6;
   --btn-gradient-dk:#111211b6;
@@ -69,7 +69,7 @@
   --font-size-content-title: 1.5rem;
   --font-size-subtitle: 1.25rem;
   --font-size-basic: 1rem;
-  --font-weight-content-title: 700;
+  /* --font-weight-content-title: 900; */
   
   /* IMG PRESETS */
   --img-size-title: 2.25rem;
