@@ -222,13 +222,16 @@ export function createWeatherView(data) {
 
       initializeCurrentFC();
 
-
   dataContent.append(weatherContent);
   weatherContent.append(conditionsText, lastUpdate, weatherCont1, weatherCont2);
 
   weatherCont1.append(weatherIconCont, weatherTempCont);
 
-  weatherTempCont.append(tempText, feelsLikeText);
+  if (tempData !== feelsLikeData) {
+    weatherTempCont.append(tempText, feelsLikeText);
+  } else {
+    weatherTempCont.append(tempText);
+  }
 
   weatherIconCont.append(weatherIconImg);
 
@@ -264,37 +267,39 @@ export function createWeatherView(data) {
   styleTileDayNight(data);
 }
 
-export function updateCurrentFC(data) {
-  const tempData = data.currentConditions.temp;
-  const feelsLikeData = data.currentConditions.feelslike;
-  const dewPointData = data.currentConditions.dew;
+// export function updateCurrentFC(data) {
+//   const tempData = data.currentConditions.temp;
+//   const feelsLikeData = data.currentConditions.feelslike;
+//   const dewPointData = data.currentConditions.dew;
 
-  const tempText = document.querySelector("#temp-text");
-  const feelsLikeText = document.querySelector(
-    "#feels-like-text"
-  );
+//   const tempText = document.querySelector("#temp-text");
+//   const feelsLikeText = document.querySelector(
+//     "#feels-like-text"
+//   );
 
-  const dewPointText = document.querySelector("#dew-point-text");
+//   const dewPointText = document.querySelector("#dew-point-text");
 
-  const tempScaleBtn = document.querySelector("#temp-scale-btn");
+//   const tempScaleBtn = document.querySelector("#temp-scale-btn");
 
-  if (tempScaleBtn.value === "C") {
-    dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-    if (tempData !== feelsLikeData) {
-      tempText.textContent = `${convertToCelsius(tempData)}°C`;
-      feelsLikeText.textContent = `(Feels like ${convertToCelsius(
-        feelsLikeData
-      )}°C)`;
-    } else {
-      tempText.textContent = `${convertToCelsius(tempData)}°C`;
-    }
-  } else {
-    dewPointText.textContent = `${dewPointData}°F`;
-    if (tempData !== feelsLikeData) {
-      tempText.textContent = `${tempData}°F`;
-      feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
-    } else {
-      tempText.textContent = `${tempData}°F`;
-    }
-  }
-}
+//   if (tempScaleBtn.value === "C") {
+//     dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+//     if (tempData !== feelsLikeData) {
+//       tempText.textContent = `${convertToCelsius(tempData)}°C`;
+//       feelsLikeText.textContent = `(Feels like ${convertToCelsius(
+//         feelsLikeData
+//       )}°C)`;
+//     } else {
+//       tempText.textContent = `${convertToCelsius(tempData)}°C`;
+//     }
+//   } else {
+//     dewPointText.textContent = `${dewPointData}°F`;
+//     if (tempData !== feelsLikeData) {
+//       tempText.textContent = `${tempData}°F`;
+//       feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
+//     } else {
+//       tempText.textContent = `${tempData}°F`;
+//     }
+//   }
+// }
+
+

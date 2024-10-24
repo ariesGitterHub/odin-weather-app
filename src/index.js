@@ -11,13 +11,17 @@ import { createSearch } from "./javascript/search.js";
 import { createBtns } from "./javascript/btns.js";
 import { fetchWithHandling } from "./javascript/fetch.js";
 import { createLocationView } from "./javascript/currentLocation.js";
-import { createDaysView, updateDaysFC } from "./javascript/currentDays.js";
+import { createDaysView, 
+  // updateDaysFC
+ } from "./javascript/currentDays.js";
 
-import { createHoursView, updateHoursFC } from "./javascript/currentHours.js";
+import { createHoursView, 
+  // updateHoursFC
+ } from "./javascript/currentHours.js";
 import { createAlertsView } from "./javascript/currentAlerts.js";
 import {
   createWeatherView,
-  updateCurrentFC,
+  // updateCurrentFC,
 } from "./javascript/currentWeather.js";
 
 import {  } from "./javascript/currentDays.js"
@@ -59,6 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const tempScaleImg = document.querySelector("#temp-scale-img");
   tempScaleImg.src = svgF;
 
+  // const hoursContent = document.querySelector("#hours-content");
+  // const daysContent = document.querySelector("#days-content");
+
   tempScaleBtn.addEventListener("click", () => {
     if (tempScaleImg.src === svgF && tempScaleBtn.value === "F") {
       tempScaleBtn.value = "C";
@@ -66,8 +73,17 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Temperature scale set to Celsius.");
 
       if (weatherData || weatherDataUSA || weatherDataWorld) {
-        updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        updateDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // if (hoursContent) {
+        // updateHoursFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // } else if (daysContent) {
+        // updateDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // } else {
+        // updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // }
+      } else {
+        console.log("There is no data to change from C to F yet.");
       }
     } else {
       tempScaleBtn.value = "F";
@@ -75,8 +91,17 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Temperature scale set to Fahrenheit.");
 
       if (weatherData || weatherDataUSA || weatherDataWorld) {
-        updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        updateDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // if (hoursContent) {
+        //   updateHoursFC(weatherData || weatherDataUSA || weatherDataWorld);
+        //   updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // } else if (daysContent) {
+        //   updateDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
+        //   updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // } else {
+        //   updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
+        // }
+      } else {
+        console.log("There is no data to change from F to C yet.");
       }
     }
   });
