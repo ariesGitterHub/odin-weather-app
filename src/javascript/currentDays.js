@@ -48,7 +48,7 @@ export function createDaysView(data) {
     const daysTitleText = createTextElement(
       "p",
       "days-title-text",
-      `Your ${limitedDaysData.length}-Day Outlook`,
+      `Your ${limitedDaysData.length}-Day Outlook!`,
       ""
     );
 
@@ -282,9 +282,31 @@ export function createDaysView(data) {
         false
       );
 
+      // function initializeDaysFC() {
+      //   if (tempScaleBtn.value === "C") {
+      //     daysDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+      //     daysTempMaxText.textContent = `High ${convertToCelsius(
+      //       tempMaxData
+      //     )}°C`;
+      //     daysTempMinText.textContent = `Low ${convertToCelsius(
+      //       tempMinData
+      //     )}°C`;
+      //   } else {
+      //     daysDewPointText.textContent = `${dewPointData}°F`;
+      //     daysTempMaxText.textContent = `High ${tempMaxData}°F`;
+      //     daysTempMinText.textContent = `Low ${tempMinData}°F`;
+      //   }
+      // }
+
       function initializeDaysFC() {
+        daysDewPointText.dataset.dew = dewPointData;
+        daysTempMaxText.dataset.tempmax = tempMaxData;
+        daysTempMinText.dataset.tempmin = tempMinData;
+
         if (tempScaleBtn.value === "C") {
-          daysDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+          daysDewPointText.textContent = `${convertToCelsius(
+            dewPointData
+          )}°C`;
           daysTempMaxText.textContent = `High ${convertToCelsius(
             tempMaxData
           )}°C`;
@@ -345,33 +367,172 @@ export function createDaysView(data) {
   getDaysInfo();
 }
 
-export function updateDaysFC(data) {
-  const daysData = data.days;
+// export function updateDaysFC(data) {
+//   const daysData = data.days;
+//   const tempScaleBtn = document.querySelector("#temp-scale-btn");
+
+//   daysData.forEach((days, index) => {
+//     const tempMaxData = days.tempmax;
+//     const tempMinData = days.tempmin;
+//     const dewPointData = days.dew;
+
+//     const daysTempMaxText = document.querySelectorAll(".days-temp-max-text")[
+//       index
+//     ];
+//     const daysTempMinText = document.querySelectorAll(".days-temp-min-text")[
+//       index
+//     ];
+//     const daysDewPointText = document.querySelectorAll(".days-dew-point-text")[
+//       index
+//     ];
+
+//     if (tempScaleBtn.value === "C") {
+//       daysDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+//       daysTempMaxText.textContent = `High ${convertToCelsius(tempMaxData)}°C`;
+//       daysTempMinText.textContent = `Low ${convertToCelsius(tempMinData)}°C`;
+//     } else {
+//       daysDewPointText.textContent = `${dewPointData}°F`;
+//       daysTempMaxText.textContent = `High ${tempMaxData}°F`;
+//       daysTempMinText.textContent = `Low ${tempMinData}°F`;
+//     }
+//   });
+// }
+
+// export function updateDaysFC(data) {
+//   const daysData = data.days;
+//   const tempScaleBtn = document.querySelector("#temp-scale-btn");
+
+//   daysData.forEach((days, index) => {
+//     const tempMaxData = days.tempmax;
+//     const tempMinData = days.tempmin;
+//     const dewPointData = days.dew;
+
+//     const daysTempMaxText = document.querySelectorAll(".days-temp-max-text")[
+//       index
+//     ];
+//     const daysTempMinText = document.querySelectorAll(".days-temp-min-text")[
+//       index
+//     ];
+//     const daysDewPointText = document.querySelectorAll(".days-dew-point-text")[
+//       index
+//     ];
+
+//     if (tempScaleBtn.value === "C") {
+//       daysDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+//       daysTempMaxText.textContent = `High ${convertToCelsius(tempMaxData)}°C`;
+//       daysTempMinText.textContent = `Low ${convertToCelsius(tempMinData)}°C`;
+//     } else {
+//       daysDewPointText.textContent = `${dewPointData}°F`;
+//       daysTempMaxText.textContent = `High ${tempMaxData}°F`;
+//       daysTempMinText.textContent = `Low ${tempMinData}°F`;
+//     }
+//   });
+// }
+
+// A SUPER EFFICIENT WAY!
+// export function updateDaysFC() {
+//   const daysDewPointText = document.querySelectorAll(".dew-point-text");
+//   const daysTempMaxText = document.querySelectorAll(".temp-max-text");
+//   const daysTempMinText = document.querySelectorAll(".temp-min-text");
+
+//   const tempScaleBtn = document.querySelector("#temp-scale-btn");
+//   const daysContent = document.querySelector("#days-content");
+
+//   if (daysContent) {
+//     const scale = tempScaleBtn.value;
+
+//     // Combine all elements into an array
+//     const allElements = [
+//       { elements: daysDewPointText, type: "dew", suffix: scale },
+//       {
+//         elements: daysTempMaxText,
+//         type: "tempmax",
+//         suffix: scale,
+//         prefix: "High ",
+//       },
+//       {
+//         elements: daysTempMinText,
+//         type: "tempmin",
+//         suffix: scale,
+//         prefix: "Low ",
+//       },
+//     ];
+
+//     allElements.forEach(({ elements, type, suffix, prefix = "" }) => {
+//       elements.forEach((element) => {
+//         if (suffix === "C") {
+//           element.textContent = `${prefix} ${convertToCelsius(
+//             element.dataset[type]
+//           )}°C`;
+//         } else if (suffix === "F") {
+//           element.textContent = `${prefix} ${element.dataset[type]}°F`;
+//         }
+//       });
+//     });
+//   } else {
+//     console.log("10 day outlook has been selected yet.");
+//   }
+// }
+
+
+export function updateDaysFC() {
+  const daysDewPointText = document.querySelectorAll(".days-dew-point-text");
+  const daysTempMaxText = document.querySelectorAll(".days-temp-max-text");
+  const daysTempMinText = document.querySelectorAll(".days-temp-min-text");
+
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
+  const daysContent = document.querySelector("#days-content");
 
-  daysData.forEach((days, index) => {
-    const tempMaxData = days.tempmax;
-    const tempMinData = days.tempmin;
-    const dewPointData = days.dew;
+  if (!daysContent) {
+    console.log("No location has been selected yet.");
+    return;
+  }
 
-    const daysTempMaxText = document.querySelectorAll(".days-temp-max-text")[
-      index
-    ];
-    const daysTempMinText = document.querySelectorAll(".days-temp-min-text")[
-      index
-    ];
-    const daysDewPointText = document.querySelectorAll(".days-dew-point-text")[
-      index
-    ];
-
+  daysDewPointText.forEach((element) => {
     if (tempScaleBtn.value === "C") {
-      daysDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-      daysTempMaxText.textContent = `High ${convertToCelsius(tempMaxData)}°C`;
-      daysTempMinText.textContent = `Low ${convertToCelsius(tempMinData)}°C`;
-    } else {
-      daysDewPointText.textContent = `${dewPointData}°F`;
-      daysTempMaxText.textContent = `High ${tempMaxData}°F`;
-      daysTempMinText.textContent = `Low ${tempMinData}°F`;
+      element.textContent = `${convertToCelsius(element.dataset.dew)}°C`;
+    } else if (tempScaleBtn.value === "F") {
+      element.textContent = `${element.dataset.dew}°F`;
+    }
+  });
+
+  daysTempMaxText.forEach((element) => {
+    if (tempScaleBtn.value === "C") {
+      element.textContent = `High ${convertToCelsius(
+        element.dataset.tempmax
+      )}°C`;
+    } else if (tempScaleBtn.value === "F") {
+      element.textContent = `High ${element.dataset.tempmax}°F`;
+    }
+  });
+
+  daysTempMinText.forEach((element) => {
+    if (tempScaleBtn.value === "C") {
+      element.textContent = `Low ${convertToCelsius(
+        element.dataset.tempmin
+      )}°C`;
+    } else if (tempScaleBtn.value === "F") {
+      element.textContent = `Low ${element.dataset.tempmin}°F`;
     }
   });
 }
+
+
+
+  // if (daysContent && tempScaleBtn.value === "C") {
+  //   daysDewPointText.textContent = `${convertToCelsius(
+  //     daysDewPointText.dataset.dew
+  //   )}°C`;
+  //   daysTempMaxText.textContent = `High ${convertToCelsius(
+  //     daysTempMaxText.dataset.tempmax
+  //   )}°C`;
+  //   daysTempMinText.textContent = `Low ${convertToCelsius(
+  //     daysTempMinText.dataset.tempmin
+  //   )}°C`;
+  // } else if (daysContent && tempScaleBtn.value === "F") {
+  //   daysDewPointText.textContent = `${daysDewPointText.dataset.dew}°F`;
+  //   daysTempMaxText.textContent = `High ${daysTempMaxText.dataset.tempmax}°F`;
+  //   daysTempMinText.textContent = `Low ${daysTempMinText.dataset.tempmin}°F`;
+  // } else {
+  //   console.log("No location has been selected yet.");
+ // }

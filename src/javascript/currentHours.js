@@ -48,7 +48,7 @@ export function createHoursView(data) {
     const hoursTitleText = createTextElement(
       "p",
       "hours-title-text",
-      `Your ${numberOfHours}-Hour Outlook`,
+      `Your ${numberOfHours}-Hour Outlook!`,
       ""
     );
     const currentFeelsLikeData = data.currentConditions.feelslike;
@@ -283,7 +283,25 @@ export function createHoursView(data) {
         false
       );
 
+      // function initializeHoursFC() {
+      //   if (tempScaleBtn.value === "C") {
+      //     hoursDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+      //     hoursTempText.textContent = `Temp ${convertToCelsius(tempData)}°C`;
+      //     hoursFeelsLikeText.textContent = `Feels ${convertToCelsius(
+      //       feelsLikeData
+      //     )}°C`;
+      //   } else {
+      //     hoursDewPointText.textContent = `${dewPointData}°F`;
+      //     hoursTempText.textContent = `Temp ${tempData}°F`;
+      //     hoursFeelsLikeText.textContent = `Feels ${feelsLikeData}°F`;
+      //   }
+      // }
+
       function initializeHoursFC() {
+        hoursDewPointText.dataset.dew = dewPointData;
+        hoursTempText.dataset.temp = tempData;
+        hoursFeelsLikeText.dataset.feelslike = feelsLikeData;
+
         if (tempScaleBtn.value === "C") {
           hoursDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
           hoursTempText.textContent = `Temp ${convertToCelsius(tempData)}°C`;
@@ -296,7 +314,6 @@ export function createHoursView(data) {
           hoursFeelsLikeText.textContent = `Feels ${feelsLikeData}°F`;
         }
       }
-
       initializeHoursFC();
 
       hoursContent.append(hoursTileCont);
@@ -346,51 +363,95 @@ export function createHoursView(data) {
   getHoursInfo();
 }
 
-export function updateHoursFC(data) {
-  const numberOfHours = 24;
-  const dateTimeLastUpdateData = data.currentConditions.datetime;
+// export function updateHoursFC(data) {
+//   const numberOfHours = 24;
+//   const dateTimeLastUpdateData = data.currentConditions.datetime;
 
-  const parseLastUpdateLocalTime = format(
-    parse(dateTimeLastUpdateData, "HH:mm:ss", new Date()),
-    "HH:mm"
+//   const parseLastUpdateLocalTime = format(
+//     parse(dateTimeLastUpdateData, "HH:mm:ss", new Date()),
+//     "HH:mm"
+//   );
+
+//   const lastUpdateHHNum = roundUpToNextHourNum(parseLastUpdateLocalTime);
+
+//   const startHour = lastUpdateHHNum;
+
+//   const finalHour = startHour + numberOfHours;
+
+//   const limitedDaysData = [data.days[0], data.days[1]];
+//   const hoursData = limitedDaysData
+//     .flatMap((day) => day.hours)
+//     .slice(startHour, finalHour);
+
+//   const tempScaleBtn = document.querySelector("#temp-scale-btn");
+
+//   hoursData.forEach((hours, index) => {
+//     const tempData = hours.temp;
+//     const feelsLikeData = hours.feelslike;
+//     const dewPointData = hours.dew;
+
+//     const hoursTempText = document.querySelectorAll(".hours-temp-text")[index];
+//     const hoursFeelsLikeText = document.querySelectorAll(
+//       ".hours-feels-like-text"
+//     )[index];
+//     const hoursDewPointText = document.querySelectorAll(
+//       ".hours-dew-point-text"
+//     )[index];
+
+//     if (tempScaleBtn.value === "C") {
+//       hoursDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+//       hoursTempText.textContent = `Temp ${convertToCelsius(tempData)}°C`;
+//       hoursFeelsLikeText.textContent = `Feels ${convertToCelsius(
+//         feelsLikeData
+//       )}°C`;
+//     } else {
+//       hoursDewPointText.textContent = `${dewPointData}°F`;
+//       hoursTempText.textContent = `Temp ${tempData}°F`;
+//       hoursFeelsLikeText.textContent = `Feels ${feelsLikeData}°F`;
+//     }
+//   });
+// }
+
+export function updateHoursFC() {
+  const hoursDewPointText = document.querySelectorAll(".hours-dew-point-text");
+  const hoursTempText = document.querySelectorAll(".hours-temp-text");
+  const hoursFeelsLikeText = document.querySelectorAll(
+    ".hours-feels-like-text"
   );
 
-  const lastUpdateHHNum = roundUpToNextHourNum(parseLastUpdateLocalTime);
-
-  const startHour = lastUpdateHHNum;
-
-  const finalHour = startHour + numberOfHours;
-
-  const limitedDaysData = [data.days[0], data.days[1]];
-  const hoursData = limitedDaysData
-    .flatMap((day) => day.hours)
-    .slice(startHour, finalHour);
-
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
+  const hoursContent = document.querySelector("#hours-content");
 
-  hoursData.forEach((hours, index) => {
-    const tempData = hours.temp;
-    const feelsLikeData = hours.feelslike;
-    const dewPointData = hours.dew;
+  if (!hoursContent) {
+    console.log("No 24 hour outlook view has been selected yet.");
+    return;
+  }
 
-    const hoursTempText = document.querySelectorAll(".hours-temp-text")[index];
-    const hoursFeelsLikeText = document.querySelectorAll(
-      ".hours-feels-like-text"
-    )[index];
-    const hoursDewPointText = document.querySelectorAll(
-      ".hours-dew-point-text"
-    )[index];
-
+  hoursDewPointText.forEach((element) => {
     if (tempScaleBtn.value === "C") {
-      hoursDewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-      hoursTempText.textContent = `Temp ${convertToCelsius(tempData)}°C`;
-      hoursFeelsLikeText.textContent = `Feels ${convertToCelsius(
-        feelsLikeData
-      )}°C`;
-    } else {
-      hoursDewPointText.textContent = `${dewPointData}°F`;
-      hoursTempText.textContent = `Temp ${tempData}°F`;
-      hoursFeelsLikeText.textContent = `Feels ${feelsLikeData}°F`;
+      element.textContent = `${convertToCelsius(element.dataset.dew)}°C`;
+    } else if (tempScaleBtn.value === "F") {
+      element.textContent = `${element.dataset.dew}°F`;
     }
   });
+
+  hoursTempText.forEach((element) => {
+    if (tempScaleBtn.value === "C") {
+      element.textContent = `Temp ${convertToCelsius(element.dataset.temp)}°C`;
+    } else if (tempScaleBtn.value === "F") {
+      element.textContent = `Temp ${element.dataset.temp}°F`;
+    }
+  });
+
+  if (hoursFeelsLikeText.length > 0) {
+    hoursFeelsLikeText.forEach((element) => {
+      if (tempScaleBtn.value === "C") {
+        element.textContent = `Feels ${convertToCelsius(
+          element.dataset.feelslike
+        )}°C`;
+      } else if (tempScaleBtn.value === "F") {
+        element.textContent = `Feels ${element.dataset.feelslike}°F`;
+      }
+    });
+  }
 }

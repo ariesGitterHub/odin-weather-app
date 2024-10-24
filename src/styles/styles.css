@@ -267,7 +267,7 @@ body::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
   font-family: var(--font-sans);
-  /* line-height: var(--line-height-basic); */
+  line-height: var(--line-height-basic);
   padding: 0 0 .75rem 0;
 }
 
@@ -496,10 +496,11 @@ text-transform: uppercase;
 #conditions-text {
   font-size: 1.1rem;
   font-weight: 900;
+  margin-bottom: .25rem;
 }
 
 #last-update {
-  font-size: 0.9rem;
+  font-size: .95rem;
 }
 
 #weather-cont1 {

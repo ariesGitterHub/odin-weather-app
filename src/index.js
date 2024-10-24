@@ -12,16 +12,16 @@ import { createBtns } from "./javascript/btns.js";
 import { fetchWithHandling } from "./javascript/fetch.js";
 import { createLocationView } from "./javascript/currentLocation.js";
 import { createDaysView, 
-  // updateDaysFC
+  updateDaysFC
  } from "./javascript/currentDays.js";
 
 import { createHoursView, 
-  // updateHoursFC
+  updateHoursFC
  } from "./javascript/currentHours.js";
 import { createAlertsView } from "./javascript/currentAlerts.js";
 import {
   createWeatherView,
-  // updateCurrentFC,
+  updateCurrentFC,
 } from "./javascript/currentWeather.js";
 
 import {  } from "./javascript/currentDays.js"
@@ -71,39 +71,18 @@ document.addEventListener("DOMContentLoaded", () => {
       tempScaleBtn.value = "C";
       tempScaleImg.src = svgC;
       console.log("Temperature scale set to Celsius.");
-
-      if (weatherData || weatherDataUSA || weatherDataWorld) {
-        // if (hoursContent) {
-        // updateHoursFC(weatherData || weatherDataUSA || weatherDataWorld);
-        // updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        // } else if (daysContent) {
-        // updateDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
-        // updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        // } else {
-        // updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        // }
-      } else {
-        console.log("There is no data to change from C to F yet.");
-      }
+      updateCurrentFC();
+      updateHoursFC();
+      updateDaysFC();
     } else {
       tempScaleBtn.value = "F";
       tempScaleImg.src = svgF;
       console.log("Temperature scale set to Fahrenheit.");
-
-      if (weatherData || weatherDataUSA || weatherDataWorld) {
-        // if (hoursContent) {
-        //   updateHoursFC(weatherData || weatherDataUSA || weatherDataWorld);
-        //   updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        // } else if (daysContent) {
-        //   updateDaysFC(weatherData || weatherDataUSA || weatherDataWorld);
-        //   updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        // } else {
-        //   updateCurrentFC(weatherData || weatherDataUSA || weatherDataWorld);
-        // }
-      } else {
-        console.log("There is no data to change from F to C yet.");
+      updateCurrentFC();
+      updateHoursFC();
+      updateDaysFC();
       }
-    }
+
   });
 
   const searchInput = document.querySelector("#search-input");

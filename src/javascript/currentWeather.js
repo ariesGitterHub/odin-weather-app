@@ -91,12 +91,7 @@ export function createWeatherView(data) {
   const weatherTempCont = createDivElement("weather-temp-cont", "");
 
   const tempText = createTextElement("p", "temp-text", "", "");
-  const feelsLikeText = createTextElement(
-    "p",
-    "feels-like-text",
-    "",
-    ""
-  );
+  const feelsLikeText = createTextElement("p", "feels-like-text", "", "");
 
   weatherTempCont.style.backgroundColor = getTempColor(feelsLikeData);
 
@@ -117,7 +112,12 @@ export function createWeatherView(data) {
     targetDiv: humidityDiv,
     targetImg: humidityImg,
     targetText: humidityText,
-  } = createWeatherElements("humidity", svgHumidity, `${humidityData}%`, "current");
+  } = createWeatherElements(
+    "humidity",
+    svgHumidity,
+    `${humidityData}%`,
+    "current"
+  );
 
   const {
     targetDiv: dewPointDiv,
@@ -160,7 +160,12 @@ export function createWeatherView(data) {
     targetDiv: uvIndexDiv,
     targetImg: uvIndexImg,
     targetText: uvIndexText,
-  } = createWeatherElements("uv-index", svgUVIndex, `${getUVIndexValue(uvIndexData)}`, "current");
+  } = createWeatherElements(
+    "uv-index",
+    svgUVIndex,
+    `${getUVIndexValue(uvIndexData)}`,
+    "current"
+  );
 
   const {
     targetDiv: cloudCoverDiv,
@@ -196,31 +201,55 @@ export function createWeatherView(data) {
     "current"
   );
 
-  // initializeFC(data);
+  // function initializeCurrentFC() {
+  //   if (tempScaleBtn.value === "C") {
+  //     dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+  //     if (tempData !== feelsLikeData) {
+  //       tempText.textContent = `${convertToCelsius(tempData)}°C`;
+  //       feelsLikeText.textContent = `(Feels like ${convertToCelsius(
+  //         feelsLikeData
+  //       )}°C)`;
+  //     } else {
+  //       tempText.textContent = `${convertToCelsius(tempData)}°C`;
+  //     }
+  //   } else {
+  //     dewPointText.textContent = `${dewPointData}°F`;
+  //     if (tempData !== feelsLikeData) {
+  //       tempText.textContent = `${tempData}°F`;
+  //       feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
+  //     } else {
+  //       tempText.textContent = `${tempData}°F`;
+  //     }
+  //   }
+  // }
 
-    function initializeCurrentFC() {
-      if (tempScaleBtn.value === "C") {
-        dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-        if (tempData !== feelsLikeData) {
-          tempText.textContent = `${convertToCelsius(tempData)}°C`;
-          feelsLikeText.textContent = `(Feels like ${convertToCelsius(
-            feelsLikeData
-          )}°C)`;
-        } else {
-          tempText.textContent = `${convertToCelsius(tempData)}°C`;
-        }
+  function initializeCurrentFC() {
+    dewPointText.dataset.dew = dewPointData;
+    tempText.dataset.temp = tempData;
+    feelsLikeText.dataset.feelslike = feelsLikeData;
+
+    if (tempScaleBtn.value === "C") {
+      dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+      if (tempData !== feelsLikeData) {
+        tempText.textContent = `${convertToCelsius(tempData)}°C`;
+        feelsLikeText.textContent = `(Feels like ${convertToCelsius(
+          feelsLikeData
+        )}°C)`;
       } else {
-        dewPointText.textContent = `${dewPointData}°F`;
-        if (tempData !== feelsLikeData) {
-          tempText.textContent = `${tempData}°F`;
-          feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
-        } else {
-          tempText.textContent = `${tempData}°F`;
-        }
+        tempText.textContent = `${convertToCelsius(tempData)}°C`;
+      }
+    } else {
+      dewPointText.textContent = `${dewPointData}°F`;
+      if (tempData !== feelsLikeData) {
+        tempText.textContent = `${tempData}°F`;
+        feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
+      } else {
+        tempText.textContent = `${tempData}°F`;
       }
     }
+  }
 
-      initializeCurrentFC();
+  initializeCurrentFC();
 
   dataContent.append(weatherContent);
   weatherContent.append(conditionsText, lastUpdate, weatherCont1, weatherCont2);
@@ -245,11 +274,7 @@ export function createWeatherView(data) {
     moonPhaseDiv
   );
 
-  weatherMoistureCont.append(
-    humidityDiv,
-    dewPointDiv,
-    precipProbDiv
-  );
+  weatherMoistureCont.append(humidityDiv, dewPointDiv, precipProbDiv);
 
   humidityDiv.append(humidityImg, humidityText);
   cloudCoverDiv.append(cloudCoverImg, cloudCoverText);
@@ -259,10 +284,7 @@ export function createWeatherView(data) {
   sunsetDiv.append(sunsetImg, sunsetText);
   sunriseDiv.append(sunriseImg, sunriseText);
   moonPhaseDiv.append(moonPhaseImg, moonPhaseText);
-  precipProbDiv.append(
-    precipProbImg,
-    precipProbText
-  );
+  precipProbDiv.append(precipProbImg, precipProbText);
 
   styleTileDayNight(data);
 }
@@ -302,4 +324,34 @@ export function createWeatherView(data) {
 //   }
 // }
 
+export function updateCurrentFC() {
+  const dewPointText = document.querySelector("#dew-point-text");
+  const tempText = document.querySelector("#temp-text");
+  const feelsLikeText = document.querySelector("#feels-like-text");
 
+  const tempScaleBtn = document.querySelector("#temp-scale-btn");
+
+    if (tempText && tempScaleBtn.value === "C") { // Using tempText, I just need one of the three for all to be true
+      dewPointText.textContent = `${convertToCelsius(
+        dewPointText.dataset.dew
+      )}°C`;
+      if (feelsLikeText) {
+        tempText.textContent = `${convertToCelsius(tempText.dataset.temp)}°C`;
+        feelsLikeText.textContent = `(Feels like ${convertToCelsius(
+          feelsLikeText.dataset.feelslike
+        )}°C)`;
+      } else {
+        tempText.textContent = `${convertToCelsius(tempText.dataset.temp)}°C`;
+      }
+    } else if (tempText && tempScaleBtn.value === "F") {
+      dewPointText.textContent = `${dewPointText.dataset.dew}°F`;
+      if (feelsLikeText) {
+        tempText.textContent = `${tempText.dataset.temp}°F`;
+        feelsLikeText.textContent = `(Feels like ${feelsLikeText.dataset.feelslike}°F)`;
+      } else {
+        tempText.textContent = `${tempText.dataset.temp}°F`;
+      }
+    } else {
+      console.log("No location has been selected yet.");
+    }
+}
