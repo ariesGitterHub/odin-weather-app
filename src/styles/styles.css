@@ -6,7 +6,7 @@
   --black: #161716;
   --gray: #7f8680;
   --white: #e8f0e9;
-  --alerts: #d04141;
+  --alerts: #bd3d3d;
  
   --btn-color:#b6c4b6;
   --btn-gradient-dk:#111211b6;
@@ -92,7 +92,7 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
+/* html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -113,7 +113,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+/* article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -134,13 +134,13 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-}
+} */
 
 /* END RESETS */
 
 * {
   box-sizing: border-box;
-  /* border: 1px dashed red; */
+  border: 1px dashed red;
   /* KEEP ABOVE: USE FOR TESTS */
   margin: 0;
   padding: 0;
@@ -173,7 +173,7 @@ body::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
   margin: auto;
-  padding-top: .5rem;
+  /* padding-top: .25rem; */
 }
 
 #title-img-div {
@@ -224,7 +224,7 @@ body::-webkit-scrollbar {
   color: var(--white);
   font-family: var(--font-hand);
   font-size: var(--font-size-basic);
-  /* margin-top: -0.5rem; */
+  margin-top: -0.5rem;
   margin-bottom: .5rem;
   text-align: center;
 }
@@ -291,6 +291,8 @@ body::-webkit-scrollbar {
   margin: auto;
   padding: var(--rem-lg) 0 var(--rem-lg) 0;
 }
+
+
 
 
 /* MESSAGE-CONTENT */
@@ -392,8 +394,11 @@ body::-webkit-scrollbar {
   font-weight:var(--font-weight-subtitle);
   margin: var(--margin-content-title);
   text-align: center;
-  text-transform: uppercase;
   padding: .25rem 0 .25rem 0;
+}
+
+#alerts-title-text {
+  text-transform: uppercase;
 }
 
 .alerts-headline {
@@ -525,7 +530,7 @@ background-color: var(--white);
 
 }
 
-.days-icon-img {
+.days-icon-img, .hours-icon-img {
   height: 3.5rem;
   width: auto;
 }
@@ -622,13 +627,13 @@ text-transform: uppercase;
 
 #weather-cont2 {
   height: fit-content;
-  border-radius: 1.75rem;
+  /* border-radius: 1.75rem; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 0.25rem;
+  /* padding: 0.25rem; */
 }
 
 
@@ -800,18 +805,31 @@ text-transform: uppercase;
   transform: scale(0.9);
 }
 
-#world-btn {
-  border: none;
-}
-
-#world-btn {
-  padding: 0;
+#world-btn-img {
+  height: 2.75rem;
+  width: auto;
 }
 
 #temp-scale-img {
   height: 1.75rem;
   width: auto;
 }
+
+#usa-btn-img {
+  height: 2.25rem;
+  width: auto;
+}
+
+#hours-btn-img, #alerts-btn-img {
+  height: 2.5rem;
+  width: auto;
+}
+
+#days-btn-img {
+  height: 2.25rem;
+  width: auto;
+}
+
 
 button:hover {
     background-image: linear-gradient(
