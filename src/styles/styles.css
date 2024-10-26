@@ -62,9 +62,9 @@
 
   /* BOX PRESETS */
   --border-radius-basic: 1rem;
-  --box-shadow-black: 0 4px 8px var(--black);
-  --box-shadow-gray: 0 4px 8px var(--gray);
-  --box-shadow-white: 0 4px 8px var(--white);
+  --box-shadow-black: 0 5px 9px var(--black);
+  --box-shadow-gray: 0 5px 9px var(--gray);
+  --box-shadow-white: 0 5px 9px var(--white);
 
 
   /* FONT PRESETS */
