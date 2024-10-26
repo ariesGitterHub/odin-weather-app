@@ -7,9 +7,9 @@ import {
 
 import { getTempColor } from "./functionsWeather.js"
 
-import svgHours from "../assets/hourly.svg";
-import svgAlerts from "../assets/alert.svg";
-import svgDays from "../assets/multi-day.svg";
+import svgHours from "../assets/hours.svg";
+import svgAlerts from "../assets/alerts.svg";
+import svgDays from "../assets/days.svg";
 
 export function createLocationView(query, data) {
   const noWDataAvailable = "No data currently available.";

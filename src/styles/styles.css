@@ -10,7 +10,7 @@
 
   --btn-color: #b6c4b6;
   --btn-gradient-dk: #111211b6;
-  --btn-gradient-lt: #666e66a9;
+  --btn-gradient-lt: #87ae87a9;
 
   --day-sky: #1288c8;
   --overcast-sky: #545759;
@@ -26,9 +26,10 @@
   --very-hot: #ffa0a0;
 
   --water: #85cfe7;
-  --air: #a8bc8d;
+  --air: #bac6a6;
   --sun: #dcc86c;
-  --moon: #8b74a8;
+  /* --moon: #7b6f8b; */
+    --moon: var(--black);
 
   --day: #eae6d7;
   --dawn: #e7ca47;
@@ -52,8 +53,10 @@
   --dec: #7c929c;
 
   /* BTN PRESETS */
-  --btn-border: 0.125rem solid var(--black);
-  --btn-outline: 1px solid var(--white);
+  --btn-border-black: 1.5px solid var(--black);
+  --btn-border-gray: 1.5px solid var(--gray);
+  --btn-border-white: 1.5px solid var(--white);
+  /* --btn-outline: 1px solid var(--white); */
   --btn-size-h: 2.75rem;
   --btn-transition: background-color 0.5s, transform 0.3s;
 
@@ -61,6 +64,8 @@
   --border-radius-basic: 1rem;
   --box-shadow-black: 0 4px 8px var(--black);
   --box-shadow-gray: 0 4px 8px var(--gray);
+  --box-shadow-white: 0 4px 8px var(--white);
+
 
   /* FONT PRESETS */
   --font-hand: "Caveat", cursive;
@@ -242,8 +247,10 @@ body::-webkit-scrollbar {
 #search-input,
 #search-btn {
   height: 2rem;
+    border: none;
   font-family: var(--font-sans);
   font-size: var(--font-size-basic);
+    outline: none;
   padding: var(--rem-md);
 }
 
@@ -251,25 +258,27 @@ body::-webkit-scrollbar {
   background-color: var(--white);
   border-top-left-radius: var(--border-radius-basic);
   border-bottom-left-radius: var(--border-radius-basic);
-  border: 1px solid var(--btn-color);
-  box-shadow: var(--box-shadow-gray);
+  /* border: var(--btn-color-black); */
+  /* box-shadow: var(--box-shadow-white); */
   font-size: var(--font-size-basic);
-  outline: none;
 }
 
 #search-btn {
   width: fit-content;
   background-color: var(--btn-color);
-  border: none;
+  /* border: none; */
+  /* border: var(--btn-color-black); */
   border-top-right-radius: var(--border-radius-basic);
   border-bottom-right-radius: var(--border-radius-basic);
-  box-shadow: var(--box-shadow-gray);
+  /* box-shadow: var(--box-shadow-white); */
   color: var(--black);
   cursor: pointer;
   transition: var(--btn-transition);
+  /* outline: none; */
 }
 
 #search-btn:hover {
+  color: var(--white);
   transform: translateX(2.5px);
 }
 
@@ -488,10 +497,10 @@ body::-webkit-scrollbar {
 .days-temp-min-cont {
   height: 4.25rem;
   width: 4.25rem;
-  border: var(--btn-border);
-  outline: var(--btn-outline);
+  border: var(--btn-border-white);
+  /* outline: var(--btn-outline); */
   border-radius: 0.75rem;
-  box-shadow: var(--box-shadow-gray);
+  /* box-shadow: var(--box-shadow-white); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -561,21 +570,23 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: .25rem;
 }
 
 #weather-temp-cont,
 #weather-icon-cont {
   height: 5.5rem;
   width: 5.5rem;
-  border: var(--btn-border);
+  /* use day night for below */
+  /* border: var(--btn-border); */
   border-radius: 1rem;
-  box-shadow: var(--box-shadow-gray);
+  /* box-shadow: var(--box-shadow-white); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0.25rem;
-  outline: var(--btn-outline);
+  /* outline: var(--btn-outline); */
   padding: 0.25rem;
 }
 
@@ -625,17 +636,17 @@ body::-webkit-scrollbar {
 .days-sunrise-div,
 .days-sunset-div,
 .days-moon-phase-div {
-  height: 2.25rem;
+  height: 2.5rem;
   width: fit-content;
   background-color: var(--black);
-  border: var(--btn-border);
+  border: var(--btn-border-white);
   border-radius: 1.5rem;
-  box-shadow: var(--box-shadow-black);
+  /* box-shadow: var(--box-shadow-black); */
   color: var(--white);
   display: flex;
   justify-content: center;
   align-items: center;
-  outline: var(--btn-outline);
+  /* outline: var(--btn-outline); */
 }
 
 .hours-humidity-div,
@@ -653,8 +664,10 @@ body::-webkit-scrollbar {
 .days-sunrise-div,
 .days-sunset-div,
 .days-moon-phase-div {
-  box-shadow: var(--box-shadow-gray);
+  /* box-shadow: var(--box-shadow-white); */
 }
+
+
 
 .current-img,
 .hours-humidity-img,
@@ -672,9 +685,11 @@ body::-webkit-scrollbar {
 .days-sunrise-img,
 .days-sunset-img,
 .days-moon-phase-img {
-  height: 2rem;
+  height: 2.5rem;
   width: auto;
   border-radius: 50%;
+  border: var(--btn-border-white);
+  margin-left: -1.5px;
 }
 
 #humidity-img,
@@ -749,14 +764,14 @@ body::-webkit-scrollbar {
   height: var(--btn-size-h);
   width: var(--btn-size-h);
   background-color: var(--btn-color);
-  border: var(--btn-border);
+  border: var(--btn-border-white);
   border-radius: 50%;
-  box-shadow: var(--box-shadow-gray);
+  box-shadow: var(--box-shadow-white);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  outline: var(--btn-outline);
+  /* outline: var(--btn-outline); */
   padding: 0.15rem;
   transition: var(--btn-transition);
 }
@@ -769,12 +784,12 @@ body::-webkit-scrollbar {
   transform: scale(0.9);
 }
 
-#world-btn-img {
+#world-btn-img, #temp-scale-img, #usa-btn-img, #hours-btn-img, #alerts-btn-img, #days-btn-img  {
   height: 2.75rem;
   width: auto;
 }
 
-#temp-scale-img {
+/* #temp-scale-img {
   height: 1.75rem;
   width: auto;
 }
@@ -793,7 +808,7 @@ body::-webkit-scrollbar {
 #days-btn-img {
   height: 2.25rem;
   width: auto;
-}
+} */
 
 button:hover {
   background-image: linear-gradient(
