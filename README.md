@@ -19,23 +19,23 @@ Push that baby to github and share your solution below!
 ## Defining the icon set parameter in the Weather API
 https://www.visualcrossing.com/resources/documentation/weather-api/defining-icon-set-in-the-weather-api/?gad_source=1&gclid=EAIaIQobChMIgMHTpKHciAMVMlFHAR3IxSMMEAAYASAAEgKa2_D_BwE
 
-## visualcrossing/WeatherIcons
+## Visualcrossing/WeatherIcons - UNUSED
 Public
 https://github.com/visualcrossing/WeatherIcons
 
-## Alternate weather icons for use
+## Alternate weather icons for use - UNUSED
 https://github.com/erikflowers/weather-icons
 
 ## Useful astronomical data and how to use it
 https://www.visualcrossing.com/resources/documentation/weather-api/how-to-include-sunrise-sunset-and-moon-phase-data-into-your-api-requests/
 
-## Trying to see foreign language writing systems
-installed: sudo apt install fonts-noto fonts-noto-cjk fonts-arabeyes fonts-wqy-microhei fonts-indic
+## Fix to see foreign language writing systems so blank characters are not rendered
+Installed: sudo apt install fonts-noto fonts-noto-cjk fonts-arabeyes fonts-wqy-microhei fonts-indic
 sudo apt-get install fonts-noto
 sudo apt-get install fonts-noto-cjk
 
-## Units of Measurement
+## Units of Measurement used with Virtual Crossing Data
 https://www.visualcrossing.com/resources/documentation/weather-data/weather-data-documentation/
 
-## Moon Icons
-Modified variants of moon phase icons from https://www.svgrepo.com/collection/iconhub-glyph-icons/ (specifically: https://www.svgrepo.com/collection/emojione-mono-emojis/)
+## General Weather Icons
+I ended up making most of my own weather icons for this project, so please cite me, "ariesGitterHub" if you used them. The exceptions are the title img icons of the wind, the weathervane, and the windy weather icons, which are all heavily modified version of weather icons found on https://www.svgrepo.com .
