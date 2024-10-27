@@ -1,16 +1,12 @@
 import { createDivElement, createTextElement } from "./functionsBasic.js";
 
 export function createAlertsView(data) {
-  const noWDataAvailable = "No data currently available.";
   const dataContent = document.querySelector("#data-content");
 
   const alertsData = data.alerts;
 
   function getAlertsInfo() {
-    if (!data) {
-      console.error(noWDataAvailable);
-      return;
-    } else if (alertsData.length > 0) {
+    if (alertsData.length > 0) {
       const alertsContent = createDivElement("alerts-content", "");
       const alertsTitle = createTextElement(
         "p",
@@ -26,7 +22,6 @@ export function createAlertsView(data) {
         const onsetData = alerts.onset;
         const endData = alerts.ends;
         const descriptionData = alerts.description;
-
         const alertsHeadline = createTextElement(
           "p",
           "",
@@ -61,5 +56,6 @@ export function createAlertsView(data) {
       });
     }
   }
+  
   getAlertsInfo();
 }

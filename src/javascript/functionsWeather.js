@@ -1,4 +1,5 @@
 import { format, parse } from "date-fns";
+
 import clearDay from "../assets/clear-day.svg";
 import clearNight from "../assets/clear-night.svg";
 import cloudy from "../assets/cloudy.svg";
@@ -29,69 +30,36 @@ export function convertToCelsius(temp) {
   return celsius;
 }
 
-// CONVERT TO F FROM C
+// CONVERT TO F FROM C -- UNUSED!
 export function convertToFahrenheit(temp) {
   const celsius = Math.round(((temp * 9) / 5 + 32) * 10) / 10;
   return celsius;
 }
 
-export function styleTileDayNight(data) {
-  const parseLastUpdateLocalTime = format(
-    parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
-    "HH:mm:ss a"
-  );
+export function initializeFC(data) {
+  const tempScaleBtn = document.querySelector("#temp-scale-btn");
+  const tempData = data.currentConditions.temp;
+  const feelsLikeData = data.currentConditions.feelslike;
+  const dewPointData = data.currentConditions.dew;
 
-  const parseSunrise = format(
-    parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
-    "HH:mm:ss a"
-  );
+  const dewPointText = document.querySelector("#dew-point-text");
+  const tempText = document.querySelector("#temp-text");
+  const feelsLikeText = document.querySelector("#feels-like-text");
 
-  const parseSunset = format(
-    parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
-    "HH:mm:ss a"
-  );
-
-  // const locationContent = document.querySelector("#location-content")
-  const weatherContent = document.querySelector("#weather-content");
-  const conditionsText = document.querySelector("#conditions-text");
-  const lastUpdate = document.querySelector("#last-update");
-  const weatherIconCont = document.querySelector("#weather-icon-cont");
-  const weatherTempCont = document.querySelector("#weather-temp-cont");
-
-  // const weatherItemElements = document.querySelectorAll(
-  //   ".current-img, .hours-humidity-img, .hours-dew-point-img, .hours-precip-prob-img, .hours-wind-info-img, .hours-cloud-cover-img, .hours-uv-index-img, .days-humidity-img, .days-dew-point-img, .days-precip-prob-img, .days-wind-info-img, .days-cloud-cover-img, .days-uv-index-img, .days-sunrise-img, .days-sunset-img, .days-moon-phase-img"
-  // );
-
-  if (
-    parseLastUpdateLocalTime > parseSunrise &&
-    parseLastUpdateLocalTime < parseSunset
-  ) {
-    weatherContent.style.background = "var(--day-time)";
-    conditionsText.style.color = "var(--black)";
-    lastUpdate.style.color = "var(--black)";
-    weatherIconCont.style.border = "var(--btn-border-black)";
-    weatherTempCont.style.border = "var(--btn-border-black)";
-
-    // weatherItemElements.forEach(border => {
-    //   border.style.border = "var(--btn-border-black)";
-    // });
-
-  } else if (
-    parseLastUpdateLocalTime < parseSunrise ||
-    parseLastUpdateLocalTime > parseSunset
-  ) {
-    weatherContent.style.background = "var(--night-time)";
-    conditionsText.style.color = "var(--white)";
-    lastUpdate.style.color = "var(--white)";
-    weatherIconCont.style.border = "var(--btn-border-white)";
-    weatherTempCont.style.border = "var(--btn-border-white)";
-    // weatherItemElements.forEach(border => {
-    //   border.style.border = "var(--btn-border-black)";
-    // });
-}
+  if (tempScaleBtn.value === "C") {
+    dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
+    tempText.textContent = `${convertToCelsius(tempData)}°C`;
+    feelsLikeText.textContent = `(Feels like ${convertToCelsius(
+      feelsLikeData
+    )}°C)`;
+  } else {
+    dewPointText.textContent = `${dewPointData}°F`;
+    tempText.textContent = `${tempData}°F`;
+    feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
+  }
 }
 
-export function styleHoursDayNight(data, sunrise, sunset) {
+export function getHoursDayNight(data, sunrise, sunset) {
   const parseHourTime = format(
     parse(data, "HH:mm:ss", new Date()),
     "HH:mm:ss a"
@@ -118,11 +86,57 @@ export function styleHoursDayNight(data, sunrise, sunset) {
   return { colorText, colorBkgd };
 }
 
+export function getMonthBkgdColor(data) {
+  let contBkgdColor = "";
+  switch (data) {
+    case "Jan":
+      contBkgdColor = "var(--jan)";
+      break;
+    case "Feb":
+      contBkgdColor = "var(--feb)";
+      break;
+    case "Mar":
+      contBkgdColor = "var(--mar)";
+      break;
+    case "Apr":
+      contBkgdColor = "var(--apr)";
+      break;
+    case "May":
+      contBkgdColor = "var(--may)";
+      break;
+    case "Jun":
+      contBkgdColor = "var(--jun)";
+      break;
+    case "Jul":
+      contBkgdColor = "var(--jul)";
+      break;
+    case "Aug":
+      contBkgdColor = "var(--aug)";
+      break;
+    case "Sep":
+      contBkgdColor = "var(--sep)";
+      break;
+    case "Oct":
+      contBkgdColor = "var(--oct)";
+      break;
+    case "Nov":
+      contBkgdColor = "var(--nov)";
+      break;
+    case "Dec":
+      contBkgdColor = "var(--dec)";
+      break;
+    default:
+      contBkgdColor = "var(--gray)";
+      break;
+  }
+
+  return contBkgdColor;
+}
+
 export function getMoonPhase(data) {
   const moonRatio = data;
   let moonSrc;
   let moonPhase;
-  // console.log(`Moon Phase value: ${moonRatio}`);
 
   if (moonRatio === 0) {
     moonSrc = moon1New;
@@ -156,6 +170,121 @@ export function getMoonPhase(data) {
   }
 
   return { moonSrc, moonPhase };
+}
+
+export function getTempColor(data) {
+  const feelsLikeData = data;
+  let tempColor;
+  if (feelsLikeData < 32) tempColor = "var(--very-cold)";
+  else if (feelsLikeData >= 32 && feelsLikeData < 50) tempColor = "var(--cold)";
+  else if (feelsLikeData >= 50 && feelsLikeData < 68) tempColor = "var(--mild)";
+  else if (feelsLikeData >= 68 && feelsLikeData < 86) tempColor = "var(--warm)";
+  else if (feelsLikeData >= 86 && feelsLikeData < 104) tempColor = "var(--hot)";
+  else if (feelsLikeData >= 104) tempColor = "var(--very-hot)";
+  else tempColor = "Unknown Temperature";
+
+  return tempColor;
+}
+
+export function getTileDayNight(data) {
+  const parseLastUpdateLocalTime = format(
+    parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
+    "HH:mm:ss a"
+  );
+
+  const parseSunrise = format(
+    parse(data.currentConditions.sunrise, "HH:mm:ss", new Date()),
+    "HH:mm:ss a"
+  );
+
+  const parseSunset = format(
+    parse(data.currentConditions.sunset, "HH:mm:ss", new Date()),
+    "HH:mm:ss a"
+  );
+
+  const weatherContent = document.querySelector("#weather-content");
+  const conditionsText = document.querySelector("#conditions-text");
+  const lastUpdate = document.querySelector("#last-update");
+  const weatherIconCont = document.querySelector("#weather-icon-cont");
+  const weatherTempCont = document.querySelector("#weather-temp-cont");
+
+  if (
+    parseLastUpdateLocalTime > parseSunrise &&
+    parseLastUpdateLocalTime < parseSunset
+  ) {
+    weatherContent.style.background = "var(--day-time)";
+    conditionsText.style.color = "var(--black)";
+    lastUpdate.style.color = "var(--black)";
+    weatherIconCont.style.border = "var(--btn-border-black)";
+    weatherTempCont.style.border = "var(--btn-border-black)";
+  } else if (
+    parseLastUpdateLocalTime < parseSunrise ||
+    parseLastUpdateLocalTime > parseSunset
+  ) {
+    weatherContent.style.background = "var(--night-time)";
+    conditionsText.style.color = "var(--white)";
+    lastUpdate.style.color = "var(--white)";
+    weatherIconCont.style.border = "var(--btn-border-white)";
+    weatherTempCont.style.border = "var(--btn-border-white)";
+  }
+}
+
+export function getUVIndexValue(data) {
+  const uvIndexData = data;
+  let uvWarning;
+  if (uvIndexData >= 0 && uvIndexData <= 2) uvWarning = `${uvIndexData} (low)`;
+  else if (uvIndexData >= 3 && uvIndexData <= 5)
+    uvWarning = `${uvIndexData} (moderate)`;
+  else if (uvIndexData >= 6 && uvIndexData <= 7)
+    uvWarning = `${uvIndexData} (high)`;
+  else if (uvIndexData >= 8 && uvIndexData <= 10)
+    uvWarning = `${uvIndexData} (very high)`;
+  else if (uvIndexData >= 11) uvWarning = `${uvIndexData} (extreme)`;
+  else uvWarning = "Unknown UV Index";
+
+  return uvWarning;
+}
+
+export function getWeatherIconBkgdColor(data) {
+  let imgBkgdColor = "";
+
+  switch (data) {
+    case "clear-day":
+    case "partly-cloudy-day":
+      imgBkgdColor = "var(--day-sky)";
+      break;
+    case "clear-night":
+    case "partly-cloudy-night":
+      imgBkgdColor = "var(--night-sky)";
+      break;
+    case "cloudy":
+    case "fog":
+    case "hail":
+    case "rain":
+    case "sleet":
+    case "snow":
+    case "thunder":
+    case "wind":
+      imgBkgdColor = "var(--overcast-sky)";
+      break;
+    case "rain-snow-showers-day":
+    case "showers-day":
+    case "snow-showers-day":
+    case "thunder-showers-day":
+      imgBkgdColor = "var(--day-overcast-sky)";
+      break;
+    case "rain-snow-showers-night":
+    case "showers-night":
+    case "snow-showers-night":
+    case "thunder-showers-night":
+      imgBkgdColor = "var(--night-overcast-sky)";
+      break;
+    default:
+      imgBkgdColor = "";
+      break;
+  }
+
+  return imgBkgdColor;
 }
 
 export function getWeatherIconSRC(data) {
@@ -209,48 +338,6 @@ export function getWeatherIconSRC(data) {
   }
 }
 
-export function getWeatherIconBkgdColor(data) {
-  let imgBkgdColor = "";
-
-  switch (data) {
-    case "clear-day":
-    case "partly-cloudy-day":
-      imgBkgdColor = "var(--day-sky)";
-      break;
-    case "clear-night":
-    case "partly-cloudy-night":
-      imgBkgdColor = "var(--night-sky)";
-      break;
-    case "cloudy":
-    case "fog":
-    case "hail":
-    case "rain":
-    case "sleet":
-    case "snow":
-    case "thunder":
-    case "wind":
-      imgBkgdColor = "var(--overcast-sky)";
-      break;
-    case "rain-snow-showers-day":
-    case "showers-day":
-    case "snow-showers-day":
-    case "thunder-showers-day":
-      imgBkgdColor = "var(--day-overcast-sky)";
-      break;
-    case "rain-snow-showers-night":
-    case "showers-night":
-    case "snow-showers-night":
-    case "thunder-showers-night":
-      imgBkgdColor = "var(--night-overcast-sky)";
-      break;
-    default:
-      imgBkgdColor = "";
-      break;
-  }
-
-  return imgBkgdColor;
-}
-
 export function getWindDirection(data) {
   const windDegrees = data;
   let windDesc;
@@ -274,171 +361,3 @@ export function getWindDirection(data) {
 
   return windDesc;
 }
-
-export function getUVIndexValue(data) {
-  const uvIndexData = data;
-  let uvWarning;
-  if (uvIndexData >= 0 && uvIndexData <= 2) uvWarning = `${uvIndexData} (low)`;
-  else if (uvIndexData >= 3 && uvIndexData <= 5)
-    uvWarning = `${uvIndexData} (moderate)`;
-  else if (uvIndexData >= 6 && uvIndexData <= 7)
-    uvWarning = `${uvIndexData} (high)`;
-  else if (uvIndexData >= 8 && uvIndexData <= 10)
-    uvWarning = `${uvIndexData} (very high)`;
-  else if (uvIndexData >= 11) uvWarning = `${uvIndexData} (extreme)`;
-  else uvWarning = "Unknown UV Index";
-
-  return uvWarning;
-}
-
-export function getTempColor(data) {
-  const feelsLikeData = data;
-  let tempColor;
-  if (feelsLikeData < 32) tempColor = "var(--very-cold)";
-  else if (feelsLikeData >= 32 && feelsLikeData < 50) tempColor = "var(--cold)";
-  else if (feelsLikeData >= 50 && feelsLikeData < 68) tempColor = "var(--mild)";
-  else if (feelsLikeData >= 68 && feelsLikeData < 86) tempColor = "var(--warm)";
-  else if (feelsLikeData >= 86 && feelsLikeData < 104) tempColor = "var(--hot)";
-  else if (feelsLikeData >= 104) tempColor = "var(--very-hot)";
-  else tempColor = "Unknown Temperature";
-
-  return tempColor;
-}
-
-export function initializeFC(data) {
-  const tempScaleBtn = document.querySelector("#temp-scale-btn");
-  const tempData = data.currentConditions.temp;
-  const feelsLikeData = data.currentConditions.feelslike;
-  const dewPointData = data.currentConditions.dew;
-
-  const dewPointText = document.querySelector("#dew-point-text");
-  const tempText = document.querySelector("#temp-text");
-  const feelsLikeText = document.querySelector("#feels-like-text");
-
-  if (tempScaleBtn.value === "C") {
-    dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-    tempText.textContent = `${convertToCelsius(tempData)}°C`;
-    feelsLikeText.textContent = `(Feels like ${convertToCelsius(
-      feelsLikeData
-    )}°C)`;
-  } else {
-    dewPointText.textContent = `${dewPointData}°F`;
-    tempText.textContent = `${tempData}°F`;
-    feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
-  }
-}
-
-// if (tempScaleBtn.value === "C") {
-//   dewPointText.textContent = `${convertToCelsius(dewPointData)}°C`;
-//   tempText.textContent = `${convertToCelsius(tempData)}°C`;
-//   feelsLikeText.textContent = `(Feels like ${convertToCelsius(feelsLikeData)}°C)`;
-//   }
-// } else {
-//   dewPointText.textContent = `${dewPointData}°F`;
-//   tempText.textContent = `${tempData}°F`;
-//   feelsLikeText.textContent = `(Feels like ${feelsLikeData}°F)`;
-// }
-
-export function getMonthBkgdColor(data) {
-  let contBkgdColor = "";
-  switch (data) {
-    case "Jan":
-      contBkgdColor = "var(--jan)";
-      break;
-    case "Feb":
-      contBkgdColor = "var(--feb)";
-      break;
-    case "Mar":
-      contBkgdColor = "var(--mar)";
-      break;
-    case "Apr":
-      contBkgdColor = "var(--apr)";
-      break;
-    case "May":
-      contBkgdColor = "var(--may)";
-      break;
-    case "Jun":
-      contBkgdColor = "var(--jun)";
-      break;
-    case "Jul":
-      contBkgdColor = "var(--jul)";
-      break;
-    case "Aug":
-      contBkgdColor = "var(--aug)";
-      break;
-    case "Sep":
-      contBkgdColor = "var(--sep)";
-      break;
-    case "Oct":
-      contBkgdColor = "var(--oct)";
-      break;
-    case "Nov":
-      contBkgdColor = "var(--nov)";
-      break;
-    case "Dec":
-      contBkgdColor = "var(--dec)";
-      break;
-    default:
-      contBkgdColor = "var(--gray)";
-      break;
-  }
-
-  return contBkgdColor;
-}
-
-// export function getDayBkgdColor(data) {
-//   // const funcDataTimeDate = dataTimeData;
-//   const sunrise0 = data.days[0].sunrise;
-//   const sunset0 = data.days[0].sunset;
-//   const sunrise1 = data.days[1].sunrise;
-//   const sunset1 = data.days[1].sunset;
-
-//   // const parseDataTimeData = format(
-//   //   parse(funcDataTimeDate, "HH:mm:ss", new Date()),
-//   //   "HH:mm:ss"
-//   // );
-
-//     const parseSunrise0 = format(
-//       parse(sunrise0, "HH:mm:ss", new Date()),
-//       "HH:mm:ss"
-//     );
-
-//   const parseSunset0 = format(
-//     parse(sunset0, "HH:mm:ss", new Date()),
-//     "HH:mm:ss"
-//   );
-
-//       const parseSunrise1 = format(
-//     parse(sunrise1, "HH:mm:ss", new Date()),
-//     "HH:mm:ss"
-//   );
-
-//   const parseSunset1 = format(
-//     parse(sunset1, "HH:mm:ss", new Date()),
-//     "HH:mm:ss a"
-//   );
-//   let colorText = "";
-//   let colorBkgd = "";
-
-//   if (dateTimeData === data.days[0].hours.datetime) {
-//     if (dataTimeData > parseSunrise0 && dataTimeData < parseSunset0) {
-//         colorText = "var(--black)";
-//         colorBkgd = "var(--day-time)";
-//     } else if (dataTimeData < parseSunrise0 || dataTimeData > parseSunset0) {
-//         colorText = "var(--white)";
-//         colorBkgd = "var(--night-time)";
-//     }
-//   } else if (dateTimeData === data.days[1].hours.datetime) {
-//     if (dataTimeData > parseSunrise1 && dataTimeData < parseSunset1) {
-//         colorText = "var(--black)";
-//         colorBkgd = "var(--day-time)";
-//     } else if (dataTimeData < parseSunrise1 || dataTimeData > parseSunset1) {
-//         colorText = "var(--white)";
-//         colorBkgd = "var(--night-time)";
-//     } else {
-//     return "Invalid Value";
-//   }
-
-//   return { colorText, colorBkgd };
-// }
-// }

@@ -8,12 +8,12 @@ import svgPrecipProb from "../assets/chance-of-precipitation.svg";
 import svgWindInfo from "../assets/wind-sm.svg";
 
 import {
-  getTodayDate,
-  getTomorrowDate,
   createDivElement,
   createImgElement,
   createTextElement,
   createWeatherElements,
+  getTodayDate,
+  getTomorrowDate,
   roundUpToNextHourNum,
 } from "./functionsBasic.js";
 
@@ -23,24 +23,18 @@ import {
   getTempColor,
   getWeatherIconBkgdColor,
   getUVIndexValue,
-  styleHoursDayNight,
+  getHoursDayNight,
   convertToCelsius,
 } from "./functionsWeather.js";
 
 export function createHoursView(data) {
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
 
-  const noWDataAvailable = "No data currently available.";
   const dataContent = document.querySelector("#data-content");
 
   // I need data from currentConditions (datetime which will be the lastUpdateTime locally), days( indexes 0 and 1, and datetime, which will be a date that I use below the hour), and hours (which has all the hourly data by the data, the bulk of my needs)
 
   function getHoursInfo() {
-    if (!data) {
-      console.error(noWDataAvailable);
-      return;
-    }
-
     const numberOfHours = 24; // The number of hours you want the hourly forecast to cover
     const hoursContent = createDivElement("hours-content", "");
     const hoursTitleText = createTextElement(
@@ -121,12 +115,12 @@ export function createHoursView(data) {
         "hours-condition-text"
       );
       const hoursTimeCont = createDivElement("", "hours-time-cont");
-      hoursTimeCont.style.backgroundColor = styleHoursDayNight(
+      hoursTimeCont.style.backgroundColor = getHoursDayNight(
         dateTimeData,
         sunrise0Time,
         sunset0Time
       ).colorBkgd;
-      hoursTimeCont.style.color = styleHoursDayNight(
+      hoursTimeCont.style.color = getHoursDayNight(
         dateTimeData,
         sunrise0Time,
         sunset0Time

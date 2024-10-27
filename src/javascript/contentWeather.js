@@ -18,20 +18,19 @@ import {
 
 import {
   convertToCelsius,
-  styleTileDayNight,
+  getMoonPhase,
+  getTempColor,
+  getTileDayNight,
+  getUVIndexValue,
   getWeatherIconSRC,
   getWeatherIconBkgdColor,
-  getTempColor,
   getWindDirection,
-  getUVIndexValue,
-  getMoonPhase,
 } from "./functionsWeather.js";
 
 export function createWeatherView(data) {
   const dataContent = document.querySelector("#data-content");
   const weatherContent = createDivElement("weather-content", "");
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
-  const noWeatherDataAvailable = "No weather data available.";
   const conditionsData = data.currentConditions.conditions;
   const tempData = data.currentConditions.temp;
   const feelsLikeData = data.currentConditions.feelslike;
@@ -45,11 +44,6 @@ export function createWeatherView(data) {
   const cloudCoverData = data.currentConditions.cloudcover;
   const uvIndexData = data.currentConditions.uvindex;
   const moonPhaseData = data.currentConditions.moonphase;
-
-  if (!data) {
-    console.error(noWeatherDataAvailable);
-    return;
-  }
 
   const parseLastUpdateLocalTime = format(
     parse(data.currentConditions.datetime, "HH:mm:ss", new Date()),
@@ -81,27 +75,19 @@ export function createWeatherView(data) {
   );
 
   const weatherCont1 = createDivElement("weather-cont1", "");
-
   const weatherTempCont = createDivElement("weather-temp-cont", "");
-
+  weatherTempCont.style.backgroundColor = getTempColor(feelsLikeData);
   const tempText = createTextElement("p", "temp-text", "", "");
   const feelsLikeText = createTextElement("p", "feels-like-text", "", "");
-
-  weatherTempCont.style.backgroundColor = getTempColor(feelsLikeData);
-
   const weatherIconCont = createDivElement("weather-icon-cont", "");
-
+  weatherIconCont.style.backgroundColor = getWeatherIconBkgdColor(iconData);
   const weatherIconImg = createImgElement(
     "weather-icon-img",
     getWeatherIconSRC(iconData),
     "Weather icon based on current conditions.",
     ""
   );
-
-  weatherIconCont.style.backgroundColor = getWeatherIconBkgdColor(iconData);
-
   const weatherMoistureCont = createDivElement("weather-moisture-cont", "");
-
   const {
     targetDiv: humidityDiv,
     targetImg: humidityImg,
@@ -112,13 +98,11 @@ export function createWeatherView(data) {
     `${humidityData}%`,
     "current"
   );
-
   const {
     targetDiv: dewPointDiv,
     targetImg: dewPointImg,
     targetText: dewPointText,
   } = createWeatherElements("dew-point", svgDewPoint, "", "current");
-
   const {
     targetDiv: precipProbDiv,
     targetImg: precipProbImg,
@@ -129,11 +113,9 @@ export function createWeatherView(data) {
     `${precipProbData}%`,
     "current"
   );
-
   const weatherCont2 = createDivElement("weather-cont2", "");
 
   let windInfo = "";
-
   if (windSpeedMPHData && windDirectionData && windGustMPHData) {
     windInfo = `${windSpeedMPHData}mph ${getWindDirection(
       windDirectionData
@@ -149,7 +131,6 @@ export function createWeatherView(data) {
     targetImg: windInfoImg,
     targetText: windInfoText,
   } = createWeatherElements("wind-info", svgWindInfo, windInfo, "current");
-
   const {
     targetDiv: uvIndexDiv,
     targetImg: uvIndexImg,
@@ -160,7 +141,6 @@ export function createWeatherView(data) {
     `${getUVIndexValue(uvIndexData)}`,
     "current"
   );
-
   const {
     targetDiv: cloudCoverDiv,
     targetImg: cloudCoverImg,
@@ -171,19 +151,16 @@ export function createWeatherView(data) {
     `${cloudCoverData}%`,
     "current"
   );
-
   const {
     targetDiv: sunriseDiv,
     targetImg: sunriseImg,
     targetText: sunriseText,
   } = createWeatherElements("sunrise", svgSunrise, parseSunrise, "current");
-
   const {
     targetDiv: sunsetDiv,
     targetImg: sunsetImg,
     targetText: sunsetText,
   } = createWeatherElements("sunset", svgSunset, parseSunset, "current");
-
   const {
     targetDiv: moonPhaseDiv,
     targetImg: moonPhaseImg,
@@ -225,7 +202,6 @@ export function createWeatherView(data) {
 
   dataContent.append(weatherContent);
   weatherContent.append(conditionsText, lastUpdate, weatherCont1, weatherCont2);
-
   weatherCont1.append(weatherIconCont, weatherTempCont);
 
   if (tempData !== feelsLikeData) {
@@ -235,7 +211,6 @@ export function createWeatherView(data) {
   }
 
   weatherIconCont.append(weatherIconImg);
-
   weatherCont2.append(
     weatherMoistureCont,
     windInfoDiv,
@@ -245,9 +220,7 @@ export function createWeatherView(data) {
     sunsetDiv,
     moonPhaseDiv
   );
-
   weatherMoistureCont.append(humidityDiv, dewPointDiv, precipProbDiv);
-
   humidityDiv.append(humidityImg, humidityText);
   cloudCoverDiv.append(cloudCoverImg, cloudCoverText);
   dewPointDiv.append(dewPointImg, dewPointText);
@@ -258,14 +231,13 @@ export function createWeatherView(data) {
   moonPhaseDiv.append(moonPhaseImg, moonPhaseText);
   precipProbDiv.append(precipProbImg, precipProbText);
 
-  styleTileDayNight(data);
+  getTileDayNight(data);
 }
 
 export function updateCurrentFC() {
   const dewPointText = document.querySelector("#dew-point-text");
   const tempText = document.querySelector("#temp-text");
   const feelsLikeText = document.querySelector("#feels-like-text");
-
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
 
   if (tempText && tempScaleBtn.value === "C") {

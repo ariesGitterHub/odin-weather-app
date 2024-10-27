@@ -1,4 +1,4 @@
-import { createFormElement, createBtnElement } from "./functionsBasic.js";
+import { createBtnElement, createFormElement } from "./functionsBasic.js";
 
 export function createSearch() {
   const searchContent = document.querySelector("#search-content");
@@ -9,7 +9,7 @@ export function createSearch() {
     "search-input",
     placeHolderText
   );
-  
+
   searchInput.required = true;
 
   const searchBtn = createBtnElement("search-btn", "Search");

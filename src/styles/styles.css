@@ -2,10 +2,33 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
+
+/* **********TABLE OF CONTENTS ********** */
+/* GLOBALS/ROOT ***************************/
+/* UNUSED RESETS **************************/
+/* HEADER *********************************/
+/* ---> TITLE CONTENT *********************/
+/* ---> SEARCH CONTENT ********************/
+/* ---> HEADER-BTN CONTENT ****************/
+/* MESSAGE CONTENT ************************/
+/* DATA CONTENT ***************************/
+/* ---> ALERTS CONTENT ********************/
+/* ---> HOURS/DAYS CONTENT ****************/
+/* ---> CURRENT WEATHER CONTENT ***********/
+
+/* ROUND-BTNS *****************************/
+/* MEDIA QUERIES **************************/
+/* **********TABLE OF CONTENTS ********** */
+
+
+/* GLOBALS/ROOT ***************************/
+
 :root {
+
   /* COLOR PRESETS */
   --black: #161716;
   --gray: #7f8680;
+  --green: #627264;
   --white: #e8f0e9;
   --alerts: #bd3d3d;
 
@@ -29,8 +52,7 @@
   --water: #85cfe7;
   --air: #bac6a6;
   --sun: #dcc86c;
-  /* --moon: #7b6f8b; */
-    --moon: var(--black);
+  --moon: var(--black);
 
   --day: #eae6d7;
   --dawn: #e7ca47;
@@ -55,27 +77,57 @@
 
   /* BTN PRESETS */
   --btn-border-black: .125rem solid var(--black);
-  --btn-border-gray: .125rem solid var(--gray);
   --btn-border-white: .125rem solid var(--white);
-   --btn-transition: background-color 0.5s, transform 0.3s;
+  --btn-transition: background-color 0.5s, transform 0.3s;
 
   /* BOX PRESETS */
-  --box-shadow-black: 0 3px 6px var(--black);
   --box-shadow-gray: 0 3px 6px var(--gray);
+  --box-shadow-green: 0 5px 10px var(--green);
   --box-shadow-white: 0 3px 6px var(--white);
 
   /* FONT PRESETS */
   --font-hand: "Caveat", cursive;
   --font-sans: "Josefin Sans", sans-serif;
+
+  /* OTHER PRESETS */
+  --width-100: 100vw;
+  --width-90: 90vw;
+  --width-70: 70vw;
+  --width-50: 50vw;
+
+  --095: .95rem;
+  --100: 1rem;
+  --105: 1.05rem;
+  --110: 1.1rem;
+  --125: 1.25rem;
+  --150: 1.5rem;
+  --200: 2rem;
+  --225: 2.25rem;
+  --250: 2.5rem;
+  --265: 2.65rem;
+  --275: 2.75rem;
+  --350: 3.5rem;
+  --420: 4.2rem;
+  --425: 4.25rem;
+  --475: 4.75rem;
+  --525: 5.25rem;
+  --550: 5.5rem;
+
+  --lh115: 1.15;
+  --lh130: 1.3;
+
+  /* MEDIA QUERY SIZE MULTIPLIER */
+  --mq500x: 1.25;
+  --mq800x: 1.5;
+  --mq1300x: 2;
 }
 
+/* UNUSED RESETS **************************/
 /* Keep below for future reference */
-
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
-
 /* html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -120,8 +172,6 @@ table {
 	border-spacing: 0;
 } */
 
-/* END RESETS */
-
 * {
   box-sizing: border-box;
   /* border: 1px dashed red; */
@@ -141,18 +191,13 @@ body {
   margin: auto;
 }
 
-/* body::-webkit-scrollbar {
-  display: none;
-} */
-
 
 /* HEADER */
-
 
 /* ---> TITLE-CONTENT */
 
 #title-content {
-  width: 100vw;
+  width: var(--width-100);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -169,13 +214,13 @@ body {
 #title-text {
   color: var(--alerts);
   font-family: var(--font-hand);
-  font-size: 2.75rem;
+  font-size: var(--275);
   font-weight: 900;
 }
 
 #title-img1,
 #title-img2 {
-  height: 2.25rem;
+  height: var(--225);
   width: auto;
 }
 
@@ -208,7 +253,7 @@ body {
 #MMM {
   color: var(--white);
   font-family: var(--font-hand);
-  font-size: 1rem;
+  font-size: var(--100);
   margin-top: -0.5rem;
   margin-bottom: 0.5rem;
   text-align: center;
@@ -218,7 +263,7 @@ body {
 /* ---> SEARCH-CONTENT */
 
 #search-content {
-  width: 100vw;
+  width: var(--width-100);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -228,25 +273,25 @@ body {
 
 #search-input,
 #search-btn {
-  height: 2rem;
+  height: var(--200);
   border: none;
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: var(--100);
   outline: none;
   padding: .5rem;
 }
 
 #search-input {
   background-color: var(--white);
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
+  border-top-left-radius: var(--100);
+  border-bottom-left-radius: var(--100);
 }
 
 #search-btn {
   width: fit-content;
   background-color: var(--btn-color);
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border-top-right-radius: var(--100);
+  border-bottom-right-radius: var(--100);
   color: var(--black);
   cursor: pointer;
   transition: var(--btn-transition);
@@ -263,34 +308,36 @@ body {
 
 
 /* ---> HEADER-BTN-CONTENT */
+
 /* Round Btn CSS found at the end */
+
 #btn-content {
-  width: 100vw;
+  width: var(--width-100);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4.2rem;
+  gap: var(--420);
   margin: auto;
   padding: .75rem 0 .75rem 0;
 }
 
 
-/* MESSAGE-CONTENT */
+/* MESSAGE CONTENT ************************/
 
 #message-content {
-  width: 100vw;
+  width: var(--width-100);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  line-height: 1.15;
-  padding: 1.5rem;
+  line-height: var(--lh115);
+  padding: var(--150);
 }
 
 #message-text {
   color: var(--white);
   font-family: var(--font-hand);
-  font-size: 1.5rem;
+  font-size: var(--150);
   text-align: center;
 }
 
@@ -298,7 +345,8 @@ body {
   color: var(--alerts);
 }
 
-/* DATA-CONTENT */
+
+/* DATA CONTENT ***************************/
 
 #data-content {
   display: flex;
@@ -308,29 +356,31 @@ body {
   margin: auto;
 }
 
-/* ---> LOCATION-CONTENT */
+
+/* LOCATION CONTENT ***********************/
+
 /* Round Btn CSS found at the end */
+
 #location-content {
-  width: 100vw;
+  width: var(--width-100);
   background-color: var(--black);
-  border-bottom: var(--btn-outline);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: var(--font-sans);
-  line-height: 1.15;
+  line-height: var(--lh115);
   padding: 0 0 0.75rem 0;
 }
 
 #location-name {
-  font-size: 1.5rem;
+  font-size: var(--150);
   text-align: center;
   text-transform: uppercase;
 }
 
 #resolved-address {
-  font-size: 1.1rem;
+  font-size: var(--110);
   text-align: center;
 }
 
@@ -341,23 +391,24 @@ body {
 }
 
 #location-lat-lon-text {
-font-size: 1.1rem;
+  font-size: var(--110);
 }
 
 #weather-btn-cont {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: 4.2rem;
+  gap: var(--420);
   font-family: var(--font-sans);
   margin: auto;
   padding: .5rem;
 }
 
-/* ---> ALERTS-CONTENT */
+
+/* ---> ALERTS CONTENT ********************/
 
 #alerts-content {
-  width: 100vw;
+  width: var(--width-100);
   background-color: var(--alerts);
   color: var(--white);
   display: none;
@@ -365,21 +416,20 @@ font-size: 1.1rem;
   justify-content: center;
   align-items: start;
   font-family: var(--font-sans);
-  padding: 1rem;
+  line-height: var(--lh115);
+  padding: var(--100);
 }
 
 #alerts-title-text {
   align-self: center;
-  font-size: 2.25rem;
-  font-weight: var(--font-weight-subtitle);
+  font-size: var(--125);
   margin: .5rem;
-  text-align: center;
   padding: 0.25rem 0 0.25rem 0;
   text-transform: uppercase;
 }
 
 .alerts-headline {
-  font-size: 1.5rem;
+  font-size: var(--110);
   text-decoration: underline;
 }
 
@@ -389,16 +439,16 @@ font-size: 1.1rem;
 
 .alerts-start-end,
 .alerts-description {
-  font-size: 1rem;
+  font-size: var(--100);
 }
 
 .alerts-asterisks {
-  font-size: 1rem;
+  font-size: var(--100);
   padding: 0.75rem 0 0.75rem 0;
 }
 
 
-/* ---> HOURS-CONTENT AND DAYS-CONTENT */
+/* ---> HOURS/DAYS CONTENT ****************/
 
 #hours-content,
 #days-content {
@@ -417,17 +467,14 @@ font-size: 1.1rem;
   align-self: center;
   color: var(--white);
   font-family: var(--font-hand);
-  font-size: 2.25rem;
-  font-weight: var(--font-weight-subtitle);
-  margin: .5rem;
-  padding: 0.25rem 0 0.25rem 0;
+  font-size: var(--225);
   text-align: center;
 }
 
 .hours-tile-cont,
 .days-tile-cont {
   height: fit-content;
-  width: 100vw;
+  width: var(--width-100);
   background-color: var(--black);
   border-top: 1px dashed var(--white);
   display: flex;
@@ -452,7 +499,7 @@ font-size: 1.1rem;
 .hours-condition-text,
 .days-condition-text {
   color: var(--white);
-  font-size: 1.1rem;
+  font-size: var(--110);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -475,8 +522,8 @@ font-size: 1.1rem;
 .days-icon-cont,
 .days-temp-max-cont,
 .days-temp-min-cont {
-  height: 4.25rem;
-  width: 4.25rem;
+  height: var(--425);
+  width: var(--425);
   border: .125rem solid var(--white);
   border-radius: 0.75rem;
   display: flex;
@@ -489,7 +536,7 @@ font-size: 1.1rem;
 
 .hours-icon-img,
 .days-icon-img {
-  height: 3.5rem;
+  height: var(--350);
   width: auto;
 }
 
@@ -499,7 +546,7 @@ font-size: 1.1rem;
 .days-date-text,
 .days-temp-max-text,
 .days-temp-min-text {
-  font-size: 1.05rem;
+  font-size: var(--105);
 }
 
 .hours-weather-cont,
@@ -514,17 +561,17 @@ font-size: 1.1rem;
 }
 
 
-/* ---> WEATHER-CONTENT */
+/* ---> CURRENT WEATHER CONTENT ***********/
 
 #weather-content {
-  width: 100vw;
+  width: var(--width-100);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: var(--font-sans);
   margin: auto;
-  padding: 0.5rem;
+  padding: 1rem 0.25rem 1rem 0.25rem;
 }
 
 #conditions-text,
@@ -534,13 +581,13 @@ font-size: 1.1rem;
 }
 
 #conditions-text {
-  font-size: 1.1rem;
+  font-size: var(--110);
   font-weight: 900;
   margin-bottom: 0.25rem;
 }
 
 #last-update {
-  font-size: 0.95rem;
+  font-size: var(--095);
 }
 
 #weather-cont1 {
@@ -554,9 +601,9 @@ font-size: 1.1rem;
 
 #weather-temp-cont,
 #weather-icon-cont {
-  height: 5.5rem;
-  width: 5.5rem;
-  border-radius: 1rem;
+  height: var(--550);
+  width: var(--550);
+  border-radius: var(--100);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -566,12 +613,12 @@ font-size: 1.1rem;
 }
 
 #weather-temp-cont {
-  min-width: 5.5rem;
+  min-width:var(--550);
   width: fit-content;
 }
 
 #weather-icon-img {
-  height: 5.25rem;
+  height: var(--525);
   width: auto;
 }
 
@@ -609,11 +656,11 @@ font-size: 1.1rem;
 .days-sunrise-div,
 .days-sunset-div,
 .days-moon-phase-div {
-  height: 2.5rem;
+  height: var(--250);
   width: fit-content;
   background-color: var(--black);
   border: .125rem solid var(--white);
-  border-radius: 1.5rem;
+  border-radius: var(--150);
   color: var(--white);
   display: flex;
   justify-content: center;
@@ -636,7 +683,7 @@ font-size: 1.1rem;
 .days-sunrise-img,
 .days-sunset-img,
 .days-moon-phase-img {
-  height: 2.5rem;
+  height: var(--250);
   width: auto;
   border-radius: 50%;
   border: .125rem solid var(--white);
@@ -680,11 +727,11 @@ font-size: 1.1rem;
 }
 
 #temp-text {
-  font-size: 2.25rem;
+  font-size: var(--225);
 }
 
 #feels-like-text {
-  font-size: 1.1rem;
+  font-size: var(--110);
 }
 
 .current-text,
@@ -703,30 +750,31 @@ font-size: 1.1rem;
 .days-sunrise-text,
 .days-sunset-text,
 .days-moon-phase-text {
-  font-size: 1.1rem;
+  font-size: var(--110);
   padding: 0.25rem 0.5rem 0.25rem 0.25rem;
   text-align: left;
   text-wrap: nowrap;
 }
 
-/* ROUND BUTTONS */
+
+/* ROUND-BTNS *****************************/
 
 .round-btn {
-  height: 2.75rem;
-  width: 2.75rem;
+  height: var(--275);
+  width: var(--275);
   background-color: var(--btn-color);
   border: .125rem solid var(--white);
   border-radius: 50%;
-  box-shadow: var(--box-shadow-white);
+  box-shadow: var(--box-shadow-gray);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.15rem;
   transition: var(--btn-transition);
 }
 
 .round-btn:hover {
+  box-shadow: var(--box-shadow-green);
   transform: scale(1.1);
 }
 
@@ -735,7 +783,7 @@ font-size: 1.1rem;
 }
 
 #world-btn-img, #temp-scale-img, #usa-btn-img, #hours-btn-img, #alerts-btn-img, #days-btn-img  {
-  height: 2.5rem;
+  height: var(--265);
   width: auto;
 }
 
@@ -748,165 +796,128 @@ button:hover {
 }
 
 
-/* MEDIA QUERIES */
+/* MEDIA QUERIES **************************/
 
 @media only screen and (width >= 500px) {
 
-}
-
-@media only screen and (width >= 800px) {
-
 #title-content {
-  width: 70vw;
+  width: var(--width-90);
 }
 
 #title-text {
-  font-size: 4.75rem;
+  font-size: calc(var(--275) * var(--mq500x));
 }
 
 #title-img1,
 #title-img2 {
-  height: 3.75rem;
+  height: calc(var(--225) * var(--mq500x));
 }
 
 #MMM {
-  font-size: 1.75rem;
+  font-size: calc(var(--100) * var(--mq500x));
 }
 
-/* ---> SEARCH-CONTENT */
-
 #search-content {
-  width: 70vw;
+  width: var(--width-90);
 }
 
 #search-input,
 #search-btn {
-  height: 3rem;
-  font-size: 1.785rem;
-  padding: .5rem;
+  height: calc(var(--200) * var(--mq500x));
+  font-size: calc(var(--100) * var(--mq500x));
 }
 
 #search-input {
-  border-top-left-radius: 2rem;
-  border-bottom-left-radius: 2rem;
+  border-top-left-radius: calc(var(--100) * var(--mq500x));
+  border-bottom-left-radius: calc(var(--100) * var(--mq500x));
 }
 
 #search-btn {
-  border-top-right-radius: 2rem;
-  border-bottom-right-radius: 2rem;
+  border-top-right-radius: calc(var(--100) * var(--mq500x));
+  border-bottom-right-radius: calc(var(--100) * var(--mq500x));
 }
 
-
-/* ---> HEADER-BTN-CONTENT */
-/* Round Btn CSS found at the end */
 #btn-content {
-  width: 70vw;
-  gap: 7.4rem;
-  padding: 1.25rem 0 1.25rem 0;
+  width: var(--width-90);
+  gap: calc(var(--420) * (var(--mq500x) - .1));
 }
-
-
-/* MESSAGE-CONTENT */
 
 #message-content {
-  width: 70vw;
-  line-height: 1.15;
-  padding: 1.5rem;
+  width: var(--width-90);
+  line-height: var(--lh130);
+  padding: calc(var(--150) * var(--mq500x));
 }
 
 #message-text {
-  font-size: 3.5rem;
+  font-size: calc(var(--150) * var(--mq500x));
 }
 
-
-/* DATA-CONTENT */
-
-/* ---> LOCATION-CONTENT */
-/* Round Btn CSS found at the end */
 #location-content {
-  width: 70vw;
-  line-height: 1.15;
-  padding: 0 0 0.75rem 0;
+  width: var(--width-90);
+  line-height: var(--lh130);
 }
 
 #location-name {
-  font-size: 2.5rem;
+  font-size: calc(var(--150) * var(--mq500x));
 }
 
 #resolved-address {
-  font-size: 1.75rem;
+  font-size: calc(var(--110) * var(--mq500x));
 }
 
 #location-lat-lon-text {
-  font-size: 1.75rem;
+  font-size: calc(var(--110) * var(--mq500x));
 }
 
 #weather-btn-cont {
-  gap: 7.4rem;
-  padding: .75rem;
+  gap: calc(var(--420) * (var(--mq500x) - .1));
 }
 
-/* ---> ALERTS-CONTENT */
-
 #alerts-content {
-  width: 70vw;
-  border-radius: 2rem;
-  margin-bottom: 1rem;
-  padding: 2rem;
+  width: var(--width-90);
+  border-radius: var(--100);
+  line-height: var(--lh130);
+  margin-bottom: calc(var(--100) * var(--mq500x));
+  padding: calc(var(--100) * var(--mq500x));
 }
 
 #alerts-title-text {
-  font-size: 3.25rem;
-  margin: .5rem;
-  padding: 0.25rem 0 0.25rem 0;
+  font-size: calc(var(--125) * var(--mq500x));
 }
 
 .alerts-headline {
-  font-size: 2.5rem;
+  font-size: calc(var(--110) * var(--mq500x));
 }
 
 .alerts-start-end {
-  padding: 0.5rem 0 0.5rem 0;
+  padding: calc(0.5rem * var(--mq500x)) 0 calc(0.5rem * var(--mq500x)) 0;
 }
 
 .alerts-start-end,
 .alerts-description {
-  font-size: 2rem;
+  font-size: calc(var(--100) * var(--mq500x));
 }
 
 .alerts-asterisks {
-  font-size: 2rem;
-  padding: 1rem 0 1rem 0;
+  font-size: calc(var(--100) * var(--mq500x));
 }
-
-
-/* ---> HOURS-CONTENT AND DAYS-CONTENT */
 
 #hours-title-text,
 #days-title-text {
-  font-size: 3.75rem;
-  margin: .5rem;
-  padding: 0.25rem 0 0.25rem 0;
+  font-size: calc(var(--225) * var(--mq500x));
 }
 
 .hours-tile-cont,
 .days-tile-cont {
-  width: 70vw;
+  width: var(--width-90);
   border: 1px dashed var(--white);
-  border-radius: 2rem;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  padding: 1rem 0.25rem 1rem 0.25rem;
+  border-radius: var(--100);
+  margin-bottom: calc(var(--100) * var(--mq500x));
 }
 
 .hours-condition-text,
 .days-condition-text {
-  font-size: 2rem;
-}
-
-.hours-row-cont,
-.days-row-cont {
-  gap: 0.5rem;
+  font-size: calc(var(--110) * var(--mq500x));
 }
 
 .hours-time-cont,
@@ -917,16 +928,13 @@ button:hover {
 .days-icon-cont,
 .days-temp-max-cont,
 .days-temp-min-cont {
-  height: 7.25rem;
-  width: 7.25rem;
-  border: .125rem solid var(--white);
-  border-radius: 0.75rem;
-  padding: 0.25rem;
+  height: calc(var(--425) * var(--mq500x));
+  width: calc(var(--425) * var(--mq500x));
 }
 
 .hours-icon-img,
 .days-icon-img {
-  height: 7.5rem;
+  height: calc(var(--350) * var(--mq500x));
 }
 
 .hours-time-text,
@@ -935,65 +943,37 @@ button:hover {
 .days-date-text,
 .days-temp-max-text,
 .days-temp-min-text {
-  font-size: 2.05rem;
+  font-size: calc(var(--105) * var(--mq500x));
 }
-
-.hours-weather-cont,
-.days-weather-cont {
-  gap: 0.75rem;
-  padding: 0.25rem;
-}
-
-
-/* ---> WEATHER-CONTENT */
 
 #weather-content {
-  width: 70vw;
-  border-radius: 2rem;
-  margin-bottom: 1rem;
-  padding: 0.75rem;
+  width: var(--width-90);
+  border-radius: var(--100);
+  margin-bottom: calc(var(--100) * var(--mq500x));
 }
 
 #conditions-text {
-  font-size: 2rem;
-  margin-bottom: 0.25rem;
+  font-size: calc(var(--110) * var(--mq500x));
 }
 
 #last-update {
-  font-size: 1.25rem;
-}
-
-#weather-cont1 {
-  height: fit-content;
-  width: fit-content;
-  margin: .25rem;
+  font-size: calc(var(--095) * var(--mq500x));
 }
 
 #weather-temp-cont,
 #weather-icon-cont {
-  height: 7.5rem;
-  width: 7.5rem;
-  border-radius: 1rem;
-  margin: 0.25rem;
-  padding: 0.25rem;
+  height: calc(var(--550) * var(--mq500x));
+  width: calc(var(--550) * var(--mq500x));
+  border-radius: var(--100);
 }
 
 #weather-temp-cont {
-  min-width: 7.5rem;
-  width:fit-content;
+  min-width: calc(var(--550) * var(--mq500x));
+  width: fit-content;
 }
 
 #weather-icon-img {
-  height: 7.25rem;
-  width: auto;
-}
-
-#weather-moisture-cont {
-  gap: 0.5rem;
-}
-
-#weather-cont2 {
-  gap: 0.5rem;
+  height: calc(var(--525) * var(--mq500x));
 }
 
 .current-div,
@@ -1012,8 +992,8 @@ button:hover {
 .days-sunrise-div,
 .days-sunset-div,
 .days-moon-phase-div {
-  height: 3.5rem;
-  border-radius: 2.5rem;
+  height: calc(var(--250) * var(--mq500x));
+  border-radius: calc(var(--150) * var(--mq500x));
 }
 
 .current-img,
@@ -1032,18 +1012,15 @@ button:hover {
 .days-sunrise-img,
 .days-sunset-img,
 .days-moon-phase-img {
-  height: 3.5rem;
-  border: .125rem solid var(--white);
-  margin-left: -1.5px;
+  height: calc(var(--250) * var(--mq500x));
 }
 
-
 #temp-text {
-  font-size: 3.25rem;
+  font-size: calc(var(--225) * var(--mq500x));
 }
 
 #feels-like-text {
-  font-size: 1.75rem;
+  font-size: calc(var(--110) * var(--mq500x));
 }
 
 .current-text,
@@ -1062,19 +1039,521 @@ button:hover {
 .days-sunrise-text,
 .days-sunset-text,
 .days-moon-phase-text {
-  font-size: 2rem;
-  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+  font-size: calc(var(--110) * var(--mq500x));
 }
 
-/* ROUND BUTTONS */
-
 .round-btn {
-  height: 4.5rem;
-  width: 4.5rem;
+  height: calc(var(--275) * var(--mq500x));
+  width: calc(var(--275) * var(--mq500x));
 }
 
 #world-btn-img, #temp-scale-img, #usa-btn-img, #hours-btn-img, #alerts-btn-img, #days-btn-img  {
-  height: 4.25rem;
+  height: calc(var(--265) * var(--mq500x));
+}
+
+}
+
+@media only screen and (width >= 800px) {
+ 
+#title-content {
+  width: var(--width-70);
+}
+
+#title-text {
+  font-size: calc(var(--275) * var(--mq800x));
+}
+
+#title-img1,
+#title-img2 {
+  height: calc(var(--225) * var(--mq800x));
+}
+
+#MMM {
+  font-size: calc(var(--100) * var(--mq800x));
+
+}
+
+#search-content {
+  width: var(--width-70);
+}
+
+#search-input,
+#search-btn {
+  height: calc(var(--200) * var(--mq800x));
+  font-size: calc(var(--100) * var(--mq800x));
+}
+
+#search-input {
+  border-top-left-radius: calc(var(--100) * var(--mq800x));
+  border-bottom-left-radius: calc(var(--100) * var(--mq800x));
+}
+
+#search-btn {
+  border-top-right-radius: calc(var(--100) * var(--mq800x));
+  border-bottom-right-radius: calc(var(--100) * var(--mq800x));
+}
+
+#btn-content {
+  width: var(--width-70);
+  gap: calc(var(--420) * (var(--mq800x) - .15));
+}
+
+#message-content {
+  width: var(--width-70);
+  padding: calc(var(--150) * var(--mq800x));
+}
+
+#message-text {
+  font-size: calc(var(--150) * var(--mq800x));
+}
+
+#location-content {
+  width: var(--width-70);
+}
+
+#location-name {
+  font-size: calc(var(--150) * var(--mq800x));
+}
+
+#resolved-address {
+  font-size: calc(var(--110) * var(--mq800x));
+}
+
+#location-lat-lon-text {
+font-size: calc(var(--110) * var(--mq800x));
+}
+
+#weather-btn-cont {
+  gap: calc(var(--420) * (var(--mq800x) - .15));
+}
+
+#alerts-content {
+  width: var(--width-70);
+  border-radius: var(--100);
+  margin-bottom: calc(var(--100) * var(--mq800x));
+  padding: calc(var(--100) * var(--mq800x));
+}
+
+#alerts-title-text {
+  font-size: calc(var(--125) * var(--mq800x));
+}
+
+.alerts-headline {
+  font-size: calc(var(--110) * var(--mq800x));
+}
+
+.alerts-start-end {
+  padding: calc(0.5rem * var(--mq800x)) 0 calc(0.5rem * var(--mq800x)) 0;
+}
+
+.alerts-start-end,
+.alerts-description {
+  font-size: calc(var(--100) * var(--mq800x));
+}
+
+.alerts-asterisks {
+  font-size: calc(var(--100) * var(--mq800x));
+}
+
+#hours-title-text,
+#days-title-text {
+  font-size: calc(var(--225) * var(--mq800x));
+}
+
+.hours-tile-cont,
+.days-tile-cont {
+  width: var(--width-70);
+  border: 1px dashed var(--white);
+  border-radius: var(--100);
+  margin-bottom: calc(var(--100) * var(--mq800x));
+}
+
+.hours-condition-text,
+.days-condition-text {
+  font-size: calc(var(--110) * var(--mq800x));
+}
+
+.hours-time-cont,
+.hours-icon-cont,
+.hours-temp-cont,
+.hours-feels-like-cont,
+.days-date-cont,
+.days-icon-cont,
+.days-temp-max-cont,
+.days-temp-min-cont {
+  height: calc(var(--425) * var(--mq800x));
+  width: calc(var(--425) * var(--mq800x));
+}
+
+.hours-icon-img,
+.days-icon-img {
+  height: calc(var(--350) * var(--mq800x));
+}
+
+.hours-time-text,
+.hours-temp-text,
+.hours-feels-like-text,
+.days-date-text,
+.days-temp-max-text,
+.days-temp-min-text {
+  font-size: calc(var(--105) * var(--mq800x));
+}
+
+#weather-content {
+  width: var(--width-70);
+  border-radius: var(--100);
+  margin-bottom: calc(var(--100) * var(--mq800x));
+}
+
+#conditions-text {
+  font-size: calc(var(--110) * var(--mq800x));
+}
+
+#last-update {
+  font-size: calc(var(--095) * var(--mq800x));
+}
+
+#weather-temp-cont,
+#weather-icon-cont {
+  height: calc(var(--550) * var(--mq800x));
+  width: calc(var(--550) * var(--mq800x));
+  border-radius: var(--100);
+}
+
+#weather-temp-cont {
+  min-width: calc(var(--550) * var(--mq800x));
+  width: fit-content;
+}
+
+#weather-icon-img {
+  height: calc(var(--525) * var(--mq800x));
+}
+
+.current-div,
+.hours-humidity-div,
+.hours-dew-point-div,
+.hours-precip-prob-div,
+.hours-wind-info-div,
+.hours-cloud-cover-div,
+.hours-uv-index-div,
+.days-humidity-div,
+.days-dew-point-div,
+.days-precip-prob-div,
+.days-wind-info-div,
+.days-cloud-cover-div,
+.days-uv-index-div,
+.days-sunrise-div,
+.days-sunset-div,
+.days-moon-phase-div {
+  height: calc(var(--250) * var(--mq800x));
+  border-radius: calc(var(--150) * var(--mq800x));
+}
+
+.current-img,
+.hours-humidity-img,
+.hours-dew-point-img,
+.hours-precip-prob-img,
+.hours-wind-info-img,
+.hours-cloud-cover-img,
+.hours-uv-index-img,
+.days-humidity-img,
+.days-dew-point-img,
+.days-precip-prob-img,
+.days-wind-info-img,
+.days-cloud-cover-img,
+.days-uv-index-img,
+.days-sunrise-img,
+.days-sunset-img,
+.days-moon-phase-img {
+  height: calc(var(--250) * var(--mq800x));
+}
+
+#temp-text {
+  font-size: calc(var(--225) * var(--mq800x));
+}
+
+#feels-like-text {
+  font-size: calc(var(--110) * var(--mq800x));
+}
+
+.current-text,
+.hours-humidity-text,
+.hours-dew-point-text,
+.hours-precip-prob-text,
+.hours-wind-info-text,
+.hours-cloud-cover-text,
+.hours-uv-index-text,
+.days-humidity-text,
+.days-dew-point-text,
+.days-precip-prob-text,
+.days-wind-info-text,
+.days-cloud-cover-text,
+.days-uv-index-text,
+.days-sunrise-text,
+.days-sunset-text,
+.days-moon-phase-text {
+  font-size: calc(var(--110) * var(--mq800x));
+}
+
+.round-btn {
+  height: calc(var(--275) * var(--mq800x));
+  width: calc(var(--275) * var(--mq800x));
+}
+
+#world-btn-img, #temp-scale-img, #usa-btn-img, #hours-btn-img, #alerts-btn-img, #days-btn-img  {
+  height: calc(var(--265) * var(--mq800x));
+}
+
+}
+
+@media only screen and (width >= 1300px) {
+
+#title-content {
+  width: var(--width-70);
+}
+
+#title-text {
+  font-size: calc(var(--275) * var(--mq1300x));
+}
+
+#title-img1,
+#title-img2 {
+  height: calc(var(--225) * var(--mq1300x));
+}
+
+#MMM {
+  font-size: calc(var(--100) * var(--mq1300x));
+}
+
+#search-content {
+  width: var(--width-70);
+}
+
+#search-input,
+#search-btn {
+  height: calc(var(--200) * var(--mq1300x));
+  font-size: calc(var(--100) * var(--mq1300x));
+}
+
+#search-input {
+  border-top-left-radius: calc(var(--100) * var(--mq1300x));
+  border-bottom-left-radius: calc(var(--100) * var(--mq1300x));
+}
+
+#search-btn {
+  border-top-right-radius: calc(var(--100) * var(--mq1300x));
+  border-bottom-right-radius: calc(var(--100) * var(--mq1300x));
+}
+
+#btn-content {
+  width: var(--width-70);
+  gap: calc(var(--420) * (var(--mq1300x) - .2));
+}
+
+#message-content {
+  width: var(--width-70);
+  padding: calc(var(--150) * var(--mq1300x));
+}
+
+#message-text {
+  font-size: calc(var(--150) * var(--mq1300x));
+}
+
+#location-content {
+  width: var(--width-70);
+}
+
+#location-name {
+  font-size: calc(var(--150) * var(--mq1300x));
+}
+
+#resolved-address {
+  font-size: calc(var(--110) * var(--mq1300x));
+}
+
+#location-lat-lon-text {
+  font-size: calc(var(--110) * var(--mq1300x));
+}
+
+#weather-btn-cont {
+  gap: calc(var(--420) * (var(--mq1300x) - .2));
+}
+
+#alerts-content {
+  width: var(--width-70);
+  border-radius: var(--100);
+  margin-bottom: calc(var(--100) * var(--mq1300x));
+  padding: calc(var(--100) * var(--mq1300x));
+}
+
+#alerts-title-text {
+  font-size: calc(var(--125) * var(--mq1300x));
+}
+
+.alerts-headline {
+  font-size: calc(var(--110) * var(--mq1300x));
+}
+
+.alerts-start-end {
+  padding: calc(0.5rem * var(--mq1300x)) 0 calc(0.5rem * var(--mq1300x)) 0;
+}
+
+.alerts-start-end,
+.alerts-description {
+  font-size: calc(var(--100) * var(--mq1300x));
+}
+
+.alerts-asterisks {
+  font-size: calc(var(--100) * var(--mq1300x));
+}
+
+#hours-title-text,
+#days-title-text {
+  font-size: calc(var(--225) * var(--mq1300x));
+}
+
+.hours-tile-cont,
+.days-tile-cont {
+  width: var(--width-70);
+  border: 1px dashed var(--white);
+  border-radius: var(--100);
+  margin-bottom: calc(var(--100) * var(--mq1300x));
+}
+
+.hours-condition-text,
+.days-condition-text {
+  font-size: calc(var(--110) * var(--mq1300x));
+}
+
+.hours-time-cont,
+.hours-icon-cont,
+.hours-temp-cont,
+.hours-feels-like-cont,
+.days-date-cont,
+.days-icon-cont,
+.days-temp-max-cont,
+.days-temp-min-cont {
+  height: calc(var(--425) * var(--mq1300x));
+  width: calc(var(--425) * var(--mq1300x));
+}
+
+.hours-icon-img,
+.days-icon-img {
+  height: calc(var(--350) * var(--mq1300x));
+}
+
+.hours-time-text,
+.hours-temp-text,
+.hours-feels-like-text,
+.days-date-text,
+.days-temp-max-text,
+.days-temp-min-text {
+  font-size: calc(var(--105) * var(--mq1300x));
+}
+
+#weather-content {
+  width: var(--width-70);
+  border-radius: var(--100);
+  margin-bottom: calc(var(--100) * var(--mq1300x));
+}
+
+#conditions-text {
+  font-size: calc(var(--110) * var(--mq1300x));
+}
+
+#last-update {
+  font-size: calc(var(--095) * var(--mq1300x));
+}
+
+#weather-temp-cont,
+#weather-icon-cont {
+  height: calc(var(--550) * var(--mq1300x));
+  width: calc(var(--550) * var(--mq1300x));
+  border-radius: var(--100);
+}
+
+#weather-temp-cont {
+  min-width: calc(var(--550) * var(--mq1300x));
+  width: fit-content;
+}
+
+#weather-icon-img {
+  height: calc(var(--525) * var(--mq1300x));
+}
+
+.current-div,
+.hours-humidity-div,
+.hours-dew-point-div,
+.hours-precip-prob-div,
+.hours-wind-info-div,
+.hours-cloud-cover-div,
+.hours-uv-index-div,
+.days-humidity-div,
+.days-dew-point-div,
+.days-precip-prob-div,
+.days-wind-info-div,
+.days-cloud-cover-div,
+.days-uv-index-div,
+.days-sunrise-div,
+.days-sunset-div,
+.days-moon-phase-div {
+  height: calc(var(--250) * var(--mq1300x));
+  border-radius: calc(var(--150) * var(--mq1300x));
+}
+
+.current-img,
+.hours-humidity-img,
+.hours-dew-point-img,
+.hours-precip-prob-img,
+.hours-wind-info-img,
+.hours-cloud-cover-img,
+.hours-uv-index-img,
+.days-humidity-img,
+.days-dew-point-img,
+.days-precip-prob-img,
+.days-wind-info-img,
+.days-cloud-cover-img,
+.days-uv-index-img,
+.days-sunrise-img,
+.days-sunset-img,
+.days-moon-phase-img {
+  height: calc(var(--250) * var(--mq1300x));
+}
+
+#temp-text {
+  font-size: calc(var(--225) * var(--mq1300x));
+}
+
+#feels-like-text {
+  font-size: calc(var(--110) * var(--mq1300x));
+}
+
+.current-text,
+.hours-humidity-text,
+.hours-dew-point-text,
+.hours-precip-prob-text,
+.hours-wind-info-text,
+.hours-cloud-cover-text,
+.hours-uv-index-text,
+.days-humidity-text,
+.days-dew-point-text,
+.days-precip-prob-text,
+.days-wind-info-text,
+.days-cloud-cover-text,
+.days-uv-index-text,
+.days-sunrise-text,
+.days-sunset-text,
+.days-moon-phase-text {
+  font-size: calc(var(--110) * var(--mq1300x));
+}
+
+.round-btn {
+  height: calc(var(--275) * var(--mq1300x));
+  width: calc(var(--275) * var(--mq1300x));
+}
+
+#world-btn-img, #temp-scale-img, #usa-btn-img, #hours-btn-img, #alerts-btn-img, #days-btn-img  {
+  height: calc(var(--265) * var(--mq1300x));
 }
 
 }

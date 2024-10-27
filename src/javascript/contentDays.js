@@ -30,19 +30,12 @@ import {
 
 export function createDaysView(data) {
   const tempScaleBtn = document.querySelector("#temp-scale-btn");
-
-  const noWDataAvailable = "No data currently available.";
   const dataContent = document.querySelector("#data-content");
 
   const daysData = data.days;
   const limitedDaysData = daysData.slice(0, 10); // Only iterates 10 out of 15 days.
 
   function getDaysInfo() {
-    if (!data) {
-      console.error(noWDataAvailable);
-      return;
-    }
-
     const daysContent = createDivElement("days-content", "");
     const daysTitleText = createTextElement(
       "p",
@@ -50,7 +43,6 @@ export function createDaysView(data) {
       `Your ${limitedDaysData.length}-Day Outlook!`,
       ""
     );
-
     const currentFeelsLikeData = data.currentConditions.feelslike;
     daysTitleText.style.color = getTempColor(currentFeelsLikeData);
 
@@ -77,21 +69,16 @@ export function createDaysView(data) {
         parse(dateTimeData, "yyyy-MM-dd", new Date()),
         "E, MMM d"
       );
-
       const parseDaysMonthDayDate = format(
         parse(dateTimeData, "yyyy-MM-dd", new Date()),
         "MMM d"
       );
-
       const parseDaysMonth = format(
         parse(dateTimeData, "yyyy-MM-dd", new Date()),
         "MMM"
       );
-
       const daysTileCont = createDivElement("", "days-tile-cont");
-
       const daysConditionCont = createDivElement("", "days-condition-cont");
-
       const daysConditionText = createTextElement(
         "p",
         "",
@@ -167,7 +154,6 @@ export function createDaysView(data) {
         targetImg: daysDewPointImg,
         targetText: daysDewPointText,
       } = createWeatherElements("", svgDewPoint, "", "days-dew-point", false);
-
       const {
         targetDiv: daysPrecipProbDiv,
         targetImg: daysPrecipProbImg,
@@ -321,7 +307,7 @@ export function createDaysView(data) {
   getDaysInfo();
 }
 
-// A SUPER EFFICIENT WAY!
+// A SUPER EFFICIENT WAY! -- KEEP FOR MY REFERENCE
 // export function updateDaysFC() {
 //   const daysDewPointText = document.querySelectorAll(".dew-point-text");
 //   const daysTempMaxText = document.querySelectorAll(".temp-max-text");
