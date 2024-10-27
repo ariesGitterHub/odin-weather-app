@@ -124,7 +124,7 @@ export function createDaysView(data) {
         parse(days.sunset, "HH:mm:ss", new Date()),
         "h:mm:ssa"
       );
-      const daysColRowCont = createDivElement("", "days-col-row-cont");
+      const daysRowCont = createDivElement("", "days-row-cont");
       const daysIconCont = createDivElement("", "days-icon-cont");
       const daysIconImg = createImgElement(
         "",
@@ -283,9 +283,9 @@ export function createDaysView(data) {
       initializeDaysFC();
 
       daysContent.append(daysTileCont);
-      daysTileCont.append(daysConditionCont, daysColRowCont, daysWeatherCont);
+      daysTileCont.append(daysConditionCont, daysRowCont, daysWeatherCont);
       daysConditionCont.append(daysConditionText);
-      daysColRowCont.append(
+      daysRowCont.append(
         daysDateCont,
         daysIconCont,
         daysTempMaxCont,

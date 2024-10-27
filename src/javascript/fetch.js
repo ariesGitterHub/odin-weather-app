@@ -50,7 +50,7 @@ export async function fetchWithHandling(url) {
           break;
         case 500:
           errorMessage =
-            "Server error: There’s a problem with the service. Please try again later.";
+            "Server error: There is a problem with the service. Please try again later.";
           break;
         default:
           errorMessage = `HTTP error! Status: ${response.status}`;

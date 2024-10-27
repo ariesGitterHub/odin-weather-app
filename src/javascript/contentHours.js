@@ -137,7 +137,7 @@ export function createHoursView(data) {
         `${parseHoursTime}, ${checkHourGetDate()}`,
         "hours-time-text"
       );
-      const hoursColRowCont = createDivElement("", "hours-col-row-cont");
+      const hoursRowCont = createDivElement("", "hours-row-cont");
       const hoursIconCont = createDivElement("", "hours-icon-cont");
       const hoursIconImg = createImgElement(
         "",
@@ -260,22 +260,18 @@ export function createHoursView(data) {
       initializeHoursFC();
 
       hoursContent.append(hoursTileCont);
-      hoursTileCont.append(
-        hoursConditionCont,
-        hoursColRowCont,
-        hoursWeatherCont
-      );
+      hoursTileCont.append(hoursConditionCont, hoursRowCont, hoursWeatherCont);
       hoursConditionCont.append(hoursConditionText);
 
       if (tempData !== feelsLikeData) {
-        hoursColRowCont.append(
+        hoursRowCont.append(
           hoursTimeCont,
           hoursIconCont,
           hoursTempCont,
           hoursFeelsLikeCont
         );
       } else {
-        hoursColRowCont.append(hoursTimeCont, hoursIconCont, hoursTempCont);
+        hoursRowCont.append(hoursTimeCont, hoursIconCont, hoursTempCont);
       }
 
       hoursTimeCont.append(hoursTimeText);

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap");
+
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
 :root {
@@ -53,40 +54,19 @@
   --dec: #7c929c;
 
   /* BTN PRESETS */
-  --btn-border-black: 1.5px solid var(--black);
-  --btn-border-gray: 1.5px solid var(--gray);
-  --btn-border-white: 1.5px solid var(--white);
-  /* --btn-outline: 1px solid var(--white); */
-  --btn-size-h: 2.75rem;
-  --btn-transition: background-color 0.5s, transform 0.3s;
+  --btn-border-black: .125rem solid var(--black);
+  --btn-border-gray: .125rem solid var(--gray);
+  --btn-border-white: .125rem solid var(--white);
+   --btn-transition: background-color 0.5s, transform 0.3s;
 
   /* BOX PRESETS */
-  --border-radius-basic: 1rem;
-  --box-shadow-black: 0 5px 9px var(--black);
-  --box-shadow-gray: 0 5px 9px var(--gray);
-  --box-shadow-white: 0 5px 9px var(--white);
-
+  --box-shadow-black: 0 3px 6px var(--black);
+  --box-shadow-gray: 0 3px 6px var(--gray);
+  --box-shadow-white: 0 3px 6px var(--white);
 
   /* FONT PRESETS */
   --font-hand: "Caveat", cursive;
   --font-sans: "Josefin Sans", sans-serif;
-  --font-size-title: 2.75rem;
-  --font-size-content-title: 2.25rem;
-  --font-size-subtitle: 1.5rem;
-  --font-size-basic: 1rem;
-  /* --font-weight-content-title: 900; */
-
-  /* SPACING PRESETS */
-  --gap-basic: 0.5rem;
-  --gap-round-btns: 4.2rem;
-  --line-height-basic: 1.15;
-  --margin-content-title: 0.5rem;
-  --padding-basic: 0.25rem;
-  --padding-content-section: 0.5rem;
-  --rem-lg: 0.75rem;
-  --rem-md: 0.5rem;
-  --rem-sm: 0.25rem;
-  --width: 100vw;
 }
 
 /* Keep below for future reference */
@@ -161,22 +141,23 @@ body {
   margin: auto;
 }
 
-body::-webkit-scrollbar {
-  display: none; /* Hide scrollbar */
-}
+/* body::-webkit-scrollbar {
+  display: none;
+} */
+
 
 /* HEADER */
+
 
 /* ---> TITLE-CONTENT */
 
 #title-content {
-  width: var(--width);
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
-  /* padding-top: .25rem; */
 }
 
 #title-img-div {
@@ -188,7 +169,7 @@ body::-webkit-scrollbar {
 #title-text {
   color: var(--alerts);
   font-family: var(--font-hand);
-  font-size: var(--font-size-title);
+  font-size: 2.75rem;
   font-weight: 900;
 }
 
@@ -227,16 +208,17 @@ body::-webkit-scrollbar {
 #MMM {
   color: var(--white);
   font-family: var(--font-hand);
-  font-size: var(--font-size-basic);
+  font-size: 1rem;
   margin-top: -0.5rem;
   margin-bottom: 0.5rem;
   text-align: center;
 }
 
+
 /* ---> SEARCH-CONTENT */
 
 #search-content {
-  width: var(--width);
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -247,34 +229,27 @@ body::-webkit-scrollbar {
 #search-input,
 #search-btn {
   height: 2rem;
-    border: none;
+  border: none;
   font-family: var(--font-sans);
-  font-size: var(--font-size-basic);
-    outline: none;
-  padding: var(--rem-md);
+  font-size: 1rem;
+  outline: none;
+  padding: .5rem;
 }
 
 #search-input {
   background-color: var(--white);
-  border-top-left-radius: var(--border-radius-basic);
-  border-bottom-left-radius: var(--border-radius-basic);
-  /* border: var(--btn-color-black); */
-  /* box-shadow: var(--box-shadow-white); */
-  font-size: var(--font-size-basic);
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
 #search-btn {
   width: fit-content;
   background-color: var(--btn-color);
-  /* border: none; */
-  /* border: var(--btn-color-black); */
-  border-top-right-radius: var(--border-radius-basic);
-  border-bottom-right-radius: var(--border-radius-basic);
-  /* box-shadow: var(--box-shadow-white); */
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
   color: var(--black);
   cursor: pointer;
   transition: var(--btn-transition);
-  /* outline: none; */
 }
 
 #search-btn:hover {
@@ -286,36 +261,36 @@ body::-webkit-scrollbar {
   transform: translateX(0);
 }
 
-/* ---> HEADER-BTN-CONTENT */
 
+/* ---> HEADER-BTN-CONTENT */
+/* Round Btn CSS found at the end */
 #btn-content {
-  width: var(--width);
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--gap-round-btns);
+  gap: 4.2rem;
   margin: auto;
-  padding: var(--rem-lg) 0 var(--rem-lg) 0;
+  padding: .75rem 0 .75rem 0;
 }
 
-/* Round Btn CSS found at the end */
 
 /* MESSAGE-CONTENT */
 
 #message-content {
-  width: var(--width);
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  line-height: var(--line-height-basic);
+  line-height: 1.15;
   padding: 1.5rem;
 }
 
 #message-text {
   color: var(--white);
   font-family: var(--font-hand);
-  font-size: var(--font-size-subtitle);
+  font-size: 1.5rem;
   text-align: center;
 }
 
@@ -334,9 +309,9 @@ body::-webkit-scrollbar {
 }
 
 /* ---> LOCATION-CONTENT */
-
+/* Round Btn CSS found at the end */
 #location-content {
-  width: var(--width);
+  width: 100vw;
   background-color: var(--black);
   border-bottom: var(--btn-outline);
   display: flex;
@@ -344,18 +319,18 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   font-family: var(--font-sans);
-  line-height: var(--line-height-basic);
+  line-height: 1.15;
   padding: 0 0 0.75rem 0;
 }
 
 #location-name {
-  font-size: var(--font-size-subtitle);
+  font-size: 1.5rem;
   text-align: center;
   text-transform: uppercase;
 }
 
 #resolved-address {
-  font-size: var(--font-size-basic);
+  font-size: 1.1rem;
   text-align: center;
 }
 
@@ -363,23 +338,26 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding-bottom: .5rem; */
+}
+
+#location-lat-lon-text {
+font-size: 1.1rem;
 }
 
 #weather-btn-cont {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: var(--gap-round-btns);
+  gap: 4.2rem;
   font-family: var(--font-sans);
   margin: auto;
-  padding-top: var(--rem-md);
+  padding: .5rem;
 }
 
 /* ---> ALERTS-CONTENT */
 
 #alerts-content {
-  width: var(--width);
+  width: 100vw;
   background-color: var(--alerts);
   color: var(--white);
   display: none;
@@ -392,16 +370,16 @@ body::-webkit-scrollbar {
 
 #alerts-title-text {
   align-self: center;
-  font-size: var(--font-size-content-title);
+  font-size: 2.25rem;
   font-weight: var(--font-weight-subtitle);
-  margin: var(--margin-content-title);
+  margin: .5rem;
   text-align: center;
   padding: 0.25rem 0 0.25rem 0;
   text-transform: uppercase;
 }
 
 .alerts-headline {
-  font-size: var(--font-size-subtitle);
+  font-size: 1.5rem;
   text-decoration: underline;
 }
 
@@ -411,12 +389,14 @@ body::-webkit-scrollbar {
 
 .alerts-start-end,
 .alerts-description {
-  font-size: var(--font-size-basic);
+  font-size: 1rem;
 }
 
 .alerts-asterisks {
+  font-size: 1rem;
   padding: 0.75rem 0 0.75rem 0;
 }
+
 
 /* ---> HOURS-CONTENT AND DAYS-CONTENT */
 
@@ -437,9 +417,9 @@ body::-webkit-scrollbar {
   align-self: center;
   color: var(--white);
   font-family: var(--font-hand);
-  font-size: var(--font-size-content-title);
+  font-size: 2.25rem;
   font-weight: var(--font-weight-subtitle);
-  margin: var(--margin-content-title);
+  margin: .5rem;
   padding: 0.25rem 0 0.25rem 0;
   text-align: center;
 }
@@ -447,7 +427,7 @@ body::-webkit-scrollbar {
 .hours-tile-cont,
 .days-tile-cont {
   height: fit-content;
-  width: var(--width);
+  width: 100vw;
   background-color: var(--black);
   border-top: 1px dashed var(--white);
   display: flex;
@@ -477,8 +457,8 @@ body::-webkit-scrollbar {
   text-transform: uppercase;
 }
 
-.hours-col-row-cont,
-.days-col-row-cont {
+.hours-row-cont,
+.days-row-cont {
   height: fit-content;
   display: flex;
   flex-direction: row;
@@ -497,10 +477,8 @@ body::-webkit-scrollbar {
 .days-temp-min-cont {
   height: 4.25rem;
   width: 4.25rem;
-  border: var(--btn-border-white);
-  /* outline: var(--btn-outline); */
+  border: .125rem solid var(--white);
   border-radius: 0.75rem;
-  /* box-shadow: var(--box-shadow-white); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -535,10 +513,11 @@ body::-webkit-scrollbar {
   padding: 0.25rem;
 }
 
+
 /* ---> WEATHER-CONTENT */
 
 #weather-content {
-  width: var(--width);
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -577,16 +556,12 @@ body::-webkit-scrollbar {
 #weather-icon-cont {
   height: 5.5rem;
   width: 5.5rem;
-  /* use day night for below */
-  /* border: var(--btn-border); */
   border-radius: 1rem;
-  /* box-shadow: var(--box-shadow-white); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0.25rem;
-  /* outline: var(--btn-outline); */
   padding: 0.25rem;
 }
 
@@ -611,13 +586,11 @@ body::-webkit-scrollbar {
 
 #weather-cont2 {
   height: fit-content;
-  /* border-radius: 1.75rem; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  /* padding: 0.25rem; */
 }
 
 .current-div,
@@ -639,35 +612,13 @@ body::-webkit-scrollbar {
   height: 2.5rem;
   width: fit-content;
   background-color: var(--black);
-  border: var(--btn-border-white);
+  border: .125rem solid var(--white);
   border-radius: 1.5rem;
-  /* box-shadow: var(--box-shadow-black); */
   color: var(--white);
   display: flex;
   justify-content: center;
   align-items: center;
-  /* outline: var(--btn-outline); */
 }
-
-.hours-humidity-div,
-.hours-dew-point-div,
-.hours-precip-prob-div,
-.hours-wind-info-div,
-.hours-cloud-cover-div,
-.hours-uv-index-div,
-.days-humidity-div,
-.days-dew-point-div,
-.days-precip-prob-div,
-.days-wind-info-div,
-.days-cloud-cover-div,
-.days-uv-index-div,
-.days-sunrise-div,
-.days-sunset-div,
-.days-moon-phase-div {
-  /* box-shadow: var(--box-shadow-white); */
-}
-
-
 
 .current-img,
 .hours-humidity-img,
@@ -688,7 +639,7 @@ body::-webkit-scrollbar {
   height: 2.5rem;
   width: auto;
   border-radius: 50%;
-  border: var(--btn-border-white);
+  border: .125rem solid var(--white);
   margin-left: -1.5px;
 }
 
@@ -761,17 +712,16 @@ body::-webkit-scrollbar {
 /* ROUND BUTTONS */
 
 .round-btn {
-  height: var(--btn-size-h);
-  width: var(--btn-size-h);
+  height: 2.75rem;
+  width: 2.75rem;
   background-color: var(--btn-color);
-  border: var(--btn-border-white);
+  border: .125rem solid var(--white);
   border-radius: 50%;
   box-shadow: var(--box-shadow-white);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* outline: var(--btn-outline); */
   padding: 0.15rem;
   transition: var(--btn-transition);
 }
@@ -785,30 +735,9 @@ body::-webkit-scrollbar {
 }
 
 #world-btn-img, #temp-scale-img, #usa-btn-img, #hours-btn-img, #alerts-btn-img, #days-btn-img  {
-  height: 2.75rem;
-  width: auto;
-}
-
-/* #temp-scale-img {
-  height: 1.75rem;
-  width: auto;
-}
-
-#usa-btn-img {
-  height: 2.25rem;
-  width: auto;
-}
-
-#hours-btn-img,
-#alerts-btn-img {
   height: 2.5rem;
   width: auto;
 }
-
-#days-btn-img {
-  height: 2.25rem;
-  width: auto;
-} */
 
 button:hover {
   background-image: linear-gradient(
@@ -816,4 +745,336 @@ button:hover {
     var(--btn-gradient-dk),
     var(--btn-gradient-lt)
   );
+}
+
+
+/* MEDIA QUERIES */
+
+@media only screen and (width >= 500px) {
+
+}
+
+@media only screen and (width >= 800px) {
+
+#title-content {
+  width: 70vw;
+}
+
+#title-text {
+  font-size: 4.75rem;
+}
+
+#title-img1,
+#title-img2 {
+  height: 3.75rem;
+}
+
+#MMM {
+  font-size: 1.75rem;
+}
+
+/* ---> SEARCH-CONTENT */
+
+#search-content {
+  width: 70vw;
+}
+
+#search-input,
+#search-btn {
+  height: 3rem;
+  font-size: 1.785rem;
+  padding: .5rem;
+}
+
+#search-input {
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+
+#search-btn {
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+
+/* ---> HEADER-BTN-CONTENT */
+/* Round Btn CSS found at the end */
+#btn-content {
+  width: 70vw;
+  gap: 7.4rem;
+  padding: 1.25rem 0 1.25rem 0;
+}
+
+
+/* MESSAGE-CONTENT */
+
+#message-content {
+  width: 70vw;
+  line-height: 1.15;
+  padding: 1.5rem;
+}
+
+#message-text {
+  font-size: 3.5rem;
+}
+
+
+/* DATA-CONTENT */
+
+/* ---> LOCATION-CONTENT */
+/* Round Btn CSS found at the end */
+#location-content {
+  width: 70vw;
+  line-height: 1.15;
+  padding: 0 0 0.75rem 0;
+}
+
+#location-name {
+  font-size: 2.5rem;
+}
+
+#resolved-address {
+  font-size: 1.75rem;
+}
+
+#location-lat-lon-text {
+  font-size: 1.75rem;
+}
+
+#weather-btn-cont {
+  gap: 7.4rem;
+  padding: .75rem;
+}
+
+/* ---> ALERTS-CONTENT */
+
+#alerts-content {
+  width: 70vw;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+  padding: 2rem;
+}
+
+#alerts-title-text {
+  font-size: 3.25rem;
+  margin: .5rem;
+  padding: 0.25rem 0 0.25rem 0;
+}
+
+.alerts-headline {
+  font-size: 2.5rem;
+}
+
+.alerts-start-end {
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.alerts-start-end,
+.alerts-description {
+  font-size: 2rem;
+}
+
+.alerts-asterisks {
+  font-size: 2rem;
+  padding: 1rem 0 1rem 0;
+}
+
+
+/* ---> HOURS-CONTENT AND DAYS-CONTENT */
+
+#hours-title-text,
+#days-title-text {
+  font-size: 3.75rem;
+  margin: .5rem;
+  padding: 0.25rem 0 0.25rem 0;
+}
+
+.hours-tile-cont,
+.days-tile-cont {
+  width: 70vw;
+  border: 1px dashed var(--white);
+  border-radius: 2rem;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0.25rem 1rem 0.25rem;
+}
+
+.hours-condition-text,
+.days-condition-text {
+  font-size: 2rem;
+}
+
+.hours-row-cont,
+.days-row-cont {
+  gap: 0.5rem;
+}
+
+.hours-time-cont,
+.hours-icon-cont,
+.hours-temp-cont,
+.hours-feels-like-cont,
+.days-date-cont,
+.days-icon-cont,
+.days-temp-max-cont,
+.days-temp-min-cont {
+  height: 7.25rem;
+  width: 7.25rem;
+  border: .125rem solid var(--white);
+  border-radius: 0.75rem;
+  padding: 0.25rem;
+}
+
+.hours-icon-img,
+.days-icon-img {
+  height: 7.5rem;
+}
+
+.hours-time-text,
+.hours-temp-text,
+.hours-feels-like-text,
+.days-date-text,
+.days-temp-max-text,
+.days-temp-min-text {
+  font-size: 2.05rem;
+}
+
+.hours-weather-cont,
+.days-weather-cont {
+  gap: 0.75rem;
+  padding: 0.25rem;
+}
+
+
+/* ---> WEATHER-CONTENT */
+
+#weather-content {
+  width: 70vw;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+}
+
+#conditions-text {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+#last-update {
+  font-size: 1.25rem;
+}
+
+#weather-cont1 {
+  height: fit-content;
+  width: fit-content;
+  margin: .25rem;
+}
+
+#weather-temp-cont,
+#weather-icon-cont {
+  height: 7.5rem;
+  width: 7.5rem;
+  border-radius: 1rem;
+  margin: 0.25rem;
+  padding: 0.25rem;
+}
+
+#weather-temp-cont {
+  min-width: 7.5rem;
+  width:fit-content;
+}
+
+#weather-icon-img {
+  height: 7.25rem;
+  width: auto;
+}
+
+#weather-moisture-cont {
+  gap: 0.5rem;
+}
+
+#weather-cont2 {
+  gap: 0.5rem;
+}
+
+.current-div,
+.hours-humidity-div,
+.hours-dew-point-div,
+.hours-precip-prob-div,
+.hours-wind-info-div,
+.hours-cloud-cover-div,
+.hours-uv-index-div,
+.days-humidity-div,
+.days-dew-point-div,
+.days-precip-prob-div,
+.days-wind-info-div,
+.days-cloud-cover-div,
+.days-uv-index-div,
+.days-sunrise-div,
+.days-sunset-div,
+.days-moon-phase-div {
+  height: 3.5rem;
+  border-radius: 2.5rem;
+}
+
+.current-img,
+.hours-humidity-img,
+.hours-dew-point-img,
+.hours-precip-prob-img,
+.hours-wind-info-img,
+.hours-cloud-cover-img,
+.hours-uv-index-img,
+.days-humidity-img,
+.days-dew-point-img,
+.days-precip-prob-img,
+.days-wind-info-img,
+.days-cloud-cover-img,
+.days-uv-index-img,
+.days-sunrise-img,
+.days-sunset-img,
+.days-moon-phase-img {
+  height: 3.5rem;
+  border: .125rem solid var(--white);
+  margin-left: -1.5px;
+}
+
+
+#temp-text {
+  font-size: 3.25rem;
+}
+
+#feels-like-text {
+  font-size: 1.75rem;
+}
+
+.current-text,
+.hours-humidity-text,
+.hours-dew-point-text,
+.hours-precip-prob-text,
+.hours-wind-info-text,
+.hours-cloud-cover-text,
+.hours-uv-index-text,
+.days-humidity-text,
+.days-dew-point-text,
+.days-precip-prob-text,
+.days-wind-info-text,
+.days-cloud-cover-text,
+.days-uv-index-text,
+.days-sunrise-text,
+.days-sunset-text,
+.days-moon-phase-text {
+  font-size: 2rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+}
+
+/* ROUND BUTTONS */
+
+.round-btn {
+  height: 4.5rem;
+  width: 4.5rem;
+}
+
+#world-btn-img, #temp-scale-img, #usa-btn-img, #hours-btn-img, #alerts-btn-img, #days-btn-img  {
+  height: 4.25rem;
+}
+
 }
