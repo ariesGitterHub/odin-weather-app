@@ -85,25 +85,58 @@ export function createHoursView(data) {
         "ha"
       );
 
-      const todayIs = getTodayDate();
-      const tomorrowIs = getTomorrowDate();
-      const parseTodayDate = format(
-        parse(todayIs, "yyyy-MM-dd", new Date()),
+      // THIS DID NOT WORK IN EDGE CASES WHERE THE LAST UPDATE TIME WAS, E.G., 11PM AND THE TIME GETS ROUNDED UP TO 00AM WITH TOMORROW'S DATE, BUT THAT ADDITIONAL HOURS ARE SET TO THE PRIOR DAY.JUST USING WHAT THE DATA SAID WAS MORE EFFICIENT AND HANDLES THE INTERNATIONAL DATE LINE ISSUE I DISCOVERED I WAS ALSO HAVING.
+
+      // const todayIs = getTodayDate();
+      // const tomorrowIs = getTomorrowDate();
+      // const parseTodayDate = format(
+      //   parse(todayIs, "yyyy-MM-dd", new Date()),
+      //   "MMM d"
+      // );
+      // const parseTomorrowDate = format(
+      //   parse(tomorrowIs, "yyyy-MM-dd", new Date()),
+      //   "MMM d"
+      // );
+
+      // function checkHourGetDate() {
+      //   let hourlyTimeIsWhatDate = "";
+      //   let count = index;
+      //   if (startHour + count > 0 && startHour + count <= 23) {
+      //     hourlyTimeIsWhatDate = parseTodayDate;
+      //   } else {
+      //     hourlyTimeIsWhatDate = parseTomorrowDate;
+      //   }
+      //   return hourlyTimeIsWhatDate;
+      // }
+
+      const dataSaysTodayDateIs = data.days[0].datetime;
+      const dataSaysTomorrowDateIs = data.days[1].datetime;
+
+      const parseDataSaysTodayDateIs = format(
+        parse(dataSaysTodayDateIs, "yyyy-MM-dd", new Date()),
         "MMM d"
       );
-      const parseTomorrowDate = format(
-        parse(tomorrowIs, "yyyy-MM-dd", new Date()),
+      const parseDataSaysTomorrowDateIs = format(
+        parse(dataSaysTomorrowDateIs, "yyyy-MM-dd", new Date()),
         "MMM d"
       );
+
       function checkHourGetDate() {
-        let hourlyTimeisWhatDate = "";
+        let hourlyTimeIsWhatDate = "";
         let count = index;
-        if (startHour + count > 0 && startHour + count <= 23) {
-          hourlyTimeisWhatDate = parseTodayDate;
+
+        // BELOW LOG WAS FOR TESTING, KEEP FOR FUTURE REFERENCE
+        // let gimmeThatNum = startHour + count;
+
+        if (startHour + count >= 0 && startHour + count <= 23) {
+          hourlyTimeIsWhatDate = parseDataSaysTodayDateIs;
+          // console.log(`Count is: ${gimmeThatNum}`);
         } else {
-          hourlyTimeisWhatDate = parseTomorrowDate;
+          hourlyTimeIsWhatDate = parseDataSaysTomorrowDateIs;
+          // console.log(`Count is: ${gimmeThatNum}`);
         }
-        return hourlyTimeisWhatDate;
+
+        return hourlyTimeIsWhatDate;
       }
 
       const hoursTileCont = createDivElement("", "hours-tile-cont");

@@ -56,6 +56,6 @@ export function createAlertsView(data) {
       });
     }
   }
-  
+
   getAlertsInfo();
 }

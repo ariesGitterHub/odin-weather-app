@@ -5,7 +5,7 @@ import {
   createImgElement,
 } from "./functionsBasic.js";
 
-import { getTempColor } from "./functionsWeather.js"
+import { getTempColor } from "./functionsWeather.js";
 
 import svgHours from "../assets/hours.svg";
 import svgAlerts from "../assets/alerts.svg";
@@ -34,45 +34,45 @@ export function createLocationView(query, data) {
     `Latitude: ${data.latitude}/Longitude: ${data.longitude}`,
     ""
   );
-    const weatherBtnCont = createDivElement("weather-btn-cont");
+  const weatherBtnCont = createDivElement("weather-btn-cont");
 
-    function checkForAlertInfo() {
-      const hoursBtn = createBtnElement("hours-btn", "", "round-btn");
-      const alertsBtn = createBtnElement("alerts-btn", "", "round-btn");
-      const daysBtn = createBtnElement("days-btn", "", "round-btn");
-      const hoursBtnImg = createImgElement(
-        "hours-btn-img",
-        svgHours,
-        "Hourly Forecast Icon",
-        ""
-      );
-      const alertsBtnImg = createImgElement(
-        "alerts-btn-img",
-        svgAlerts,
-        "Weather Alert Icon",
-        ""
-      );
-      const daysBtnImg = createImgElement(
-        "days-btn-img",
-        svgDays,
-        "Multi-Day Forecast Icon",
-        ""
-      );
+  function checkForAlertInfo() {
+    const hoursBtn = createBtnElement("hours-btn", "", "round-btn");
+    const alertsBtn = createBtnElement("alerts-btn", "", "round-btn");
+    const daysBtn = createBtnElement("days-btn", "", "round-btn");
+    const hoursBtnImg = createImgElement(
+      "hours-btn-img",
+      svgHours,
+      "Hourly Forecast Icon",
+      ""
+    );
+    const alertsBtnImg = createImgElement(
+      "alerts-btn-img",
+      svgAlerts,
+      "Weather Alert Icon",
+      ""
+    );
+    const daysBtnImg = createImgElement(
+      "days-btn-img",
+      svgDays,
+      "Multi-Day Forecast Icon",
+      ""
+    );
 
-      if (alertsData.length > 0) {
-        // console.log(alertsData);
-        weatherBtnCont.append(hoursBtn, alertsBtn, daysBtn);
-        hoursBtn.append(hoursBtnImg);
-        alertsBtn.append(alertsBtnImg);
-        daysBtn.append(daysBtnImg);
-      } else {
-        weatherBtnCont.append(hoursBtn, daysBtn);
-        hoursBtn.append(hoursBtnImg);
-        daysBtn.append(daysBtnImg);
-      }
+    if (alertsData.length > 0) {
+      // console.log(alertsData);
+      weatherBtnCont.append(hoursBtn, alertsBtn, daysBtn);
+      hoursBtn.append(hoursBtnImg);
+      alertsBtn.append(alertsBtnImg);
+      daysBtn.append(daysBtnImg);
+    } else {
+      weatherBtnCont.append(hoursBtn, daysBtn);
+      hoursBtn.append(hoursBtnImg);
+      daysBtn.append(daysBtnImg);
     }
+  }
 
-    checkForAlertInfo();
+  checkForAlertInfo();
 
   dataContent.append(locationContent);
 
@@ -80,10 +80,8 @@ export function createLocationView(query, data) {
     locationName,
     resolvedAddress,
     locationLatLonDiv,
-    weatherBtnCont,
+    weatherBtnCont
   );
 
-  locationLatLonDiv.append(
-    locationLatLonText
-  );
+  locationLatLonDiv.append(locationLatLonText);
 }
