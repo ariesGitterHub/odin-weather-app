@@ -12,8 +12,8 @@ import {
   createImgElement,
   createTextElement,
   createWeatherElements,
-  getTodayDate,
-  getTomorrowDate,
+  // getTodayDate,
+  // getTomorrowDate,
   roundUpToNextHourNum,
 } from "./functionsBasic.js";
 
