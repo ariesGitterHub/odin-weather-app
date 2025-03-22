@@ -11,7 +11,7 @@ export function createAlertsView(data) {
       const alertsTitle = createTextElement(
         "p",
         "alerts-title-text",
-        "Weather Alert",
+        "Alert!",
         ""
       );
       dataContent.append(alertsContent);
