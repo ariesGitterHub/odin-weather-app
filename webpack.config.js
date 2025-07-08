@@ -7,13 +7,16 @@ module.exports = {
   mode: "development", // or 'production'
   entry: "./src/index.js", // Entry point of your application
   output: {
-    filename: "bundle.js", // Output bundle file name
-    path: path.resolve(__dirname, "dist"), // Output directory (absolute path)
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "ariesgitterhub.github.io/odin-weather-app/", // 👈 use your repo name here
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html", // Path to your HTML file in src
-      favicon: "./public/favIcon.svg", // this copies it automatically
+      favicon: path.resolve(__dirname, "public", "favIcon.svg"),
+      // this copies it automatically
       //filename: "index.html", // Output HTML file name
       // Other options if needed
     }),
