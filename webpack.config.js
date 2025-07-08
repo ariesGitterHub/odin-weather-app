@@ -9,7 +9,16 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "ariesgitterhub.github.io/odin-weather-app/", // 👈 use your repo name here
+    publicPath: "/odin-weather-app/",
+  },
+
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "dist"), // Serve from dist
+    },
+    compress: true,
+    port: 8080,
+    open: true, // Optional: auto-open browser
   },
 
   plugins: [
