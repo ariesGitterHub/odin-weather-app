@@ -13,6 +13,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html", // Path to your HTML file in src
+      favicon: "./public/favIcon.svg", // this copies it automatically
       //filename: "index.html", // Output HTML file name
       // Other options if needed
     }),
