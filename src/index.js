@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   tempScaleImg.src = svgF;
 
   tempScaleBtn.addEventListener("click", () => {
-    if (tempScaleImg.src === svgF && tempScaleBtn.value === "F") {
+    if (tempScaleBtn.value === "F") {
       tempScaleBtn.value = "C";
       tempScaleImg.src = svgC;
       console.log("Temperature scale set to Celsius.");
